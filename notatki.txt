@@ -1,0 +1,10 @@
+2022-02-22
+Założenie remote repo na githubie
+Sklonowanie repo na local 
+git config --global user.email "krzysztofkowerczyk@gmail.com"
+
+logowanie się do gita z terminala (bo Tosia była zalogowana >_< )
+git config --global user.name "GaussFighting"
+git config --global user.email "krzysztofkowerczyk@gmail.com"
+
+nowa branch -> stworzyłem plik txt -> add . -> commit -m -> push -> na githubie zmergować -> checkout na main -> pull 
