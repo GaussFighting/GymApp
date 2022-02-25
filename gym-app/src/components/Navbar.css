@@ -1,0 +1,16 @@
+@media only screen and (max-width: 600px) {
+  .for-mobile {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+  }
+}
+.nav {
+  background-color: rgb(3, 163, 38);
+}
+.nav-link {
+    color: rgba(255, 255, 255, 0.548);
+}
+.nav-link:hover {
+    color: rgb(255, 255, 255);
+}
