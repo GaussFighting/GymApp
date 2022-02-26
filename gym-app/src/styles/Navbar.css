@@ -6,11 +6,11 @@
   }
 }
 .nav {
-  background-color: rgb(3, 163, 38);
+  background-color: var(--secondary-bg-color);
 }
 .nav-link {
-    color: rgba(255, 255, 255, 0.548);
+    color: var(--primary-color);
 }
 .nav-link:hover {
-    color: rgb(255, 255, 255);
+    color: var(--secondary-color);
 }

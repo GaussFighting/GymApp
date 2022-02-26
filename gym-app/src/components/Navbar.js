@@ -1,20 +1,28 @@
-import "./Navbar.css";
+import "../styles/Navbar.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faDumbbell, faMedal, faHeartPulse} from '@fortawesome/free-solid-svg-icons';
 
 function Navbar() {
   return (
     <div>
       <nav class="nav nav-pills nav-justified for-mobile">
-        <a class="nav-link" aria-current="page" href="./">
-          Profile
+  
+      <a class="nav-link" aria-current="page" href="./">
+          Profile 
+          <FontAwesomeIcon icon={faUser} size="2x" />
         </a>
         <a class="nav-link" href="./">
           Exercises
+          <FontAwesomeIcon icon={faDumbbell} size="2x" />
         </a>
         <a class="nav-link" href="./">
           History
+          <FontAwesomeIcon icon={faMedal} size="2x" />
         </a>
         <a class="nav-link" href="./">
           Start Workout
+          <FontAwesomeIcon icon={faHeartPulse} size="2x" />
+          
         </a>
       </nav>
       <div>
@@ -80,7 +88,7 @@ function Navbar() {
       therefore always holds in these matters to this principle of selection: he
       rejects pleasures to secure other greater pleasures, or else he endures
       pains to avoid worse pains."
-      </div>
+      </div>    
     </div>
   );
 }
