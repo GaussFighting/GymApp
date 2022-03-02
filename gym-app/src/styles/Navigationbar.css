@@ -1,5 +1,5 @@
 @media only screen and (max-width: 600px) {
-  .for-mobile {
+  .nav {
     bottom: 0;
     position: fixed;
     width: 100%;
@@ -7,6 +7,8 @@
 }
 .nav {
   background-color: var(--secondary-bg-color);
+  height: 100px;
+  padding-top: 10px;
 }
 .nav-link {
     color: var(--primary-color);
@@ -14,3 +16,4 @@
 .nav-link:hover {
     color: var(--secondary-color);
 }
+
