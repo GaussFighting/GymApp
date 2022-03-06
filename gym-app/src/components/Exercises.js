@@ -1,11 +1,5 @@
-
 function Exercises() {
-    return (
-      <div>
-      
-      </div>
-    );
-  }
-  
-  export default Exercises;
-  
+  return <div>1234</div>;
+}
+
+export default Exercises;

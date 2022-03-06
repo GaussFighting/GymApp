@@ -1,11 +1,5 @@
-
 function History() {
-    return (
-      <div>
-      
-      </div>
-    );
-  }
-  
-  export default History;
-  
+  return <div>((-(-_(-_-)_-)-))</div>;
+}
+
+export default History;
