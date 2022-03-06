@@ -11,14 +11,12 @@
   padding-top: 10px;
 }
 .nav-pills .nav-link {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 .nav-pills .nav-link:hover {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
 }
 .nav-pills .nav-link.active {
   color: var(--secondary-color);
   background-color: var(--secondary-bg-color);
-
 }
-
