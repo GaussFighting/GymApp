@@ -1,0 +1,65 @@
+2022-03-02
+Navbar -> navlinki reactstrap 
+
+2022-02-26 
+zakładanie folderów
+styles (na cssy, fonts, data)
+CSS custom properties (variables) -używanie cssów pod zmiennymi w całym dokumencie
+https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+index czytany jest przed appem (trzeba było ccsa bootstrapa od reboota przerzucić bo nadpisywał tło)
+root jest nad body, tam może być stylowanie przeglądarek
+@font-face
+https://fonts.google.com/ wyrazy z polskimi znakami daikrytycznymi żółć pięść jaźń ŻÓŁĆ PIĘŚĆ JAŹŃ
+https://grafmag.pl/artykuly/font-face-bez-tajemnic
+https://fontawesome.com/search?m=free -> darmowe ikony
+
+
+2022-02-25
+Tworzenie nowej aplikacji w Reakcie
+Trzeba mieć zainstalowanego Node v5.6 na kompie
+Create React App,
+yarn create react-app gym-app // przy npm coś się srało ;x
+przeredirectować się do folderu z gym-app i "yarn start" uruchomi apkę
+commit init do mastera - nazwa dla pierwszego commita, nie trzeba mergować bo master i na końcu checkout na inną branch
+"node -v" sprawdza wersje node na komputerze
+
+Dlaczego uczyć się VanilaJS przed Frameworkami
+https://snipcart.com/blog/learn-vanilla-javascript-before-using-js-frameworks
+
+Node.js jest środowiskiem uruchomieniowym do wykonywania kodu JavaScript. Wcześniej programiści uruchamiali swój kod JavaScript tylko za 
+pomocą przeglądarek. Dzisiaj Node.js pracuje niezależnie od przeglądarki i pozwala na uruchamianie kodu JavaScript również poza 
+przeglądarką.
+Node.js jako środowisko uruchomieniowe pozwala nie tylko w łatwiejszy sposób tworzyć aplikacje webowe. Jest także narzędziem do tworzenia 
+aplikacji po stronie serwera, wszelkiego rodzaju skryptów i bibliotek. Współpracuje bezpośrednio z systemem operacyjnym i może być 
+uruchomiony na każdym z nich, jak Linux, MacOS czy Windows.
+
+Package.json jest plikiem w formacie JSON, który istnieje w każdym projekcie opartym na Node.js. Jest to plik zawierający informacje o 
+projekcie, takie jak wersja, opis, autorzy i wiele innych ważnych informacji.
+Drugą jego bardzo ważną rolą, jest przechowywanie informacji o dodatkowych zależnościach jakie zostały wykorzystane do stworzenia projektu. 
+Zależności te najczęściej pochodzą z repozytorium NPM-a. Zależności zapisane są za pomocą nazwy i wersji.
+Gdy inicjalizujemy nowy projekt na przykład w Angularze inicjalizuje się gotowy package.json który zawiera wszystkie niezbędne zależności. 
+Gdy zaczynam pracę w projekcie który już trwa i pobieramy go z repozytorium kodu, tam również istnieje package.json. Zazwyczaj wystarczy uruchomić komendę:
+dokumentacja: https://docs.npmjs.com/cli/v8/configuring-npm/package-json
+
+
+npm install
+i wszystkie niezbędne zależności zostaną dociągnięte do naszego projektu. Wtedy dopiero możemy zacząć proces developmentu.
+
+pierwszy komponent
+yarn add bootstrap
+@media query - zmienna wprowadzona w CSS3
+react-bootstrap
+reactstrap
+bootstrap
+
+2022-02-22
+Założenie remote repo na githubie
+Sklonowanie repo na local 
+git config --global user.email "krzysztofkowerczyk@gmail.com"
+
+logowanie się do gita z terminala (bo Tosia była zalogowana >_< )
+git config --global user.name "GaussFighting"
+git config --global user.email "krzysztofkowerczyk@gmail.com"
+
+nowa branch -> stworzyłem plik txt -> add . -> commit -m -> push -> na githubie zmergować -> checkout na main -> pull 
+do maina nie muszę mergować

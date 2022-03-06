@@ -1,0 +1,24 @@
+@media only screen and (max-width: 600px) {
+  .nav {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+  }
+}
+.nav {
+  background-color: var(--secondary-bg-color);
+  height: 100px;
+  padding-top: 10px;
+}
+.nav-pills .nav-link {
+    color: var(--primary-color);
+}
+.nav-pills .nav-link:hover {
+    color: var(--secondary-color);
+}
+.nav-pills .nav-link.active {
+  color: var(--secondary-color);
+  background-color: var(--secondary-bg-color);
+
+}
+
