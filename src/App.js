@@ -5,6 +5,7 @@ import Exercises from "./components/Exercises";
 import History from "./components/History";
 import Profile from "./components/Profile";
 import StartWorkout from "./components/StartWorkout";
+import Exercise from "./components/Exercise";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/startworkout" element={<StartWorkout />} />
           <Route path="/" element={<Profile />} />
+          <Route path="/exercise/:id" element={<Exercise />} />
         </Routes>
       </div>
     </Router>
