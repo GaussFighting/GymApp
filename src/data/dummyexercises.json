@@ -1,0 +1,618 @@
+[
+  {
+    "id": "1",
+    "exerciseEn": "Bench Press",
+    "exercisePl": "Wyciskanie le��c",
+    "bodyPart": "Chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "2",
+    "exerciseEn": "Bench Press - Close Grip",
+    "exercisePl": "Wyciskanie le��c - chwyt w�ski",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "3",
+    "exerciseEn": "Bench Press - Wide Grip",
+    "exercisePl": "Wyciskanie le��c - chwyt szeroki",
+    "bodyPart": "Chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "4",
+    "exerciseEn": "Bent Over Row",
+    "exercisePl": "Podci�ganie sztangi w opadzie tu�owia nachwytem (wios�o)",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "5",
+    "exerciseEn": "Bent Over Row - Underhand",
+    "exercisePl": "Podci�ganie sztangi w opadzie tu�owia podchwytem (wios�o)",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "6",
+    "exerciseEn": "Biceps Curl",
+    "exercisePl": "Zginanie przedramion ze sztang� trzyman� podchwytem",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "7",
+    "exerciseEn": "Box Squat",
+    "exercisePl": "P��przysiad przy �aweczce",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "8",
+    "exerciseEn": "Bulgarian Split Squat",
+    "exercisePl": "Przysiad Bu�garski",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "9",
+    "exerciseEn": "Clean",
+    "exercisePl": "Zarzut sztangi z ziemi do siadu",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "10",
+    "exerciseEn": "Clean and Jerk",
+    "exercisePl": "Podrzut sztangi",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "11",
+    "exerciseEn": "Deadlift",
+    "exercisePl": "Martwy ci�g",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "12",
+    "exerciseEn": "Deadlift High Pull",
+    "exercisePl": "Martwy ci�g z doci�giem",
+    "bodyPart": "Olimpic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "13",
+    "exerciseEn": "Decline Bench Press",
+    "exercisePl": "Wyciskanie sztangi na �awce z g�ow� w d��",
+    "bodyPart": "Chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "14",
+    "exerciseEn": "Deficit Deadlift",
+    "exercisePl": "Martwy ci�g z podwy�szenia",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "15",
+    "exerciseEn": "Floor Press",
+    "exercisePl": "Wyciskanie sztangielek na ziemi",
+    "bodyPart": "Chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "16",
+    "exerciseEn": "Front Raise",
+    "exercisePl": "Wznosy ramion",
+    "bodyPart": "Shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "17",
+    "exerciseEn": "Front Squat",
+    "exercisePl": "Przysiad przedni",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "18",
+    "exerciseEn": "Good Morning",
+    "exercisePl": "Sk�on w prz�d ze sztang� na plecach",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "19",
+    "exerciseEn": "Hack Squat",
+    "exercisePl": "Wypychanie ci��aru z wykorzystaniem przyrz�du Hack Squat",
+    "bodyPart": "Legs",
+    "equipment": "Machine"
+  },
+  {
+    "id": "20",
+    "exerciseEn": "Hack Squat",
+    "exercisePl": "Przysiad ze sztang� trzyman� z ty�u",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "21",
+    "exerciseEn": "Hang Clean",
+    "exercisePl": "Zarzut sztangi zud do stania",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "22",
+    "exerciseEn": "Hang Snatch",
+    "exercisePl": "Rwanie si�owe ze zwisu",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "23",
+    "exerciseEn": "Hip Thrust",
+    "exercisePl": "Unoszenie bioder ze sztang�",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "24",
+    "exerciseEn": "Incline Bench Press",
+    "exercisePl": "Wyciskanie le��c na �awce sko�nej g�ow� do g�ry",
+    "bodyPart": "Chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "25",
+    "exerciseEn": "Jump Shrug",
+    "exercisePl": "Unoszenie bark�w ze sztang� z wysokiem",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "26",
+    "exerciseEn": "Lunge",
+    "exercisePl": "Wykroki",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "27",
+    "exerciseEn": "Overhead Press",
+    "exercisePl": "Wyciskasnie sztangi nad g�ow�",
+    "bodyPart": "Shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "28",
+    "exerciseEn": "Overhead Squat",
+    "exercisePl": "Przysiad ze sztang� nad g�ow�",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "29",
+    "exerciseEn": "Pendlay Row",
+    "exercisePl": "Wios�owanie Pendlaya",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "30",
+    "exerciseEn": "Power Clean",
+    "exercisePl": "Zarzut sztangi z ziemi do stania",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "31",
+    "exerciseEn": "Power Snatch",
+    "exercisePl": "Rwanie si�owe ze zwisu do pozycji stoj�cej",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "32",
+    "exerciseEn": "Preacher Curl",
+    "exercisePl": "Zginanie przedramion na modlitewniku gryfem",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "33",
+    "exerciseEn": "Press Under",
+    "exercisePl": "Wyciskanie sztangi z zza g�owy z przysiadem",
+    "bodyPart": "Olimpic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "34",
+    "exerciseEn": "Push Press",
+    "exercisePl": "Wycisko podrzut",
+    "bodyPart": "Shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "35",
+    "exerciseEn": "Rack Pull",
+    "exercisePl": "Martwy ci�g z podwy�szenia",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "36",
+    "exerciseEn": "Reverse Curl",
+    "exercisePl": "Zginanie ramion ze sztang� nachwytem",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "37",
+    "exerciseEn": "Romanian Deadlift",
+    "exercisePl": "Rumu�ski martwy ci�g",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "38",
+    "exerciseEn": "Seated Overhead Press",
+    "exercisePl": "Wyciskanie sztangi nad g�ow� siedz�c",
+    "bodyPart": "Shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "39",
+    "exerciseEn": "Shrug",
+    "exercisePl": "Unoszenie bark�w ze sztang�",
+    "bodyPart": "Shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "40",
+    "exerciseEn": "Skullcrusher",
+    "exercisePl": "Prostowanie przedramion ze sztang� w pozycji le��cej na �aweczce",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "41",
+    "exerciseEn": "Snatch",
+    "exercisePl": "Rwanie",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "42",
+    "exerciseEn": "Snatch Pull",
+    "exercisePl": "Rwanie z przyci�gni�ciem",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "43",
+    "exerciseEn": "Split Jerk",
+    "exercisePl": "Wycisko podrzut na no�yce",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "44",
+    "exerciseEn": "Squat",
+    "exercisePl": "Przysiad",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "45",
+    "exerciseEn": "Standing Calf Raise",
+    "exercisePl": "Wspi�cia na palcach ze sztangielkami stoj�c",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "46",
+    "exerciseEn": "Standing Calf Raise",
+    "exercisePl": "Wspi�cia na palcach ze sztang� stoj�c",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "47",
+    "exerciseEn": "Stiff Leg Deadlift",
+    "exercisePl": "Martwy ci�g ze sztywnymi nogami",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "48",
+    "exerciseEn": "Sumo Deadlift",
+    "exercisePl": "Martwy ci�g sumo",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "49",
+    "exerciseEn": "Sumo Deadlifht High Pull",
+    "exercisePl": "Martwy ci�g sumo z doci�giem",
+    "bodyPart": "Full Body",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "50",
+    "exerciseEn": "Thruster",
+    "exercisePl": "Przysiad z wyciskaniem z klatki piersiowej nad g�ow�",
+    "bodyPart": "Full Body",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "51",
+    "exerciseEn": "Trap Bar Deadlift",
+    "exercisePl": "Martwy ci�g z gryfem heksagonalnym",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "52",
+    "exerciseEn": "Triceps Extension",
+    "exercisePl": "Naprzemienne prostowanie przedramion z wykorzystaniem wyci�gu g�rnego",
+    "bodyPart": "Arms",
+    "equipment": "Cable"
+  },
+  {
+    "id": "53",
+    "exerciseEn": "Triceps Extension",
+    "exercisePl": "Prostowanie przedramion ze sztang� �aman� siedz�c",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "54",
+    "exerciseEn": "Upright Row",
+    "exercisePl": "Podci�ganie sztangi wzd�u� tu�owia",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "55",
+    "exerciseEn": "Zercher Squat",
+    "exercisePl": "Przysiad Zerchera",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "56",
+    "exerciseEn": "Arnold Press",
+    "exercisePl": "Wyciskanie sztangielek nad g�ow� z rotacj�",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "57",
+    "exerciseEn": "Around the World",
+    "exercisePl": "Pe�ny ruch sztangielkami po okr�gu w przeciwnych kierunkach",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "58",
+    "exerciseEn": "Bench Press",
+    "exercisePl": "Wyciskanie le��c sztangielkami",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "59",
+    "exerciseEn": "Bent Over One Arm Row",
+    "exercisePl": "Podci�ganie sztangielki w kl�ku podpartym na �aweczce",
+    "bodyPart": "Back",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "60",
+    "exerciseEn": "Bent Over Row",
+    "exercisePl": "Podci�ganie sztangi w opadzie tu�owia (wios�o)",
+    "bodyPart": "Back",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "61",
+    "exerciseEn": "Biceps Curl",
+    "exercisePl": "Zginanie przedramion sztangielkami",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "62",
+    "exerciseEn": "Chest Fly",
+    "exercisePl": "Rozpi�tki",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "63",
+    "exerciseEn": "Concentration Curl",
+    "exercisePl": "Naprzemienne zginanie przedramion ze sztangielkami (�okie� wsparty na udzie)",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "64",
+    "exerciseEn": "Deadlift",
+    "exercisePl": "Martwy ci�g sztangielkami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "65",
+    "exerciseEn": "Decline Bench Press",
+    "exercisePl": "Wyciskanie sztangieleki na �awce z g�ow� w d��",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "66",
+    "exerciseEn": "Front Raise",
+    "exercisePl": "Wznosy ramion do przodu",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "67",
+    "exerciseEn": "Hammer Curl",
+    "exercisePl": "Naprzemienne zginanie przedramion ze sztangielkami chwytem m�otkowym",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "68",
+    "exerciseEn": "Incline Bench Press",
+    "exercisePl": "Wyciskanie sztangielek na �awce sko�nej z g�ow� ku g�rze",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "69",
+    "exerciseEn": "Incline Chest Fly",
+    "exercisePl": "Rozpi�tki na �awce sko�nej z g�ow� ku g�rze",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "70",
+    "exerciseEn": "Incline Curl",
+    "exercisePl": "Zginanie przedramion ze sztangielkami w siadzie na �awce sko�nej z g�ow� ku g�rze",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "71",
+    "exerciseEn": "Incline Row",
+    "exercisePl": "Wios�owanie sztangielkami le��c na �awce sko�nej",
+    "bodyPart": "Back",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "72",
+    "exerciseEn": "Lateral Raise",
+    "exercisePl": "Wznoszy sztangielek bokiem",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "73",
+    "exerciseEn": "Overhead Press",
+    "exercisePl": "Wyciskanie sztangielek nad g�ow�",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "74",
+    "exerciseEn": "Preacher Curl",
+    "exercisePl": "Zginanie przedramion na modlitewniku sztangielkami",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "75",
+    "exerciseEn": "Pullover",
+    "exercisePl": "Przenoszenie sztangielki zza g�owy",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "76",
+    "exerciseEn": "Reverse Curl",
+    "exercisePl": "Zginanie przedramion ze sztang� trzyman� nachwytem",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "77",
+    "exerciseEn": "Reverse Fly",
+    "exercisePl": "Odwr�cone rozpi�tki na �awce sko�nej",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "78",
+    "exerciseEn": "Reverse Cgrip Concentration Curl",
+    "exercisePl": "Odwrotne zginanie przedramion ze sztangielkami (�okie� wsparty na udzie)",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "79",
+    "exerciseEn": "Romanian Deadlift",
+    "exercisePl": "Rumu�ski martwy ci�g ze sztangielkami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "80",
+    "exerciseEn": "Seated Overhead Press",
+    "exercisePl": "Wyciskanie sztangielek nad g�ow� siedz�c",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "81",
+    "exerciseEn": "Seated Palms Up Wrist Curl",
+    "exercisePl": "Zginanie nadgarstk�w ze sztang� trzyman� podchwytem",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "82",
+    "exerciseEn": "Shrug",
+    "exercisePl": "Unoszenie bark�w ze sztangielkami",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "83",
+    "exerciseEn": "Side Bend",
+    "exercisePl": "Sk�ony tu�owia w bok ze sztangielk�",
+    "bodyPart": "Chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "84",
+    "exerciseEn": "Skullcrusher",
+    "exercisePl": "Prostowanie przedramion ze sztangielkami w pozycji le��cej na �aweczce",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "85",
+    "exerciseEn": "Squat",
+    "exercisePl": "Przysiad ze sztangielkami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "86",
+    "exerciseEn": "Stiff Leg Deadlift",
+    "exercisePl": "Martwy ci�g ze sztangielkami ze sztywnymi nogami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "87",
+    "exerciseEn": "Triceps Extension",
+    "exercisePl": "Zginanie ramion ze sztangielk� za g�ow�",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "88",
+    "exerciseEn": "Upright Row",
+    "exercisePl": "Podci�ganie sztangielek wzd�u� tu�owia",
+    "bodyPart": "Shoulders",
+    "equipment": "Dumbbell"
+  }
+]
