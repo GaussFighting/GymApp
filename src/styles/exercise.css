@@ -4,7 +4,16 @@
 .text-align-exercise {
   text-align: left;
   line-height: 20px;
+  padding: 10px;
 }
 .ul-exercise {
   padding-left: 0px;
+}
+.button {
+  position: relative;
+  float: left;
+  border: none;
+}
+a {
+  text-decoration: none;
 }

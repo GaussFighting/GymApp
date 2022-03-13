@@ -1,3 +1,9 @@
+2022-03-10-13
+UseParams https://www.geeksforgeeks.org/reactjs-useparams-hook/
+Col/Row w Exercises, baza danych w firebase + połączenie, 
+https://getbootstrap.com/docs/4.0/utilities/text/ text uppercase
++ widok na telefonie
+
 2022-03-02
 Navbar -> navlinki reactstrap 
 

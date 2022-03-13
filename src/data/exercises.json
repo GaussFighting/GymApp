@@ -1,0 +1,618 @@
+[
+  {
+    "id": "1",
+    "nameEn": "Bench Press",
+    "namePl": "Wyciskanie lezac",
+    "bodyPart": "chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "2",
+    "nameEn": "Bench Press - close Grip",
+    "namePl": "Wyciskanie lezac - chwyt waski",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "3",
+    "nameEn": "Bench Press - Wide Grip",
+    "namePl": "Wyciskanie lezac - chwyt szeroki",
+    "bodyPart": "chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "4",
+    "nameEn": "Bent Over Row",
+    "namePl": "Podciaganie sztangi w opadzie tulowia nachwytem (wioslo)",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "5",
+    "nameEn": "Bent Over Row - Underhand",
+    "namePl": "Podciaganie sztangi w opadzie tulowia podchwytem (wioslo)",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "6",
+    "nameEn": "Biceps curl",
+    "namePl": "Zginanie przedramion ze sztanga trzymana podchwytem",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "7",
+    "nameEn": "Box squat",
+    "namePl": "Polprzysiad przy laweczce",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "8",
+    "nameEn": "Bulgarian split squat",
+    "namePl": "Przysiad Bulgarski",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "9",
+    "nameEn": "clean",
+    "namePl": "Zarzut sztangi z ziemi do siadu",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "10",
+    "nameEn": "clean and Jerk",
+    "namePl": "Podrzut sztangi",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "11",
+    "nameEn": "Deadlift",
+    "namePl": "Martwy ciag",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "12",
+    "nameEn": "Deadlift High Pull",
+    "namePl": "Martwy ciag z dociagiem",
+    "bodyPart": "Olimpic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "13",
+    "nameEn": "Decline Bench Press",
+    "namePl": "Wyciskanie sztangi na lawce z glowa w dol",
+    "bodyPart": "chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "14",
+    "nameEn": "Deficit Deadlift",
+    "namePl": "Martwy ciag z podwyzszenia",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "15",
+    "nameEn": "Floor Press",
+    "namePl": "Wyciskanie sztangielek na ziemi",
+    "bodyPart": "chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "16",
+    "nameEn": "Front Raise",
+    "namePl": "Wznosy ramion",
+    "bodyPart": "shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "17",
+    "nameEn": "Front squat",
+    "namePl": "Przysiad przedni",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "18",
+    "nameEn": "Good Morning",
+    "namePl": "sklon w przod ze sztanga na plecach",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "19",
+    "nameEn": "Hack squat",
+    "namePl": "Wypychanie ciezaru z wykorzystaniem przyrzadu Hack squat",
+    "bodyPart": "Legs",
+    "equipment": "Machine"
+  },
+  {
+    "id": "20",
+    "nameEn": "Hack squat",
+    "namePl": "Przysiad ze sztanga trzymana z tylu",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "21",
+    "nameEn": "Hang clean",
+    "namePl": "Zarzut sztangi zud do stania",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "22",
+    "nameEn": "Hang snatch",
+    "namePl": "Rwanie silowe ze zwisu",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "23",
+    "nameEn": "Hip Thrust",
+    "namePl": "Unoszenie bioder ze sztanga",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "24",
+    "nameEn": "Incline Bench Press",
+    "namePl": "Wyciskanie lezac na lawce skosnej glowa do gory",
+    "bodyPart": "chest",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "25",
+    "nameEn": "Jump shrug",
+    "namePl": "Unoszenie barkow ze sztanga z wysokiem",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "26",
+    "nameEn": "Lunge",
+    "namePl": "Wykroki",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "27",
+    "nameEn": "Overhead Press",
+    "namePl": "Wyciskasnie sztangi nad glowe",
+    "bodyPart": "shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "28",
+    "nameEn": "Overhead squat",
+    "namePl": "Przysiad ze sztanga nad glowa",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "29",
+    "nameEn": "Pendlay Row",
+    "namePl": "Wioslowanie Pendlaya",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "30",
+    "nameEn": "Power clean",
+    "namePl": "Zarzut sztangi z ziemi do stania",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "31",
+    "nameEn": "Power snatch",
+    "namePl": "Rwanie silowe ze zwisu do pozycji stojacej",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "32",
+    "nameEn": "Preacher curl",
+    "namePl": "Zginanie przedramion na modlitewniku gryfem",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "33",
+    "nameEn": "Press Under",
+    "namePl": "Wyciskanie sztangi z zza glowy z przysiadem",
+    "bodyPart": "Olimpic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "34",
+    "nameEn": "Push Press",
+    "namePl": "Wycisko podrzut",
+    "bodyPart": "shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "35",
+    "nameEn": "Rack Pull",
+    "namePl": "Martwy ciag z podwyzszenia",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "36",
+    "nameEn": "Reverse curl",
+    "namePl": "Zginanie ramion ze sztanga nachwytem",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "37",
+    "nameEn": "Romanian Deadlift",
+    "namePl": "Rumunski martwy ciag",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "38",
+    "nameEn": "seated Overhead Press",
+    "namePl": "Wyciskanie sztangi nad glowe siedzac",
+    "bodyPart": "shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "39",
+    "nameEn": "shrug",
+    "namePl": "Unoszenie barkow ze sztanga",
+    "bodyPart": "shoulders",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "40",
+    "nameEn": "skullcrusher",
+    "namePl": "Prostowanie przedramion ze sztanga w pozycji lezacej na laweczce",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "41",
+    "nameEn": "snatch",
+    "namePl": "Rwanie",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "42",
+    "nameEn": "snatch Pull",
+    "namePl": "Rwanie z przyciagnieciem",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "43",
+    "nameEn": "split Jerk",
+    "namePl": "Wycisko podrzut na nozyce",
+    "bodyPart": "Olympic",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "44",
+    "nameEn": "squat",
+    "namePl": "Przysiad",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "45",
+    "nameEn": "standing calf Raise",
+    "namePl": "Wspiecia na palcach ze sztangielkami stojac",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "46",
+    "nameEn": "standing calf Raise",
+    "namePl": "Wspiecia na palcach ze sztanga stojac",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "47",
+    "nameEn": "stiff Leg Deadlift",
+    "namePl": "Martwy ciag ze sztywnymi nogami",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "48",
+    "nameEn": "sumo Deadlift",
+    "namePl": "Martwy ciag sumo",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "49",
+    "nameEn": "sumo Deadlifht High Pull",
+    "namePl": "Martwy ciag sumo z dociagiem",
+    "bodyPart": "Full Body",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "50",
+    "nameEn": "Thruster",
+    "namePl": "Przysiad z wyciskaniem z klatki piersiowej nad glowe",
+    "bodyPart": "Full Body",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "51",
+    "nameEn": "Trap Bar Deadlift",
+    "namePl": "Martwy ciag z gryfem heksagonalnym",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "52",
+    "nameEn": "Triceps extension",
+    "namePl": "Naprzemienne prostowanie przedramion z wykorzystaniem wyciagu gornego",
+    "bodyPart": "Arms",
+    "equipment": "cable"
+  },
+  {
+    "id": "53",
+    "nameEn": "Triceps extension",
+    "namePl": "Prostowanie przedramion ze sztanga lamana siedzac",
+    "bodyPart": "Arms",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "54",
+    "nameEn": "Upright Row",
+    "namePl": "Podciaganie sztangi wzdluz tulowia",
+    "bodyPart": "Back",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "55",
+    "nameEn": "Zercher squat",
+    "namePl": "Przysiad Zerchera",
+    "bodyPart": "Legs",
+    "equipment": "Barebell"
+  },
+  {
+    "id": "56",
+    "nameEn": "Arnold Press",
+    "namePl": "Wyciskanie sztangielek nad glowe z rotacja",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "57",
+    "nameEn": "Around the World",
+    "namePl": "Pelny ruch sztangielkami po okregu w przeciwnych kierunkach",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "58",
+    "nameEn": "Bench Press",
+    "namePl": "Wyciskanie lezac sztangielkami",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "59",
+    "nameEn": "Bent Over One Arm Row",
+    "namePl": "Podciaganie sztangielki w kleku podpartym na laweczce",
+    "bodyPart": "Back",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "60",
+    "nameEn": "Bent Over Row",
+    "namePl": "Podciaganie sztangi w opadzie tulowia (wioslo)",
+    "bodyPart": "Back",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "61",
+    "nameEn": "Biceps curl",
+    "namePl": "Zginanie przedramion sztangielkami",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "62",
+    "nameEn": "chest Fly",
+    "namePl": "Rozpietki",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "63",
+    "nameEn": "concentration curl",
+    "namePl": "Naprzemienne zginanie przedramion ze sztangielkami (lokiec wsparty na udzie)",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "64",
+    "nameEn": "Deadlift",
+    "namePl": "Martwy ciag sztangielkami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "65",
+    "nameEn": "Decline Bench Press",
+    "namePl": "Wyciskanie sztangieleki na lawce z glowa w dol",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "66",
+    "nameEn": "Front Raise",
+    "namePl": "Wznosy ramion do przodu",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "67",
+    "nameEn": "Hammer curl",
+    "namePl": "Naprzemienne zginanie przedramion ze sztangielkami chwytem mlotkowym",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "68",
+    "nameEn": "Incline Bench Press",
+    "namePl": "Wyciskanie sztangielek na lawce skosnej z glowa ku gorze",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "69",
+    "nameEn": "Incline chest Fly",
+    "namePl": "Rozpietki na lawce skosnej z glowa ku gorze",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "70",
+    "nameEn": "Incline curl",
+    "namePl": "Zginanie przedramion ze sztangielkami w siadzie na lawce skosnej z glowa ku gorze",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "71",
+    "nameEn": "Incline Row",
+    "namePl": "Wioslowanie sztangielkami lezac na lawce skosnej",
+    "bodyPart": "Back",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "72",
+    "nameEn": "Lateral Raise",
+    "namePl": "Wznoszy sztangielek bokiem",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "73",
+    "nameEn": "Overhead Press",
+    "namePl": "Wyciskanie sztangielek nad glowe",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "74",
+    "nameEn": "Preacher curl",
+    "namePl": "Zginanie przedramion na modlitewniku sztangielkami",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "75",
+    "nameEn": "Pullover",
+    "namePl": "Przenoszenie sztangielki zza glowy",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "76",
+    "nameEn": "Reverse curl",
+    "namePl": "Zginanie przedramion ze sztanga trzymana nachwytem",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "77",
+    "nameEn": "Reverse Fly",
+    "namePl": "Odwrocone rozpietki na lawce skosnej",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "78",
+    "nameEn": "Reverse cgrip concentration curl",
+    "namePl": "Odwrotne zginanie przedramion ze sztangielkami (lokiec wsparty na udzie)",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "79",
+    "nameEn": "Romanian Deadlift",
+    "namePl": "Rumunski martwy ciag ze sztangielkami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "80",
+    "nameEn": "seated Overhead Press",
+    "namePl": "Wyciskanie sztangielek nad glowe siedzac",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "81",
+    "nameEn": "seated Palms Up Wrist curl",
+    "namePl": "Zginanie nadgarstkow ze sztanga trzymana podchwytem",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "82",
+    "nameEn": "shrug",
+    "namePl": "Unoszenie barkow ze sztangielkami",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "83",
+    "nameEn": "side Bend",
+    "namePl": "sklony tulowia w bok ze sztangielka",
+    "bodyPart": "chest",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "84",
+    "nameEn": "skullcrusher",
+    "namePl": "Prostowanie przedramion ze sztangielkami w pozycji lezacej na laweczce",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "85",
+    "nameEn": "squat",
+    "namePl": "Przysiad ze sztangielkami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "86",
+    "nameEn": "stiff Leg Deadlift",
+    "namePl": "Martwy ciag ze sztangielkami ze sztywnymi nogami",
+    "bodyPart": "Legs",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "87",
+    "nameEn": "Triceps extension",
+    "namePl": "Zginanie ramion ze sztangielka za glowe",
+    "bodyPart": "Arms",
+    "equipment": "Dumbbell"
+  },
+  {
+    "id": "88",
+    "nameEn": "Upright Row",
+    "namePl": "Podciaganie sztangielek wzdluz tulowia",
+    "bodyPart": "shoulders",
+    "equipment": "Dumbbell"
+  }
+]
