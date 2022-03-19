@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import dummyExercises from "../data/dummyExercises.json";
+import dummyExercises from "../data/exercises.json";
 
 function Exercise() {
   let { id } = useParams();
@@ -15,8 +15,8 @@ function Exercise() {
   console.log(exercise);
   return (
     <div>
-      {exercise.id} {exercise.exerciseEn} {exercise.exercisePl}{" "}
-      {exercise.bodyPart} {exercise.equipment}
+      {exercise.id} {exercise.nameEn} {exercise.namePl} {exercise.bodyPart}{" "}
+      {exercise.equipment}
     </div>
   );
 }

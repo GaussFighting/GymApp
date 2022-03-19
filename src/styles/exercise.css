@@ -17,3 +17,7 @@
 a {
   text-decoration: none;
 }
+.margin-input {
+  margin-left: 1%;
+  margin-right: 1%;
+}

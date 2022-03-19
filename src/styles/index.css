@@ -32,3 +32,5 @@ body {
 
 @import "navigationbar.css";
 @import "exercise.css";
+@import "formExercises.css";
+@import "formSelector.css";
