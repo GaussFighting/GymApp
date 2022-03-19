@@ -3,6 +3,7 @@ UseParams https://www.geeksforgeeks.org/reactjs-useparams-hook/
 Col/Row w Exercises, baza danych w firebase + połączenie, 
 https://getbootstrap.com/docs/4.0/utilities/text/ text uppercase
 + widok na telefonie
+https://pl.reactjs.org/docs/hooks-reference.html#usecallback
 
 2022-03-02
 Navbar -> navlinki reactstrap 

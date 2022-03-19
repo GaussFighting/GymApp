@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { ListGroup, ListGroupItem, Row, Col, Container } from "react-bootstrap";
+import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import FormExercises from "./FormExercises";
+import FormSelector from "./FormSelector";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
+  const [filterName, setFilterName] = useState("");
+  const [allExercisesForFiltering, setAllExercisesForFiltering] = useState([]);
+  const [filterByBodyPart, setFilterByBodyPart] = useState("");
+  const [filterByEquipment, setFilterByEquipment] = useState("");
 
   useEffect(() => {
     const fetchExercises = async () => {
       const response = await fetch(
         "https://gymapp2-d46e1-default-rtdb.firebaseio.com/exercises.json"
       );
+
       const responseData = await response.json();
 
       const loadedExercises = [];
@@ -25,12 +32,13 @@ const Exercises = () => {
         });
       }
       setExercises(loadedExercises);
+      setAllExercisesForFiltering(loadedExercises);
     };
 
     fetchExercises();
   }, []);
 
-  const exercisesList = exercises.map((exercise, idx) => (
+  const ExercisesList = exercises.map((exercise, idx) => (
     <ListGroup key={exercise.id}>
       <Button className="button" outline>
         <Link to={`/exercise/${idx + 1}`}>
@@ -58,9 +66,59 @@ const Exercises = () => {
       </Button>
     </ListGroup>
   ));
+
+  const bodyPart = "bodyPart";
+  const bodyPartUniqueList = [
+    ...new Set(
+      allExercisesForFiltering.map((item) => item.bodyPart.toUpperCase())
+    ),
+  ];
+
+  const equipment = "equipment";
+  const equipmentUniqueList = [
+    ...new Set(
+      allExercisesForFiltering.map((item) => item.equipment.toUpperCase())
+    ),
+  ];
+
+  console.log(bodyPartUniqueList, equipmentUniqueList);
+
   return (
     <div className="margin-top">
-      <ul className="ul-exercise">{exercisesList}</ul>
+      <Row>
+        <Col className="margin-input">
+          <FormExercises
+            setFilterName={setFilterName}
+            exercises={exercises}
+            filterName={filterName}
+            setExercises={setExercises}
+            allExercisesForFiltering={allExercisesForFiltering}
+          />
+        </Col>
+      </Row>
+      <Row className="margin-input">
+        <Col xs="6" md="6">
+          <FormSelector
+            uniqueList={bodyPartUniqueList}
+            name={bodyPart}
+            setExercises={setExercises}
+            setFilterByOption={setFilterByBodyPart}
+            filterOption={filterByBodyPart}
+            allExercisesForFiltering={allExercisesForFiltering}
+          />
+        </Col>
+        <Col xs="6" md="6">
+          <FormSelector
+            uniqueList={equipmentUniqueList}
+            name={equipment}
+            setExercises={setExercises}
+            setFilterByOption={setFilterByEquipment}
+            filterOption={filterByEquipment}
+            allExercisesForFiltering={allExercisesForFiltering}
+          />
+        </Col>
+      </Row>
+      <ul className="ul-exercise">{ExercisesList}</ul>
     </div>
   );
 };
