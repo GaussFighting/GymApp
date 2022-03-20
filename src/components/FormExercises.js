@@ -3,17 +3,15 @@ import { Form, FormGroup, Input } from "reactstrap";
 
 function FormExercises({
   setExercises,
+  filterName,
   setFilterName,
   allExercisesForFiltering,
-  filterName,
 }) {
   const getByName = (value) => {
     const filteredExercises = allExercisesForFiltering.filter((exercise) => {
-      // console.log(exercise.nameEn);
-      // console.log(value);
       return exercise.nameEn.toLowerCase().includes(value.toLowerCase());
     });
-    // console.log(filteredExercises);
+
     setExercises(filteredExercises);
   };
   return (

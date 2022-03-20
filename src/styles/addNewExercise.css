@@ -1,0 +1,16 @@
+.new-exercise {
+  color: var(--thirdary-color);
+  background-color: var(--fourdary-bg-color);
+  text-decoration: none;
+}
+.new-exercise:hover {
+  color: var(--secondary-color);
+  background-color: var(--fourdary-bg-color);
+}
+.new-exercise.active {
+  color: var(--secondary-color);
+  background-color: var(--fourdary-bg-color);
+}
+.new-exercise:focus {
+  box-shadow: none;
+}
