@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Modal, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function MyVerticallyCenteredModal(props) {
+  const [form, setForm] = useState({
+    exerciseName: "",
+    selectedBodyPart: "CHEST",
+    selectedEquipment: "BAREBELL",
+  });
+
+  const navigate = useNavigate();
+
+  function updateForm(value) {
+    return setForm((prev) => {
+      return { ...prev, ...value };
+    });
+  }
+  async function onSubmit(e) {
+    e.preventDefault();
+    const newExercise = { ...form };
+    try {
+      await fetch("http://localhost:5000/exercise", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newExercise),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    setForm({ exerciseName: "", selectedBodyPart: "", selectedEquipment: "" });
+    navigate("/");
+  }
+
   return (
     <Modal
       {...props}
@@ -24,7 +57,9 @@ function MyVerticallyCenteredModal(props) {
                 type="text"
                 placeholder="Exercise name"
                 //   value={}
-                onChange={(event) => {}}
+                onChange={(event) =>
+                  updateForm({ exerciseName: event.target.value })
+                }
               ></Input>
             </FormGroup>
           </Row>
@@ -42,16 +77,16 @@ function MyVerticallyCenteredModal(props) {
                   id="exampleSelect"
                   className="selector"
                   //   value={filterOption}
-                  onChange={(event) => {}}
+                  onChange={(event) =>
+                    updateForm({ selectedBodyPart: event.target.value })
+                  }
                 >
-                  {" "}
                   {props.optionsBodyPart}
                 </Input>
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
-                {" "}
                 <Label for="exampleSelect">
                   SELECT{" "}
                   {props.nameEquipment.replace(/([A-Z])/g, " $1").toUpperCase()}
@@ -62,7 +97,9 @@ function MyVerticallyCenteredModal(props) {
                   id="exampleSelect"
                   className="selector"
                   //   value={filterOption}
-                  onChange={(event) => {}}
+                  onChange={(event) =>
+                    updateForm({ selectedEquipment: event.target.value })
+                  }
                 >
                   {props.optionsEquipment}
                 </Input>
@@ -72,7 +109,7 @@ function MyVerticallyCenteredModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button>Save</Button>
+        <Button onClick={(e) => onSubmit(e)}>Save</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
