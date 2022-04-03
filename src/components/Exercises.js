@@ -15,19 +15,16 @@ const Exercises = () => {
 
   useEffect(() => {
     const fetchExercises = async () => {
-      const response = await fetch(
-        "https://gymapp2-d46e1-default-rtdb.firebaseio.com/exercises.json"
-      );
+      const response = await fetch("http://localhost:5000/");
 
       const responseData = await response.json();
-
       const loadedExercises = [];
 
       for (const key in responseData) {
         loadedExercises.push({
-          id: key,
+          id: responseData[key]._id,
           nameEn: responseData[key].nameEn,
-          namePl: responseData[key].namePl,
+          // namePl: responseData[key].namePl,
           bodyPart: responseData[key].bodyPart,
           equipment: responseData[key].equipment,
         });
@@ -42,26 +39,22 @@ const Exercises = () => {
   const ExercisesList = exercises.map((exercise, idx) => (
     <ListGroup key={exercise.id}>
       <Button className="button" outline>
-        <Link to={`/exercise/${idx + 1}`}>
+        <Link to={`/exercise/${exercise.id}`}>
           <ListGroupItem className="text-align-exercise text-uppercase">
             <Row>
               <Col xs="1" md="1">
-                {" "}
                 {idx + 1}
               </Col>
               <Col xs="5" md="5">
-                {" "}
                 {exercise.nameEn}
               </Col>
               <Col xs="3" md="3">
-                {" "}
-                {exercise.bodyPart}{" "}
+                {exercise.bodyPart}
               </Col>
               <Col xs="3" md="3">
-                {" "}
                 {exercise.equipment}
               </Col>
-            </Row>{" "}
+            </Row>
           </ListGroupItem>
         </Link>
       </Button>

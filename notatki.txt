@@ -1,3 +1,23 @@
+2022-04-03
+fetch (dostawiać) łączy aplikacje w reakcie z bazą danych, pozwala na łatwiejsze i czytleniejsze radzenie sobie z zapytaniami http
+Gdy żądanie POST zostaje wysyłane do utworzonego adresu URL, fetch dodaje nowy rekord do bazy danych
+
+
+Jak zbudować pełną MERN-stack Application (web development framework) składa się ze "stosu" Node.js, React.js, w Node React App. + bazda danych w MongoDB
+https://www.mongodb.com/languages/mern-stack-tutorial?fbclid=IwAR2nql8tVSdoLGIQOMVe1Nx4inGpeEraMmncQTi_9Xsd8zWU1WN-mEOUpk4
+node server.js
+2022-03-30
+https://www.mongodb.com/docs/atlas/getting-started/?_ga=2.141465210.939493497.1648646578-279535562.1648292053
+
+2022-03-26
+mongodb - pozwala aplikacji node.js polaczyc sie z baza danych i pracować z nią
+express - to framework dla node.jscors - 
+cors - pozwala jakby aplikacji dzielić zasoby z różnych urli 
+dotenv - pozwala oddzielać pliki konfiguracyjne od kodu
+https://www.mongodb.com/languages/mern-stack-tutorial?fbclid=IwAR3Y5gzxDpb-rugm6nidTo3Ru7-S9F1Dpk3BvnZ8C6OrILBXEAnXDtdUI88
+
+
+
 2022-03-10-13
 UseParams https://www.geeksforgeeks.org/reactjs-useparams-hook/
 Col/Row w Exercises, baza danych w firebase + połączenie, 
