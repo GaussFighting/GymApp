@@ -2,12 +2,12 @@ import React from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 
 const FormSelector = ({
-  uniqueList,
   name,
-  filterOption,
-  allExercisesForFiltering,
+  uniqueList,
   setExercises,
   setFilterByOption,
+  filterOption,
+  allExercisesForFiltering,
 }) => {
   const humanName = name.replace(/([A-Z])/g, " $1").toUpperCase();
   const options = uniqueList.map((item, idx) => (

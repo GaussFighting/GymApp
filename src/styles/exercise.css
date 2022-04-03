@@ -21,3 +21,9 @@ a {
   margin-left: 1%;
   margin-right: 1%;
 }
+
+.button-new-exercise {
+  padding-left: 0px;
+  margin-left: -10px;
+  margin-top: 5px;
+}

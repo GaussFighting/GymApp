@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import FormExercises from "./FormExercises";
 import FormSelector from "./FormSelector";
+import AddNewExercise from "./AddNewExercise";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -81,26 +82,32 @@ const Exercises = () => {
     ),
   ];
 
-  console.log(bodyPartUniqueList, equipmentUniqueList);
-
   return (
     <div className="margin-top">
       <Row>
         <Col className="margin-input">
           <FormExercises
-            setFilterName={setFilterName}
-            exercises={exercises}
             filterName={filterName}
+            exercises={exercises}
+            setFilterName={setFilterName}
             setExercises={setExercises}
             allExercisesForFiltering={allExercisesForFiltering}
+          />
+        </Col>
+        <Col className="button-new-exercise">
+          <AddNewExercise
+            nameBodyPart={bodyPart}
+            nameEquipment={equipment}
+            uniqueListBodyPart={bodyPartUniqueList}
+            uniqueListEquipment={equipmentUniqueList}
           />
         </Col>
       </Row>
       <Row className="margin-input">
         <Col xs="6" md="6">
           <FormSelector
-            uniqueList={bodyPartUniqueList}
             name={bodyPart}
+            uniqueList={bodyPartUniqueList}
             setExercises={setExercises}
             setFilterByOption={setFilterByBodyPart}
             filterOption={filterByBodyPart}
@@ -109,8 +116,8 @@ const Exercises = () => {
         </Col>
         <Col xs="6" md="6">
           <FormSelector
-            uniqueList={equipmentUniqueList}
             name={equipment}
+            uniqueList={equipmentUniqueList}
             setExercises={setExercises}
             setFilterByOption={setFilterByEquipment}
             filterOption={filterByEquipment}
