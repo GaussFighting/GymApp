@@ -2,10 +2,33 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
 
+function OpenModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Are you sure you want to continue deleting current exercise?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={() => props.deleteRecord(props.id)}>Delete</Button>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 function Exercise() {
   let { id } = useParams();
   const [exercise, setExercise] = useState({});
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
     const fetchExercise = async () => {
@@ -36,12 +59,35 @@ function Exercise() {
     }
     navigate("/");
   }
-  return (
-    <div>
-      {exercise.nameEn}
 
-      <Button onClick={() => deleteRecord(id)}>Delete</Button>
-    </div>
+  return (
+    <ListGroupItem className="text-align-single-exercise text-uppercase">
+      <Row className="row">
+        <Col xs="6" md="6">
+          {exercise.nameEn}
+        </Col>
+        <Col xs="6" md="6">
+          {exercise.bodyPart}
+        </Col>
+      </Row>
+      <Row className="row">
+        <Col xs="6" md="6">
+          {exercise.equipment}
+        </Col>
+        <Col xs="6" md="6" className="button-new-exercise">
+          <Button onClick={() => setModalShow(true)}>Delete</Button>
+          <OpenModal
+            show={modalShow}
+            deleteRecord={deleteRecord}
+            id={id}
+            onHide={() => setModalShow(false)}
+          />
+        </Col>
+      </Row>
+      <Row className="row"> Results</Row>
+      <Row className="row"> Charts</Row>
+      <Row className="row"> Best scores</Row>
+    </ListGroupItem>
   );
 }
 
