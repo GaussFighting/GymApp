@@ -17,11 +17,7 @@ function OpenModalEdit(props) {
         <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Edit
-          nameEn={props.nameEn}
-          bodyPart={props.bodyPart}
-          equipment={props.equipment}
-        />
+        <Edit />
       </Modal.Body>
     </Modal>
   );
@@ -29,7 +25,8 @@ function OpenModalEdit(props) {
 function OpenModal(props) {
   return (
     <Modal
-      {...props}
+      onHide={props.onHide}
+      show={props.show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
