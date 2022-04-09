@@ -30,3 +30,21 @@ a {
 .row {
   padding: 10px;
 }
+.col-position-body-part {
+  margin-left: -0.5%;
+}
+.col-position-equipment {
+  margin-left: -0.5%;
+}
+.exercise-name {
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .col-position-body-part {
+    margin-left: -5%;
+  }
+  .col-position-equipment {
+    margin-left: 0%;
+  }
+}

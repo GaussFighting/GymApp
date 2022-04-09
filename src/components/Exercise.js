@@ -3,7 +3,29 @@ import { useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
+import Edit from "./Edit.js";
 
+function OpenModalEdit(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Edit
+          nameEn={props.nameEn}
+          bodyPart={props.bodyPart}
+          equipment={props.equipment}
+        />
+      </Modal.Body>
+    </Modal>
+  );
+}
 function OpenModal(props) {
   return (
     <Modal
@@ -29,6 +51,7 @@ function Exercise() {
   let { id } = useParams();
   const [exercise, setExercise] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
+  const [modalShowEdit, setModalShowEdit] = React.useState(false);
 
   useEffect(() => {
     const fetchExercise = async () => {
@@ -49,7 +72,6 @@ function Exercise() {
   const navigate = useNavigate();
 
   async function deleteRecord(id) {
-    console.log(id);
     try {
       await fetch(`http://localhost:5000/exercise/${id}`, {
         method: "DELETE",
@@ -63,16 +85,26 @@ function Exercise() {
   return (
     <ListGroupItem className="text-align-single-exercise text-uppercase">
       <Row className="row">
-        <Col xs="6" md="6">
-          {exercise.nameEn}
+        <Col xs="12" md="12">
+          <h1>{exercise.nameEn}</h1>
         </Col>
-        <Col xs="6" md="6">
-          {exercise.bodyPart}
+      </Row>
+      <Row>
+        <Col xs="6" md="6" className="col-position-body-part">
+          <h3>{exercise.bodyPart}</h3>
+        </Col>
+        <Col xs="6" md="6" className="col-position-equipment">
+          <h3>{exercise.equipment}</h3>
         </Col>
       </Row>
       <Row className="row">
-        <Col xs="6" md="6">
-          {exercise.equipment}
+        <Col xs="6" md="6" className="button-new-exercise">
+          <Button onClick={() => setModalShowEdit(true)}>Edit</Button>
+          <OpenModalEdit
+            show={modalShowEdit}
+            id={id}
+            onHide={() => setModalShowEdit(false)}
+          />
         </Col>
         <Col xs="6" md="6" className="button-new-exercise">
           <Button onClick={() => setModalShow(true)}>Delete</Button>

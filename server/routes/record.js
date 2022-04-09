@@ -1,4 +1,5 @@
 const express = require("express");
+// const { default: Exercises } = require("../../src/components/Exercises");
 
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
@@ -47,17 +48,27 @@ recordRoutes.route("/exercise").post(function (req, response) {
   });
 });
 
-// // This section will help you update a record by id.
-// recordRoutes.route("/update/:id").post(function (req, response) {
-//   let db_connect = dbo.getDb();
-//   let myquery = { _id: ObjectId( req.params.id )};
-//   let newvalues = {
-//     $set: {
-//       name: req.body.name,
-//       position: req.body.position,
-//       level: req.body.level,
-//   },
-// };
+// This section will help you update a record by id.
+recordRoutes.route("/exercise/:id").put(function (req, response) {
+  console.log("asdf");
+
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  let newvalues = {
+    $set: {
+      nameEn: req.body.nameEn,
+      bodyPart: req.body.bodyPart,
+      equipment: req.body.equipment,
+    },
+  };
+  db_connect
+    .collection("Exercises")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+      response.json(res);
+    });
+});
 
 // // This section will help you delete a record
 recordRoutes.route("/exercise/:id").delete((req, response) => {
