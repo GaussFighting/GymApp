@@ -35,10 +35,11 @@ function MyVerticallyCenteredModal(props) {
     setForm({ exerciseName: "", selectedBodyPart: "", selectedEquipment: "" });
     navigate("/");
   }
-
+  console.log(props);
   return (
     <Modal
-      {...props}
+      onHide={props.onHide}
+      show={props.show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -56,7 +57,7 @@ function MyVerticallyCenteredModal(props) {
                 className="input"
                 type="text"
                 placeholder="Exercise name"
-                //   value={}
+                value={form.exerciseName}
                 onChange={(event) =>
                   updateForm({ exerciseName: event.target.value })
                 }
@@ -76,7 +77,7 @@ function MyVerticallyCenteredModal(props) {
                   name="select"
                   id="exampleSelect"
                   className="selector"
-                  //   value={filterOption}
+                  value={form.selectedBodyPart}
                   onChange={(event) =>
                     updateForm({ selectedBodyPart: event.target.value })
                   }
@@ -96,7 +97,7 @@ function MyVerticallyCenteredModal(props) {
                   name="select"
                   id="exampleSelect"
                   className="selector"
-                  //   value={filterOption}
+                  value={form.selectedEquipment}
                   onChange={(event) =>
                     updateForm({ selectedEquipment: event.target.value })
                   }

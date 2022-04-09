@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
-function Edit(props) {
+function Edit() {
   const [form, setForm] = useState({
-    nameEn: props.nameEn,
-    bodyPart: props.bodyPart,
-    equipment: props.equipment,
+    nameEn: "",
+    bodyPart: "",
+    equipment: "",
   });
+
   const params = useParams();
   const navigate = useNavigate();
 
@@ -36,8 +37,6 @@ function Edit(props) {
     }
 
     fetchData();
-
-    return;
   }, [params.id, navigate]);
 
   // These methods will update the state properties.
@@ -86,13 +85,14 @@ function Edit(props) {
           ></Input>
         </FormGroup>
         <FormGroup className="form-group">
+          {console.log(form)}
           <Label for="exampleSelect">SELECT BODY PART</Label>
           <Input
             type="select"
             name="select"
             id="exampleSelect"
             className="selector select-name-position"
-            // value={}
+            value={form.bodyPart}
             onChange={(e) => updateForm({ bodyPart: e.target.value })}
           >
             <option>BACK</option>
@@ -115,7 +115,7 @@ function Edit(props) {
             name="select"
             id="exampleSelect"
             className="selector select-name-position"
-            // value={}
+            value={form.equipment}
             onChange={(e) => updateForm({ equipment: e.target.value })}
           >
             <option>BAREBELL</option>

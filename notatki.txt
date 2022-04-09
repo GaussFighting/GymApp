@@ -1,3 +1,8 @@
+2022-04-09
+CSS Tutorial - https://www.w3schools.com/css/default.asp
+HTML Tutorial - https://www.w3schools.com/html/default.asp
+JS Tutorial - https://www.w3schools.com/js/default.asp
+
 2022-04-03
 fetch (dostawiać) łączy aplikacje w reakcie z bazą danych, pozwala na łatwiejsze i czytleniejsze radzenie sobie z zapytaniami http
 Gdy żądanie POST zostaje wysyłane do utworzonego adresu URL, fetch dodaje nowy rekord do bazy danych
