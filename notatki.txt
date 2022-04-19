@@ -1,3 +1,13 @@
+2022-04-10
+https://www.jschallenger.com/javascript-basics/times-character-occurs-string
+metody w JSchallenger: slice, split, ** to potęgowanie, math.floor(a), a < b ? a / b : a * b condition ? valueOfTrue : valueOfFalse.
+Array.from() 
+
+zrobienie z liczby 1234 arraya [1,2,3,4]
+Array.from(a.toString()).map(Number); lub   const string = a + '';
+  const strings = string.split('');
+  return strings.map(digit => Number(digit))
+
 2022-04-09
 CSS Tutorial - https://www.w3schools.com/css/default.asp
 HTML Tutorial - https://www.w3schools.com/html/default.asp
