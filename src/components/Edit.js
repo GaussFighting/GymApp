@@ -67,7 +67,7 @@ function Edit() {
       console.log(error);
     }
     console.log(params.id);
-    navigate("/");
+    navigate("/exercises");
   }
 
   // This following section will display the form that takes input from the user to update the data.

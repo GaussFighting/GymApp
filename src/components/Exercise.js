@@ -76,7 +76,7 @@ function Exercise() {
     } catch (error) {
       console.log(error);
     }
-    navigate("/");
+    navigate("/exercises");
   }
 
   return (
