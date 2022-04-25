@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import ChooseExercise from "./ChooseExercise";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 
 function AddNewTemplate() {
+  const [addedExercises, setAddedExercises] = useState([]);
+  console.log("asdf", addedExercises);
+
   return (
     <Form>
       <FormGroup>
@@ -25,7 +28,10 @@ function AddNewTemplate() {
         />
       </FormGroup>
       <FormGroup>
-        <ChooseExercise />
+        <ChooseExercise
+          setAddedExercises={setAddedExercises}
+          addedExercises={addedExercises}
+        />
       </FormGroup>
       <Button>Submit</Button>
     </Form>

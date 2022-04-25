@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Exercises from "./Exercises";
+import ExercisesForTemplate from "./ExercisesForTemplate";
 import { Button } from "reactstrap";
 import { Modal, ModalHeader, ModalFooter } from "react-bootstrap";
 
-function ChooseExercise() {
+function ChooseExercise(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,7 +15,10 @@ function ChooseExercise() {
       </Button>
       <Modal show={show} onHide={handleClose}>
         <ModalHeader toggle={function noRefCheck() {}}>Modal title</ModalHeader>
-        <Exercises />
+        <ExercisesForTemplate
+          setAddedExercises={props.setAddedExercises}
+          addedExercises={props.addedExercises}
+        />
         <ModalFooter>
           <Button color="primary" onClick={handleClose}>
             Do Something
