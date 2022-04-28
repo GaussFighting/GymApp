@@ -5,7 +5,6 @@ import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 
 function AddNewTemplate() {
   const [addedExercises, setAddedExercises] = useState([]);
-  console.log("asdf", addedExercises);
 
   const [exercises, setExercises] = useState([]);
 
@@ -29,27 +28,29 @@ function AddNewTemplate() {
 
     fetchExercises();
   }, []);
+  console.log(addedExercises);
 
-  let exercisesForTemplate = exercises
-    .filter((exercise) => addedExercises.includes(exercise.id))
-    .map((exercise, idx) => (
-      <ListGroupItem className="text-align-exercise text-uppercase">
-        <Row>
-          <Col xs="1" md="1">
-            {idx + 1}
-          </Col>
-          <Col xs="5" md="5">
-            {exercise.nameEn}
-          </Col>
-          <Col xs="3" md="3">
-            {exercise.bodyPart}
-          </Col>
-          <Col xs="3" md="3">
-            {exercise.equipment}
-          </Col>
-        </Row>
-      </ListGroupItem>
-    ));
+  let exercisesForTemplate = addedExercises.map((exercise, idx) => (
+    <ListGroupItem
+      className="text-align-exercise text-uppercase"
+      key={exercise.id}
+    >
+      <Row>
+        <Col xs="1" md="1">
+          {idx + 1}
+        </Col>
+        <Col xs="5" md="5">
+          {exercise.nameEn}
+        </Col>
+        <Col xs="3" md="3">
+          {exercise.bodyPart}
+        </Col>
+        <Col xs="3" md="3">
+          {exercise.equipment}
+        </Col>
+      </Row>
+    </ListGroupItem>
+  ));
 
   return (
     <Form>

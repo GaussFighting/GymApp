@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 import FormExercises from "./FormExercises";
 import FormSelector from "./FormSelector";
 
@@ -11,8 +10,6 @@ const ExercisesForTemplate = (props) => {
   const [allExercisesForFiltering, setAllExercisesForFiltering] = useState([]);
   const [filterByBodyPart, setFilterByBodyPart] = useState("");
   const [filterByEquipment, setFilterByEquipment] = useState("");
-
-  console.log(props.addedExercises);
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -36,8 +33,8 @@ const ExercisesForTemplate = (props) => {
     fetchExercises();
   }, []);
 
-  const addExercise = (id) => {
-    props.setAddedExercises((prev) => [...prev, id]);
+  const addExercise = (exercise) => {
+    props.setAddedExercises((prev) => [...prev, exercise]);
   };
 
   const removeExercise = (id) => {
@@ -45,11 +42,10 @@ const ExercisesForTemplate = (props) => {
   };
 
   const ExercisesList = exercises.map((exercise, idx) => {
-    const isAdded = props.addedExercises.includes(exercise.id);
+    const isAdded = props.addedExercises.includes(exercise);
     return (
       <ListGroup key={exercise.id}>
         <Button className="button" outline>
-          {/* <Link to={`/exercise/${exercise.id}`}> */}
           <ListGroupItem
             className={
               isAdded
@@ -57,7 +53,7 @@ const ExercisesForTemplate = (props) => {
                 : "text-align-exercise text-uppercase "
             }
             onClick={() => {
-              isAdded ? removeExercise(exercise.id) : addExercise(exercise.id);
+              isAdded ? removeExercise(exercise) : addExercise(exercise);
             }}
           >
             <Row>
@@ -75,7 +71,6 @@ const ExercisesForTemplate = (props) => {
               </Col>
             </Row>
           </ListGroupItem>
-          {/* </Link> */}
         </Button>
       </ListGroup>
     );

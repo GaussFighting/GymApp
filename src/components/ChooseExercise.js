@@ -7,6 +7,7 @@ function ChooseExercise(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleCancel = () => props.setAddedExercises([]);
 
   return (
     <div>
@@ -14,16 +15,25 @@ function ChooseExercise(props) {
         Add New Exercise
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <ModalHeader toggle={function noRefCheck() {}}>Modal title</ModalHeader>
+        <ModalHeader toggle={function noRefCheck() {}}>
+          CHOOSE EXERCISE
+        </ModalHeader>
         <ExercisesForTemplate
           setAddedExercises={props.setAddedExercises}
           addedExercises={props.addedExercises}
         />
         <ModalFooter>
           <Button color="primary" onClick={handleClose}>
-            Do Something
+            Add to Template
           </Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            onClick={() => {
+              handleClose();
+              handleCancel();
+            }}
+          >
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
     </div>
