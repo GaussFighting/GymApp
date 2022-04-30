@@ -119,6 +119,7 @@ const Exercises = () => {
         </Col>
       </Row>
       <ul className="ul-exercise">{ExercisesList}</ul>
+      <div className="spacer"></div>
     </div>
   );
 };

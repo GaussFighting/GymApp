@@ -39,14 +39,17 @@ function AddNewTemplate() {
         <Col xs="1" md="1">
           {idx + 1}
         </Col>
-        <Col xs="5" md="5">
+        <Col xs="4" md="5">
           {exercise.nameEn}
         </Col>
-        <Col xs="3" md="3">
+        <Col xs="3" md="2">
           {exercise.bodyPart}
         </Col>
         <Col xs="3" md="3">
           {exercise.equipment}
+        </Col>
+        <Col xs="1" md="1">
+          <Button> - </Button>
         </Col>
       </Row>
     </ListGroupItem>
@@ -54,7 +57,7 @@ function AddNewTemplate() {
 
   return (
     <Form>
-      <FormGroup>
+      <FormGroup className="add-new-template-input">
         <Label for="exampleEmail">Name</Label>
         <Input
           className="input"
@@ -64,13 +67,14 @@ function AddNewTemplate() {
           onChange={(event) => {}}
         ></Input>
       </FormGroup>
-      <FormGroup>
+      <FormGroup className="add-new-template-input">
         <Label for="exampleText">Descritpion</Label>
         <Input
           type="textarea"
           name="text"
           id="exampleText"
           placeholder="Descritpion"
+          className="add-new-template-input-position"
         />
       </FormGroup>
       <ListGroup>{exercisesForTemplate}</ListGroup>
@@ -80,7 +84,8 @@ function AddNewTemplate() {
           addedExercises={addedExercises}
         />
       </FormGroup>
-      <Button>Submit</Button>
+      <Button className="add-new-template-cancel-button">Submit</Button>
+      <div className="spacer"></div>
     </Form>
   );
 }

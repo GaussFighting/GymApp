@@ -11,7 +11,7 @@ function ChooseExercise(props) {
 
   return (
     <div>
-      <Button color="danger" onClick={handleShow}>
+      <Button color="danger" className="open-modal-button" onClick={handleShow}>
         Add New Exercise
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -22,11 +22,12 @@ function ChooseExercise(props) {
           setAddedExercises={props.setAddedExercises}
           addedExercises={props.addedExercises}
         />
-        <ModalFooter>
-          <Button color="primary" onClick={handleClose}>
+        <ModalFooter className="modal-footer-buttons">
+          <Button color="primary add-button" onClick={handleClose}>
             Add to Template
           </Button>
           <Button
+            className="cancel-button"
             onClick={() => {
               handleClose();
               handleCancel();

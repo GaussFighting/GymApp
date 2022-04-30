@@ -1,0 +1,32 @@
+.start-workout-button {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+  left: 10px;
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-color);
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.start-workout-button:hover {
+  background-color: var(--thirdary-bg-color);
+  color: var(--fourdary-color);
+}
+
+.start-workout-button:focus {
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-color);
+  box-shadow: none;
+}
+
+.start-workout-navlink {
+  color: var(--primary-color);
+}
+.start-workout-navlink:hover {
+  color: var(--fourdary-color);
+}

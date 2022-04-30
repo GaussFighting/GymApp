@@ -5,6 +5,9 @@
     width: 100%;
     z-index: 1;
   }
+  .spacer {
+    height: 180px;
+  }
 }
 .nav {
   background-color: var(--secondary-bg-color);

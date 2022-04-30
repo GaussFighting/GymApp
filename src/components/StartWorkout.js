@@ -1,18 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 import StartAnEmptyWorkout from "./StartAnEmptyWorkout";
 import TemplatesList from "./TemplatesList";
 
 function StartWorkout() {
   return (
     <div>
-      Quick Start
+      <div>Quick Start</div>
       <StartAnEmptyWorkout />
-      Templates
-      <Link className="nav-link" to="/addnewtemplate">
-        Add a New Templates
-      </Link>
-      Example Templates
+      <div> Templates</div>
+      <Button className="start-workout-button">
+        <Link className="start-workout-navlink" to="/addnewtemplate">
+          Add a New Templates
+        </Link>
+      </Button>
+      <div>Example Templates</div>
       <TemplatesList />
     </div>
   );
