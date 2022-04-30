@@ -35,21 +35,58 @@ function AddNewTemplate() {
       className="text-align-exercise text-uppercase"
       key={exercise.id}
     >
-      <Row>
+      <Row className="text-wraper">
         <Col xs="1" md="1">
           {idx + 1}
         </Col>
-        <Col xs="4" md="5">
+        <Col xs="5" md="5">
           {exercise.nameEn}
         </Col>
-        <Col xs="3" md="2">
+        <Col xs="3" md="3">
           {exercise.bodyPart}
         </Col>
         <Col xs="3" md="3">
           {exercise.equipment}
         </Col>
-        <Col xs="1" md="1">
-          <Button> - </Button>
+      </Row>
+      <Row>
+        <Col xs="6" md="6">
+          <Button
+            className="delete-button"
+            onClick={() => {
+              setAddedExercises((exercises) => {
+                return exercises.filter((ex) => {
+                  return ex.id !== exercise.id;
+                });
+              });
+            }}
+          >
+            DELETE
+          </Button>
+        </Col>
+        <Col xs="6" md="6">
+          <Form>
+            {" "}
+            <FormGroup className="add-new-template-input">
+              <Label for="exampleEmail">Number of sets</Label>
+              <Input
+                className="input"
+                type="number"
+                value={exercise.sets || 1}
+                onChange={(event) => {
+                  setAddedExercises((exercises) => {
+                    return exercises.map((ex) => {
+                      if (ex.id === exercise.id) {
+                        return { ...exercise, sets: event.target.value };
+                      }
+                      return ex;
+                    });
+                  });
+                  console.log(event.target.value);
+                }}
+              ></Input>
+            </FormGroup>
+          </Form>
         </Col>
       </Row>
     </ListGroupItem>

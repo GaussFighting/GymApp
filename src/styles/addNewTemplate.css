@@ -27,3 +27,16 @@
   margin-left: 10px;
   padding-left: 10px;
 }
+.text-wraper {
+  overflow-wrap: anywhere;
+}
+.delete-button {
+  margin-left: 50%;
+  background-color: var(--secondary-bg-color);
+  border: none;
+  color: var(--primary-color);
+  width: 200px;
+}
+.sets-number {
+  margin-left: 50%;
+}
