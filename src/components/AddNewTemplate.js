@@ -2,11 +2,63 @@ import React, { useState, useEffect } from "react";
 import ChooseExercise from "./ChooseExercise";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function AddNewTemplate() {
   const [addedExercises, setAddedExercises] = useState([]);
-
   const [exercises, setExercises] = useState([]);
+  const [formTemplate, setFormTemplate] = useState({});
+  // const template = {
+  //   id: "234",
+  //   templateName: "asdf",
+  //   descirption: "test",
+  //   exercises: [
+  //     {
+  //       id: "1",
+  //       equipment: "Barebell",
+  //       exerciseName: "bench press",
+  //       bodyPart: "Chest",
+  //       sets: "5",
+  //     },
+  //     {
+  //       id: "2",
+  //       equipment: "Barebell",
+  //       exerciseName: "bench press",
+  //       bodyPart: "Chest",
+  //       sets: "5",
+  //     },
+  //   ],
+  // };
+  const navigate = useNavigate();
+
+  function updateFormTemplate(value) {
+    return setFormTemplate((prev) => {
+      return { ...prev, ...value };
+    });
+  }
+  console.log(formTemplate);
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      await fetch("http://localhost:5000/templates", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formTemplate),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    setFormTemplate({
+      templateName: "",
+      description: "",
+      templateExercises: [],
+    });
+    navigate("/");
+  }
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -28,7 +80,15 @@ function AddNewTemplate() {
 
     fetchExercises();
   }, []);
-  console.log(addedExercises);
+
+  useEffect(() => {
+    setFormTemplate((prev) => {
+      return {
+        ...prev,
+        templateExercises: addedExercises,
+      };
+    });
+  }, [addedExercises]);
 
   let exercisesForTemplate = addedExercises.map((exercise, idx) => (
     <ListGroupItem
@@ -72,12 +132,15 @@ function AddNewTemplate() {
               <Input
                 className="input"
                 type="number"
-                value={exercise.sets || 1}
+                value={exercise.sets}
                 onChange={(event) => {
-                  setAddedExercises((exercises) => {
-                    return exercises.map((ex) => {
+                  setAddedExercises((prev) => {
+                    return prev.map((ex) => {
                       if (ex.id === exercise.id) {
-                        return { ...exercise, sets: event.target.value };
+                        return {
+                          ...exercise,
+                          sets: parseInt(event.target.value),
+                        };
                       }
                       return ex;
                     });
@@ -91,7 +154,6 @@ function AddNewTemplate() {
       </Row>
     </ListGroupItem>
   ));
-
   return (
     <Form>
       <FormGroup className="add-new-template-input">
@@ -101,7 +163,9 @@ function AddNewTemplate() {
           type="text"
           placeholder="Put template name"
           // value={}
-          onChange={(event) => {}}
+          onChange={(event) =>
+            updateFormTemplate({ templateName: event.target.value })
+          }
         ></Input>
       </FormGroup>
       <FormGroup className="add-new-template-input">
@@ -112,6 +176,9 @@ function AddNewTemplate() {
           id="exampleText"
           placeholder="Descritpion"
           className="add-new-template-input-position"
+          onChange={(event) =>
+            updateFormTemplate({ description: event.target.value })
+          }
         />
       </FormGroup>
       <ListGroup>{exercisesForTemplate}</ListGroup>
@@ -121,7 +188,12 @@ function AddNewTemplate() {
           addedExercises={addedExercises}
         />
       </FormGroup>
-      <Button className="add-new-template-cancel-button">Submit</Button>
+      <Button
+        onClick={(e) => onSubmit(e)}
+        className="add-new-template-cancel-button"
+      >
+        Submit
+      </Button>
       <div className="spacer"></div>
     </Form>
   );

@@ -24,6 +24,7 @@ const ExercisesForTemplate = (props) => {
           nameEn: responseData[key].nameEn,
           bodyPart: responseData[key].bodyPart,
           equipment: responseData[key].equipment,
+          sets: 1,
         });
       }
       setExercises(loadedExercises);

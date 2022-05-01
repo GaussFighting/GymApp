@@ -23,7 +23,12 @@ function ChooseExercise(props) {
           addedExercises={props.addedExercises}
         />
         <ModalFooter className="modal-footer-buttons">
-          <Button color="primary add-button" onClick={handleClose}>
+          <Button
+            color="primary add-button"
+            onClick={() => {
+              handleClose();
+            }}
+          >
             Add to Template
           </Button>
           <Button

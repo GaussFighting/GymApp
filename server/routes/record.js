@@ -52,9 +52,9 @@ recordRoutes.route("/exercise").post(function (req, response) {
 recordRoutes.route("/templates").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    nameEn: req.body.exerciseName,
-    bodyPart: req.body.selectedBodyPart,
-    equipment: req.body.selectedEquipment,
+    templateName: req.body.templateName,
+    description: req.body.description,
+    templateExercises: req.body.templateExercises,
   };
   db_connect.collection("Templates").insertOne(myobj, function (err, res) {
     if (err) throw err;
