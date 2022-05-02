@@ -40,3 +40,30 @@
 .sets-number {
   margin-left: 50%;
 }
+
+@media only screen and (max-width: 600px) {
+  .add-new-template-input {
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-right: 0px;
+  }
+  .add-new-template-input-position {
+    margin-left: 10px;
+    display: block;
+    padding-left: 10px;
+  }
+  .text-wraper {
+    overflow-wrap: anywhere;
+  }
+  .delete-button {
+    margin-top: 10px;
+    margin-left: 0px;
+    background-color: var(--secondary-bg-color);
+    border: none;
+    color: var(--primary-color);
+    width: 100px;
+  }
+  .sets-number {
+    margin-left: 10%;
+  }
+}

@@ -110,7 +110,7 @@ function AddNewTemplate() {
         </Col>
       </Row>
       <Row>
-        <Col xs="6" md="6">
+        <Col xs="4" md="6">
           <Button
             className="delete-button"
             onClick={() => {
@@ -124,11 +124,16 @@ function AddNewTemplate() {
             DELETE
           </Button>
         </Col>
-        <Col xs="6" md="6">
+        <Col xs="4" md="3">
+          <FormGroup className="add-new-template-input">
+            <Label for="exampleEmail">Enter number of sets</Label>
+          </FormGroup>
+        </Col>
+        <Col xs="4" md="3">
           <Form>
             {" "}
             <FormGroup className="add-new-template-input">
-              <Label for="exampleEmail">Number of sets</Label>
+              {/* <Label for="exampleEmail">Number of sets</Label> */}
               <Input
                 className="input"
                 type="number"
