@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import StartAnEmptyWorkout from "./StartAnEmptyWorkout";
-import TemplatesList from "./TemplatesList";
 
 function StartWorkout() {
   return (
@@ -15,8 +14,11 @@ function StartWorkout() {
           Add a New Templates
         </Link>
       </Button>
-      <div>Example Templates</div>
-      <TemplatesList />
+      <Button className="start-workout-button">
+        <Link className="start-workout-navlink" to="/templatelist">
+          List of Templates
+        </Link>
+      </Button>
     </div>
   );
 }

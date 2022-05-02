@@ -24,11 +24,33 @@ recordRoutes.route("/").get(function (req, res) {
     });
 });
 
+// This section will help you get a list of all the records.
+recordRoutes.route("/templates").get(function (req, res) {
+  let db_connect = dbo.getDb("GYMAPP");
+  db_connect
+    .collection("Templates")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
 // This section will help you get a single record by id
 recordRoutes.route("/exercise/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection("Exercises").findOne(myquery, function (err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
+// This section will help you get a single record by id
+recordRoutes.route("/templates/:id").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  db_connect.collection("Templates").findOne(myquery, function (err, result) {
     if (err) throw err;
     res.json(result);
   });
