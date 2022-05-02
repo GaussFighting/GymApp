@@ -70,6 +70,7 @@ function Profile() {
       therefore always holds in these matters to this principle of selection: he
       rejects pleasures to secure other greater pleasures, or else he endures
       pains to avoid worse pains."
+      <div className="spacer"></div>
     </div>
   );
 }

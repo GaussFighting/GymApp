@@ -14,6 +14,7 @@ body {
   --primary-color: #f3f2f2;
   --secondary-color: #f9aa33;
   --thirdary-color: #070101;
+  --fourdary-color: #232f34;
 
   --primary-bg-color: #f3f2f2;
   --secondary-bg-color: #232f34;
@@ -38,3 +39,7 @@ body {
 @import "addNewExercise.css";
 @import "exercise.css";
 @import "edit.css";
+@import "exercisesForTemplate.css";
+@import "./chooseExercise.css";
+@import "./addNewTemplate.css";
+@import "./startWorkout.css";

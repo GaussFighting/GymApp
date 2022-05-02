@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
 import FormExercises from "./FormExercises";
 import FormSelector from "./FormSelector";
-import AddNewExercise from "./AddNewExercise";
 
-const Exercises = () => {
+const ExercisesForTemplate = (props) => {
   const [exercises, setExercises] = useState([]);
   const [filterName, setFilterName] = useState("");
   const [allExercisesForFiltering, setAllExercisesForFiltering] = useState([]);
@@ -24,9 +22,9 @@ const Exercises = () => {
         loadedExercises.push({
           id: responseData[key]._id,
           nameEn: responseData[key].nameEn,
-          // namePl: responseData[key].namePl,
           bodyPart: responseData[key].bodyPart,
           equipment: responseData[key].equipment,
+          sets: 1,
         });
       }
       setExercises(loadedExercises);
@@ -36,11 +34,29 @@ const Exercises = () => {
     fetchExercises();
   }, []);
 
-  const ExercisesList = exercises.map((exercise, idx) => (
-    <ListGroup key={exercise.id}>
-      <Button className="button" outline>
-        <Link to={`/exercise/${exercise.id}`}>
-          <ListGroupItem className="text-align-exercise text-uppercase">
+  const addExercise = (exercise) => {
+    props.setAddedExercises((prev) => [...prev, exercise]);
+  };
+
+  const removeExercise = (id) => {
+    props.setAddedExercises((prev) => prev.filter((element) => element !== id));
+  };
+
+  const ExercisesList = exercises.map((exercise, idx) => {
+    const isAdded = props.addedExercises.includes(exercise);
+    return (
+      <ListGroup key={exercise.id}>
+        <Button className="button" outline>
+          <ListGroupItem
+            className={
+              isAdded
+                ? "text-align-exercise text-uppercase button-clicked"
+                : "text-align-exercise text-uppercase "
+            }
+            onClick={() => {
+              isAdded ? removeExercise(exercise) : addExercise(exercise);
+            }}
+          >
             <Row>
               <Col xs="1" md="1">
                 {idx + 1}
@@ -56,10 +72,10 @@ const Exercises = () => {
               </Col>
             </Row>
           </ListGroupItem>
-        </Link>
-      </Button>
-    </ListGroup>
-  ));
+        </Button>
+      </ListGroup>
+    );
+  });
 
   const bodyPart = "bodyPart";
   const bodyPartUniqueList = [
@@ -87,14 +103,7 @@ const Exercises = () => {
             allExercisesForFiltering={allExercisesForFiltering}
           />
         </Col>
-        <Col className="button-new-exercise">
-          <AddNewExercise
-            nameBodyPart={bodyPart}
-            nameEquipment={equipment}
-            uniqueListBodyPart={bodyPartUniqueList}
-            uniqueListEquipment={equipmentUniqueList}
-          />
-        </Col>
+        <Col className="button-new-exercise"></Col>
       </Row>
       <Row className="margin-input">
         <Col xs="6" md="6">
@@ -119,9 +128,8 @@ const Exercises = () => {
         </Col>
       </Row>
       <ul className="ul-exercise">{ExercisesList}</ul>
-      <div className="spacer"></div>
     </div>
   );
 };
 
-export default Exercises;
+export default ExercisesForTemplate;

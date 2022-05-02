@@ -6,6 +6,7 @@ import History from "./components/History";
 import Profile from "./components/Profile";
 import StartWorkout from "./components/StartWorkout";
 import Exercise from "./components/Exercise";
+import AddNewTemplate from "./components/AddNewTemplate";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/startworkout" element={<StartWorkout />} />
           <Route path="/" element={<Profile />} />
           <Route path="/exercise/:id" element={<Exercise />} />
+          <Route path="/addnewtemplate" element={<AddNewTemplate />} />
         </Routes>
       </div>
     </Router>
