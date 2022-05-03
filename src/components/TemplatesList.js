@@ -28,23 +28,30 @@ const TemplatesList = () => {
 
   const TemplatesList = templates.map((template, index) => (
     <ListGroup key={template.id}>
-      <Link to={`/template/${template.id}`}>
-        <Row>
-          <Col xs="1" md="1">
+      <Row className="template-row">
+        <Link to={`/template/${template.id}`}>
+          <Col xs="12" md="12" className="col-name">
             {index + 1} {template.templateName.toUpperCase()}
           </Col>
-        </Row>
+        </Link>
+      </Row>
 
-        <Row>
-          <Col xs="6" md="6">
-            {template.templateExercises.map((exercise, idx) => (
-              <div>
-                {idx + 1} {exercise.nameEn.toUpperCase()} {exercise.sets} SETS
-              </div>
-            ))}
-          </Col>
-        </Row>
-      </Link>
+      <Row className="template-row">
+        {template.templateExercises.map((exercise, idx) => (
+          <Row>
+            <Col xs="1" md="2">
+              {idx + 1}{" "}
+            </Col>
+            <Col xs="7" md="8">
+              {exercise.nameEn.toUpperCase()}
+            </Col>
+            <Col xs="4" md="2">
+              {" "}
+              {exercise.sets} SETS
+            </Col>
+          </Row>
+        ))}
+      </Row>
     </ListGroup>
   ));
 
