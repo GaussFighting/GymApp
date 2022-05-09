@@ -1,3 +1,11 @@
+2022-05-09
+text truncation
+https://getbootstrap.com/docs/5.0/helpers/text-truncation/
+css white-space: nowrap; do zawijania "5 sets"
+https://www.w3schools.com/cssref/pr_text_white-space.asp
+https://www.w3schools.com/cssref/pr_class_clear.asp
+
+
 2022-04-10
 https://www.jschallenger.com/javascript-basics/times-character-occurs-string
 metody w JSchallenger: slice, split, ** to potęgowanie, math.floor(a), a < b ? a / b : a * b condition ? valueOfTrue : valueOfFalse.

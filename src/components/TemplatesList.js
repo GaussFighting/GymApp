@@ -38,7 +38,7 @@ const TemplatesList = () => {
 
       <Row className="template-row">
         {template.templateExercises.map((exercise, idx) => (
-          <Row>
+          <Row className="template-row-exercise" key={exercise.id}>
             <Col xs="1" md="2">
               {idx + 1}{" "}
             </Col>
