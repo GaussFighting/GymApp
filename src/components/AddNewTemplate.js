@@ -57,7 +57,7 @@ function AddNewTemplate() {
       description: "",
       templateExercises: [],
     });
-    navigate("/");
+    navigate("/templatelist");
   }
 
   useEffect(() => {

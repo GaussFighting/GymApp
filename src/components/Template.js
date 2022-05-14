@@ -1,11 +1,56 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
+import EditTemplate from "./EditTemplate";
+
+function OpenModalEdit(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <EditTemplate />
+      </Modal.Body>
+    </Modal>
+  );
+}
+
+function OpenModal(props) {
+  return (
+    <Modal
+      onHide={props.onHide}
+      show={props.show}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Are you sure you want to continue deleting current template?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={() => props.deleteRecord(props.id)}>Delete</Button>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 
 function Template() {
   let { id } = useParams();
   const [template, setTemplate] = useState({});
+  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShowEdit, setModalShowEdit] = React.useState(false);
 
   useEffect(() => {
     const fetchTemplate = async () => {
@@ -22,6 +67,19 @@ function Template() {
     };
     fetchTemplate();
   }, [id]);
+
+  const navigate = useNavigate();
+
+  async function deleteRecord(id) {
+    try {
+      await fetch(`http://localhost:5000/template/${id}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    navigate("/templatelist");
+  }
 
   return (
     <div className="main-template-div">
@@ -60,6 +118,25 @@ function Template() {
               </Row>
             </Link>
           ))}
+      </Row>
+      <Row className="row">
+        <Col xs="6" md="6" className="button-new-exercise">
+          <Button onClick={() => setModalShowEdit(true)}>Edit</Button>
+          <OpenModalEdit
+            show={modalShowEdit}
+            id={id}
+            onHide={() => setModalShowEdit(false)}
+          />
+        </Col>
+        <Col xs="6" md="6" className="button-new-exercise">
+          <Button onClick={() => setModalShow(true)}>Delete</Button>
+          <OpenModal
+            show={modalShow}
+            deleteRecord={deleteRecord}
+            id={id}
+            onHide={() => setModalShow(false)}
+          />
+        </Col>
       </Row>
       <div className="spacer"></div>
       {console.log(template)}

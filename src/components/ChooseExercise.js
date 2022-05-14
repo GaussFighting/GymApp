@@ -7,7 +7,7 @@ function ChooseExercise(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleCancel = () => props.setAddedExercises([]);
+  const handleCancel = () => props.setAddedExercises(() => []);
 
   return (
     <div>

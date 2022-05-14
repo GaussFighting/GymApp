@@ -44,6 +44,8 @@ const ExercisesForTemplate = (props) => {
 
   const ExercisesList = exercises.map((exercise, idx) => {
     const isAdded = props.addedExercises.includes(exercise);
+    console.log(props.addedExercises);
+    console.log(exercise);
     return (
       <ListGroup key={exercise.id}>
         <Button className="button" outline>
