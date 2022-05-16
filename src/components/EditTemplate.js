@@ -75,14 +75,11 @@ function Edit() {
   }
 
   const addExercises = (callback) => {
-    const pickedExcercises = callback([]);
     setFormTemplate((prevFormTemplate) => {
+      const pickedExcercises = callback(prevFormTemplate.templateExercises);
       return {
         ...prevFormTemplate,
-        templateExercises: [
-          ...prevFormTemplate.templateExercises,
-          ...pickedExcercises,
-        ],
+        templateExercises: pickedExcercises,
       };
     });
   };

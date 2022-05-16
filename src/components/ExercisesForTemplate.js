@@ -38,14 +38,20 @@ const ExercisesForTemplate = (props) => {
     props.setAddedExercises((prev) => [...prev, exercise]);
   };
 
-  const removeExercise = (id) => {
-    props.setAddedExercises((prev) => prev.filter((element) => element !== id));
+  const removeExercise = (exercise) => {
+    props.setAddedExercises((addExercise) => {
+      console.log(addExercise);
+      return addExercise.filter((element) => element !== exercise);
+    });
   };
 
   const ExercisesList = exercises.map((exercise, idx) => {
-    const isAdded = props.addedExercises.includes(exercise);
-    console.log(props.addedExercises);
-    console.log(exercise);
+    const isAdded = props.addedExercises
+      .map((ex) => {
+        return ex.id;
+      })
+      .includes(exercise.id);
+
     return (
       <ListGroup key={exercise.id}>
         <Button className="button" outline>
