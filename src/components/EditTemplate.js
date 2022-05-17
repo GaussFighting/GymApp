@@ -11,6 +11,8 @@ function Edit() {
     templateExercises: [],
   });
 
+  const [addedExercises, setAddedExercises] = useState([]);
+
   console.log(formTemplate);
 
   const params = useParams();
@@ -56,6 +58,7 @@ function Edit() {
       templateName: formTemplate.templateName,
       description: formTemplate.description,
       templateExercises: formTemplate.templateExercises,
+      // sets: exercise.sets,
     };
 
     // This will send a post request to update the data in the database.
@@ -137,7 +140,31 @@ function Edit() {
                   {exercise.equipment.toUpperCase()}
                 </Col>
                 <Col xs="1" md="1" className="px-0 sets">
-                  {exercise.sets} SETS
+                  <Input
+                    className="input"
+                    type="number"
+                    value={exercise.sets}
+                    onChange={(event) => {
+                      setFormTemplate((prev) => {
+                        return {
+                          ...prev,
+                          templateExercises: prev.templateExercises.map(
+                            (ex) => {
+                              if (ex.id === exercise.id) {
+                                return {
+                                  ...ex,
+                                  sets: parseInt(event.target.value),
+                                };
+                              }
+                              return ex;
+                            }
+                          ),
+                        };
+                      });
+                      console.log(event.target.value);
+                    }}
+                  ></Input>{" "}
+                  SETS
                 </Col>
                 <Col xs="1" md="1" className="px-0 single-col">
                   <Button
