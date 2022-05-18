@@ -15,16 +15,18 @@ function App() {
     <Router>
       <div>
         <Navigationbar />
-        <Routes>
-          <Route path="/exercises" element={<Exercises />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/startworkout" element={<StartWorkout />} />
-          <Route path="/" element={<Profile />} />
-          <Route path="/exercise/:id" element={<Exercise />} />
-          <Route path="/addnewtemplate" element={<AddNewTemplate />} />
-          <Route path="/templatelist" element={<TemplatesList />} />
-          <Route path="/template/:id" element={<Template />} />
-        </Routes>
+        <div className="container-fluid">
+          <Routes>
+            <Route path="/exercises" element={<Exercises />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/startworkout" element={<StartWorkout />} />
+            <Route path="/" element={<Profile />} />
+            <Route path="/exercise/:id" element={<Exercise />} />
+            <Route path="/addnewtemplate" element={<AddNewTemplate />} />
+            <Route path="/templatelist" element={<TemplatesList />} />
+            <Route path="/template/:id" element={<Template />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );

@@ -40,7 +40,6 @@ const ExercisesForTemplate = (props) => {
 
   const removeExercise = (exercise) => {
     props.setAddedExercises((addExercise) => {
-      console.log(addExercise);
       return addExercise.filter((element) => element !== exercise);
     });
   };
@@ -114,7 +113,7 @@ const ExercisesForTemplate = (props) => {
         <Col className="button-new-exercise"></Col>
       </Row>
       <Row className="margin-input">
-        <Col xs="6" md="6">
+        <Col xs="5" md="6">
           <FormSelector
             name={bodyPart}
             uniqueList={bodyPartUniqueList}

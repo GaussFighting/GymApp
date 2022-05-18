@@ -1,0 +1,64 @@
+.input-sets {
+  width: 60px;
+}
+
+@media only screen and (max-width: 600px) {
+}
+
+.delete-exercise {
+  width: 11%;
+  background-color: var(--secondary-bg-color);
+}
+
+.delete-exercise:hover {
+  width: 11%;
+  background-color: var(--thirdary-bg-color);
+  color: var(--fourdary-color);
+}
+
+.open-modal-button {
+  height: 50px;
+  position: center;
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-color);
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+}
+.sets-view {
+  padding-right: 10px;
+}
+@media only screen and (max-width: 600px) {
+  .input-sets {
+    width: 35px;
+    font-size: 9px;
+  }
+  .delete-exercise {
+    margin-left: 20%;
+    width: 40%;
+    font-size: 11px;
+  }
+  .delete-exercise:hover {
+    width: 40%;
+    background-color: var(--thirdary-bg-color);
+    color: var(--fourdary-color);
+  }
+  .open-modal-button {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 10px;
+    height: 80%;
+    left: 10px;
+    background-color: var(--secondary-bg-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+  }
+  .sets-view {
+    padding-right: 30%;
+  }
+}

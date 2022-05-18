@@ -17,4 +17,19 @@
 .button-edit {
   width: 50%;
   margin: auto;
+  background-color: var(--secondary-bg-color);
+  font-size: 22px;
+}
+
+@media only screen and (max-width: 600px) {
+  .button-edit {
+    font-size: 16px;
+  }
+}
+
+.button-edit:hover {
+  width: 50%;
+  margin: auto;
+  background-color: var(--thirdary-bg-color);
+  color: var(--fourdary-color);
 }

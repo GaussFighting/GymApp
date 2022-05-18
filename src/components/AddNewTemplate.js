@@ -187,18 +187,21 @@ function AddNewTemplate() {
         />
       </FormGroup>
       <ListGroup>{exercisesForTemplate}</ListGroup>
+
       <FormGroup>
         <ChooseExercise
           setAddedExercises={setAddedExercises}
           addedExercises={addedExercises}
         />
       </FormGroup>
-      <Button
-        onClick={(e) => onSubmit(e)}
-        className="add-new-template-cancel-button"
-      >
-        Submit
-      </Button>
+      <FormGroup>
+        <Button
+          onClick={(e) => onSubmit(e)}
+          className="add-new-template-cancel-button"
+        >
+          SUBMIT
+        </Button>
+      </FormGroup>
       <div className="spacer"></div>
     </Form>
   );

@@ -96,7 +96,12 @@ function Exercise() {
       </Row>
       <Row className="row">
         <Col xs="6" md="6" className="button-new-exercise">
-          <Button onClick={() => setModalShowEdit(true)}>Edit</Button>
+          <Button
+            className="delete-exercise"
+            onClick={() => setModalShowEdit(true)}
+          >
+            EDIT
+          </Button>
           <OpenModalEdit
             show={modalShowEdit}
             id={id}
@@ -104,7 +109,12 @@ function Exercise() {
           />
         </Col>
         <Col xs="6" md="6" className="button-new-exercise">
-          <Button onClick={() => setModalShow(true)}>Delete</Button>
+          <Button
+            className="delete-exercise"
+            onClick={() => setModalShow(true)}
+          >
+            DELETE
+          </Button>
           <OpenModal
             show={modalShow}
             deleteRecord={deleteRecord}

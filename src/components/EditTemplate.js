@@ -11,10 +11,6 @@ function Edit() {
     templateExercises: [],
   });
 
-  const [addedExercises, setAddedExercises] = useState([]);
-
-  console.log(formTemplate);
-
   const params = useParams();
   const navigate = useNavigate();
 
@@ -58,7 +54,6 @@ function Edit() {
       templateName: formTemplate.templateName,
       description: formTemplate.description,
       templateExercises: formTemplate.templateExercises,
-      // sets: exercise.sets,
     };
 
     // This will send a post request to update the data in the database.
@@ -115,12 +110,7 @@ function Edit() {
         <FormGroup className="form-group">
           <Label for="exampleSelect">List of Exercises</Label>
         </FormGroup>
-        <Row>
-          <div className="row-position">
-            {" "}
-            Are you sure you want to edit current template?
-          </div>
-        </Row>
+
         <Row>
           {formTemplate.templateExercises &&
             formTemplate.templateExercises.map((exercise, idx) => (
@@ -128,7 +118,7 @@ function Edit() {
                 <Col xs="1" md="1" className="px-0 single-col">
                   {idx + 1}{" "}
                 </Col>
-                <Col xs="3" md="3" className="px-0 single-col">
+                <Col xs="2" md="3" className="px-0 single-col">
                   {exercise.nameEn.toUpperCase()}
                 </Col>
                 <Col xs="2" md="2" className="px-0 single-col">
@@ -139,9 +129,9 @@ function Edit() {
                   {" "}
                   {exercise.equipment.toUpperCase()}
                 </Col>
-                <Col xs="1" md="1" className="px-0 sets">
+                <Col xs="2" md="1" className="px-0 sets">
                   <Input
-                    className="input"
+                    className="input-sets"
                     type="number"
                     value={exercise.sets}
                     onChange={(event) => {
@@ -164,10 +154,11 @@ function Edit() {
                       console.log(event.target.value);
                     }}
                   ></Input>{" "}
-                  SETS
+                  <div className="sets-view">SETS</div>
                 </Col>
                 <Col xs="1" md="1" className="px-0 single-col">
                   <Button
+                    className="delete-exercise"
                     onClick={() => {
                       setFormTemplate((template) => {
                         console.log(template.templateExercises);
@@ -189,13 +180,26 @@ function Edit() {
               </Row>
             ))}
         </Row>
+      </Row>
+      <Row></Row>
+      <Row>
         <ChooseExercise
           setAddedExercises={addExercises}
           addedExercises={formTemplate.templateExercises}
         />
-        <Button className="button-edit" onClick={(e) => onSubmit(e)}>
-          EDIT
-        </Button>
+      </Row>
+      <Row>
+        <div className="row-position">
+          {" "}
+          Are you sure you want to edit current template?
+        </div>
+      </Row>
+      <Row>
+        <div className="row-position">
+          <Button className="button-edit" onClick={(e) => onSubmit(e)}>
+            EDIT
+          </Button>
+        </div>
       </Row>
     </Form>
   );

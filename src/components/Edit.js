@@ -80,7 +80,7 @@ function Edit() {
             className="input select-name-position"
             type="text"
             placeholder="Search..."
-            value={form.nameEn}
+            value={form.nameEn.toUpperCase()}
             onChange={(e) => updateForm({ nameEn: e.target.value })}
           ></Input>
         </FormGroup>

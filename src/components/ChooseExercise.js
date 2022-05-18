@@ -12,7 +12,7 @@ function ChooseExercise(props) {
   return (
     <div>
       <Button color="danger" className="open-modal-button" onClick={handleShow}>
-        Add New Exercise
+        ADD NEW EXERCISE
       </Button>
       <Modal show={show} onHide={handleClose}>
         <ModalHeader toggle={function noRefCheck() {}}>
