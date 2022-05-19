@@ -1,0 +1,22 @@
+a {
+  color: black;
+}
+.col-name {
+  font-size: 22px;
+  color: var(--primary-color);
+  background-color: var(--secondary-bg-color);
+}
+.col-name:hover {
+  color: var(--secondary-color);
+  background-color: var(--secondary-bg-color);
+}
+.template-row {
+  text-align: center;
+  margin-left: -50px;
+  margin-right: -50px;
+}
+
+.template-row-exercise:nth-child(2n) {
+  text-align: center;
+  background-color: var(--fifthdary-bg-color);
+}

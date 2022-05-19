@@ -1,11 +1,12 @@
 .new-exercise {
-  color: var(--thirdary-color);
-  background-color: var(--fourdary-bg-color);
+  color: var(--primary-color);
+  background-color: var(--secondary-bg-color);
   text-decoration: none;
 }
 .new-exercise:hover {
   color: var(--secondary-color);
-  background-color: var(--fourdary-bg-color);
+  background-color: var(--thirdary-bg-color);
+  color: var(--fourdary-color);
 }
 .new-exercise.active {
   color: var(--secondary-color);
@@ -13,4 +14,16 @@
 }
 .new-exercise:focus {
   box-shadow: none;
+}
+@media only screen and (max-width: 600px) {
+  .new-exercise {
+    width: 80%;
+    margin-left: 10%;
+    font-size: 11px;
+  }
+  .text-align-exercise {
+    font-size: 10px;
+    white-space: normal;
+    margin-right: 10%;
+  }
 }

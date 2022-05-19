@@ -24,7 +24,6 @@ a {
 
 .button-clicked {
   padding-left: 0px;
-  margin-left: -10px;
   margin-top: 5px;
   background-color: var(--thirdary-bg-color);
 }

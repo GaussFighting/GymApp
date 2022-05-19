@@ -80,7 +80,7 @@ function Edit() {
             className="input select-name-position"
             type="text"
             placeholder="Search..."
-            value={form.nameEn}
+            value={form.nameEn.toUpperCase()}
             onChange={(e) => updateForm({ nameEn: e.target.value })}
           ></Input>
         </FormGroup>
@@ -141,51 +141,6 @@ function Edit() {
         </Button>
       </Row>
     </Form>
-
-    // <div>
-    //   <h3>Update Record</h3>
-    //   <form>
-    //     <div className="form-group">
-    //       <label htmlFor="name">EXERCISE NAME: </label>
-    //       <input
-    //         type="text"
-    //         className="form-control"
-    //         id="name"
-    //         value={form.nameEn}
-    //         onChange={(e) => updateForm({ nameEn: e.target.value })}
-    //       />
-    //     </div>
-    //     <div className="form-group">
-    //       <label htmlFor="position">SELECT BODY PART </label>
-    //       <input
-    //         type="text"
-    //         className="form-control"
-    //         id="position"
-    //         value={form.bodyPart}
-    //         onChange={(e) => updateForm({ bodyPart: e.target.value })}
-    //       />
-    //     </div>
-    //     <div className="form-group">
-    //       <label htmlFor="position">SELECT EQUIPMENT</label>
-    //       <input
-    //         type="text"
-    //         className="form-control"
-    //         id="position"
-    //         value={form.bodyPart}
-    //         onChange={(e) => updateForm({ bodyPart: e.target.value })}
-    //       />
-    //     </div>
-    //     <div className="form-group">
-    //       <button
-    //         onClick={(e) => onSubmit(e)}
-    //         value="Update Record"
-    //         className="btn btn-primary"
-    //       >
-    //         elo
-    //       </button>
-    //     </div>
-    //   </form>
-    // </div>
   );
 }
 

@@ -38,12 +38,19 @@ const ExercisesForTemplate = (props) => {
     props.setAddedExercises((prev) => [...prev, exercise]);
   };
 
-  const removeExercise = (id) => {
-    props.setAddedExercises((prev) => prev.filter((element) => element !== id));
+  const removeExercise = (exercise) => {
+    props.setAddedExercises((addExercise) => {
+      return addExercise.filter((element) => element !== exercise);
+    });
   };
 
   const ExercisesList = exercises.map((exercise, idx) => {
-    const isAdded = props.addedExercises.includes(exercise);
+    const isAdded = props.addedExercises
+      .map((ex) => {
+        return ex.id;
+      })
+      .includes(exercise.id);
+
     return (
       <ListGroup key={exercise.id}>
         <Button className="button" outline>
@@ -106,7 +113,7 @@ const ExercisesForTemplate = (props) => {
         <Col className="button-new-exercise"></Col>
       </Row>
       <Row className="margin-input">
-        <Col xs="6" md="6">
+        <Col xs="5" md="6">
           <FormSelector
             name={bodyPart}
             uniqueList={bodyPartUniqueList}

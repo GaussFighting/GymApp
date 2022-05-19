@@ -20,6 +20,8 @@ body {
   --secondary-bg-color: #232f34;
   --thirdary-bg-color: #f9aa33;
   --fourdary-bg-color: #fff;
+  --fifthdary-bg-color: #d1d1d1;
+  --sixdary-bg-color: #716f6f;
 
   background-color: var(--primary-bg-color);
   color: var(--thirdary-color);
@@ -27,10 +29,6 @@ body {
 .list-group-item {
   color: var(--thirdary-color);
 }
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace; */
-/* } */
 
 @import "navigationbar.css";
 @import "exercises.css";
@@ -43,3 +41,6 @@ body {
 @import "./chooseExercise.css";
 @import "./addNewTemplate.css";
 @import "./startWorkout.css";
+@import "./templatesList.css";
+@import "./template.css";
+@import "./editTemplate.css";

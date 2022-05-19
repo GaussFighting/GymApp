@@ -33,7 +33,7 @@ function MyVerticallyCenteredModal(props) {
     }
 
     setForm({ exerciseName: "", selectedBodyPart: "", selectedEquipment: "" });
-    navigate("/");
+    navigate("/exercises");
   }
   console.log(props);
   return (
@@ -110,8 +110,12 @@ function MyVerticallyCenteredModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={(e) => onSubmit(e)}>Save</Button>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button className="new-exercise" onClick={(e) => onSubmit(e)}>
+          Save
+        </Button>
+        <Button className="new-exercise" onClick={props.onHide}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );
@@ -137,7 +141,7 @@ const AddNewExercise = ({
     <div>
       <Button
         color="link"
-        className="new-exercise"
+        className="new-exercise "
         onClick={() => setModalShow(true)}
       >
         ADD NEW EXERCISE
