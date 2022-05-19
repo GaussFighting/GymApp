@@ -29,10 +29,6 @@ body {
 .list-group-item {
   color: var(--thirdary-color);
 }
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace; */
-/* } */
 
 @import "navigationbar.css";
 @import "exercises.css";

@@ -1,7 +1,6 @@
 .main-template-div {
   text-align: center;
 }
-
 a {
   color: black;
 }
@@ -34,10 +33,6 @@ a {
 .single-col {
   padding-left: 0px;
   padding-right: 0px;
-
-  /* display: inline-block;
-  overflow: hidden;
-  white-space: nowrap; */
 }
 .sets {
   white-space: nowrap;

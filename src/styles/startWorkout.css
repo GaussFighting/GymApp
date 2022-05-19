@@ -12,18 +12,15 @@
   text-decoration: none;
   display: inline-block;
 }
-
 .start-workout-button:hover {
   background-color: var(--thirdary-bg-color);
   color: var(--fourdary-color);
 }
-
 .start-workout-button:focus {
   background-color: var(--secondary-bg-color);
   color: var(--primary-color);
   box-shadow: none;
 }
-
 .start-workout-navlink {
   color: var(--primary-color);
 }

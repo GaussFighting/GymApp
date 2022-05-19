@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
+import { Row, Col, Modal } from "react-bootstrap";
 import EditTemplate from "./EditTemplate";
 
 function OpenModalEdit(props) {
@@ -39,8 +39,15 @@ function OpenModal(props) {
         Are you sure you want to continue deleting current template?
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => props.deleteRecord(props.id)}>Delete</Button>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button
+          className="start-workout-button"
+          onClick={() => props.deleteRecord(props.id)}
+        >
+          Delete
+        </Button>
+        <Button className="start-workout-button" onClick={props.onHide}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );

@@ -38,8 +38,15 @@ function OpenModal(props) {
         Are you sure you want to continue deleting current exercise?
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => props.deleteRecord(props.id)}>Delete</Button>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button
+          className="start-workout-button"
+          onClick={() => props.deleteRecord(props.id)}
+        >
+          Delete
+        </Button>
+        <Button className="start-workout-button" onClick={props.onHide}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );

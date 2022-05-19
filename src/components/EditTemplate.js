@@ -98,8 +98,8 @@ function Edit() {
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW DESCRIPTION</Label>
           <Input
-            className="input select-name-position"
-            type="text"
+            className="input select-name-position descritpion"
+            type="textarea"
             placeholder="Search..."
             value={formTemplate.description}
             onChange={(e) => updateForm({ description: e.target.value })}

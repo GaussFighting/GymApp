@@ -26,6 +26,7 @@
 .add-new-template-input-position {
   margin-left: 10px;
   padding-left: 10px;
+  height: 100px;
 }
 .text-wraper {
   overflow-wrap: anywhere;

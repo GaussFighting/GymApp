@@ -1,3 +1,6 @@
+2022-05-22
+REFAKTORYZACJA T_T
+
 2022-05-09
 text truncation
 https://getbootstrap.com/docs/5.0/helpers/text-truncation/

@@ -8,27 +8,7 @@ function AddNewTemplate() {
   const [addedExercises, setAddedExercises] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [formTemplate, setFormTemplate] = useState({});
-  // const template = {
-  //   id: "234",
-  //   templateName: "asdf",
-  //   descirption: "test",
-  //   exercises: [
-  //     {
-  //       id: "1",
-  //       equipment: "Barebell",
-  //       exerciseName: "bench press",
-  //       bodyPart: "Chest",
-  //       sets: "5",
-  //     },
-  //     {
-  //       id: "2",
-  //       equipment: "Barebell",
-  //       exerciseName: "bench press",
-  //       bodyPart: "Chest",
-  //       sets: "5",
-  //     },
-  //   ],
-  // };
+
   const navigate = useNavigate();
 
   function updateFormTemplate(value) {
@@ -37,6 +17,7 @@ function AddNewTemplate() {
     });
   }
   console.log(formTemplate);
+  console.log(exercises);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -133,7 +114,6 @@ function AddNewTemplate() {
           <Form>
             {" "}
             <FormGroup className="add-new-template-input">
-              {/* <Label for="exampleEmail">Number of sets</Label> */}
               <Input
                 className="input"
                 type="number"
