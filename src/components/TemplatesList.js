@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 
-const TemplatesList = () => {
+const TemplatesList = (props) => {
   const [templates, setTemplates] = useState([]);
-
+  console.log(props);
   useEffect(() => {
     const fetchExercises = async () => {
       const response = await fetch("http://localhost:5000/templates");
@@ -29,7 +29,10 @@ const TemplatesList = () => {
   const TemplatesList = templates.map((template, index) => (
     <ListGroup key={template.id}>
       <Row className="template-row">
-        <Link to={`/template/${template.id}`}>
+        <Link
+          state={props.training ? { templateObj: template } : {}}
+          to={props.training ? `/training` : `/template/${template.id}`}
+        >
           <Col xs="12" md="12" className="col-name">
             {index + 1} {template.templateName.toUpperCase()}
           </Col>
