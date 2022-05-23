@@ -1,5 +1,5 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
 
@@ -11,6 +11,64 @@ const Training = () => {
   const date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
+  const [formResults, setFormResults] = useState({
+    templateName: loadedTemplate.templateName.toUpperCase(),
+    description: loadedTemplate.descritpion,
+    date: date,
+    templateExercises: loadedTemplate.templateExercises,
+  });
+  const [addedResults, setAddedResults] = useState([]);
+
+  const navigate = useNavigate();
+
+  function updateFormResults(value) {
+    return setFormResults((prev) => {
+      return { ...prev, ...value };
+    });
+  }
+
+  // console.log(formResults);
+  // console.log(addedResults);
+  // console.log(loadedTemplate.templateExercises);
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      await fetch("http://localhost:5000/results", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formResults),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    setFormResults({
+      templateName: loadedTemplate.templateName.toUpperCase(),
+      description: loadedTemplate.descritpion,
+      bodyWeight: "",
+      date: date,
+      templateExercises: [],
+    });
+    navigate("/");
+  }
+
+  useEffect(() => {
+    setFormResults((prev) => {
+      const myNewArray = prev.templateExercises.map((exercise) => ({
+        ...exercise,
+        addedResults,
+      }));
+
+      return {
+        ...prev,
+        templateExercises: myNewArray,
+      };
+    });
+  }, [addedResults]);
+
   const typeOfEquipment = loadedTemplate.templateExercises.map(
     (exercise) => exercise.equipment
   );
@@ -18,18 +76,106 @@ const Training = () => {
   let valueOfSets = (exercise) => {
     let arrayOfSets = [];
     for (let i = 0; i < exercise.sets; i++) {
-      arrayOfSets.push(<Row>{valueOfExercises(exercise.equipment)}</Row>);
+      arrayOfSets.push(
+        <Row key={`${exercise.id}-${i}`}>{valueOfExercises(exercise, i)}</Row>
+      );
     }
     return arrayOfSets;
   };
 
-  let valueOfExercises = (condition) => {
+  let valueOfExercises = (exercise, i) => {
     if (
-      condition === "barebell" ||
-      condition === "dumbbell" ||
-      condition === "OTHER" ||
-      condition === "MACHINE" ||
-      condition === "CABLE"
+      exercise.equipment === "barebell" ||
+      exercise.equipment === "BAREBELL" ||
+      exercise.equipment === "dumbbell" ||
+      exercise.equipment === "DUMBBELL" ||
+      exercise.equipment === "OTHER" ||
+      exercise.equipment === "MACHINE" ||
+      exercise.equipment === "CABLE"
+    ) {
+      // console.log(exercise.id);
+      console.log(addedResults);
+      return (
+        <Form>
+          <span>WEIGHT:</span>
+          <Input
+            className="input d-inline-block"
+            type="number"
+            // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+
+                console.log(prev);
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setWeight: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setWeight: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+
+              console.log(event.target.value);
+            }}
+          ></Input>
+          <span>REPETITION:</span>
+          <Input
+            className="input d-inline-block"
+            type="number"
+            // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+
+                console.log(prev);
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setRepetition: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setRepetition: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+
+              console.log(event.target.value);
+            }}
+          ></Input>
+          <Label check>
+            <Input type="checkbox" />
+          </Label>
+        </Form>
+      );
+    }
+    if (
+      exercise.equipment === "weighted bodyweight" ||
+      exercise.equipment === "assisted bodyweight"
     ) {
       return (
         <Form>
@@ -45,31 +191,13 @@ const Training = () => {
             type="number"
             // value={}
           ></Input>
+          <Label check>
+            <Input type="checkbox" />
+          </Label>
         </Form>
       );
     }
-    if (
-      condition === "weighted bodyweight" ||
-      condition === "assisted bodyweight"
-    ) {
-      return (
-        <Form>
-          <span>WEIGHT:</span>
-          <Input
-            className="input d-inline-block"
-            type="number"
-            // value={}
-          ></Input>
-          <span>REPETITION:</span>
-          <Input
-            className="input d-inline-block"
-            type="number"
-            // value={}
-          ></Input>
-        </Form>
-      );
-    }
-    if (condition === "cardio") {
+    if (exercise.equipment === "cardio") {
       return (
         <Form>
           <span>DISTANCE:</span>
@@ -84,10 +212,13 @@ const Training = () => {
             type="number"
             // value={}
           ></Input>
+          <Label check>
+            <Input type="checkbox" />
+          </Label>
         </Form>
       );
     }
-    if (condition === "duration") {
+    if (exercise.equipment === "duration") {
       return (
         <Form>
           <span>TIME:</span>
@@ -96,10 +227,13 @@ const Training = () => {
             type="number"
             // value={}
           ></Input>
+          <Label check>
+            <Input type="checkbox" />
+          </Label>
         </Form>
       );
     }
-    if (condition === "reps only") {
+    if (exercise.equipment === "reps only") {
       return (
         <Form>
           <span>REPETITION:</span>
@@ -108,6 +242,9 @@ const Training = () => {
             type="number"
             // value={}
           ></Input>
+          <Label check>
+            <Input type="checkbox" />
+          </Label>
         </Form>
       );
     } else {
@@ -115,11 +252,8 @@ const Training = () => {
     }
   };
 
-  console.log(today);
-  console.log(date);
-  console.log(typeOfEquipment);
-  console.log(location.state.templateObj);
-  console.log(location.state.templateObj.descritpion);
+  // console.log(typeOfEquipment);
+  // console.log(location.state.templateObj);
 
   return (
     <div className="main-template-div">
@@ -145,6 +279,12 @@ const Training = () => {
                 className="input d-inline-block"
                 type="number"
                 // value={}
+                onChange={(event) => {
+                  updateFormResults({
+                    bodyWeight: parseInt(event.target.value),
+                  });
+                  console.log(event.target.value);
+                }}
               ></Input>
             </Form>
           </Col>
@@ -164,6 +304,15 @@ const Training = () => {
           ))}
         </Row>
       </ListGroup>
+      <FormGroup>
+        <Button
+          onClick={(e) => onSubmit(e)}
+          className="add-new-template-cancel-button"
+        >
+          FINISH
+        </Button>
+      </FormGroup>
+      <div className="spacer"></div>
     </div>
   );
 };

@@ -84,6 +84,22 @@ recordRoutes.route("/templates").post(function (req, response) {
   });
 });
 
+// This section will help you create a new record for RESULTS
+recordRoutes.route("/results").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    templateName: req.body.templateName,
+    description: req.body.description,
+    bodyWeight: req.body.bodyWeight,
+    date: req.body.date,
+    templateExercises: req.body.templateExercises,
+  };
+  db_connect.collection("Results").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
+
 // This section will help you update a record by id.
 recordRoutes.route("/exercise/:id").put(function (req, response) {
   console.log("asdf");
