@@ -90,7 +90,10 @@ const Training = () => {
       exercise.equipment === "dumbbell" ||
       exercise.equipment === "DUMBBELL" ||
       exercise.equipment === "OTHER" ||
+      exercise.equipment === "other" ||
       exercise.equipment === "MACHINE" ||
+      exercise.equipment === "machine" ||
+      exercise.equipment === "cable" ||
       exercise.equipment === "CABLE"
     ) {
       // console.log(exercise.id);
@@ -107,8 +110,6 @@ const Training = () => {
                 const isExisting = prev.find((set) => {
                   return set.id === `${exercise.id}-${i}`;
                 });
-
-                console.log(prev);
                 if (!isExisting) {
                   return [
                     ...prev,
@@ -128,8 +129,6 @@ const Training = () => {
                   });
                 }
               });
-
-              console.log(event.target.value);
             }}
           ></Input>
           <span>REPETITION:</span>
@@ -163,8 +162,6 @@ const Training = () => {
                   });
                 }
               });
-
-              console.log(event.target.value);
             }}
           ></Input>
           <Label check>
@@ -175,7 +172,9 @@ const Training = () => {
     }
     if (
       exercise.equipment === "weighted bodyweight" ||
-      exercise.equipment === "assisted bodyweight"
+      exercise.equipment === "WEIGHTED BODYWEIGHT" ||
+      exercise.equipment === "assisted bodyweight" ||
+      exercise.equipment === "ASSISTED BODYWEIGHT"
     ) {
       return (
         <Form>
@@ -184,12 +183,64 @@ const Training = () => {
             className="input d-inline-block"
             type="number"
             // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setWeight: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setWeight: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+            }}
           ></Input>
           <span>REPETITION:</span>
           <Input
             className="input d-inline-block"
             type="number"
             // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+
+                console.log(prev);
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setRepetition: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setRepetition: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+            }}
           ></Input>
           <Label check>
             <Input type="checkbox" />
@@ -197,7 +248,7 @@ const Training = () => {
         </Form>
       );
     }
-    if (exercise.equipment === "cardio") {
+    if (exercise.equipment === "CARDIO" || exercise.equipment === "cardio") {
       return (
         <Form>
           <span>DISTANCE:</span>
@@ -205,12 +256,64 @@ const Training = () => {
             className="input d-inline-block"
             type="number"
             // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setDistance: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setDistance: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+            }}
           ></Input>
           <span>TIME:</span>
           <Input
             className="input d-inline-block"
             type="number"
             // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+
+                console.log(prev);
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setTime: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setTime: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+            }}
           ></Input>
           <Label check>
             <Input type="checkbox" />
@@ -218,7 +321,10 @@ const Training = () => {
         </Form>
       );
     }
-    if (exercise.equipment === "duration") {
+    if (
+      exercise.equipment === "duration" ||
+      exercise.equipment === "DURATION"
+    ) {
       return (
         <Form>
           <span>TIME:</span>
@@ -226,6 +332,31 @@ const Training = () => {
             className="input d-inline-block"
             type="number"
             // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setTime: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setTime: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+            }}
           ></Input>
           <Label check>
             <Input type="checkbox" />
@@ -233,7 +364,10 @@ const Training = () => {
         </Form>
       );
     }
-    if (exercise.equipment === "reps only") {
+    if (
+      exercise.equipment === "reps only" ||
+      exercise.equipment === "REPS ONLY"
+    ) {
       return (
         <Form>
           <span>REPETITION:</span>
@@ -241,6 +375,31 @@ const Training = () => {
             className="input d-inline-block"
             type="number"
             // value={}
+            onChange={(event) => {
+              setAddedResults((prev) => {
+                const isExisting = prev.find((set) => {
+                  return set.id === `${exercise.id}-${i}`;
+                });
+                if (!isExisting) {
+                  return [
+                    ...prev,
+                    {
+                      id: `${exercise.id}-${i}`,
+                      setRepetition: parseInt(event.target.value),
+                    },
+                  ];
+                } else {
+                  return prev.map((res) => {
+                    if (res.id === `${exercise.id}-${i}`)
+                      return {
+                        ...res,
+                        setRepetition: parseInt(event.target.value),
+                      };
+                    return res;
+                  });
+                }
+              });
+            }}
           ></Input>
           <Label check>
             <Input type="checkbox" />
