@@ -59,7 +59,9 @@ const Training = () => {
     setFormResults((prev) => {
       const myNewArray = prev.templateExercises.map((exercise) => ({
         ...exercise,
-        addedResults,
+        addedResults: addedResults.filter((set) => {
+          return set.id.startsWith(exercise.id);
+        }),
       }));
 
       return {
@@ -97,7 +99,7 @@ const Training = () => {
       exercise.equipment === "CABLE"
     ) {
       // console.log(exercise.id);
-      console.log(addedResults);
+      // console.log(addedResults);
       return (
         <Form>
           <span>WEIGHT:</span>
@@ -107,6 +109,7 @@ const Training = () => {
             // value={}
             onChange={(event) => {
               setAddedResults((prev) => {
+                console.log(prev);
                 const isExisting = prev.find((set) => {
                   return set.id === `${exercise.id}-${i}`;
                 });
