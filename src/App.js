@@ -9,6 +9,9 @@ import Exercise from "./components/Exercise";
 import AddNewTemplate from "./components/AddNewTemplate";
 import TemplatesList from "./components/TemplatesList";
 import Template from "./components/Template";
+import StartWorkoutFromTemplate from "./components/StartWorkoutFromTemplate";
+import StarAnEmptytWorkout from "./components/StartAnEmptyWorkout";
+import Training from "./components/Training";
 
 function App() {
   return (
@@ -25,6 +28,13 @@ function App() {
             <Route path="/addnewtemplate" element={<AddNewTemplate />} />
             <Route path="/templatelist" element={<TemplatesList />} />
             <Route path="/template/:id" element={<Template />} />
+            <Route path="/training" element={<Training />} />
+
+            <Route
+              path="/templateworkout"
+              element={<TemplatesList training={true} />}
+            />
+            <Route path="/emptyworkout" element={<StarAnEmptytWorkout />} />
           </Routes>
         </div>
       </div>
