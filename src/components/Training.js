@@ -5,7 +5,10 @@ import { ListGroup, Row, Col } from "react-bootstrap";
 
 const Training = () => {
   const location = useLocation();
-  const loadedTemplate = location.state.templateObj;
+
+  const [loadedTemplate, setLoadedTemplate] = useState(
+    location.state.templateObj
+  );
 
   const today = new Date();
   const date =
@@ -54,6 +57,23 @@ const Training = () => {
     });
     navigate("/");
   }
+
+  let changeSetNumber = (exerciseId, isIncreasing) => {
+    setLoadedTemplate((prev) => {
+      return {
+        ...prev,
+        templateExercises: prev.templateExercises.map((exercise) => {
+          if (exercise.id === exerciseId) {
+            return {
+              ...exercise,
+              sets: isIncreasing ? exercise.sets + 1 : exercise.sets - 1,
+            };
+          }
+          return exercise;
+        }),
+      };
+    });
+  };
 
   useEffect(() => {
     setFormResults((prev) => {
@@ -455,6 +475,7 @@ const Training = () => {
         <Row className="template-row">
           {loadedTemplate.templateExercises.map((exercise, idx) => (
             <Row className="template-row-exercise" key={exercise.id}>
+              {/* {console.log(exercise.sets)} */}
               <Col xs="1" md="2">
                 {idx + 1}{" "}
               </Col>
@@ -462,6 +483,19 @@ const Training = () => {
                 {exercise.nameEn.toUpperCase()}
               </Col>
               <Row>{valueOfSets(exercise)}</Row>
+              {/* {console.log(exercise)} */}
+              <Button
+                onClick={() => changeSetNumber(exercise.id, true)}
+                className="add-new-template-cancel-button"
+              >
+                ADD SET
+              </Button>
+              <Button
+                onClick={() => changeSetNumber(exercise.id, false)}
+                className="add-new-template-cancel-button"
+              >
+                DELETE SET
+              </Button>
             </Row>
           ))}
         </Row>
