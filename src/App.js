@@ -9,7 +9,7 @@ import Exercise from "./components/Exercise";
 import AddNewTemplate from "./components/AddNewTemplate";
 import TemplatesList from "./components/TemplatesList";
 import Template from "./components/Template";
-import StartWorkoutFromTemplate from "./components/StartWorkoutFromTemplate";
+// import StartWorkoutFromTemplate from "./components/StartWorkoutFromTemplate";
 import StarAnEmptytWorkout from "./components/StartAnEmptyWorkout";
 import Training from "./components/Training";
 
