@@ -21,6 +21,7 @@ const Training = () => {
     templateExercises: loadedTemplate.templateExercises,
   });
   const [addedResults, setAddedResults] = useState([]);
+  const [disabledCheckboxesArr, setDisabledCheckboxesArr] = useState([]);
 
   const navigate = useNavigate();
 
@@ -118,6 +119,7 @@ const Training = () => {
       exercise.equipment === "cable" ||
       exercise.equipment === "CABLE"
     ) {
+      // console.log(formResults);
       // console.log(exercise.id);
       // console.log(addedResults);
       return (
@@ -129,7 +131,7 @@ const Training = () => {
             // value={}
             onChange={(event) => {
               setAddedResults((prev) => {
-                console.log(prev);
+                console.log(addedResults);
                 const isExisting = prev.find((set) => {
                   return set.id === `${exercise.id}-${i}`;
                 });
@@ -188,11 +190,30 @@ const Training = () => {
             }}
           ></Input>
           <Label check>
-            <Input type="checkbox" />
+            <Input
+              type="checkbox"
+              onChange={(event) => {
+                setDisabledCheckboxesArr((prev) => {
+                  if (event.target.checked) {
+                    return [...prev, `${exercise.id}-${i}`];
+                  } else {
+                    return prev.filter(
+                      (setId) => setId !== `${exercise.id}-${i}`
+                    );
+                  }
+                });
+              }}
+            />
           </Label>
         </Form>
       );
     }
+    console.log(
+      "asdf",
+      // `${exercise.id}-${i}`,
+      // event,
+      disabledCheckboxesArr
+    );
     if (
       exercise.equipment === "weighted bodyweight" ||
       exercise.equipment === "WEIGHTED BODYWEIGHT" ||
