@@ -10,6 +10,7 @@ const Training = () => {
     location.state.templateObj
   );
 
+  const [bodyWeightConfirmed, setBodyWeightConfirmed] = useState();
   const today = new Date();
   const date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -96,13 +97,18 @@ const Training = () => {
     (exercise) => exercise.equipment
   );
 
+  let arrayOfSetsIds = [];
+
   let valueOfSets = (exercise) => {
     let arrayOfSets = [];
     for (let i = 0; i < exercise.sets; i++) {
+      arrayOfSetsIds = [...arrayOfSetsIds, `${exercise.id}-${i}`];
+      // console.log(arrayOfSetsIds);
       arrayOfSets.push(
         <Row key={`${exercise.id}-${i}`}>{valueOfExercises(exercise, i)}</Row>
       );
     }
+
     return arrayOfSets;
   };
 
@@ -126,6 +132,8 @@ const Training = () => {
         <Form>
           <span>WEIGHT:</span>
           <Input
+            key={`${exercise.id}-${i}`}
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -158,6 +166,7 @@ const Training = () => {
           ></Input>
           <span>REPETITION:</span>
           <Input
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -208,15 +217,15 @@ const Training = () => {
         </Form>
       );
     }
-    console.log(
-      "asdf",
-      // `${exercise.id}-${i}`,
-      // event,
-      disabledCheckboxesArr
-    );
+    // console.log(
+    //   "asdf",
+    //   // `${exercise.id}-${i}`,
+    //   // event,
+    //   disabledCheckboxesArr
+    // );
     if (
       exercise.equipment === "weighted bodyweight" ||
-      exercise.equipment === "WEIGHTED BODYWEIGHT" ||
+      exercise.equipment === "ASSISTED BODYWEIGHT" ||
       exercise.equipment === "assisted bodyweight" ||
       exercise.equipment === "ASSISTED BODYWEIGHT"
     ) {
@@ -224,6 +233,7 @@ const Training = () => {
         <Form>
           <span>WEIGHT:</span>
           <Input
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -255,6 +265,7 @@ const Training = () => {
           ></Input>
           <span>REPETITION:</span>
           <Input
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -287,7 +298,20 @@ const Training = () => {
             }}
           ></Input>
           <Label check>
-            <Input type="checkbox" />
+            <Input
+              type="checkbox"
+              onChange={(event) => {
+                setDisabledCheckboxesArr((prev) => {
+                  if (event.target.checked) {
+                    return [...prev, `${exercise.id}-${i}`];
+                  } else {
+                    return prev.filter(
+                      (setId) => setId !== `${exercise.id}-${i}`
+                    );
+                  }
+                });
+              }}
+            />
           </Label>
         </Form>
       );
@@ -297,6 +321,7 @@ const Training = () => {
         <Form>
           <span>DISTANCE:</span>
           <Input
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -328,6 +353,7 @@ const Training = () => {
           ></Input>
           <span>TIME:</span>
           <Input
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -360,7 +386,20 @@ const Training = () => {
             }}
           ></Input>
           <Label check>
-            <Input type="checkbox" />
+            <Input
+              type="checkbox"
+              onChange={(event) => {
+                setDisabledCheckboxesArr((prev) => {
+                  if (event.target.checked) {
+                    return [...prev, `${exercise.id}-${i}`];
+                  } else {
+                    return prev.filter(
+                      (setId) => setId !== `${exercise.id}-${i}`
+                    );
+                  }
+                });
+              }}
+            />
           </Label>
         </Form>
       );
@@ -373,6 +412,7 @@ const Training = () => {
         <Form>
           <span>TIME:</span>
           <Input
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -403,7 +443,20 @@ const Training = () => {
             }}
           ></Input>
           <Label check>
-            <Input type="checkbox" />
+            <Input
+              type="checkbox"
+              onChange={(event) => {
+                setDisabledCheckboxesArr((prev) => {
+                  if (event.target.checked) {
+                    return [...prev, `${exercise.id}-${i}`];
+                  } else {
+                    return prev.filter(
+                      (setId) => setId !== `${exercise.id}-${i}`
+                    );
+                  }
+                });
+              }}
+            />
           </Label>
         </Form>
       );
@@ -416,6 +469,7 @@ const Training = () => {
         <Form>
           <span>REPETITION:</span>
           <Input
+            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
             className="input d-inline-block"
             type="number"
             // value={}
@@ -446,7 +500,20 @@ const Training = () => {
             }}
           ></Input>
           <Label check>
-            <Input type="checkbox" />
+            <Input
+              type="checkbox"
+              onChange={(event) => {
+                setDisabledCheckboxesArr((prev) => {
+                  if (event.target.checked) {
+                    return [...prev, `${exercise.id}-${i}`];
+                  } else {
+                    return prev.filter(
+                      (setId) => setId !== `${exercise.id}-${i}`
+                    );
+                  }
+                });
+              }}
+            />
           </Label>
         </Form>
       );
@@ -479,6 +546,7 @@ const Training = () => {
             <Form>
               <span>BODY WEIGHT:</span>
               <Input
+                disabled={bodyWeightConfirmed}
                 className="input d-inline-block"
                 type="number"
                 // value={}
@@ -489,6 +557,17 @@ const Training = () => {
                   console.log(event.target.value);
                 }}
               ></Input>
+              <Label check>
+                <Input
+                  type="checkbox"
+                  onChange={(event) => {
+                    setBodyWeightConfirmed(() => event.target.checked);
+                    // console.log(bodyWeightConfirmed);
+                    // console.log(event.target.checked);
+                    // bodyWeightConfirmed = event.target.checked;
+                  }}
+                />
+              </Label>
             </Form>
           </Col>
         </Row>
@@ -523,7 +602,22 @@ const Training = () => {
       </ListGroup>
       <FormGroup>
         <Button
-          onClick={(e) => onSubmit(e)}
+          onClick={(e) => {
+            console.log(arrayOfSetsIds, disabledCheckboxesArr);
+            if (arrayOfSetsIds.length !== disabledCheckboxesArr.length) {
+              return;
+            }
+            let sortedArrayOfSetsIds = arrayOfSetsIds.sort();
+            let sortedDisabledCheckboxesArr = disabledCheckboxesArr.sort();
+
+            for (let i = 0; i < sortedArrayOfSetsIds.length; i++) {
+              if (sortedArrayOfSetsIds[i] !== sortedDisabledCheckboxesArr[i]) {
+                return;
+              } else {
+                onSubmit(e);
+              }
+            }
+          }}
           className="add-new-template-cancel-button"
         >
           FINISH
