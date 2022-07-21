@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
+import ChooseExercise from "./ChooseExercise";
 
 const Training = () => {
   const location = useLocation();
@@ -32,9 +33,12 @@ const Training = () => {
     });
   }
 
-  // console.log(formResults);
-  // console.log(addedResults);
-  // console.log(loadedTemplate.templateExercises);
+  console.log("formResults", formResults);
+  console.log("addedResults", addedResults);
+  console.log(
+    "loadedTemplate.templateExercises",
+    loadedTemplate.templateExercises
+  );
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -91,7 +95,24 @@ const Training = () => {
         templateExercises: myNewArray,
       };
     });
+    // setLoadedTemplate((prev) => {
+    //   console.log(prev);
+    //   return {
+    //     ...prev,
+    //     templateExercises: [...prev.templateExercises],
+    //   };
+    // });
   }, [addedResults]);
+
+  useEffect(() => {
+    setLoadedTemplate((prev) => {
+      console.log(prev);
+      return {
+        ...prev,
+        templateExercises: [...formResults.templateExercises],
+      };
+    });
+  }, [formResults]);
 
   const typeOfEquipment = loadedTemplate.templateExercises.map(
     (exercise) => exercise.equipment
@@ -601,6 +622,18 @@ const Training = () => {
         </Row>
       </ListGroup>
       <FormGroup>
+        <ChooseExercise
+          setAddedExercises={(asdf) => {
+            console.log(asdf([]));
+            setFormResults((prev) => {
+              return {
+                ...prev,
+                templateExercises: [...prev.templateExercises, ...asdf([])],
+              };
+            });
+          }}
+          addedExercises={formResults.templateExercises}
+        />
         <Button
           onClick={(e) => {
             console.log(arrayOfSetsIds, disabledCheckboxesArr);

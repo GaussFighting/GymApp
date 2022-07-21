@@ -39,10 +39,8 @@ const ExercisesForTemplate = (props) => {
   };
 
   const removeExercise = (exercise) => {
-    console.log("consoleloga");
-    props.setAddedExercises((prev) => {
-      console.log("AAAAAAAAA", exercise, prev);
-      return prev.filter((element) => element !== exercise);
+    props.setAddedExercises((addExercise) => {
+      return addExercise.filter((element) => element !== exercise);
     });
   };
 
