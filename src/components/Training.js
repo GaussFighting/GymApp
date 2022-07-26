@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import ChooseExercise from "./ChooseExercise";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Training = () => {
   const location = useLocation();
@@ -12,19 +14,20 @@ const Training = () => {
   );
 
   const [bodyWeightConfirmed, setBodyWeightConfirmed] = useState();
-  const today = new Date();
-  const date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  // const today = new Date();
+  // const date =
+  //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+  const [startDate, setStartDate] = useState(new Date());
 
   const [formResults, setFormResults] = useState({
     templateName: loadedTemplate.templateName.toUpperCase(),
     description: loadedTemplate.descritpion,
-    date: date,
+    date: startDate,
     templateExercises: loadedTemplate.templateExercises,
   });
   const [addedResults, setAddedResults] = useState([]);
   const [disabledCheckboxesArr, setDisabledCheckboxesArr] = useState([]);
-
   const navigate = useNavigate();
 
   function updateFormResults(value) {
@@ -32,6 +35,8 @@ const Training = () => {
       return { ...prev, ...value };
     });
   }
+
+  console.log(startDate, formResults);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -51,7 +56,7 @@ const Training = () => {
       templateName: loadedTemplate.templateName.toUpperCase(),
       description: loadedTemplate.descritpion,
       bodyWeight: "",
-      date: date,
+      date: startDate,
       templateExercises: [],
     });
     navigate("/");
@@ -72,7 +77,6 @@ const Training = () => {
         }),
       };
     };
-
     setFormResults(stateUpdater);
     setLoadedTemplate(stateUpdater);
   };
@@ -101,10 +105,6 @@ const Training = () => {
     });
   }, [formResults]);
 
-  // const typeOfEquipment = loadedTemplate.templateExercises.map(
-  //   (exercise) => exercise.equipment
-  // );
-
   let arrayOfSetsIds = [];
 
   let valueOfSets = (exercise) => {
@@ -115,368 +115,69 @@ const Training = () => {
         <Row key={`${exercise.id}-${i}`}>{valueOfExercises(exercise, i)}</Row>
       );
     }
-
     return arrayOfSets;
   };
 
   let valueOfExercises = (exercise, i) => {
     let exerciseArray = ["barebell", "dumbbell", "other", "machine", "cable"];
-    if (exerciseArray.includes(exercise.equipment.toLowerCase())) {
-      return (
-        <Form>
-          <span>WEIGHT:</span>
-          <Input
-            key={`${exercise.id}-${i}`}
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setWeight: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setWeight: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
-          <span>REPETITION:</span>
-          <Input
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setRepetition: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setRepetition: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
-          <Label check>
-            <Input
-              type="checkbox"
-              onChange={(event) => {
-                setDisabledCheckboxesArr((prev) => {
-                  if (event.target.checked) {
-                    return [...prev, `${exercise.id}-${i}`];
-                  } else {
-                    return prev.filter(
-                      (setId) => setId !== `${exercise.id}-${i}`
-                    );
-                  }
-                });
-              }}
-            />
-          </Label>
-        </Form>
-      );
-    }
-
     let exerciseArray1 = ["weighted bodyweight", "assisted bodyweight"];
-    if (exerciseArray1.includes(exercise.equipment.toLowerCase())) {
-      return (
-        <Form>
-          <span>WEIGHT:</span>
-          <Input
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setWeight: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setWeight: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
-          <span>REPETITION:</span>
-          <Input
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setRepetition: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setRepetition: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
-          <Label check>
-            <Input
-              type="checkbox"
-              onChange={(event) => {
-                setDisabledCheckboxesArr((prev) => {
-                  if (event.target.checked) {
-                    return [...prev, `${exercise.id}-${i}`];
-                  } else {
-                    return prev.filter(
-                      (setId) => setId !== `${exercise.id}-${i}`
-                    );
-                  }
-                });
-              }}
-            />
-          </Label>
-        </Form>
-      );
-    }
+    let exerciseLabels = ["WEIGHT:", "REPETITION:"];
     let exerciseArray2 = ["cardio"];
-    if (exerciseArray2.includes(exercise.equipment.toLowerCase())) {
-      return (
-        <Form>
-          <span>DISTANCE:</span>
-          <Input
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setDistance: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setDistance: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
-          <span>TIME:</span>
-          <Input
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setTime: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setTime: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
-          <Label check>
-            <Input
-              type="checkbox"
-              onChange={(event) => {
-                setDisabledCheckboxesArr((prev) => {
-                  if (event.target.checked) {
-                    return [...prev, `${exercise.id}-${i}`];
-                  } else {
-                    return prev.filter(
-                      (setId) => setId !== `${exercise.id}-${i}`
-                    );
-                  }
-                });
-              }}
-            />
-          </Label>
-        </Form>
-      );
-    }
+    let exerciseLabels2 = ["DISTANCE:", "TIME:"];
     let exerciseArray3 = ["duration"];
-    if (exerciseArray3.includes(exercise.equipment.toLowerCase())) {
-      return (
-        <Form>
-          <span>TIME:</span>
-          <Input
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setTime: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setTime: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
-          <Label check>
-            <Input
-              type="checkbox"
-              onChange={(event) => {
-                setDisabledCheckboxesArr((prev) => {
-                  if (event.target.checked) {
-                    return [...prev, `${exercise.id}-${i}`];
-                  } else {
-                    return prev.filter(
-                      (setId) => setId !== `${exercise.id}-${i}`
-                    );
-                  }
-                });
-              }}
-            />
-          </Label>
-        </Form>
-      );
-    }
+    let exerciseLabels3 = ["TIME"];
     let exerciseArray4 = ["reps only"];
-    if (exerciseArray4.includes(exercise.equipment.toLowerCase())) {
+    let exerciseLabels4 = ["REPETITION:"];
+
+    let labelsFunction = (labels) => {
       return (
         <Form>
-          <span>REPETITION:</span>
-          <Input
-            disabled={disabledCheckboxesArr.includes(`${exercise.id}-${i}`)}
-            className="input d-inline-block"
-            type="number"
-            // value={}
-            onChange={(event) => {
-              setAddedResults((prev) => {
-                const isExisting = prev.find((set) => {
-                  return set.id === `${exercise.id}-${i}`;
-                });
-                if (!isExisting) {
-                  return [
-                    ...prev,
-                    {
-                      id: `${exercise.id}-${i}`,
-                      setRepetition: parseInt(event.target.value),
-                    },
-                  ];
-                } else {
-                  return prev.map((res) => {
-                    if (res.id === `${exercise.id}-${i}`)
-                      return {
-                        ...res,
-                        setRepetition: parseInt(event.target.value),
-                      };
-                    return res;
-                  });
-                }
-              });
-            }}
-          ></Input>
+          {labels.map((label, idx) => {
+            let labelName =
+              "set" +
+              label.charAt(0).toUpperCase() +
+              label.toLowerCase().slice(1);
+            return (
+              <React.Fragment>
+                {" "}
+                <span>{`${(idx === 0 ? i + 1 : " ") + " " + label}`}</span>
+                <Input
+                  key={`${exercise.id}-${i}`}
+                  disabled={disabledCheckboxesArr.includes(
+                    `${exercise.id}-${i}`
+                  )}
+                  className="input d-inline-block"
+                  type="number"
+                  // value={}
+                  onChange={(event) => {
+                    setAddedResults((prev) => {
+                      const isExisting = prev.find((set) => {
+                        return set.id === `${exercise.id}-${i}`;
+                      });
+                      if (!isExisting) {
+                        return [
+                          ...prev,
+                          {
+                            id: `${exercise.id}-${i}`,
+                            [labelName]: parseInt(event.target.value),
+                          },
+                        ];
+                      } else {
+                        return prev.map((res) => {
+                          if (res.id === `${exercise.id}-${i}`)
+                            return {
+                              ...res,
+                              [labelName]: parseInt(event.target.value),
+                            };
+                          return res;
+                        });
+                      }
+                    });
+                  }}
+                ></Input>
+              </React.Fragment>
+            );
+          })}
           <Label check>
             <Input
               type="checkbox"
@@ -495,11 +196,25 @@ const Training = () => {
           </Label>
         </Form>
       );
+    };
+    if (exerciseArray.includes(exercise.equipment.toLowerCase())) {
+      return labelsFunction(exerciseLabels);
+    }
+    if (exerciseArray1.includes(exercise.equipment.toLowerCase())) {
+      return labelsFunction(exerciseLabels);
+    }
+    if (exerciseArray2.includes(exercise.equipment.toLowerCase())) {
+      return labelsFunction(exerciseLabels2);
+    }
+    if (exerciseArray3.includes(exercise.equipment.toLowerCase())) {
+      return labelsFunction(exerciseLabels3);
+    }
+    if (exerciseArray4.includes(exercise.equipment.toLowerCase())) {
+      return labelsFunction(exerciseLabels4);
     } else {
       return <div>Dude Wrong Equipment!</div>;
     }
   };
-
   return (
     <div className="main-template-div">
       <ListGroup key={loadedTemplate.id}>
@@ -515,7 +230,15 @@ const Training = () => {
         </Row>
         <Row>
           <Col xs="6" md="6">
-            DATE: {date}
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                setStartDate(date);
+                setFormResults((prev) => {
+                  return { ...prev, date: date };
+                });
+              }}
+            />
           </Col>
           <Col xs="6" md="6">
             <Form>
@@ -542,7 +265,6 @@ const Training = () => {
             </Form>
           </Col>
         </Row>
-
         <Row className="template-row">
           {loadedTemplate.templateExercises.map((exercise, idx) => (
             <Row className="template-row-exercise" key={exercise.id}>
@@ -588,14 +310,12 @@ const Training = () => {
             }
             let sortedArrayOfSetsIds = arrayOfSetsIds.sort();
             let sortedDisabledCheckboxesArr = disabledCheckboxesArr.sort();
-
             for (let i = 0; i < sortedArrayOfSetsIds.length; i++) {
               if (sortedArrayOfSetsIds[i] !== sortedDisabledCheckboxesArr[i]) {
                 return;
-              } else {
-                onSubmit(e);
               }
             }
+            onSubmit(e);
           }}
           className="add-new-template-cancel-button"
         >
