@@ -33,13 +33,6 @@ const Training = () => {
     });
   }
 
-  console.log("formResults", formResults);
-  console.log("addedResults", addedResults);
-  console.log(
-    "loadedTemplate.templateExercises",
-    loadedTemplate.templateExercises
-  );
-
   async function onSubmit(e) {
     e.preventDefault();
     try {
@@ -65,7 +58,7 @@ const Training = () => {
   }
 
   let changeSetNumber = (exerciseId, isIncreasing) => {
-    setLoadedTemplate((prev) => {
+    let stateUpdater = (prev) => {
       return {
         ...prev,
         templateExercises: prev.templateExercises.map((exercise) => {
@@ -78,7 +71,10 @@ const Training = () => {
           return exercise;
         }),
       };
-    });
+    };
+
+    setFormResults(stateUpdater);
+    setLoadedTemplate(stateUpdater);
   };
 
   useEffect(() => {
@@ -89,24 +85,15 @@ const Training = () => {
           return set.id.startsWith(exercise.id);
         }),
       }));
-
       return {
         ...prev,
         templateExercises: myNewArray,
       };
     });
-    // setLoadedTemplate((prev) => {
-    //   console.log(prev);
-    //   return {
-    //     ...prev,
-    //     templateExercises: [...prev.templateExercises],
-    //   };
-    // });
   }, [addedResults]);
 
   useEffect(() => {
     setLoadedTemplate((prev) => {
-      console.log(prev);
       return {
         ...prev,
         templateExercises: [...formResults.templateExercises],
@@ -114,9 +101,9 @@ const Training = () => {
     });
   }, [formResults]);
 
-  const typeOfEquipment = loadedTemplate.templateExercises.map(
-    (exercise) => exercise.equipment
-  );
+  // const typeOfEquipment = loadedTemplate.templateExercises.map(
+  //   (exercise) => exercise.equipment
+  // );
 
   let arrayOfSetsIds = [];
 
@@ -124,7 +111,6 @@ const Training = () => {
     let arrayOfSets = [];
     for (let i = 0; i < exercise.sets; i++) {
       arrayOfSetsIds = [...arrayOfSetsIds, `${exercise.id}-${i}`];
-      // console.log(arrayOfSetsIds);
       arrayOfSets.push(
         <Row key={`${exercise.id}-${i}`}>{valueOfExercises(exercise, i)}</Row>
       );
@@ -134,21 +120,8 @@ const Training = () => {
   };
 
   let valueOfExercises = (exercise, i) => {
-    if (
-      exercise.equipment === "barebell" ||
-      exercise.equipment === "BAREBELL" ||
-      exercise.equipment === "dumbbell" ||
-      exercise.equipment === "DUMBBELL" ||
-      exercise.equipment === "OTHER" ||
-      exercise.equipment === "other" ||
-      exercise.equipment === "MACHINE" ||
-      exercise.equipment === "machine" ||
-      exercise.equipment === "cable" ||
-      exercise.equipment === "CABLE"
-    ) {
-      // console.log(formResults);
-      // console.log(exercise.id);
-      // console.log(addedResults);
+    let exerciseArray = ["barebell", "dumbbell", "other", "machine", "cable"];
+    if (exerciseArray.includes(exercise.equipment.toLowerCase())) {
       return (
         <Form>
           <span>WEIGHT:</span>
@@ -160,7 +133,6 @@ const Training = () => {
             // value={}
             onChange={(event) => {
               setAddedResults((prev) => {
-                console.log(addedResults);
                 const isExisting = prev.find((set) => {
                   return set.id === `${exercise.id}-${i}`;
                 });
@@ -197,7 +169,6 @@ const Training = () => {
                   return set.id === `${exercise.id}-${i}`;
                 });
 
-                console.log(prev);
                 if (!isExisting) {
                   return [
                     ...prev,
@@ -238,18 +209,9 @@ const Training = () => {
         </Form>
       );
     }
-    // console.log(
-    //   "asdf",
-    //   // `${exercise.id}-${i}`,
-    //   // event,
-    //   disabledCheckboxesArr
-    // );
-    if (
-      exercise.equipment === "weighted bodyweight" ||
-      exercise.equipment === "ASSISTED BODYWEIGHT" ||
-      exercise.equipment === "assisted bodyweight" ||
-      exercise.equipment === "ASSISTED BODYWEIGHT"
-    ) {
+
+    let exerciseArray1 = ["weighted bodyweight", "assisted bodyweight"];
+    if (exerciseArray1.includes(exercise.equipment.toLowerCase())) {
       return (
         <Form>
           <span>WEIGHT:</span>
@@ -296,7 +258,6 @@ const Training = () => {
                   return set.id === `${exercise.id}-${i}`;
                 });
 
-                console.log(prev);
                 if (!isExisting) {
                   return [
                     ...prev,
@@ -337,7 +298,8 @@ const Training = () => {
         </Form>
       );
     }
-    if (exercise.equipment === "CARDIO" || exercise.equipment === "cardio") {
+    let exerciseArray2 = ["cardio"];
+    if (exerciseArray2.includes(exercise.equipment.toLowerCase())) {
       return (
         <Form>
           <span>DISTANCE:</span>
@@ -384,7 +346,6 @@ const Training = () => {
                   return set.id === `${exercise.id}-${i}`;
                 });
 
-                console.log(prev);
                 if (!isExisting) {
                   return [
                     ...prev,
@@ -425,10 +386,8 @@ const Training = () => {
         </Form>
       );
     }
-    if (
-      exercise.equipment === "duration" ||
-      exercise.equipment === "DURATION"
-    ) {
+    let exerciseArray3 = ["duration"];
+    if (exerciseArray3.includes(exercise.equipment.toLowerCase())) {
       return (
         <Form>
           <span>TIME:</span>
@@ -482,10 +441,8 @@ const Training = () => {
         </Form>
       );
     }
-    if (
-      exercise.equipment === "reps only" ||
-      exercise.equipment === "REPS ONLY"
-    ) {
+    let exerciseArray4 = ["reps only"];
+    if (exerciseArray4.includes(exercise.equipment.toLowerCase())) {
       return (
         <Form>
           <span>REPETITION:</span>
@@ -543,9 +500,6 @@ const Training = () => {
     }
   };
 
-  // console.log(typeOfEquipment);
-  // console.log(location.state.templateObj);
-
   return (
     <div className="main-template-div">
       <ListGroup key={loadedTemplate.id}>
@@ -575,7 +529,6 @@ const Training = () => {
                   updateFormResults({
                     bodyWeight: parseInt(event.target.value),
                   });
-                  console.log(event.target.value);
                 }}
               ></Input>
               <Label check>
@@ -583,9 +536,6 @@ const Training = () => {
                   type="checkbox"
                   onChange={(event) => {
                     setBodyWeightConfirmed(() => event.target.checked);
-                    // console.log(bodyWeightConfirmed);
-                    // console.log(event.target.checked);
-                    // bodyWeightConfirmed = event.target.checked;
                   }}
                 />
               </Label>
@@ -596,7 +546,6 @@ const Training = () => {
         <Row className="template-row">
           {loadedTemplate.templateExercises.map((exercise, idx) => (
             <Row className="template-row-exercise" key={exercise.id}>
-              {/* {console.log(exercise.sets)} */}
               <Col xs="1" md="2">
                 {idx + 1}{" "}
               </Col>
@@ -604,7 +553,6 @@ const Training = () => {
                 {exercise.nameEn.toUpperCase()}
               </Col>
               <Row>{valueOfSets(exercise)}</Row>
-              {/* {console.log(exercise)} */}
               <Button
                 onClick={() => changeSetNumber(exercise.id, true)}
                 className="add-new-template-cancel-button"
@@ -624,7 +572,6 @@ const Training = () => {
       <FormGroup>
         <ChooseExercise
           setAddedExercises={(asdf) => {
-            console.log(asdf([]));
             setFormResults((prev) => {
               return {
                 ...prev,
@@ -636,7 +583,6 @@ const Training = () => {
         />
         <Button
           onClick={(e) => {
-            console.log(arrayOfSetsIds, disabledCheckboxesArr);
             if (arrayOfSetsIds.length !== disabledCheckboxesArr.length) {
               return;
             }
