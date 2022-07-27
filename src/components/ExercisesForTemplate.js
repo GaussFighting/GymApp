@@ -35,13 +35,13 @@ const ExercisesForTemplate = (props) => {
   }, []);
 
   const addExercise = (exercise) => {
-    props.setAddedExercises((prev) => [...prev, exercise]);
+    props.setAddedExercises((prev) => {
+      return [...prev, exercise];
+    });
   };
 
   const removeExercise = (exercise) => {
-    console.log("consoleloga");
     props.setAddedExercises((prev) => {
-      console.log("AAAAAAAAA", exercise, prev);
       return prev.filter((element) => element !== exercise);
     });
   };

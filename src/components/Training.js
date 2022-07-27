@@ -14,9 +14,6 @@ const Training = () => {
   );
 
   const [bodyWeightConfirmed, setBodyWeightConfirmed] = useState();
-  // const today = new Date();
-  // const date =
-  //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
   const [startDate, setStartDate] = useState(new Date());
 
@@ -35,8 +32,6 @@ const Training = () => {
       return { ...prev, ...value };
     });
   }
-
-  console.log(startDate, formResults);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -121,13 +116,13 @@ const Training = () => {
   let valueOfExercises = (exercise, i) => {
     let exerciseArray = ["barebell", "dumbbell", "other", "machine", "cable"];
     let exerciseArray1 = ["weighted bodyweight", "assisted bodyweight"];
-    let exerciseLabels = ["WEIGHT:", "REPETITION:"];
+    let exerciseLabels = ["WEIGHT", "REPETITION"];
     let exerciseArray2 = ["cardio"];
-    let exerciseLabels2 = ["DISTANCE:", "TIME:"];
+    let exerciseLabels2 = ["DISTANCE", "TIME"];
     let exerciseArray3 = ["duration"];
     let exerciseLabels3 = ["TIME"];
     let exerciseArray4 = ["reps only"];
-    let exerciseLabels4 = ["REPETITION:"];
+    let exerciseLabels4 = ["REPETITION"];
 
     let labelsFunction = (labels) => {
       return (
@@ -148,7 +143,9 @@ const Training = () => {
                   )}
                   className="input d-inline-block"
                   type="number"
-                  // value={}
+                  min={0}
+                  max={1000}
+                  value={addedResults[i] ? addedResults[i].labelName : 0}
                   onChange={(event) => {
                     setAddedResults((prev) => {
                       const isExisting = prev.find((set) => {
@@ -247,7 +244,9 @@ const Training = () => {
                 disabled={bodyWeightConfirmed}
                 className="input d-inline-block"
                 type="number"
-                // value={}
+                min={0}
+                max={255}
+                value={formResults.bodyWeight ? formResults.bodyWeight : 0}
                 onChange={(event) => {
                   updateFormResults({
                     bodyWeight: parseInt(event.target.value),
@@ -293,11 +292,14 @@ const Training = () => {
       </ListGroup>
       <FormGroup>
         <ChooseExercise
-          setAddedExercises={(asdf) => {
+          setAddedExercises={(updateExcercises) => {
+            console.log("RR", updateExcercises);
             setFormResults((prev) => {
               return {
                 ...prev,
-                templateExercises: [...prev.templateExercises, ...asdf([])],
+                templateExercises: [
+                  ...updateExcercises(prev.templateExercises),
+                ],
               };
             });
           }}
