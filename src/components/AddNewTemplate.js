@@ -16,8 +16,6 @@ function AddNewTemplate() {
       return { ...prev, ...value };
     });
   }
-  console.log(formTemplate);
-  console.log(exercises);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -130,7 +128,6 @@ function AddNewTemplate() {
                       return ex;
                     });
                   });
-                  console.log(event.target.value);
                 }}
               ></Input>
             </FormGroup>

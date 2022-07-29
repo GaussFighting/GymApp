@@ -35,7 +35,6 @@ function MyVerticallyCenteredModal(props) {
     setForm({ exerciseName: "", selectedBodyPart: "", selectedEquipment: "" });
     navigate("/exercises");
   }
-  console.log(props);
   return (
     <Modal
       onHide={props.onHide}

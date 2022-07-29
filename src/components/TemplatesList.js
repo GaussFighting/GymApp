@@ -4,7 +4,6 @@ import { ListGroup, Row, Col } from "react-bootstrap";
 
 const TemplatesList = (props) => {
   const [templates, setTemplates] = useState([]);
-  console.log(props);
   useEffect(() => {
     const fetchExercises = async () => {
       const response = await fetch("http://localhost:5000/templates");
@@ -31,7 +30,7 @@ const TemplatesList = (props) => {
       <Row className="template-row">
         <Link
           state={props.training ? { templateObj: template } : {}}
-          to={props.training ? `/training` : `/template/${template.id}`}
+          to={props.training ? `/templateworkout` : `/template/${template.id}`}
         >
           <Col xs="12" md="12" className="col-name">
             {index + 1} {template.templateName.toUpperCase()}
@@ -62,7 +61,6 @@ const TemplatesList = (props) => {
     <div>
       <ul className="ul-exercise">{TemplatesList}</ul>
       <div className="spacer"></div>
-      {console.log(templates)}
     </div>
   );
 };
