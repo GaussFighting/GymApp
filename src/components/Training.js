@@ -33,6 +33,17 @@ const Training = () => {
     });
   }
 
+  console.log(formResults);
+
+  let filteredResultsWithExistingExercises = () => {
+    let realResults = formResults.templateExercises.filter((exerciseObj) => {
+      return exerciseObj.addedResults && exerciseObj.addedResults.length > 0;
+    });
+    return { ...formResults, templateExercises: realResults };
+  };
+
+  console.log(filteredResultsWithExistingExercises());
+
   async function onSubmit(e) {
     e.preventDefault();
     try {
@@ -41,7 +52,7 @@ const Training = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formResults),
+        body: JSON.stringify(filteredResultsWithExistingExercises()),
       });
     } catch (error) {
       console.log(error);
@@ -257,6 +268,7 @@ const Training = () => {
                 <Input
                   type="checkbox"
                   onChange={(event) => {
+                    console.log(bodyWeightConfirmed);
                     setBodyWeightConfirmed(() => event.target.checked);
                   }}
                 />
@@ -317,7 +329,7 @@ const Training = () => {
                 return;
               }
             }
-            onSubmit(e);
+            if (bodyWeightConfirmed) onSubmit(e);
           }}
           className="add-new-template-cancel-button"
         >
