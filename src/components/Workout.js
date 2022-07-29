@@ -6,11 +6,13 @@ import ChooseExercise from "./ChooseExercise";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Training = () => {
+const Workout = (props) => {
   const location = useLocation();
 
   const [loadedTemplate, setLoadedTemplate] = useState(
-    location.state.templateObj
+    props.template
+      ? location.state.templateObj
+      : { templateName: "", description: "", templateExercises: [] }
   );
 
   const [bodyWeightConfirmed, setBodyWeightConfirmed] = useState();
@@ -33,16 +35,12 @@ const Training = () => {
     });
   }
 
-  console.log(formResults);
-
   let filteredResultsWithExistingExercises = () => {
     let realResults = formResults.templateExercises.filter((exerciseObj) => {
       return exerciseObj.addedResults && exerciseObj.addedResults.length > 0;
     });
     return { ...formResults, templateExercises: realResults };
   };
-
-  console.log(filteredResultsWithExistingExercises());
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -268,7 +266,6 @@ const Training = () => {
                 <Input
                   type="checkbox"
                   onChange={(event) => {
-                    console.log(bodyWeightConfirmed);
                     setBodyWeightConfirmed(() => event.target.checked);
                   }}
                 />
@@ -305,7 +302,6 @@ const Training = () => {
       <FormGroup>
         <ChooseExercise
           setAddedExercises={(updateExcercises) => {
-            console.log("RR", updateExcercises);
             setFormResults((prev) => {
               return {
                 ...prev,
@@ -341,4 +337,4 @@ const Training = () => {
   );
 };
 
-export default Training;
+export default Workout;

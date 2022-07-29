@@ -6,12 +6,12 @@ function StartWorkout() {
   return (
     <div>
       <Button className="start-workout-button">
-        <Link className="start-workout-navlink" to="/templateworkout">
+        <Link className="start-workout-navlink" to="/choosetemplate">
           Start Workout from Template
         </Link>
       </Button>
       <Button className="start-workout-button">
-        <Link className="start-workout-navlink" to="/startworkoutfromtemplate">
+        <Link className="start-workout-navlink" to="/emptyworkout">
           Start an Empty Workout
         </Link>
       </Button>
