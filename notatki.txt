@@ -1,3 +1,8 @@
+2022-07-27
+  // const today = new Date();
+  // const date =
+  //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
 2022-05-22
 REFAKTORYZACJA T_T
 

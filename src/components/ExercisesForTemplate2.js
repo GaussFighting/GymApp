@@ -35,14 +35,12 @@ const ExercisesForTemplate = (props) => {
   }, []);
 
   const addExercise = (exercise) => {
-    props.setAddedExercises((prev) => {
-      return [...prev, exercise];
-    });
+    props.setAddedExercises((prev) => [...prev, exercise]);
   };
 
   const removeExercise = (exercise) => {
-    props.setAddedExercises((prev) => {
-      return prev.filter((element) => element !== exercise);
+    props.setAddedExercises((addExercise) => {
+      return addExercise.filter((element) => element !== exercise);
     });
   };
 
