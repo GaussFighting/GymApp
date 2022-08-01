@@ -165,7 +165,7 @@ const Workout = (props) => {
                           ...prev,
                           {
                             id: `${exercise.id}-${i}`,
-                            [labelName]: parseInt(event.target.value),
+                            [labelName]: parseFloat(event.target.value),
                           },
                         ];
                       } else {
@@ -173,7 +173,7 @@ const Workout = (props) => {
                           if (res.id === `${exercise.id}-${i}`)
                             return {
                               ...res,
-                              [labelName]: parseInt(event.target.value),
+                              [labelName]: parseFloat(event.target.value),
                             };
                           return res;
                         });
@@ -258,7 +258,7 @@ const Workout = (props) => {
                 value={formResults.bodyWeight ? formResults.bodyWeight : 0}
                 onChange={(event) => {
                   updateFormResults({
-                    bodyWeight: parseInt(event.target.value),
+                    bodyWeight: parseFloat(event.target.value),
                   });
                 }}
               ></Input>
