@@ -1,13 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
+import { FormGroup, Label, Input, Button } from "reactstrap";
 
-const History = (props) => {
+const History = () => {
   const [results, setResults] = useState([]);
+  let [startDate, setStartDate] = useState();
+  let [endDate, setEndDate] = useState();
+  const [filteredResults, setFilteredResults] = useState([]);
+
+  const format = "YYYY-MM-DD";
+  const moment = require("moment");
+
+  const filterResults = () => {
+    console.log(startDate, endDate);
+    const resultsList = results.filter((result, index) => {
+      console.log(
+        "results",
+        result.date,
+        moment(result.date).isAfter(startDate) &&
+          moment(result.date).isBefore(endDate)
+      );
+      return (
+        moment(result.date).isAfter(startDate) &&
+        moment(result.date).isBefore(endDate)
+      );
+    });
+    console.log(resultsList);
+
+    return setFilteredResults(resultsList);
+  };
+
+  console.log("AAAAAAAAA", filteredResults);
+
+  const asdf = () => {
+    return filteredResults.map((result, index) => {
+      return (
+        <ListGroup key={result.id}>
+          <Row className="template-row">
+            <Link to={`/results/${result.id}`}>
+              <Col xs="12" md="12" className="col-name">
+                {index + 1} {moment(result.date).format(format)}
+              </Col>
+            </Link>
+          </Row>
+        </ListGroup>
+      );
+    });
+  };
 
   useEffect(() => {
     const fetchResults = async () => {
-      const response = await fetch("http://localhost:5000/results");
+      const response = await fetch(
+        `http://localhost:5000/results?abc=${startDate}&def=${endDate}`
+      );
 
       const responseData = await response.json();
       const loadedResults = [];
@@ -24,45 +70,57 @@ const History = (props) => {
       }
       setResults(loadedResults);
       console.log("loadedResults", loadedResults);
-      console.log("results", results);
     };
 
     fetchResults();
-  }, []);
-
-  const resultsList = results.map((result, index) => (
-    <ListGroup key={result.id}>
-      <Row className="template-row">
-        <Link to={`/results/${result.id}`}>
-          <Col xs="12" md="12" className="col-name">
-            {index + 1} {result.templateName.toUpperCase()}
-          </Col>
-        </Link>
-      </Row>
-
-      {/* <Row className="template-row">
-        {results.templateExercises.map((exercise, idx) => (
-          <Row className="template-row-exercise" key={exercise.id}>
-            <Col xs="1" md="2">
-              {idx + 1}{" "}
-            </Col>
-            <Col xs="7" md="8">
-              {exercise.nameEn.toUpperCase()}
-            </Col>
-            <Col xs="4" md="2">
-              {" "}
-              {exercise.sets} SETS
-            </Col>
-          </Row>
-        ))}
-      </Row> */}
-    </ListGroup>
-  ));
+  }, [startDate, endDate]);
 
   return (
     <div>
-      <ul className="ul-exercise">{resultsList}</ul>
-      {console.log("asdf")}
+      <FormGroup>
+        <Label for="exampleDate">START DATE</Label>
+        <Input
+          id="exampleDate"
+          name="date"
+          placeholder="date placeholder"
+          type="date"
+          onChange={(date) => {
+            setStartDate(() => {
+              return date.target.value;
+            });
+          }}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label for="exampleDate">END DATE</Label>
+        <Input
+          id="exampleDate"
+          name="date"
+          placeholder="date placeholder"
+          type="date"
+          onChange={(date) => {
+            setEndDate(() => {
+              return date.target.value;
+            });
+          }}
+        />
+      </FormGroup>
+      <Button
+        className="add-new-template-cancel-button"
+        onClick={() => {
+          if (startDate && endDate) {
+            filterResults();
+          }
+        }}
+      >
+        SHOW RESULTS
+      </Button>
+      {/* <Button className="add-new-template-cancel-button" onClick={() => {}}>
+        NEXT PAGE
+      </Button> */}
+
+      <ul className="ul-exercise">{asdf()}</ul>
+      {/* {console.log("asdf")} */}
       <div className="spacer"></div>
     </div>
   );

@@ -1,3 +1,4 @@
+const { isContentEditable } = require("@testing-library/user-event/dist/utils");
 const express = require("express");
 // const { default: Exercises } = require("../../src/components/Exercises");
 
@@ -38,11 +39,26 @@ recordRoutes.route("/templates").get(function (req, res) {
 
 // This section will help you get a list of all the records.
 recordRoutes.route("/results").get(function (req, res) {
+  console.log("REQQUERYABC", typeof req.query.abc);
+  console.log("REQQUERYDEF", req);
+  const startDate =
+    req.query.abc === "undefined" ? new Date() : new Date(req.query.abc);
+  const endDate =
+    req.query.def === "undefined" ? new Date() : new Date(req.query.def);
+
+  console.log("STARTDATE", startDate);
+  console.log("ENDDATE", endDate);
+  const isoStartDate = startDate.toISOString();
+  const isoEndDate = endDate.toISOString();
+  console.log("AAAAAAAAAAA", isoStartDate);
+  console.log("BBBBBBBBBBB", isoEndDate);
+
   let db_connect = dbo.getDb("GYMAPP");
   db_connect
     .collection("Results")
-    .find()
-    .limit(20)
+    .find({ date: { $gte: isoStartDate, $lte: isoEndDate } })
+    .sort({ date: -1 })
+    // .limit(20)
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
