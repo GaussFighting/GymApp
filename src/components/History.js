@@ -13,25 +13,15 @@ const History = () => {
   const moment = require("moment");
 
   const filterResults = () => {
-    console.log(startDate, endDate);
-    const resultsList = results.filter((result, index) => {
-      console.log(
-        "results",
-        result.date,
-        moment(result.date).isAfter(startDate) &&
-          moment(result.date).isBefore(endDate)
-      );
+    const resultsList = results.filter((result) => {
       return (
         moment(result.date).isAfter(startDate) &&
         moment(result.date).isBefore(endDate)
       );
     });
-    console.log(resultsList);
 
     return setFilteredResults(resultsList);
   };
-
-  console.log("AAAAAAAAA", filteredResults);
 
   const asdf = () => {
     return filteredResults.map((result, index) => {
@@ -85,8 +75,9 @@ const History = () => {
           placeholder="date placeholder"
           type="date"
           onChange={(date) => {
+            console.log(date.target.value);
             setStartDate(() => {
-              return date.target.value;
+              return moment(date.target.value).toDate();
             });
           }}
         />
@@ -100,7 +91,7 @@ const History = () => {
           type="date"
           onChange={(date) => {
             setEndDate(() => {
-              return date.target.value;
+              return moment(date.target.value).endOf("day").toDate();
             });
           }}
         />

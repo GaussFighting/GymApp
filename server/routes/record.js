@@ -46,12 +46,8 @@ recordRoutes.route("/results").get(function (req, res) {
   const endDate =
     req.query.def === "undefined" ? new Date() : new Date(req.query.def);
 
-  console.log("STARTDATE", startDate);
-  console.log("ENDDATE", endDate);
   const isoStartDate = startDate.toISOString();
   const isoEndDate = endDate.toISOString();
-  console.log("AAAAAAAAAAA", isoStartDate);
-  console.log("BBBBBBBBBBB", isoEndDate);
 
   let db_connect = dbo.getDb("GYMAPP");
   db_connect
