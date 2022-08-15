@@ -3,57 +3,9 @@ import { useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
-import EditTemplate from "./EditTemplate";
+import EditResult from "./EditResult";
 
-function OpenModalEdit(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <EditTemplate />
-      </Modal.Body>
-    </Modal>
-  );
-}
-
-function OpenModal(props) {
-  return (
-    <Modal
-      onHide={props.onHide}
-      show={props.show}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        Are you sure you want to continue deleting current template?
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          className="start-workout-button"
-          onClick={() => props.deleteRecord(props.id)}
-        >
-          Delete
-        </Button>
-        <Button className="start-workout-button" onClick={props.onHide}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
-function Template() {
+function Result() {
   const format = "YYYY-MM-DD dddd";
   const moment = require("moment");
 
@@ -61,6 +13,55 @@ function Template() {
   const [results, setResults] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
+
+  function OpenModalEdit(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EditResult />
+        </Modal.Body>
+      </Modal>
+    );
+  }
+
+  function OpenModal(props) {
+    console.log("openmodal", props);
+    return (
+      <Modal
+        onHide={props.onHide}
+        show={props.show}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to continue deleting current training?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="start-workout-button"
+            onClick={() => props.deleteRecord(props.id)}
+          >
+            Delete
+          </Button>
+          <Button className="start-workout-button" onClick={props.onHide}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -90,98 +91,141 @@ function Template() {
     } catch (error) {
       console.log(error);
     }
-    navigate("/templatelist");
+    navigate("/results");
   }
 
   return (
     <div className="main-template-div">
-      <Row>
-        <Col xs="12" md="12" className="single-col-name">
-          {results.templateName}
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="12" md="12">
-          {results.description}
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="12" md="12">
-          {moment(results.date).format(format)}
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="12" md="12">
-          {results.bodyWeight}
-        </Col>
+      <Row className="top-row">
+        <Row>
+          <Col xs="12" md="12" className="single-col-name">
+            {results.templateName}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12" md="12">
+            {results.description}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12" md="12">
+            {moment(results.date).format(format)}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12" md="12">
+            {"BODY WEIGHT: "}
+            {results.bodyWeight}
+            {" kg"}
+          </Col>
+        </Row>
       </Row>
       <Row>
         {results.templateExercises &&
           results.templateExercises.map((exercise, idx) => (
             <Link className="template-link" to={`/exercise/${exercise.id}`}>
-              <Row className="template-single-row-exercise" key={exercise.id}>
-                <Col xs="1" md="1" className="px-0 single-col">
+              <Row className="template-single-row-exercise " key={exercise.id}>
+                <Col xs="2" md="2" className="px-0 single-col exercise-col">
                   {idx + 1}{" "}
                 </Col>
-                <Col xs="5" md="5" className="px-0 single-col">
+                <Col xs="5" md="5" className="px-0 single-col exercise-col">
                   {exercise.nameEn.toUpperCase()} (
                   {exercise.equipment.toUpperCase()})
                 </Col>
-                <Col xs="5" md="5" className="px-0 single-col">
+                <Col xs="5" md="5" className="px-0 single-col exercise-col">
                   {" "}
                   {exercise.bodyPart.toUpperCase()}
                 </Col>
-                {/* <Col xs="3" md="3" className="px-0 single-col">
-                  {" "}
-                  {exercise.equipment.toUpperCase()}
-                </Col> */}
-                {/* <Col xs="1" md="4" className="px-0 sets">
-                  {exercise.sets} SETS
-                </Col> */}
-                {console.log(exercise.addedResults)}
-                {exercise.addedResults.map((result, index) => {
-                  let totalVolume = 0;
-                  let totalVolumeDivideBymass = 0;
 
-                  for (let i = 0; i < index + 1; i++) {
-                    totalVolume += result.setWeight * result.setRepetition;
-                    totalVolumeDivideBymass = totalVolume / results.bodyWeight;
-                  }
+                {exercise.addedResults &&
+                  exercise.addedResults.map((result, index) => {
+                    let totalVolume = 0;
+                    let totalVolumeDivideBymass = 0;
 
-                  return (
-                    <React.Fragment>
-                      {index === 0 && (
-                        <Row>
-                          <Col>SET</Col>
-                          {result.setWeight && <Col>WEIGHT</Col>}
-                          <Col>REPETITION</Col>{" "}
-                        </Row>
-                      )}
-                      <Row>
-                        <Col> {index + 1}. </Col>
-                        <Col>
-                          {" "}
-                          {result.setWeight} {result.setWeight && "kg"}
-                        </Col>
-                        <Col> {result.setRepetition}</Col>
-                      </Row>
-                      {index === exercise.addedResults.length - 1 && (
-                        <Row>
-                          {totalVolume > 0 && (
-                            <React.Fragment>
-                              <Col>Total Volume: {totalVolume}</Col>
-                              <Col>
-                                {" "}
-                                Volume / mass:{" "}
-                                {totalVolumeDivideBymass.toFixed(2)}
+                    for (let i = 0; i < index + 1; i++) {
+                      totalVolume += result.setWeight * result.setRepetition;
+                      totalVolumeDivideBymass =
+                        totalVolume / results.bodyWeight;
+                    }
+
+                    return (
+                      <React.Fragment>
+                        {index === 0 && (
+                          <Row>
+                            <Col
+                              className="firstCol"
+                              md={!result.setWeight && !result.setDistance && 4}
+                            >
+                              SET
+                            </Col>
+                            {result.setWeight && (
+                              <Col className="firstCol">WEIGHT</Col>
+                            )}
+                            {result.setRepetition && (
+                              <Col
+                                md={
+                                  !result.setWeight && !result.setDistance && 4
+                                }
+                                className="firstCol"
+                              >
+                                REPETITION
                               </Col>
-                            </React.Fragment>
+                            )}{" "}
+                            {result.setDistance && (
+                              <Col className="firstCol">DISTANCE</Col>
+                            )}
+                            {result.setTime && (
+                              <Col
+                                md={
+                                  !result.setWeight && !result.setDistance && 4
+                                }
+                                className="firstCol"
+                              >
+                                TIME
+                              </Col>
+                            )}
+                          </Row>
+                        )}
+                        <Row
+                          className={
+                            idx % 2 === 0
+                              ? "exercise-row-even"
+                              : "exercise-row-odd"
+                          }
+                        >
+                          <Col> {index + 1}. </Col>
+                          {(result.setWeight || result.setDistance) && (
+                            <Col>
+                              {" "}
+                              {result.setWeight} {result.setWeight && "kg"}
+                              {result.setDistance} {result.setDistance && "m"}
+                            </Col>
+                          )}
+                          <Col>
+                            {" "}
+                            {result.setRepetition} {result.setTime}
+                          </Col>
+                          {!result.setWeight && !result.setDistance && (
+                            <Col>{""}</Col>
                           )}
                         </Row>
-                      )}
-                    </React.Fragment>
-                  );
-                })}
+                        {index === exercise.addedResults.length - 1 && (
+                          <Row>
+                            {totalVolume > 0 && (
+                              <React.Fragment>
+                                <Col>Total Volume: {totalVolume}</Col>
+                                <Col>
+                                  {" "}
+                                  Volume / mass:{" "}
+                                  {totalVolumeDivideBymass.toFixed(2)}
+                                </Col>
+                              </React.Fragment>
+                            )}
+                          </Row>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
               </Row>
             </Link>
           ))}
@@ -221,4 +265,4 @@ function Template() {
   );
 }
 
-export default Template;
+export default Result;
