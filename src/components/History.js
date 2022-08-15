@@ -41,9 +41,12 @@ const History = () => {
 
   useEffect(() => {
     const fetchResults = async () => {
-      const response = await fetch(
-        `http://localhost:5000/results?abc=${startDate}&def=${endDate}`
-      );
+      const response =
+        startDate && endDate
+          ? await fetch(
+              `http://localhost:5000/results?startDate=${startDate}&endDate=${endDate}`
+            )
+          : await fetch(`http://localhost:5000/results`);
 
       const responseData = await response.json();
       const loadedResults = [];

@@ -39,15 +39,8 @@ recordRoutes.route("/templates").get(function (req, res) {
 
 // This section will help you get a list of all the records.
 recordRoutes.route("/results").get(function (req, res) {
-  const startDate =
-    req.query.abc === "undefined" || !req.query.abc
-      ? null
-      : new Date(req.query.abc);
-  const endDate =
-    req.query.def === "undefined" || !req.query.def
-      ? null
-      : new Date(req.query.def);
-
+  const startDate = req.query.startDate && new Date(req.query.startDate);
+  const endDate = req.query.endDate && new Date(req.query.endDate);
   const isoStartDate = startDate && startDate.toISOString();
   const isoEndDate = endDate && endDate.toISOString();
   let db_connect = dbo.getDb("GYMAPP");
