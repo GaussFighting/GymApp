@@ -1,3 +1,8 @@
+Pagination
+Wysłać przez link z fetcha params do recodrów a tam przez propsy coś z nim porobić.
+Chce mieć n stron z y wynikami i kazda na innym linku 
+
+
 2022-07-28
 TemplateWorkout & EmptyWorkout + Refactorization
 

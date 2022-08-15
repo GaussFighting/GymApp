@@ -10,6 +10,7 @@ import AddNewTemplate from "./components/AddNewTemplate";
 import TemplatesList from "./components/TemplatesList";
 import Template from "./components/Template";
 import Workout from "./components/Workout";
+import Result from "./components/Result";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/exercises" element={<Exercises />} />
             <Route path="/history" element={<History />} />
+            <Route path="/results/:id" element={<Result />} />
             <Route path="/startworkout" element={<StartWorkout />} />
             <Route path="/" element={<Profile />} />
             <Route path="/exercise/:id" element={<Exercise />} />
