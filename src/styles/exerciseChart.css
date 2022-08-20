@@ -1,0 +1,13 @@
+.template-link-chart:hover {
+  color: black;
+  font-weight: solid;
+  background-color: var(--sixdary-bg-color);
+}
+.template-link-chart:nth-child(2n):hover {
+  color: black;
+  background-color: var(--sixdary-bg-color);
+}
+.template-link-chart:nth-child(2n) {
+  text-align: center;
+  background-color: var(--sixdary-bg-color);
+}

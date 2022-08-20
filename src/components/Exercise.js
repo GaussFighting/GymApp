@@ -102,6 +102,9 @@ function Exercise() {
           <h3>{exercise.equipment}</h3>
         </Col>
       </Row>
+
+      <ExerciseChart exerciseId={id} />
+
       <Row className="row">
         <Col xs="6" md="6" className="button-new-exercise">
           <Button
@@ -131,10 +134,6 @@ function Exercise() {
           />
         </Col>
       </Row>
-      <Row className="row"> Results</Row>
-      <Row className="row"> Charts</Row>
-      <ExerciseChart />
-      <Row className="row"> Best scores</Row>
     </ListGroupItem>
   );
 }

@@ -3,52 +3,28 @@ import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 
-const ExerciseCharts = () => {
+const ExerciseCharts = (props) => {
   const [results, setResults] = useState([]);
-  let [startDate, setStartDate] = useState();
-  let [endDate, setEndDate] = useState();
-  const [filteredResults, setFilteredResults] = useState([]);
 
+  console.log("results", results);
   const format = "YYYY-MM-DD";
   const moment = require("moment");
 
-  const filterResults = () => {
-    const resultsList = results.filter((result) => {
-      return (
-        moment(result.date).isAfter(startDate) &&
-        moment(result.date).isBefore(endDate)
-      );
-    });
-
-    return setFilteredResults(resultsList);
-  };
-
-  const asdf = () => {
-    return filteredResults.map((result, index) => {
-      return (
-        <ListGroup key={result.id}>
-          <Row className="template-row">
-            <Link to={`/results/${result.id}`}>
-              <Col xs="12" md="12" className="col-name">
-                {index + 1} {moment(result.date).format(format)}
-              </Col>
-            </Link>
-          </Row>
-        </ListGroup>
-      );
-    });
-  };
-
   useEffect(() => {
     const fetchResults = async () => {
-      const response =
-        startDate && endDate
+      let response = "";
+      try {
+        response = props.exerciseId
           ? await fetch(
-              `http://localhost:5000/results?startDate=${startDate}&endDate=${endDate}`
+              `http://localhost:5000/results_per_exercise?exerciseId=${props.exerciseId}`
             )
-          : await fetch(`http://localhost:5000/results`);
+          : await fetch(`http://localhost:5000/results_per_exercise`);
+      } catch (error) {
+        console.log(error);
+      }
 
       const responseData = await response.json();
+      console.log("resp", responseData);
       const loadedResults = [];
 
       for (const key in responseData) {
@@ -62,59 +38,83 @@ const ExerciseCharts = () => {
         });
       }
       setResults(loadedResults);
-      console.log("loadedResults", loadedResults);
     };
 
     fetchResults();
-  }, [startDate, endDate]);
+  }, [props.exerciseId]);
 
   return (
     <div>
-      <FormGroup>
-        <Label for="exampleDate">START DATE</Label>
-        <Input
-          id="exampleDate"
-          name="date"
-          placeholder="date placeholder"
-          type="date"
-          onChange={(date) => {
-            console.log(date.target.value);
-            setStartDate(() => {
-              return moment(date.target.value).toDate();
-            });
-          }}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleDate">END DATE</Label>
-        <Input
-          id="exampleDate"
-          name="date"
-          placeholder="date placeholder"
-          type="date"
-          onChange={(date) => {
-            setEndDate(() => {
-              return moment(date.target.value).endOf("day").toDate();
-            });
-          }}
-        />
-      </FormGroup>
-      <Button
-        className="add-new-template-cancel-button"
-        onClick={() => {
-          if (startDate && endDate) {
-            filterResults();
-          }
-        }}
-      >
-        SHOW RESULTS
-      </Button>
-      {/* <Button className="add-new-template-cancel-button" onClick={() => {}}>
-        NEXT PAGE
-      </Button> */}
+      <Row className="top-row">
+        <Row>
+          <Col xs="12" md="12">
+            {results.map((ex, index) => {
+              console.log(ex);
+              return (
+                <React.Fragment>
+                  {/* {index === 0 && (
+                    <Row>
+                      <Col xs="1" md="1">
+                        No.
+                      </Col>
+                      <Col xs="1" md="1">
+                        Date
+                      </Col>
+                      <Col xs="1" md="1">
+                        Body Weight
+                      </Col>
+                      <Col xs="1" md="1">
+                        Weight
+                      </Col>
+                      <Col xs="1" md="1">
+                        Repetition
+                      </Col>
+                    </Row>
+                  )} */}
+                  <Link
+                    className="template-link-chart"
+                    to={`/results/${results[index].id}`}
+                  >
+                    <Row className="template-link-chart">
+                      <Col xs="1" md="1">
+                        {index + 1}
+                      </Col>
+                      <Col xs="1" md="1">
+                        {moment(ex.date).format(format)}
+                      </Col>
+                      <Col xs="1" md="1">
+                        {ex.bodyWeight}
+                        {" kg"}
+                      </Col>
+                      {console.log("AA", results)}
 
-      <ul className="ul-exercise">{asdf()}</ul>
-      {/* {console.log("asdf")} */}
+                      <Col>
+                        {ex.templateExercises
+                          .filter((asdf) => {
+                            return asdf.id === props.exerciseId;
+                          })
+                          .map((element) => {
+                            let exResults = element.addedResults.map(
+                              (element2, idx) => {
+                                return (
+                                  <Col xs="1" md="1">
+                                    {element2.setWeight}{" "}
+                                    {element2.setRepetition}
+                                  </Col>
+                                );
+                              }
+                            );
+                            return <Row>{exResults}</Row>;
+                          })}
+                      </Col>
+                    </Row>
+                  </Link>
+                </React.Fragment>
+              );
+            })}
+          </Col>
+        </Row>
+      </Row>
       <div className="spacer"></div>
     </div>
   );
