@@ -1,5 +1,6 @@
 // const { isContentEditable } = require("@testing-library/user-event/dist/utils");
 const express = require("express");
+
 // const { default: Exercises } = require("../../src/components/Exercises");
 
 // recordRoutes is an instance of the express router.
@@ -56,6 +57,26 @@ recordRoutes.route("/results").get(function (req, res) {
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
+    });
+});
+
+// This section will help you get a list of all the records.
+recordRoutes.route("/results_per_exercise").get(function (req, res) {
+  console.log("AAA", req.query.exerciseId);
+  const exerciseId = req.query.exerciseId;
+
+  let db_connect = dbo.getDb("GYMAPP");
+  db_connect
+    .collection("Results")
+    .find({
+      templateExercises: { $elemMatch: { id: exerciseId } },
+    })
+    .sort({ date: -1 })
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+      console.log(result);
+      console.log(result.length);
     });
 });
 

@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
 import Edit from "./Edit.js";
+import ExerciseChart from "./ExerciseChart.js";
 
 function OpenModalEdit(props) {
   return (
@@ -101,6 +102,9 @@ function Exercise() {
           <h3>{exercise.equipment}</h3>
         </Col>
       </Row>
+
+      <ExerciseChart exerciseId={id} />
+
       <Row className="row">
         <Col xs="6" md="6" className="button-new-exercise">
           <Button
@@ -130,9 +134,6 @@ function Exercise() {
           />
         </Col>
       </Row>
-      <Row className="row"> Results</Row>
-      <Row className="row"> Charts</Row>
-      <Row className="row"> Best scores</Row>
     </ListGroupItem>
   );
 }
