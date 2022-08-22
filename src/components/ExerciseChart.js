@@ -49,28 +49,44 @@ const ExerciseCharts = (props) => {
         <Row>
           <Col xs="12" md="12">
             {results.map((ex, index) => {
-              console.log(ex);
               return (
                 <React.Fragment>
-                  {/* {index === 0 && (
-                    <Row>
-                      <Col xs="1" md="1">
-                        No.
-                      </Col>
-                      <Col xs="1" md="1">
-                        Date
-                      </Col>
-                      <Col xs="1" md="1">
-                        Body Weight
-                      </Col>
-                      <Col xs="1" md="1">
-                        Weight
-                      </Col>
-                      <Col xs="1" md="1">
-                        Repetition
-                      </Col>
-                    </Row>
-                  )} */}
+                  {index === 0 && (
+                    <React.Fragment>
+                      <Row>
+                        <Col xs="1" md="2">
+                          RM
+                        </Col>
+                        <Col xs="1" md="2">
+                          RM / mass
+                        </Col>
+                        <Col xs="1" md="2">
+                          Best Set Volume
+                        </Col>
+                        <Col xs="1" md="2">
+                          Best Set Volume/ mass
+                        </Col>
+                        <Col xs="1" md="2">
+                          Best Total Volume
+                        </Col>
+                        <Col xs="1" md="2">
+                          Best Total Volume/ mass
+                        </Col>
+                      </Row>
+
+                      <Row>
+                        <Col xs="1" md="1">
+                          No.
+                        </Col>
+                        <Col xs="1" md="1">
+                          Date
+                        </Col>
+                        <Col xs="1" md="1">
+                          BW
+                        </Col>
+                      </Row>
+                    </React.Fragment>
+                  )}
                   <Link
                     className="template-link-chart"
                     to={`/results/${results[index].id}`}
@@ -83,11 +99,59 @@ const ExerciseCharts = (props) => {
                         {moment(ex.date).format(format)}
                       </Col>
                       <Col xs="1" md="1">
-                        {ex.bodyWeight}
+                        {ex.bodyWeight.toFixed(1)}
                         {" kg"}
                       </Col>
-                      {console.log("AA", results)}
+                      <Col xs="1" md="1">
+                        {ex.templateExercises
+                          .filter((asdf) => {
+                            return asdf.id === props.exerciseId;
+                          })
+                          .map((element) => {
+                            let totalVolume = 0;
+                            for (
+                              let i = 0;
+                              i < element.addedResults.length;
+                              i++
+                            ) {
+                              totalVolume +=
+                                element.addedResults[i].setWeight *
+                                (element.addedResults[i].setRepetition
+                                  ? element.addedResults[i].setRepetition
+                                  : 0);
+                            }
 
+                            return <Row>{totalVolume} </Row>;
+                          })}
+                      </Col>
+                      <Col xs="1" md="1">
+                        {ex.templateExercises
+                          .filter((asdf) => {
+                            return asdf.id === props.exerciseId;
+                          })
+                          .map((element) => {
+                            let totalVolume = 0;
+                            let totalVolumeDivideBymass = 0;
+                            console.log(element.addedResults);
+                            for (
+                              let i = 0;
+                              i < element.addedResults.length;
+                              i++
+                            ) {
+                              totalVolume +=
+                                element.addedResults[i].setWeight *
+                                (element.addedResults[i].setRepetition
+                                  ? element.addedResults[i].setRepetition
+                                  : 0);
+                              totalVolumeDivideBymass =
+                                totalVolume / ex.bodyWeight;
+                            }
+
+                            return (
+                              <Row>{totalVolumeDivideBymass.toFixed(2)}</Row>
+                            );
+                          })}
+                      </Col>
                       <Col>
                         {ex.templateExercises
                           .filter((asdf) => {
@@ -97,10 +161,17 @@ const ExerciseCharts = (props) => {
                             let exResults = element.addedResults.map(
                               (element2, idx) => {
                                 return (
-                                  <Col xs="1" md="1">
-                                    {element2.setWeight}{" "}
-                                    {element2.setRepetition}
-                                  </Col>
+                                  idx < 5 && (
+                                    <Col
+                                      xs="1"
+                                      md="2"
+                                      style={{ textTransform: "lowercase" }}
+                                    >
+                                      {element2.setWeight.toFixed(1)}
+                                      {"kg x "}
+                                      {element2.setRepetition}
+                                    </Col>
+                                  )
                                 );
                               }
                             );
