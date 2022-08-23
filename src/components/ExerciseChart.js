@@ -42,38 +42,74 @@ const ExerciseCharts = (props) => {
 
     fetchResults();
   }, [props.exerciseId]);
-
+  console.log(results);
+  let repMax = Math.max(
+    ...results
+      .map((training, index) => {
+        let bestWeightFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((element) => {
+            let arrayOfAllSetWeights = element.addedResults.map((score) => {
+              return score.setWeight;
+            });
+            // console.log(arrayOfAllSetWeights);
+            return Math.max(...arrayOfAllSetWeights);
+          });
+        return [...bestWeightFromSet];
+      })
+      .flat()
+  );
+  let repMaxByMass = Math.max(
+    ...results
+      .map((training, index) => {
+        let bestWeightFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((element) => {
+            let arrayOfAllSetWeights = element.addedResults.map((score) => {
+              return score.setWeight / training.bodyWeight;
+            });
+            // console.log(arrayOfAllSetWeights);
+            return Math.max(...arrayOfAllSetWeights);
+          });
+        return [...bestWeightFromSet];
+      })
+      .flat()
+  );
+  console.log(repMax);
   return (
     <div>
       <Row className="top-row">
         <Row>
           <Col xs="12" md="12">
+            <Row>
+              <Col xs="1" md="2">
+                RM: <b>{repMax}</b> kg
+              </Col>
+              <Col xs="1" md="2">
+                RM / mass: <b>{repMaxByMass.toFixed(2)}</b>
+              </Col>
+              <Col xs="1" md="2">
+                Best Set Volume
+              </Col>
+              <Col xs="1" md="2">
+                Best Set Volume/ mass
+              </Col>
+              <Col xs="1" md="2">
+                Best Total Volume
+              </Col>
+              <Col xs="1" md="2">
+                Best Total Volume/ mass
+              </Col>
+            </Row>
             {results.map((ex, index) => {
               return (
                 <React.Fragment>
                   {index === 0 && (
                     <React.Fragment>
-                      <Row>
-                        <Col xs="1" md="2">
-                          RM
-                        </Col>
-                        <Col xs="1" md="2">
-                          RM / mass
-                        </Col>
-                        <Col xs="1" md="2">
-                          Best Set Volume
-                        </Col>
-                        <Col xs="1" md="2">
-                          Best Set Volume/ mass
-                        </Col>
-                        <Col xs="1" md="2">
-                          Best Total Volume
-                        </Col>
-                        <Col xs="1" md="2">
-                          Best Total Volume/ mass
-                        </Col>
-                      </Row>
-
                       <Row>
                         <Col xs="1" md="1">
                           No.
@@ -121,7 +157,7 @@ const ExerciseCharts = (props) => {
                                   : 0);
                             }
 
-                            return <Row>{totalVolume} </Row>;
+                            return <Row>{totalVolume.toFixed(1)} </Row>;
                           })}
                       </Col>
                       <Col xs="1" md="1">
@@ -132,7 +168,6 @@ const ExerciseCharts = (props) => {
                           .map((element) => {
                             let totalVolume = 0;
                             let totalVolumeDivideBymass = 0;
-                            console.log(element.addedResults);
                             for (
                               let i = 0;
                               i < element.addedResults.length;
