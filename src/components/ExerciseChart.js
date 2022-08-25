@@ -45,7 +45,7 @@ const ExerciseCharts = (props) => {
   console.log(results);
   let repMax = Math.max(
     ...results
-      .map((training, index) => {
+      .map((training) => {
         let bestWeightFromSet = training.templateExercises
           .filter((exercises) => {
             return exercises.id === props.exerciseId;
@@ -63,7 +63,7 @@ const ExerciseCharts = (props) => {
   );
   let repMaxByMass = Math.max(
     ...results
-      .map((training, index) => {
+      .map((training) => {
         let bestWeightFromSet = training.templateExercises
           .filter((exercises) => {
             return exercises.id === props.exerciseId;
@@ -72,6 +72,49 @@ const ExerciseCharts = (props) => {
             let arrayOfAllSetWeights = element.addedResults.map((score) => {
               return score.setWeight / training.bodyWeight;
             });
+            return Math.max(...arrayOfAllSetWeights);
+          });
+        return [...bestWeightFromSet];
+      })
+      .flat()
+  );
+
+  let bestSetVolume = Math.max(
+    ...results
+      .map((training) => {
+        let bestWeightFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((element) => {
+            let arrayOfAllSetWeights = element.addedResults.map((score) => {
+              return (
+                score.setWeight *
+                (score.setRepetition ? score.setRepetition : 0)
+              );
+            });
+            return Math.max(...arrayOfAllSetWeights);
+          });
+        return [...bestWeightFromSet];
+      })
+      .flat()
+  );
+
+  let bestSetVolumeByMass = Math.max(
+    ...results
+      .map((training, index) => {
+        let bestWeightFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((element) => {
+            let arrayOfAllSetWeights = element.addedResults.map((score) => {
+              return (
+                (score.setWeight *
+                  (score.setRepetition ? score.setRepetition : 0)) /
+                training.bodyWeight
+              );
+            });
             // console.log(arrayOfAllSetWeights);
             return Math.max(...arrayOfAllSetWeights);
           });
@@ -79,7 +122,55 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-  console.log(repMax);
+
+  let bestTotalSetVolumeByMass = Math.max(
+    ...results
+      .map((training, index) => {
+        let bestWeightFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((element) => {
+            let totalVolume = 0;
+            let arrayOfAllSetWeights = element.addedResults.map((score) => {
+              return (totalVolume +=
+                score.setWeight *
+                (score.setRepetition ? score.setRepetition : 0));
+            });
+            // console.log(arrayOfAllSetWeights);
+            return Math.max(...arrayOfAllSetWeights);
+          });
+        return [...bestWeightFromSet];
+      })
+      .flat()
+  );
+
+  let bestTotalSetVolumeByMassByMass = Math.max(
+    ...results
+      .map((training, index) => {
+        let bestWeightFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((element) => {
+            let totalVolume = 0;
+            let arrayOfAllSetWeights = element.addedResults.map((score) => {
+              return (
+                (totalVolume +=
+                  score.setWeight *
+                  (score.setRepetition ? score.setRepetition : 0)) /
+                training.bodyWeight
+              );
+            });
+            // console.log(arrayOfAllSetWeights);
+            return Math.max(...arrayOfAllSetWeights);
+          });
+        return [...bestWeightFromSet];
+      })
+      .flat()
+  );
+
+  console.log(bestSetVolume);
   return (
     <div>
       <Row className="top-row">
@@ -93,16 +184,18 @@ const ExerciseCharts = (props) => {
                 RM / mass: <b>{repMaxByMass.toFixed(2)}</b>
               </Col>
               <Col xs="1" md="2">
-                Best Set Volume
+                Best Set Volume <b>{bestSetVolume.toFixed(0)}</b>
               </Col>
               <Col xs="1" md="2">
-                Best Set Volume/ mass
+                Best Set Volume/ mass <b>{bestSetVolumeByMass.toFixed(2)}</b>
               </Col>
               <Col xs="1" md="2">
-                Best Total Volume
+                {" "}
+                Best Total Volume <b>{bestTotalSetVolumeByMass.toFixed(0)}</b>
               </Col>
               <Col xs="1" md="2">
-                Best Total Volume/ mass
+                Best Total Volume/ mass{" "}
+                <b>{bestTotalSetVolumeByMassByMass.toFixed(2)}</b>
               </Col>
             </Row>
             {results.map((ex, index) => {
@@ -195,8 +288,11 @@ const ExerciseCharts = (props) => {
                           .map((element) => {
                             let exResults = element.addedResults.map(
                               (element2, idx) => {
+                                console.log(element.addedResults.length);
+
                                 return (
-                                  idx < 5 && (
+                                  idx < element.addedResults.length &&
+                                  idx > element.addedResults.length - 6 && (
                                     <Col
                                       xs="1"
                                       md="2"
