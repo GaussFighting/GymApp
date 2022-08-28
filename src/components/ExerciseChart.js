@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { FormGroup, Label, Input, Button } from "reactstrap";
+import Chart from "./Chart";
 
 const ExerciseCharts = (props) => {
   const [results, setResults] = useState([]);
 
-  console.log("results", results);
   const format = "YYYY-MM-DD";
   const moment = require("moment");
 
@@ -24,7 +24,6 @@ const ExerciseCharts = (props) => {
       }
 
       const responseData = await response.json();
-      console.log("resp", responseData);
       const loadedResults = [];
 
       for (const key in responseData) {
@@ -42,7 +41,6 @@ const ExerciseCharts = (props) => {
 
     fetchResults();
   }, [props.exerciseId]);
-  console.log(results);
   let repMax = Math.max(
     ...results
       .map((training) => {
@@ -170,9 +168,9 @@ const ExerciseCharts = (props) => {
       .flat()
   );
 
-  console.log(bestSetVolume);
   return (
     <div>
+      <Chart results={results} exerciseId={props.exerciseId} />
       <Row className="top-row">
         <Row>
           <Col xs="12" md="12">
@@ -288,8 +286,6 @@ const ExerciseCharts = (props) => {
                           .map((element) => {
                             let exResults = element.addedResults.map(
                               (element2, idx) => {
-                                console.log(element.addedResults.length);
-
                                 return (
                                   idx < element.addedResults.length &&
                                   idx > element.addedResults.length - 6 && (
