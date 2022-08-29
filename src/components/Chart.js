@@ -20,12 +20,12 @@ const Chart = ({ results, exerciseId }) => {
 
   let range = endDate.diff(firstDate, "days");
 
-  console.log(firstDate.format(format));
+  console.log(results);
 
   const dataTotalVolume = () => {
     let arr = [];
     let arrayOfDateAndVolume = results.map((training, index) => {
-      let asdf = training.templateExercises
+      let volumeResults = training.templateExercises
         .filter((trainingResults) => {
           return trainingResults.id === exerciseId;
         })
@@ -40,10 +40,18 @@ const Chart = ({ results, exerciseId }) => {
           }
           return totalVolume;
         });
-
-      return { name: moment(training.date).format(format), uv: asdf[0] };
+      let volumeResultsByMass = volumeResults.map((element) => {
+        console.log(element, training.bodyWeight);
+        return element / training.bodyWeight;
+      });
+      console.log(volumeResultsByMass);
+      return {
+        name: moment(training.date).format(format),
+        uv: volumeResults[0],
+        pv: volumeResultsByMass[0],
+      };
     });
-    for (let i = 0; i < range; i++) {
+    for (let i = 0; i < range + 2; i++) {
       const abc = moment(firstDate).add(i, "days").format(format);
       arr = [...arr, abc];
     }
@@ -133,17 +141,25 @@ const Chart = ({ results, exerciseId }) => {
           reverse={true}
           angle={-45}
         />
-        <YAxis />
+        <YAxis yAxisId="left" />
+        <YAxis yAxisId="right" orientation="right" />
         <Tooltip />
         <Legend />
         <Line
+          yAxisId="left"
           type="monotone"
           dataKey="uv"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
           connectNulls={true}
         />
-        <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
+        <Line
+          yAxisId="right"
+          type="monotone"
+          dataKey="pv"
+          stroke="#82ca9d"
+          connectNulls={true}
+        />
         <Line type="monotone" dataKey="rv" stroke="#ca8284" />
       </LineChart>
       {/* </ResponsiveContainer> */}
