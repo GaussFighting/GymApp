@@ -40,15 +40,18 @@ const Chart = ({ results, exerciseId }) => {
           }
           return totalVolume;
         });
+      let bodyWeightResults = volumeResults.map(() => {
+        return training.bodyWeight;
+      });
+      console.log(training.bodyWeight);
       let volumeResultsByMass = volumeResults.map((element) => {
-        console.log(element, training.bodyWeight);
         return element / training.bodyWeight;
       });
-      console.log(volumeResultsByMass);
       return {
         name: moment(training.date).format(format),
         uv: volumeResults[0],
         pv: volumeResultsByMass[0],
+        rv: training.bodyWeight,
       };
     });
     for (let i = 0; i < range + 2; i++) {
@@ -153,14 +156,20 @@ const Chart = ({ results, exerciseId }) => {
           activeDot={{ r: 8 }}
           connectNulls={true}
         />
-        <Line
+        {/* <Line
           yAxisId="right"
           type="monotone"
           dataKey="pv"
           stroke="#82ca9d"
           connectNulls={true}
+        /> */}
+        <Line
+          yAxisId="right"
+          type="monotone"
+          dataKey="rv"
+          stroke="#ca8284"
+          connectNulls={true}
         />
-        <Line type="monotone" dataKey="rv" stroke="#ca8284" />
       </LineChart>
       {/* </ResponsiveContainer> */}
       <div className="spacer"></div>
