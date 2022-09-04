@@ -96,10 +96,10 @@ function Exercise() {
       </Row>
       <Row>
         <Col xs="6" md="6" className="col-position-body-part">
-          <h3>{exercise.bodyPart}</h3>
+          <h4>Body Part: {exercise.bodyPart}</h4>
         </Col>
         <Col xs="6" md="6" className="col-position-equipment">
-          <h3>{exercise.equipment}</h3>
+          <h4>Equipment: {exercise.equipment}</h4>
         </Col>
       </Row>
 
