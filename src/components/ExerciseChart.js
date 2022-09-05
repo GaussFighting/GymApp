@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ListGroup, Row, Col } from "react-bootstrap";
-import { FormGroup, Label, Input, Button } from "reactstrap";
+import { Row, Col } from "react-bootstrap";
+
 import Chart from "./Chart";
 
 const ExerciseCharts = (props) => {

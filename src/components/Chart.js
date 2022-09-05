@@ -1,6 +1,6 @@
-import React, { PureComponent, useState, useEffect } from "react";
-import moment, { max } from "moment";
-import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import React, { useState } from "react";
+import moment from "moment";
+import { Input } from "reactstrap";
 import {
   LineChart,
   Line,
@@ -9,7 +9,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 
