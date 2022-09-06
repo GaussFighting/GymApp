@@ -17,9 +17,9 @@ const Exercises = () => {
     const fetchExercises = async () => {
       const response = await fetch("/.netlify/functions/exerciseRead");
       const responseData = await response.json();
-      console.log(responseData);
 
-      const loadedExercises = [];
+      const loadedExercises = responseData?.data?.excercises || [];
+      console.log(loadedExercises);
 
       for (const key in responseData) {
         loadedExercises.push({
