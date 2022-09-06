@@ -7,11 +7,12 @@ connectDb(process.env.REACT_APP_DB);
 
 exports.handler = async (event, context) => {
   console.log(mongoose.connection.readyState, "ready state exercise");
-  context.callbackWaitsForEmptyEventLoop = false;
-  const id = event.queryStringParameters.id;
+  // context.callbackWaitsForEmptyEventLoop = false;
+  // const id = event.queryStringParameters.id;
   try {
     // const exercises = id;
     // ? await Exercise.find({ _id: id })
+    console.log("przedawaitem");
     const exercises = await Exercise.find({});
     console.log("AAA", id, exercises);
     const response = {
