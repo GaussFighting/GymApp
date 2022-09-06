@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-const schema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const exerciseSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   nameEn: {
     type: String,
@@ -19,4 +21,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Exercises", schema);
+module.exports = mongoose.model("Exercises", exerciseSchema);
