@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
 const Exercise = require("../models/exerciseModel");
 
-await connectDb(process.env.REACT_APP_DB);
-//Make connection with mongoose to mongo atlas outside handler
-
 exports.handler = async (event, context) => {
+  await connectDb(process.env.REACT_APP_DB);
+
   console.log(mongoose.connection.readyState, "ready state exercise");
   console.log("EVENT", event);
   console.log("CONTEXT", context);
