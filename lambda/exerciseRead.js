@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
 const Exercise = require("../models/exerciseModel");
 
-connectDb(process.env.REACT_APP_DB);
+await connectDb(process.env.REACT_APP_DB);
 //Make connection with mongoose to mongo atlas outside handler
 
 exports.handler = async (event, context) => {
@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
     // ? await Exercise.find({ _id: id })
     console.log(Exercise);
     console.log("przedawaitem");
-    const exercises = await Exercise.find();
+    const exercises = await Exercise.find({});
     console.log("AAA", exercises);
     const response = {
       msg: "Exercises successfully found",
