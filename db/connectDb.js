@@ -5,7 +5,9 @@ const connectDb = async (url) => {
   //Observe it when you send form using url netlify function
   console.log(url, "url to mongo atlas, connectDb");
 
-  await mongoose.connect(url);
+  await mongoose.connect(url, {
+    useNewUrlParser: true,
+  });
 };
 
 module.exports = connectDb;
