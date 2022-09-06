@@ -7,7 +7,9 @@ connectDb(process.env.REACT_APP_DB);
 
 exports.handler = async (event, context) => {
   console.log(mongoose.connection.readyState, "ready state exercise");
-  // context.callbackWaitsForEmptyEventLoop = false;
+  console.log("EVENT", event);
+  console.log("CONTEXT", context);
+  context.callbackWaitsForEmptyEventLoop = false;
   // const id = event.queryStringParameters.id;
   try {
     // const exercises = id;
