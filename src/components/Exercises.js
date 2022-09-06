@@ -16,10 +16,11 @@ const Exercises = () => {
   useEffect(() => {
     const fetchExercises = async () => {
       const response = await fetch("/.netlify/functions/exerciseRead");
-      const responseData = await response.json();
+      const responseDataRes = await response.json();
+      const responseData = responseDataRes?.data?.excercises || [];
+      console.log(responseData);
 
-      const loadedExercises = responseData?.data?.excercises || [];
-      console.log(loadedExercises);
+      const loadedExercises = [];
 
       for (const key in responseData) {
         loadedExercises.push({
