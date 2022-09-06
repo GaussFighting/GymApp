@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     console.log(Exercise);
     console.log("przedawaitem");
     const exercises = await Exercise.find();
-    console.log("AAA", id, exercises);
+    console.log("AAA", exercises);
     const response = {
       msg: "Exercises successfully found",
       data: {
