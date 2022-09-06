@@ -17,7 +17,7 @@ function Edit() {
     async function fetchData() {
       const id = params.id.toString();
       const response = await fetch(
-        `http://localhost:5000/exercise/${params.id.toString()}`
+        `/.netlify/functions/exerciseRead/${params.id.toString()}`
       );
 
       if (!response.ok) {
@@ -56,7 +56,7 @@ function Edit() {
 
     // This will send a post request to update the data in the database.
     try {
-      await fetch(`http://localhost:5000/exercise/${params.id}`, {
+      await fetch(`/.netlify/functions/exerciseUpdate/${params.id}`, {
         method: "PUT",
         body: JSON.stringify(editedExercise),
         headers: {

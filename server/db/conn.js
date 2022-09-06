@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const Db = process.env.DB_URL;
+const Db = process.env.REACT_APP_DB;
 const client = new MongoClient(Db, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

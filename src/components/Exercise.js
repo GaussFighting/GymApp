@@ -60,7 +60,7 @@ function Exercise() {
 
   useEffect(() => {
     const fetchExercise = async () => {
-      const response = await fetch(`http://localhost:5000/exercise/${id}`);
+      const response = await fetch(`/.netlify/functions/exerciseRead/${id}`);
 
       const responseData = await response.json();
 
@@ -78,7 +78,7 @@ function Exercise() {
 
   async function deleteRecord(id) {
     try {
-      await fetch(`http://localhost:5000/exercise/${id}`, {
+      await fetch(`/.netlify/functions/exerciseDelete/${id}`, {
         method: "DELETE",
       });
     } catch (error) {

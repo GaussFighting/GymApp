@@ -41,7 +41,7 @@ function AddNewTemplate() {
 
   useEffect(() => {
     const fetchExercises = async () => {
-      const response = await fetch("http://localhost:5000/");
+      const response = await fetch("/.netlify/functions/exerciseRead");
 
       const responseData = await response.json();
       const loadedExercises = [];
