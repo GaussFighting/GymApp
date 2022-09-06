@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
-const Exercise = require("../models/exerciseModel").default;
+const Exercise = require("../models/exerciseModel");
 
 connectDb(process.env.REACT_APP_DB);
 //Make connection with mongoose to mongo atlas outside handler
