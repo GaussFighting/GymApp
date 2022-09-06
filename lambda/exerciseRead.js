@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
     // ? await Exercise.find({ _id: id })
     console.log(Exercise);
     console.log("przedawaitem");
-    const exercises = await Exercise.find({});
+    const exercises = await Exercise.find();
     console.log("AAA", id, exercises);
     const response = {
       msg: "Exercises successfully found",
