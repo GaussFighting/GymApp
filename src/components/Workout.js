@@ -45,7 +45,7 @@ const Workout = (props) => {
   async function onSubmit(e) {
     e.preventDefault();
     try {
-      await fetch("http://localhost:5000/results", {
+      await fetch(`/.netlify/functions/resultCreate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

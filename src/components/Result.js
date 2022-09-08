@@ -65,17 +65,17 @@ function Result() {
 
   useEffect(() => {
     const fetchResults = async () => {
-      const response = await fetch(`http://localhost:5000/results/${id}`);
+      const response = await fetch(`/.netlify/functions/resultRead?id=${id}`);
 
       const responseData = await response.json();
-
+      const resultObj = responseData.data.results[0];
       setResults({
-        id: responseData._id,
-        templateName: responseData.templateName,
-        description: responseData.description,
-        templateExercises: responseData.templateExercises,
-        bodyWeight: responseData.bodyWeight,
-        date: responseData.date,
+        id: resultObj._id,
+        templateName: resultObj.templateName,
+        description: resultObj.description,
+        templateExercises: resultObj.templateExercises,
+        bodyWeight: resultObj.bodyWeight,
+        date: resultObj.date,
       });
     };
     fetchResults();
@@ -85,7 +85,7 @@ function Result() {
 
   async function deleteRecord(id) {
     try {
-      await fetch(`http://localhost:5000/results/${id}`, {
+      await fetch(`/.netlify/functions/resultDelete?id=${id}`, {
         method: "DELETE",
       });
     } catch (error) {

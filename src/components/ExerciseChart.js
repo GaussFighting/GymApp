@@ -16,9 +16,9 @@ const ExerciseCharts = (props) => {
       try {
         response = props.exerciseId
           ? await fetch(
-              `http://localhost:5000/results_per_exercise?exerciseId=${props.exerciseId}`
+              `/.netlify/functions/resultRead?exerciseId=${props.exerciseId}`
             )
-          : await fetch(`http://localhost:5000/results_per_exercise`);
+          : await fetch(`/.netlify/functions/resultRead`);
       } catch (error) {
         console.log(error);
       }
@@ -26,14 +26,16 @@ const ExerciseCharts = (props) => {
       const responseData = await response.json();
       const loadedResults = [];
 
-      for (const key in responseData) {
+      const resultArr = responseData.data.results;
+
+      for (const key in resultArr) {
         loadedResults.push({
-          id: responseData[key]._id,
-          templateName: responseData[key].templateName,
-          descritpion: responseData[key].description,
-          bodyWeight: responseData[key].bodyWeight,
-          date: responseData[key].date,
-          templateExercises: responseData[key].templateExercises,
+          id: resultArr[key]._id,
+          templateName: resultArr[key].templateName,
+          descritpion: resultArr[key].description,
+          bodyWeight: resultArr[key].bodyWeight,
+          date: resultArr[key].date,
+          templateExercises: resultArr[key].templateExercises,
         });
       }
       setResults(loadedResults);

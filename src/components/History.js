@@ -44,21 +44,22 @@ const History = () => {
       const response =
         startDate && endDate
           ? await fetch(
-              `http://localhost:5000/results?startDate=${startDate}&endDate=${endDate}`
+              `/.netlify/functions/resultRead?startDate=${startDate}&endDate=${endDate}`
             )
-          : await fetch(`http://localhost:5000/results`);
+          : await fetch(`/.netlify/functions/resultRead`);
 
       const responseData = await response.json();
       const loadedResults = [];
+      const resultArr = responseData.data.results;
 
-      for (const key in responseData) {
+      for (const key in resultArr) {
         loadedResults.push({
-          id: responseData[key]._id,
-          templateName: responseData[key].templateName,
-          descritpion: responseData[key].description,
-          bodyWeight: responseData[key].bodyWeight,
-          date: responseData[key].date,
-          templateExercises: responseData[key].templateExercises,
+          id: resultArr[key]._id,
+          templateName: resultArr[key].templateName,
+          descritpion: resultArr[key].description,
+          bodyWeight: resultArr[key].bodyWeight,
+          date: resultArr[key].date,
+          templateExercises: resultArr[key].templateExercises,
         });
       }
       setResults(loadedResults);
