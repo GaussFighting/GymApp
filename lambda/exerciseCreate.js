@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
   try {
     const data = JSON.parse(event.body);
     const exercise = {
-      _id: mongoose.Types.ObjectId(),
+      _id: new mongoose.Schema.Types.ObjectId(),
       nameEn: data.nameEn,
       bodyPart: data.bodyPart,
       equipment: data.equipment,
@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
     };
 
     await Exercise.create(exercise);
-
+    mongoose.disconnect();
     return {
       statusCode: 200,
       body: JSON.stringify(response),
