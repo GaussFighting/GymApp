@@ -9,14 +9,12 @@ exports.handler = async (event, context) => {
   console.log("EVENT", event);
   console.log("CONTEXT", context);
   context.callbackWaitsForEmptyEventLoop = false;
-  // const id = event.queryStringParameters.id;
+  const id = event.queryStringParameters.id;
   try {
-    // const exercises = id;
-    // ? await Exercise.find({ _id: id })
-    console.log(Exercise);
-    console.log("przedawaitem");
-    const exercises = await Exercise.find({});
-    console.log("AAA", exercises);
+    const exercises = id
+      ? await Exercise.find({ _id: id })
+      : await Exercise.find({});
+
     const response = {
       msg: "Exercises successfully found",
       data: {

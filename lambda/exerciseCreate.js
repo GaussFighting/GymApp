@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import db from "../../lambda/server";
-import Exercise from "./exerciseModel";
+const mongoose = require("mongoose");
+const connectDb = require("../db/connectDb");
+const Exercise = require("../models/exerciseModel");
 
 exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
