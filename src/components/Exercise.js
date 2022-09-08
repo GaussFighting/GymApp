@@ -63,12 +63,12 @@ function Exercise() {
       const response = await fetch(`/.netlify/functions/exerciseRead?id=${id}`);
 
       const responseData = await response.json();
-
+      const execiseRead = responseData.data.exercises[0];
       setExercise({
-        id: responseData._id,
-        nameEn: responseData.nameEn,
-        bodyPart: responseData.bodyPart,
-        equipment: responseData.equipment,
+        id: execiseRead._id,
+        nameEn: execiseRead.nameEn,
+        bodyPart: execiseRead.bodyPart,
+        equipment: execiseRead.equipment,
       });
     };
     fetchExercise();
