@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
   try {
     const id = event.queryStringParameters.id;
-
+    console.log(id);
     const response = {
       msg: "Exercises successfully deleted",
     };
