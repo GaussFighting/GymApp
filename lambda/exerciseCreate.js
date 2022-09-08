@@ -3,6 +3,7 @@ const connectDb = require("../db/connectDb");
 const Exercise = require("../models/exerciseModel");
 
 exports.handler = async (event, context) => {
+  await connectDb(process.env.REACT_APP_DB);
   context.callbackWaitsForEmptyEventLoop = false;
   try {
     const data = JSON.parse(event.body);
