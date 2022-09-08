@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
   try {
     const data = JSON.parse(event.body);
     const exercise = {
-      _id: new mongoose.Schema.Types.ObjectId(),
+      _id: mongoose.Schema.Types.ObjectId,
       nameEn: data.nameEn,
       bodyPart: data.bodyPart,
       equipment: data.equipment,
