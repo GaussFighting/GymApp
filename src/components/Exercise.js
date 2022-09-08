@@ -86,7 +86,7 @@ function Exercise() {
     }
     navigate("/exercises");
   }
-
+  console.log(exercise);
   return (
     <ListGroupItem className="text-align-single-exercise text-uppercase">
       <Row className="row">
