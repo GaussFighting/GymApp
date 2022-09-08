@@ -65,7 +65,7 @@ function Template() {
 
       const responseData = await response.json();
 
-      const templateObj = responseData.data.templats[0];
+      const templateObj = responseData.data.templates[0];
 
       setTemplate({
         id: templateObj._id,
