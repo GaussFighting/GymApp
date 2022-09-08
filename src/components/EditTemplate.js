@@ -35,7 +35,7 @@ function Edit() {
         return;
       }
 
-      setFormTemplate(record);
+      setFormTemplate(record.data.templates[0]);
     }
 
     fetchData();
