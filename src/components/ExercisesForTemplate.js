@@ -18,12 +18,13 @@ const ExercisesForTemplate = (props) => {
       const responseData = await response.json();
       const loadedExercises = [];
       console.log(responseData);
-      for (const key in responseData) {
+      const exercisesArr = responseData.data.exercise;
+      for (const key in exercisesArr) {
         loadedExercises.push({
-          id: responseData[key]._id,
-          nameEn: responseData[key].nameEn,
-          bodyPart: responseData[key].bodyPart,
-          equipment: responseData[key].equipment,
+          id: exercisesArr[key]._id,
+          nameEn: exercisesArr[key].nameEn,
+          bodyPart: exercisesArr[key].bodyPart,
+          equipment: exercisesArr[key].equipment,
           sets: 1,
         });
       }
