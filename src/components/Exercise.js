@@ -60,7 +60,7 @@ function Exercise() {
 
   useEffect(() => {
     const fetchExercise = async () => {
-      const response = await fetch(`/.netlify/functions/exerciseRead/${id}`);
+      const response = await fetch(`/.netlify/functions/exerciseRead?id=${id}`);
 
       const responseData = await response.json();
 
