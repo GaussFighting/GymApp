@@ -9,9 +9,9 @@ exports.handler = async (event, context) => {
     const data = JSON.parse(event.body);
     const exercise = {
       _id: mongoose.Schema.Types.ObjectId,
-      nameEn: data.nameEn,
-      bodyPart: data.bodyPart,
-      equipment: data.equipment,
+      nameEn: data.exerciseName,
+      bodyPart: data.selectedBodyPart,
+      equipment: data.selectedEquipment,
     };
     const response = {
       msg: "Exercises successfully created",
