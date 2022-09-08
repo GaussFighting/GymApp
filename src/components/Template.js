@@ -64,12 +64,13 @@ function Template() {
       const response = await fetch(`/.netlify/functions/templateRead?id=${id}`);
 
       const responseData = await response.json();
+      const templateObj = responseData.data.template[0];
 
       setTemplate({
-        id: responseData._id,
-        templateName: responseData.templateName,
-        description: responseData.description,
-        templateExercises: responseData.templateExercises,
+        id: templateObj._id,
+        templateName: templateObj.templateName,
+        description: templateObj.description,
+        templateExercises: templateObj.templateExercises,
       });
     };
     fetchTemplate();
