@@ -78,7 +78,7 @@ function Exercise() {
 
   async function deleteRecord(id) {
     try {
-      await fetch(`/.netlify/functions/exerciseDelete/${id}`, {
+      await fetch(`/.netlify/functions/exerciseDelete?id=${id}`, {
         method: "DELETE",
       });
     } catch (error) {
