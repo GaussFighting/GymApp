@@ -19,7 +19,7 @@ function Edit() {
       const id = params.id.toString();
       console.log(id);
       const response = await fetch(
-        `http://localhost:5000/template/${params.id.toString()}`
+        `/.netlify/functions/templateRead?id=${params.id.toString()}`
       );
 
       if (!response.ok) {
@@ -58,7 +58,7 @@ function Edit() {
 
     // This will send a post request to update the data in the database.
     try {
-      await fetch(`http://localhost:5000/template/${params.id}`, {
+      await fetch(`/.netlify/functions/templateUpdate?id=${params.id}`, {
         method: "PUT",
         body: JSON.stringify(editedTemplate),
         headers: {

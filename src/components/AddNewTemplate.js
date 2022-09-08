@@ -20,7 +20,7 @@ function AddNewTemplate() {
   async function onSubmit(e) {
     e.preventDefault();
     try {
-      await fetch("http://localhost:5000/templates", {
+      await fetch(`/.netlify/functions/templateCreate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

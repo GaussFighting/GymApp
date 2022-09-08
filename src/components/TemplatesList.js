@@ -6,7 +6,7 @@ const TemplatesList = (props) => {
   const [templates, setTemplates] = useState([]);
   useEffect(() => {
     const fetchExercises = async () => {
-      const response = await fetch("http://localhost:5000/templates");
+      const response = await fetch("`/.netlify/functions/templateRead`");
 
       const responseData = await response.json();
       const loadedTemplates = [];

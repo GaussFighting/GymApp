@@ -61,7 +61,7 @@ function Template() {
 
   useEffect(() => {
     const fetchTemplate = async () => {
-      const response = await fetch(`http://localhost:5000/template/${id}`);
+      const response = await fetch(`/.netlify/functions/templateRead?id=${id}`);
 
       const responseData = await response.json();
 
@@ -79,7 +79,7 @@ function Template() {
 
   async function deleteRecord(id) {
     try {
-      await fetch(`http://localhost:5000/template/${id}`, {
+      await fetch(`/.netlify/functions/templateDelete?id=${id}`, {
         method: "DELETE",
       });
     } catch (error) {
