@@ -64,7 +64,8 @@ function Template() {
       const response = await fetch(`/.netlify/functions/templateRead?id=${id}`);
 
       const responseData = await response.json();
-      const templateObj = responseData.data.template[0];
+
+      const templateObj = responseData.data.templats[0];
 
       setTemplate({
         id: templateObj._id,
