@@ -17,7 +17,7 @@ const ExercisesForTemplate = (props) => {
 
       const responseData = await response.json();
       const loadedExercises = [];
-
+      console.log(responseData);
       for (const key in responseData) {
         loadedExercises.push({
           id: responseData[key]._id,
@@ -89,7 +89,7 @@ const ExercisesForTemplate = (props) => {
   const bodyPart = "bodyPart";
   const bodyPartUniqueList = [
     ...new Set(
-      allExercisesForFiltering.map((item) => item.bodyPart.toUpperCase())
+      allExercisesForFiltering.map((item) => item.bodyPart?.toUpperCase())
     ),
   ];
 
