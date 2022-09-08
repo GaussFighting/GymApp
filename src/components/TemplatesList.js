@@ -11,12 +11,14 @@ const TemplatesList = (props) => {
       const responseData = await response.json();
       const loadedTemplates = [];
 
-      for (const key in responseData) {
+      const templatesArr = responseData.data.templates;
+
+      for (const key in templatesArr) {
         loadedTemplates.push({
-          id: responseData[key]._id,
-          templateName: responseData[key].templateName,
-          descritpion: responseData[key].description,
-          templateExercises: responseData[key].templateExercises,
+          id: templatesArr[key]._id,
+          templateName: templatesArr[key].templateName,
+          descritpion: templatesArr[key].description,
+          templateExercises: templatesArr[key].templateExercises,
         });
       }
       setTemplates(loadedTemplates);
