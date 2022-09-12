@@ -136,7 +136,11 @@ function Edit() {
             Are you sure you want to edit current exercise?
           </div>
         </Row>
-        <Button className="button-edit" onClick={(e) => onSubmit(e)}>
+        <Button
+          className="button-edit"
+          disabled={!localStorage.getItem("isAdmin")}
+          onClick={(e) => onSubmit(e)}
+        >
           EDIT
         </Button>
       </Row>
