@@ -94,6 +94,7 @@ function AddNewTemplate() {
         <Col xs="4" md="6">
           <Button
             className="delete-button"
+            disabled={!localStorage.getItem("isAdmin")}
             onClick={() => {
               setAddedExercises((exercises) => {
                 return exercises.filter((ex) => {

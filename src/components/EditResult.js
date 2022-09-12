@@ -200,7 +200,11 @@ function Edit() {
       </Row>
       <Row>
         <div className="row-position">
-          <Button className="button-edit" onClick={(e) => onSubmit(e)}>
+          <Button
+            className="button-edit"
+            disabled={!localStorage.getItem("isAdmin")}
+            onClick={(e) => onSubmit(e)}
+          >
             EDIT
           </Button>
         </div>
