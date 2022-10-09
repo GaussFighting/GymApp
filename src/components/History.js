@@ -23,7 +23,10 @@ const History = () => {
     return setFilteredResults(resultsList);
   };
 
-  const asdf = () => {
+  const allResults = () => {
+    return setFilteredResults(results);
+  };
+  const displayedWorkouts = () => {
     return filteredResults.map((result, index) => {
       return (
         <ListGroup key={result.id}>
@@ -110,12 +113,19 @@ const History = () => {
       >
         SHOW RESULTS
       </Button>
+      <Button
+        className="add-new-template-cancel-button"
+        onClick={() => {
+          allResults();
+        }}
+      >
+        SHOW ALL RESULTS
+      </Button>
       {/* <Button className="add-new-template-cancel-button" onClick={() => {}}>
         NEXT PAGE
       </Button> */}
 
-      <ul className="ul-exercise">{asdf()}</ul>
-      {/* {console.log("asdf")} */}
+      <ul className="ul-exercise">{displayedWorkouts()}</ul>
       <div className="spacer"></div>
     </div>
   );

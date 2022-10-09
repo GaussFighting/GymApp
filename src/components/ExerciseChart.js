@@ -169,155 +169,163 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
+  console.log(results);
+  if (results.length) {
+    return (
+      <div>
+        <Chart results={results} exerciseId={props.exerciseId} />
+        <Row className="top-row">
+          <Row>
+            <Col xs="12" md="12">
+              <Row>
+                <Col xs="1" md="2">
+                  RM: <b>{repMax}</b> kg
+                </Col>
+                <Col xs="1" md="2">
+                  RM / mass: <b>{repMaxByMass.toFixed(2)}</b>
+                </Col>
+                <Col xs="1" md="2">
+                  Best Set Volume <b>{bestSetVolume.toFixed(0)}</b>
+                </Col>
+                <Col xs="1" md="2">
+                  Best Set Volume/ mass <b>{bestSetVolumeByMass.toFixed(2)}</b>
+                </Col>
+                <Col xs="1" md="2">
+                  {" "}
+                  Best Total Volume <b>{bestTotalSetVolumeByMass.toFixed(0)}</b>
+                </Col>
+                <Col xs="1" md="2">
+                  Best Total Volume/ mass{" "}
+                  <b>{bestTotalSetVolumeByMassByMass.toFixed(2)}</b>
+                </Col>
+              </Row>
+              {results.map((ex, index) => {
+                return (
+                  <React.Fragment>
+                    {index === 0 && (
+                      <React.Fragment>
+                        <Row>
+                          <Col xs="1" md="1">
+                            No.
+                          </Col>
+                          <Col xs="1" md="1">
+                            Date
+                          </Col>
+                          <Col xs="1" md="1">
+                            BW
+                          </Col>
+                        </Row>
+                      </React.Fragment>
+                    )}
+                    <Link
+                      className="template-link-chart"
+                      to={`/results/${results[index].id}`}
+                    >
+                      <Row className="template-link-chart">
+                        <Col xs="1" md="1">
+                          {index + 1}
+                        </Col>
+                        <Col xs="1" md="1">
+                          {moment(ex.date).format(format)}
+                        </Col>
+                        <Col xs="1" md="1">
+                          {ex.bodyWeight.toFixed(1)}
+                          {" kg"}
+                        </Col>
+                        <Col xs="1" md="1">
+                          {ex.templateExercises
+                            .filter((asdf) => {
+                              return asdf.id === props.exerciseId;
+                            })
+                            .map((element) => {
+                              let totalVolume = 0;
+                              for (
+                                let i = 0;
+                                i < element.addedResults.length;
+                                i++
+                              ) {
+                                totalVolume +=
+                                  element.addedResults[i].setWeight *
+                                  (element.addedResults[i].setRepetition
+                                    ? element.addedResults[i].setRepetition
+                                    : 0);
+                              }
 
-  return (
-    <div>
-      <Chart results={results} exerciseId={props.exerciseId} />
-      <Row className="top-row">
-        <Row>
-          <Col xs="12" md="12">
-            <Row>
-              <Col xs="1" md="2">
-                RM: <b>{repMax}</b> kg
-              </Col>
-              <Col xs="1" md="2">
-                RM / mass: <b>{repMaxByMass.toFixed(2)}</b>
-              </Col>
-              <Col xs="1" md="2">
-                Best Set Volume <b>{bestSetVolume.toFixed(0)}</b>
-              </Col>
-              <Col xs="1" md="2">
-                Best Set Volume/ mass <b>{bestSetVolumeByMass.toFixed(2)}</b>
-              </Col>
-              <Col xs="1" md="2">
-                {" "}
-                Best Total Volume <b>{bestTotalSetVolumeByMass.toFixed(0)}</b>
-              </Col>
-              <Col xs="1" md="2">
-                Best Total Volume/ mass{" "}
-                <b>{bestTotalSetVolumeByMassByMass.toFixed(2)}</b>
-              </Col>
-            </Row>
-            {results.map((ex, index) => {
-              return (
-                <React.Fragment>
-                  {index === 0 && (
-                    <React.Fragment>
-                      <Row>
-                        <Col xs="1" md="1">
-                          No.
+                              return <Row>{totalVolume.toFixed(1)} </Row>;
+                            })}
                         </Col>
                         <Col xs="1" md="1">
-                          Date
+                          {ex.templateExercises
+                            .filter((asdf) => {
+                              return asdf.id === props.exerciseId;
+                            })
+                            .map((element) => {
+                              let totalVolume = 0;
+                              let totalVolumeDivideBymass = 0;
+                              for (
+                                let i = 0;
+                                i < element.addedResults.length;
+                                i++
+                              ) {
+                                totalVolume +=
+                                  element.addedResults[i].setWeight *
+                                  (element.addedResults[i].setRepetition
+                                    ? element.addedResults[i].setRepetition
+                                    : 0);
+                                totalVolumeDivideBymass =
+                                  totalVolume / ex.bodyWeight;
+                              }
+
+                              return (
+                                <Row>{totalVolumeDivideBymass.toFixed(2)}</Row>
+                              );
+                            })}
                         </Col>
-                        <Col xs="1" md="1">
-                          BW
+                        <Col>
+                          {ex.templateExercises
+                            .filter((asdf) => {
+                              return asdf.id === props.exerciseId;
+                            })
+                            .map((element) => {
+                              let exResults = element.addedResults.map(
+                                (element2, idx) => {
+                                  return (
+                                    idx < element.addedResults.length &&
+                                    idx > element.addedResults.length - 6 && (
+                                      <Col
+                                        xs="1"
+                                        md="2"
+                                        style={{ textTransform: "lowercase" }}
+                                      >
+                                        {element2.setWeight.toFixed(1)}
+                                        {"kg x "}
+                                        {element2.setRepetition}
+                                      </Col>
+                                    )
+                                  );
+                                }
+                              );
+                              return <Row>{exResults}</Row>;
+                            })}
                         </Col>
                       </Row>
-                    </React.Fragment>
-                  )}
-                  <Link
-                    className="template-link-chart"
-                    to={`/results/${results[index].id}`}
-                  >
-                    <Row className="template-link-chart">
-                      <Col xs="1" md="1">
-                        {index + 1}
-                      </Col>
-                      <Col xs="1" md="1">
-                        {moment(ex.date).format(format)}
-                      </Col>
-                      <Col xs="1" md="1">
-                        {ex.bodyWeight.toFixed(1)}
-                        {" kg"}
-                      </Col>
-                      <Col xs="1" md="1">
-                        {ex.templateExercises
-                          .filter((asdf) => {
-                            return asdf.id === props.exerciseId;
-                          })
-                          .map((element) => {
-                            let totalVolume = 0;
-                            for (
-                              let i = 0;
-                              i < element.addedResults.length;
-                              i++
-                            ) {
-                              totalVolume +=
-                                element.addedResults[i].setWeight *
-                                (element.addedResults[i].setRepetition
-                                  ? element.addedResults[i].setRepetition
-                                  : 0);
-                            }
-
-                            return <Row>{totalVolume.toFixed(1)} </Row>;
-                          })}
-                      </Col>
-                      <Col xs="1" md="1">
-                        {ex.templateExercises
-                          .filter((asdf) => {
-                            return asdf.id === props.exerciseId;
-                          })
-                          .map((element) => {
-                            let totalVolume = 0;
-                            let totalVolumeDivideBymass = 0;
-                            for (
-                              let i = 0;
-                              i < element.addedResults.length;
-                              i++
-                            ) {
-                              totalVolume +=
-                                element.addedResults[i].setWeight *
-                                (element.addedResults[i].setRepetition
-                                  ? element.addedResults[i].setRepetition
-                                  : 0);
-                              totalVolumeDivideBymass =
-                                totalVolume / ex.bodyWeight;
-                            }
-
-                            return (
-                              <Row>{totalVolumeDivideBymass.toFixed(2)}</Row>
-                            );
-                          })}
-                      </Col>
-                      <Col>
-                        {ex.templateExercises
-                          .filter((asdf) => {
-                            return asdf.id === props.exerciseId;
-                          })
-                          .map((element) => {
-                            let exResults = element.addedResults.map(
-                              (element2, idx) => {
-                                return (
-                                  idx < element.addedResults.length &&
-                                  idx > element.addedResults.length - 6 && (
-                                    <Col
-                                      xs="1"
-                                      md="2"
-                                      style={{ textTransform: "lowercase" }}
-                                    >
-                                      {element2.setWeight.toFixed(1)}
-                                      {"kg x "}
-                                      {element2.setRepetition}
-                                    </Col>
-                                  )
-                                );
-                              }
-                            );
-                            return <Row>{exResults}</Row>;
-                          })}
-                      </Col>
-                    </Row>
-                  </Link>
-                </React.Fragment>
-              );
-            })}
-          </Col>
+                    </Link>
+                  </React.Fragment>
+                );
+              })}
+            </Col>
+          </Row>
         </Row>
-      </Row>
-      <div className="spacer"></div>
-    </div>
-  );
+        <div className="spacer"></div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        We ARE SORRY THERE IS NO RECORDS IN DATABASE FOR THIS EXERCISE :(
+      </div>
+    );
+  }
 };
 
 export default ExerciseCharts;

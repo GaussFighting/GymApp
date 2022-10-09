@@ -57,7 +57,6 @@ function Exercise() {
   const [exercise, setExercise] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
-  console.log("costamnazwanie", id);
   useEffect(() => {
     const fetchExercise = async () => {
       const response = await fetch(`/.netlify/functions/exerciseRead?id=${id}`);

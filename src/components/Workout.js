@@ -280,7 +280,12 @@ const Workout = (props) => {
                 {idx + 1}{" "}
               </Col>
               <Col xs="7" md="8">
-                {exercise.nameEn.toUpperCase()}
+                <h5>
+                  {exercise.nameEn.toUpperCase()}
+                  {" ("}
+                  {exercise.equipment.toUpperCase()}
+                  {")"}
+                </h5>
               </Col>
               <Row>{valueOfSets(exercise)}</Row>
               <Button
