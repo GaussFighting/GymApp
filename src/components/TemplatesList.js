@@ -39,7 +39,7 @@ const TemplatesList = (props) => {
           </Col>
         </Link>
       </Row>
-
+      {console.log(template.templateExercises)}
       <Row className="template-row">
         {template.templateExercises.map((exercise, idx) => (
           <Row className="template-row-exercise" key={exercise.id}>
@@ -47,7 +47,9 @@ const TemplatesList = (props) => {
               {idx + 1}{" "}
             </Col>
             <Col xs="7" md="8">
-              {exercise.nameEn.toUpperCase()}
+              {exercise.nameEn.toUpperCase()} {"("}
+              {exercise.equipment.toUpperCase()}
+              {")"}
             </Col>
             <Col xs="4" md="2">
               {" "}

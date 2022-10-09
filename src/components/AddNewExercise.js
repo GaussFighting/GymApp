@@ -21,6 +21,7 @@ function MyVerticallyCenteredModal(props) {
     e.preventDefault();
     const newExercise = { ...form };
     try {
+      console.log("aseawedawdasd");
       await fetch("/.netlify/functions/exerciseCreate", {
         method: "POST",
         headers: {

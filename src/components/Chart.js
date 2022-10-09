@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { Input } from "reactstrap";
+import { Input, Label } from "reactstrap";
 import {
   LineChart,
   Line,
@@ -32,7 +32,7 @@ const Chart = ({ results, exerciseId }) => {
 
   const dataTotalVolume = () => {
     let arrOfDates = [];
-    let arrayOfDateAndVolume = results.map((training, index) => {
+    let arrayOfDateAndVolume = results.map((training) => {
       let volumeResults = training.templateExercises
         .filter((trainingResults) => {
           return trainingResults.id === exerciseId;
@@ -100,28 +100,34 @@ const Chart = ({ results, exerciseId }) => {
 
   return (
     <div>
-      <h5>Volume Chart</h5>
-      <Input
-        type="checkbox"
-        onChange={() => {
-          setDisabledVolumeLine(!disabledVolumeLine);
-        }}
-      ></Input>{" "}
-      Hide Volume line
-      <Input
-        type="checkbox"
-        onChange={() => {
-          setDisabledWeightLine(!disabledWeightLine);
-        }}
-      ></Input>{" "}
-      Hide Body Weight line
-      <Input
-        type="checkbox"
-        onChange={() => {
-          setDisabledVolumePerWeight(!disabledVolumePerWeight);
-        }}
-      ></Input>{" "}
-      Hide Volume per body weight line
+      <h5>Total Volume Chart</h5>
+      <Label className="VolumeLine">
+        <Input
+          type="checkbox"
+          onChange={() => {
+            setDisabledVolumeLine(!disabledVolumeLine);
+          }}
+        />{" "}
+        Hide Volume line
+      </Label>{" "}
+      <Label className="BodyWeightLine">
+        <Input
+          type="checkbox"
+          onChange={() => {
+            setDisabledWeightLine(!disabledWeightLine);
+          }}
+        />{" "}
+        Hide Body Weight line
+      </Label>{" "}
+      <Label className="VolumePerBodyWeightLine">
+        <Input
+          type="checkbox"
+          onChange={() => {
+            setDisabledVolumePerWeight(!disabledVolumePerWeight);
+          }}
+        />{" "}
+        Hide Volume per body weight line{" "}
+      </Label>
       <ResponsiveContainer width="100%" height={624}>
         <LineChart width={1500} height={300} data={dataTotalVolume()}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -176,6 +182,14 @@ const Chart = ({ results, exerciseId }) => {
               dataKey="vpm"
               stroke="#82ca9d"
               connectNulls={true}
+              // activeDot={true} checkit!
+              // dot={{
+              //   stroke: "#82ca9d",
+              //   strokeWidth: 1,
+              //   r: 2,
+              //   strokeDasharray: "",
+              //   fill: "#82ca9d",
+              // }}
             />
           )}
           {!disabledWeightLine && (
@@ -189,28 +203,35 @@ const Chart = ({ results, exerciseId }) => {
           )}
         </LineChart>
       </ResponsiveContainer>
-      <h5>Volume Chart</h5>
-      <Input
-        type="checkbox"
-        onChange={() => {
-          setDisabledSetVolumeLine(!disabledSetVolumeLine);
-        }}
-      ></Input>{" "}
-      Hide Volume line
-      <Input
-        type="checkbox"
-        onChange={() => {
-          setDisabledSetWeightLine(!disabledSetWeightLine);
-        }}
-      ></Input>{" "}
-      Hide Body Weight line
-      <Input
-        type="checkbox"
-        onChange={() => {
-          setDisabledSetVolumePerWeight(!disabledSetVolumePerWeight);
-        }}
-      ></Input>{" "}
-      Hide Volume per body weight line
+      <br />
+      <h5>Set Volume Chart</h5>
+      <Label className="VolumeLine">
+        <Input
+          type="checkbox"
+          onChange={() => {
+            setDisabledSetVolumeLine(!disabledSetVolumeLine);
+          }}
+        />{" "}
+        Hide Volume line
+      </Label>{" "}
+      <Label className="BodyWeightLine">
+        <Input
+          type="checkbox"
+          onChange={() => {
+            setDisabledSetWeightLine(!disabledSetWeightLine);
+          }}
+        />{" "}
+        Hide Body Weight line
+      </Label>{" "}
+      <Label className="VolumePerBodyWeightLine">
+        <Input
+          type="checkbox"
+          onChange={() => {
+            setDisabledSetVolumePerWeight(!disabledSetVolumePerWeight);
+          }}
+        />{" "}
+        Hide Volume per body weight line
+      </Label>
       <ResponsiveContainer width="100%" height={624}>
         <LineChart width={1500} height={300} data={dataTotalVolume()}>
           <CartesianGrid strokeDasharray="3 3" />

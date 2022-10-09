@@ -1,3 +1,15 @@
 .chart-spacer {
   height: 20px;
 }
+
+.VolumeLine {
+  color: #8884d8;
+}
+
+.BodyWeightLine {
+  color: #ca8284;
+}
+
+.VolumePerBodyWeightLine {
+  color: #82ca9d;
+}
