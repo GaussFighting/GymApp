@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
-const Result = require("../models/templateModel");
+const Result = require("../models/resultModel");
 
 exports.handler = async (event, context) => {
   await connectDb(process.env.REACT_APP_DB);
