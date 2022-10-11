@@ -36,13 +36,14 @@ function Edit() {
         navigate("/");
         return;
       }
-
-      setFormResult(record);
+      console.log("setFormResult", record.data.results[0]);
+      setFormResult(record.data.results[0]); // ?? added last
     }
 
     fetchData();
   }, [params.id, navigate]);
 
+  console.log("formResult", formResult);
   // These methods will update the state properties.
   function updateForm(value) {
     return setFormResult((prev) => {
@@ -52,19 +53,19 @@ function Edit() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    const editedTemplate = {
+    const editedResult = {
       bodyWeight: formResult.bodyWeight,
       date: formResult.date,
       templateName: formResult.templateName,
       description: formResult.description,
       templateExercises: formResult.templateExercises,
     };
-
+    console.log("editedResults", editedResult);
     // This will send a post request to update the data in the database.
     try {
       await fetch(`/.netlify/functions/resultUpdate?id=${params.id}`, {
         method: "PUT",
-        body: JSON.stringify(editedTemplate),
+        body: JSON.stringify(editedResult),
         headers: {
           "Content-Type": "application/json",
         },
@@ -73,7 +74,7 @@ function Edit() {
       console.log(error);
     }
     console.log(params.id);
-    navigate("/templatelist");
+    navigate("/history");
   }
 
   const addExercises = (callback) => {
