@@ -36,14 +36,12 @@ function Edit() {
         navigate("/");
         return;
       }
-      console.log("setFormResult", record.data.results[0]);
       setFormResult(record.data.results[0]); // ?? added last
     }
 
     fetchData();
   }, [params.id, navigate]);
 
-  console.log("formResult", formResult);
   // These methods will update the state properties.
   function updateForm(value) {
     return setFormResult((prev) => {
@@ -60,7 +58,6 @@ function Edit() {
       description: formResult.description,
       templateExercises: formResult.templateExercises,
     };
-    console.log("editedResults", editedResult);
     // This will send a post request to update the data in the database.
     try {
       await fetch(`/.netlify/functions/resultUpdate?id=${params.id}`, {
@@ -86,6 +83,7 @@ function Edit() {
       };
     });
   };
+  console.log(formResult);
 
   return (
     <Form className="edit-form">
@@ -134,7 +132,141 @@ function Edit() {
                   {" "}
                   {exercise.equipment.toUpperCase()}
                 </Col>
-                <Col xs="2" md="1" className="px-0 sets">
+                {exercise.addedResults &&
+                  exercise.addedResults.map((result, index) => {
+                    console.log(
+                      formResult.templateExercises[idx].addedResults[index]
+                        .setWeight,
+                      formResult.templateName
+                    );
+                    return (
+                      <React.Fragment>
+                        {index === 0 && (
+                          <Row>
+                            <Col
+                              className="firstCol"
+                              md={!result.setWeight && !result.setDistance && 4}
+                            >
+                              SET
+                            </Col>
+                            {result.setWeight && (
+                              <Col className="firstCol">WEIGHT</Col>
+                            )}
+                            {result.setRepetition && (
+                              <Col
+                                md={
+                                  !result.setWeight && !result.setDistance && 4
+                                }
+                                className="firstCol"
+                              >
+                                REPETITION
+                              </Col>
+                            )}{" "}
+                            {result.setDistance && (
+                              <Col className="firstCol">DISTANCE</Col>
+                            )}
+                            {result.setTime && (
+                              <Col
+                                md={
+                                  !result.setWeight && !result.setDistance && 4
+                                }
+                                className="firstCol"
+                              >
+                                TIME
+                              </Col>
+                            )}
+                          </Row>
+                        )}
+                        <Row
+                          className={
+                            idx % 2 === 0
+                              ? "exercise-row-even"
+                              : "exercise-row-odd"
+                          }
+                        >
+                          <Col> {index + 1}. </Col>
+                          {(result.setWeight || result.setDistance) && (
+                            <Col>
+                              {" "}
+                              {
+                                <Input
+                                  className="input select-name-position"
+                                  type="number"
+                                  placeholder={
+                                    formResult.templateExercises[idx]
+                                      .addedResults[index].setWeight
+                                  }
+                                  // value={}
+                                  onChange={(event) => {
+                                    updateForm((prev) => {
+                                      return {
+                                        ...prev,
+                                        templateExercises:
+                                          prev.templateExercises.map((ex) => {
+                                            if (ex.id === exercise.id) {
+                                              return {
+                                                ...ex,
+                                                addedResults:
+                                                  prev.addedResults.map(
+                                                    (setResult, index) => {
+                                                      if (
+                                                        setResult.id ===
+                                                        exercise.id +
+                                                          "-" +
+                                                          index
+                                                      ) {
+                                                        return {
+                                                          ...setResult,
+                                                          setWeight: parseInt(
+                                                            event.target.value
+                                                          ),
+                                                        };
+                                                      }
+                                                      return setResult;
+                                                    }
+                                                  ),
+                                              };
+                                            }
+                                            return ex;
+                                          }),
+                                      };
+                                    });
+                                    console.log(event.target.value);
+                                  }}
+                                ></Input>
+                              }{" "}
+                              {result.setWeight && "kg"}
+                              {result.setDistance} {result.setDistance && "m"}
+                            </Col>
+                          )}
+                          <Col>
+                            {" "}
+                            {
+                              <Input
+                                className="input select-name-position"
+                                type="number"
+                                placeholder="Search..."
+                                value={parseInt(
+                                  formResult.templateExercises[idx]
+                                    .addedResults[index].setRepetition
+                                )}
+                                // onChange={(e) =>
+                                //   updateForm({
+                                //     templateExercises: e.target.value,
+                                //   })
+                                // }
+                              ></Input>
+                            }{" "}
+                            {result.setTime}
+                          </Col>
+                          {!result.setWeight && !result.setDistance && (
+                            <Col>{""}</Col>
+                          )}
+                        </Row>
+                      </React.Fragment>
+                    );
+                  })}
+                {/* <Col xs="2" md="1" className="px-0 sets">
                   <Input
                     className="input-sets"
                     type="number"
@@ -160,8 +292,8 @@ function Edit() {
                     }}
                   ></Input>{" "}
                   <div className="sets-view">SETS</div>
-                </Col>
-                <Col xs="1" md="1" className="px-0 single-col">
+                </Col> */}
+                {/* <Col xs="1" md="1" className="px-0 single-col">
                   <Button
                     className="delete-exercise"
                     onClick={() => {
@@ -181,7 +313,7 @@ function Edit() {
                   >
                     -
                   </Button>
-                </Col>
+                </Col> */}
               </Row>
             ))}
         </Row>
