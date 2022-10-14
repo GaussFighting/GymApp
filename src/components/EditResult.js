@@ -44,6 +44,7 @@ function Edit() {
 
   // These methods will update the state properties.
   function updateForm(value) {
+    console.log("blebleble", value);
     return setFormResult((prev) => {
       return { ...prev, ...value };
     });
@@ -72,6 +73,7 @@ function Edit() {
     }
     console.log(params.id);
     navigate("/history");
+    // debugger;
   }
 
   const addExercises = (callback) => {
@@ -85,6 +87,28 @@ function Edit() {
   };
   console.log(formResult);
 
+  const asdf = (event, exercise) => {
+    updateForm({
+      templateExercises: formResult.templateExercises.map((ex) => {
+        if (ex.id === exercise.id) {
+          return {
+            ...ex,
+            addedResults: ex.addedResults.map((setResult, index) => {
+              if (setResult.id === exercise.id + "-" + index) {
+                return {
+                  ...setResult,
+                  setWeight: parseInt(event.target.value),
+                };
+              }
+              return setResult;
+            }),
+          };
+        }
+        return ex;
+      }),
+    });
+    console.log(event.target.value);
+  };
   return (
     <Form className="edit-form">
       <Row>
@@ -192,46 +216,12 @@ function Edit() {
                                 <Input
                                   className="input select-name-position"
                                   type="number"
-                                  placeholder={
+                                  value={
                                     formResult.templateExercises[idx]
                                       .addedResults[index].setWeight
                                   }
-                                  // value={}
                                   onChange={(event) => {
-                                    updateForm((prev) => {
-                                      return {
-                                        ...prev,
-                                        templateExercises:
-                                          prev.templateExercises.map((ex) => {
-                                            if (ex.id === exercise.id) {
-                                              return {
-                                                ...ex,
-                                                addedResults:
-                                                  prev.addedResults.map(
-                                                    (setResult, index) => {
-                                                      if (
-                                                        setResult.id ===
-                                                        exercise.id +
-                                                          "-" +
-                                                          index
-                                                      ) {
-                                                        return {
-                                                          ...setResult,
-                                                          setWeight: parseInt(
-                                                            event.target.value
-                                                          ),
-                                                        };
-                                                      }
-                                                      return setResult;
-                                                    }
-                                                  ),
-                                              };
-                                            }
-                                            return ex;
-                                          }),
-                                      };
-                                    });
-                                    console.log(event.target.value);
+                                    asdf(event, exercise);
                                   }}
                                 ></Input>
                               }{" "}
