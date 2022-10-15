@@ -15,11 +15,13 @@ function Edit() {
 
   const params = useParams();
   const navigate = useNavigate();
+  const format = "YYYY-MM-DD";
+  const moment = require("moment");
 
   useEffect(() => {
     async function fetchData() {
       const id = params.id.toString();
-      console.log(id);
+      // console.log(id);
       const response = await fetch(
         `/.netlify/functions/resultRead?id=${params.id.toString()}`
       );
@@ -44,7 +46,7 @@ function Edit() {
 
   // These methods will update the state properties.
   function updateForm(value) {
-    console.log("blebleble", value);
+    // console.log("blebleble", value);
     return setFormResult((prev) => {
       return { ...prev, ...value };
     });
@@ -87,17 +89,18 @@ function Edit() {
   };
   console.log(formResult);
 
-  const asdf = (event, exercise) => {
+  const resultEdit = (event, exercise, fieldName, setNumber) => {
     updateForm({
       templateExercises: formResult.templateExercises.map((ex) => {
         if (ex.id === exercise.id) {
           return {
             ...ex,
             addedResults: ex.addedResults.map((setResult, index) => {
-              if (setResult.id === exercise.id + "-" + index) {
+              console.log(setNumber, 1 + index);
+              if (setNumber === index + 1) {
                 return {
                   ...setResult,
-                  setWeight: parseInt(event.target.value),
+                  ["set" + fieldName]: parseInt(event.target.value),
                 };
               }
               return setResult;
@@ -107,8 +110,35 @@ function Edit() {
         return ex;
       }),
     });
-    console.log(event.target.value);
   };
+
+  let changeSetNumber = (exerciseId, isIncreasing) => {
+    let stateUpdater = (prev) => {
+      return {
+        ...prev,
+        templateExercises: prev.templateExercises.map((exercise, index) => {
+          if (exercise.id === exerciseId) {
+            return {
+              ...exercise,
+              sets: isIncreasing ? exercise.sets + 1 : exercise.sets - 1,
+              addedResults: [
+                ...exercise.addedResults,
+                {
+                  id: exercise.id + "-" + exercise.sets,
+                  setWeight: 1,
+                  setRepetition: 1,
+                },
+              ],
+            };
+          }
+          return exercise;
+        }),
+      };
+    };
+    setFormResult(stateUpdater);
+    // setLoadedTemplate(stateUpdater);
+  };
+
   return (
     <Form className="edit-form">
       <Row>
@@ -131,6 +161,41 @@ function Edit() {
             value={formResult.description}
             onChange={(e) => updateForm({ description: e.target.value })}
           ></Input>
+        </FormGroup>
+        <FormGroup className="form-group">
+          <Label for="exampleSelect ">PUT NEW BODY WEIGHT</Label>
+          <Input
+            className="input select-name-position"
+            type="number"
+            placeholder="Search..."
+            value={parseFloat(formResult.bodyWeight)}
+            onChange={(e) =>
+              updateForm({ bodyWeight: parseFloat(e.target.value) })
+            }
+          ></Input>
+        </FormGroup>
+        <FormGroup>
+          <Label for="exampleDate">Date</Label>
+          <Input
+            type="date"
+            name="date"
+            id="exampleDate"
+            placeholder="date placeholder"
+            value={moment(formResult.date).format(format)}
+            onChange={(e) => {
+              updateForm({
+                date: moment(e.target.value).format(format),
+              });
+
+              // const editedDate = moment(new Date(e.target.value)).format(
+              //   format
+              // );
+              // updateForm({
+              //   date: editedDate,
+              // });
+              console.log("date");
+            }}
+          />
         </FormGroup>
       </Row>
       <Row>
@@ -156,13 +221,9 @@ function Edit() {
                   {" "}
                   {exercise.equipment.toUpperCase()}
                 </Col>
+
                 {exercise.addedResults &&
                   exercise.addedResults.map((result, index) => {
-                    console.log(
-                      formResult.templateExercises[idx].addedResults[index]
-                        .setWeight,
-                      formResult.templateName
-                    );
                     return (
                       <React.Fragment>
                         {index === 0 && (
@@ -216,12 +277,17 @@ function Edit() {
                                 <Input
                                   className="input select-name-position"
                                   type="number"
-                                  value={
+                                  value={parseFloat(
                                     formResult.templateExercises[idx]
                                       .addedResults[index].setWeight
-                                  }
+                                  )}
                                   onChange={(event) => {
-                                    asdf(event, exercise);
+                                    resultEdit(
+                                      event,
+                                      exercise,
+                                      "Weight",
+                                      index + 1
+                                    );
                                   }}
                                 ></Input>
                               }{" "}
@@ -236,15 +302,18 @@ function Edit() {
                                 className="input select-name-position"
                                 type="number"
                                 placeholder="Search..."
-                                value={parseInt(
+                                value={parseFloat(
                                   formResult.templateExercises[idx]
                                     .addedResults[index].setRepetition
                                 )}
-                                // onChange={(e) =>
-                                //   updateForm({
-                                //     templateExercises: e.target.value,
-                                //   })
-                                // }
+                                onChange={(event) => {
+                                  resultEdit(
+                                    event,
+                                    exercise,
+                                    "Repetition",
+                                    index + 1
+                                  );
+                                }}
                               ></Input>
                             }{" "}
                             {result.setTime}
@@ -256,33 +325,19 @@ function Edit() {
                       </React.Fragment>
                     );
                   })}
-                {/* <Col xs="2" md="1" className="px-0 sets">
-                  <Input
-                    className="input-sets"
-                    type="number"
-                    value={exercise.sets}
-                    onChange={(event) => {
-                      setFormResult((prev) => {
-                        return {
-                          ...prev,
-                          templateExercises: prev.templateExercises.map(
-                            (ex) => {
-                              if (ex.id === exercise.id) {
-                                return {
-                                  ...ex,
-                                  sets: parseInt(event.target.value),
-                                };
-                              }
-                              return ex;
-                            }
-                          ),
-                        };
-                      });
-                      console.log(event.target.value);
-                    }}
-                  ></Input>{" "}
-                  <div className="sets-view">SETS</div>
-                </Col> */}
+                <Button
+                  onClick={() => changeSetNumber(exercise.id, true)}
+                  className="add-new-template-cancel-button"
+                >
+                  ADD SET
+                </Button>
+                <Button
+                  onClick={() => changeSetNumber(exercise.id, false)}
+                  disabled={!localStorage.getItem("isAdmin")}
+                  className="add-new-template-cancel-button"
+                >
+                  DELETE SET
+                </Button>
                 {/* <Col xs="1" md="1" className="px-0 single-col">
                   <Button
                     className="delete-exercise"
