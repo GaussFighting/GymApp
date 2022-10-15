@@ -15,11 +15,13 @@ function Edit() {
 
   const params = useParams();
   const navigate = useNavigate();
+  const format = "YYYY-MM-DD";
+  const moment = require("moment");
 
   useEffect(() => {
     async function fetchData() {
       const id = params.id.toString();
-      console.log(id);
+      // console.log(id);
       const response = await fetch(
         `/.netlify/functions/resultRead?id=${params.id.toString()}`
       );
@@ -36,16 +38,15 @@ function Edit() {
         navigate("/");
         return;
       }
-      console.log("setFormResult", record.data.results[0]);
       setFormResult(record.data.results[0]); // ?? added last
     }
 
     fetchData();
   }, [params.id, navigate]);
 
-  console.log("formResult", formResult);
   // These methods will update the state properties.
   function updateForm(value) {
+    // console.log("blebleble", value);
     return setFormResult((prev) => {
       return { ...prev, ...value };
     });
@@ -60,7 +61,6 @@ function Edit() {
       description: formResult.description,
       templateExercises: formResult.templateExercises,
     };
-    console.log("editedResults", editedResult);
     // This will send a post request to update the data in the database.
     try {
       await fetch(`/.netlify/functions/resultUpdate?id=${params.id}`, {
@@ -75,16 +75,92 @@ function Edit() {
     }
     console.log(params.id);
     navigate("/history");
+    // debugger;
   }
 
   const addExercises = (callback) => {
     setFormResult((prevFormResult) => {
       const pickedExcercises = callback(prevFormResult.templateExercises);
+      console.log(pickedExcercises);
       return {
         ...prevFormResult,
-        templateExercises: pickedExcercises,
+        templateExercises: pickedExcercises.map((ex, index) => {
+          if (ex.addedResults) {
+            return ex;
+          } else {
+            return {
+              ...ex,
+              addedResults: [
+                {
+                  id: ex.id + "-0",
+                  setWeight: 1,
+                  setRepetition: 1,
+                },
+              ],
+            };
+          }
+        }),
       };
     });
+  };
+  console.log(formResult);
+
+  const resultEdit = (event, exercise, fieldName, setNumber) => {
+    updateForm({
+      templateExercises: formResult.templateExercises.map((ex) => {
+        if (ex.id === exercise.id) {
+          return {
+            ...ex,
+            addedResults: ex.addedResults.map((setResult, index) => {
+              if (setNumber === index + 1) {
+                return {
+                  ...setResult,
+                  ["set" + fieldName]: parseInt(event.target.value),
+                };
+              }
+              return setResult;
+            }),
+          };
+        }
+        return ex;
+      }),
+    });
+  };
+
+  let changeSetNumber = (exerciseId, isIncreasing, setNumber) => {
+    let stateUpdater = (prev) => {
+      return {
+        ...prev,
+        templateExercises: prev.templateExercises.map((exercise, index) => {
+          console.log(setNumber, 1 + index);
+          if (exercise.id === exerciseId) {
+            return {
+              ...exercise,
+              sets: isIncreasing ? exercise.sets + 1 : exercise.sets - 1,
+              addedResults: isIncreasing
+                ? [
+                    ...exercise.addedResults,
+                    {
+                      id: exercise.id + "-" + exercise.sets,
+                      setWeight: 1,
+                      setRepetition: 1,
+                    },
+                  ]
+                : exercise.addedResults
+                    .filter((ex) => {
+                      return ex.id !== exercise.id + "-" + setNumber;
+                    })
+                    .map((ex, index) => {
+                      return { ...ex, id: ex.id.split("-")[0] + "-" + index };
+                    }),
+            };
+          }
+          return exercise;
+        }),
+      };
+    };
+    setFormResult(stateUpdater);
+    // setLoadedTemplate(stateUpdater);
   };
 
   return (
@@ -110,6 +186,41 @@ function Edit() {
             onChange={(e) => updateForm({ description: e.target.value })}
           ></Input>
         </FormGroup>
+        <FormGroup className="form-group">
+          <Label for="exampleSelect ">PUT NEW BODY WEIGHT</Label>
+          <Input
+            className="input select-name-position"
+            type="number"
+            placeholder="Search..."
+            value={parseFloat(formResult.bodyWeight)}
+            onChange={(e) =>
+              updateForm({ bodyWeight: parseFloat(e.target.value) })
+            }
+          ></Input>
+        </FormGroup>
+        <FormGroup>
+          <Label for="exampleDate">Date</Label>
+          <Input
+            type="date"
+            name="date"
+            id="exampleDate"
+            placeholder="date placeholder"
+            value={moment(formResult.date).format(format)}
+            onChange={(e) => {
+              updateForm({
+                date: moment(e.target.value).format(format),
+              });
+
+              // const editedDate = moment(new Date(e.target.value)).format(
+              //   format
+              // );
+              // updateForm({
+              //   date: editedDate,
+              // });
+              console.log("date");
+            }}
+          />
+        </FormGroup>
       </Row>
       <Row>
         <FormGroup className="form-group">
@@ -134,34 +245,147 @@ function Edit() {
                   {" "}
                   {exercise.equipment.toUpperCase()}
                 </Col>
-                <Col xs="2" md="1" className="px-0 sets">
-                  <Input
-                    className="input-sets"
-                    type="number"
-                    value={exercise.sets}
-                    onChange={(event) => {
-                      setFormResult((prev) => {
-                        return {
-                          ...prev,
-                          templateExercises: prev.templateExercises.map(
-                            (ex) => {
-                              if (ex.id === exercise.id) {
-                                return {
-                                  ...ex,
-                                  sets: parseInt(event.target.value),
-                                };
+
+                {exercise.addedResults &&
+                  exercise.addedResults.map((result, index) => {
+                    return (
+                      <React.Fragment>
+                        {index === 0 && (
+                          <Row>
+                            <Col
+                              className="firstCol"
+                              md={!result.setWeight && !result.setDistance && 4}
+                            >
+                              SET
+                            </Col>
+                            {result.setWeight && (
+                              <Col className="firstCol">WEIGHT</Col>
+                            )}
+                            {result.setRepetition && (
+                              <Col
+                                md={
+                                  !result.setWeight && !result.setDistance && 4
+                                }
+                                className="firstCol"
+                              >
+                                REPETITION
+                              </Col>
+                            )}{" "}
+                            {result.setDistance && (
+                              <Col className="firstCol">DISTANCE</Col>
+                            )}
+                            {result.setTime && (
+                              <Col
+                                md={
+                                  !result.setWeight && !result.setDistance && 4
+                                }
+                                className="firstCol"
+                              >
+                                TIME
+                              </Col>
+                            )}
+                          </Row>
+                        )}
+                        <Row
+                          className={
+                            idx % 2 === 0
+                              ? "exercise-row-even"
+                              : "exercise-row-odd"
+                          }
+                        >
+                          <Col> {index + 1}. </Col>
+                          {(result.setWeight || result.setDistance) && (
+                            <Col>
+                              {" "}
+                              {
+                                <Input
+                                  className="input select-name-position"
+                                  type="number"
+                                  value={parseFloat(
+                                    formResult.templateExercises[idx]
+                                      .addedResults[index].setWeight
+                                  )}
+                                  onChange={(event) => {
+                                    resultEdit(
+                                      event,
+                                      exercise,
+                                      "Weight",
+                                      index + 1
+                                    );
+                                  }}
+                                ></Input>
+                              }{" "}
+                              {result.setWeight && "kg"}
+                              {result.setDistance} {result.setDistance && "m"}
+                            </Col>
+                          )}
+                          <Col>
+                            {" "}
+                            {
+                              <Input
+                                className="input select-name-position"
+                                type="number"
+                                placeholder="Search..."
+                                value={parseFloat(
+                                  formResult.templateExercises[idx]
+                                    .addedResults[index].setRepetition
+                                )}
+                                onChange={(event) => {
+                                  resultEdit(
+                                    event,
+                                    exercise,
+                                    "Repetition",
+                                    index + 1
+                                  );
+                                }}
+                              ></Input>
+                            }{" "}
+                            {result.setTime}
+                          </Col>
+                          <Col>
+                            {" "}
+                            <Button
+                              className="delete-exercise"
+                              onClick={() =>
+                                changeSetNumber(exercise.id, false, index)
                               }
-                              return ex;
-                            }
-                          ),
-                        };
-                      });
-                      console.log(event.target.value);
-                    }}
-                  ></Input>{" "}
-                  <div className="sets-view">SETS</div>
-                </Col>
-                <Col xs="1" md="1" className="px-0 single-col">
+                            >
+                              {" "}
+                              -
+                            </Button>
+                          </Col>
+                          {!result.setWeight && !result.setDistance && (
+                            <Col>{""}</Col>
+                          )}
+                        </Row>
+                      </React.Fragment>
+                    );
+                  })}
+                <Button
+                  onClick={() => changeSetNumber(exercise.id, true)}
+                  className="add-new-template-cancel-button"
+                >
+                  ADD SET
+                </Button>
+                <Button
+                  onClick={() =>
+                    setFormResult(() => {
+                      return {
+                        ...formResult,
+                        templateExercises: formResult.templateExercises.filter(
+                          (ex) => {
+                            return ex.id !== exercise.id;
+                          }
+                        ),
+                      };
+                    })
+                  }
+                  disabled={!localStorage.getItem("isAdmin")}
+                  className="add-new-template-cancel-button"
+                >
+                  DELETE EXERCISE
+                </Button>
+                {/* <Col xs="1" md="1" className="px-0 single-col">
                   <Button
                     className="delete-exercise"
                     onClick={() => {
@@ -181,7 +405,7 @@ function Edit() {
                   >
                     -
                   </Button>
-                </Col>
+                </Col> */}
               </Row>
             ))}
         </Row>

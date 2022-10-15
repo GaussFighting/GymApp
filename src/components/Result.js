@@ -142,12 +142,13 @@ function Result() {
                     let totalVolume = 0;
                     let totalVolumeDivideBymass = 0;
 
-                    for (let i = 0; i < index + 1; i++) {
-                      totalVolume += result.setWeight * result.setRepetition;
+                    for (let i = 0; i <= index; i++) {
+                      totalVolume +=
+                        exercise.addedResults[i].setWeight *
+                        exercise.addedResults[i].setRepetition;
                       totalVolumeDivideBymass =
                         totalVolume / results.bodyWeight;
                     }
-
                     return (
                       <React.Fragment>
                         {index === 0 && (
