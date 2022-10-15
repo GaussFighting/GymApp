@@ -81,9 +81,25 @@ function Edit() {
   const addExercises = (callback) => {
     setFormResult((prevFormResult) => {
       const pickedExcercises = callback(prevFormResult.templateExercises);
+      console.log(pickedExcercises);
       return {
         ...prevFormResult,
-        templateExercises: pickedExcercises,
+        templateExercises: pickedExcercises.map((ex, index) => {
+          if (ex.addedResults) {
+            return ex;
+          } else {
+            return {
+              ...ex,
+              addedResults: [
+                {
+                  id: ex.id + "-0",
+                  setWeight: 1,
+                  setRepetition: 1,
+                },
+              ],
+            };
+          }
+        }),
       };
     });
   };
@@ -96,7 +112,6 @@ function Edit() {
           return {
             ...ex,
             addedResults: ex.addedResults.map((setResult, index) => {
-              console.log(setNumber, 1 + index);
               if (setNumber === index + 1) {
                 return {
                   ...setResult,
@@ -112,23 +127,32 @@ function Edit() {
     });
   };
 
-  let changeSetNumber = (exerciseId, isIncreasing) => {
+  let changeSetNumber = (exerciseId, isIncreasing, setNumber) => {
     let stateUpdater = (prev) => {
       return {
         ...prev,
         templateExercises: prev.templateExercises.map((exercise, index) => {
+          console.log(setNumber, 1 + index);
           if (exercise.id === exerciseId) {
             return {
               ...exercise,
               sets: isIncreasing ? exercise.sets + 1 : exercise.sets - 1,
-              addedResults: [
-                ...exercise.addedResults,
-                {
-                  id: exercise.id + "-" + exercise.sets,
-                  setWeight: 1,
-                  setRepetition: 1,
-                },
-              ],
+              addedResults: isIncreasing
+                ? [
+                    ...exercise.addedResults,
+                    {
+                      id: exercise.id + "-" + exercise.sets,
+                      setWeight: 1,
+                      setRepetition: 1,
+                    },
+                  ]
+                : exercise.addedResults
+                    .filter((ex) => {
+                      return ex.id !== exercise.id + "-" + setNumber;
+                    })
+                    .map((ex, index) => {
+                      return { ...ex, id: ex.id.split("-")[0] + "-" + index };
+                    }),
             };
           }
           return exercise;
@@ -318,6 +342,18 @@ function Edit() {
                             }{" "}
                             {result.setTime}
                           </Col>
+                          <Col>
+                            {" "}
+                            <Button
+                              className="delete-exercise"
+                              onClick={() =>
+                                changeSetNumber(exercise.id, false, index)
+                              }
+                            >
+                              {" "}
+                              -
+                            </Button>
+                          </Col>
                           {!result.setWeight && !result.setDistance && (
                             <Col>{""}</Col>
                           )}
@@ -332,11 +368,22 @@ function Edit() {
                   ADD SET
                 </Button>
                 <Button
-                  onClick={() => changeSetNumber(exercise.id, false)}
+                  onClick={() =>
+                    setFormResult(() => {
+                      return {
+                        ...formResult,
+                        templateExercises: formResult.templateExercises.filter(
+                          (ex) => {
+                            return ex.id !== exercise.id;
+                          }
+                        ),
+                      };
+                    })
+                  }
                   disabled={!localStorage.getItem("isAdmin")}
                   className="add-new-template-cancel-button"
                 >
-                  DELETE SET
+                  DELETE EXERCISE
                 </Button>
                 {/* <Col xs="1" md="1" className="px-0 single-col">
                   <Button
