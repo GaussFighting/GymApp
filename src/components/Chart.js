@@ -145,10 +145,7 @@ const Chart = ({ results, exerciseId }) => {
             tickCount={8}
             interval="preserveEnd"
             domain={(element) => {
-              return [
-                Math.round((element[0] * 0.9).toFixed(0) / 100) * 100,
-                Math.round((element[1] * 1.1).toFixed(0) / 100) * 100,
-              ];
+              return [0, Math.round((element[1] * 1.1).toFixed(0) / 100) * 100];
             }}
           />
           <YAxis
@@ -158,7 +155,7 @@ const Chart = ({ results, exerciseId }) => {
               if (disabledVolumePerWeight) {
                 return [Math.round((element[0] - 5) / 10) * 10, element[1] + 5];
               } else {
-                return [0, Math.round(element[1].toFixed(0) / 10) * 10];
+                return [0, Math.round((element[1].toFixed(0) * 1.1) / 10) * 10];
               }
             }}
           />
@@ -244,15 +241,7 @@ const Chart = ({ results, exerciseId }) => {
             height={100}
             interval={interval}
           />
-          <YAxis
-            yAxisId="left"
-            domain={(element) => {
-              return [
-                Math.round((element[0] * 0.9).toFixed(0) / 100) * 100,
-                Math.round((element[1] * 1.1).toFixed(0) / 100) * 100,
-              ];
-            }}
-          />
+          <YAxis yAxisId="left" domain={[0, "dataMax + 200"]} />
           <YAxis
             yAxisId="right"
             orientation="right"
@@ -260,7 +249,7 @@ const Chart = ({ results, exerciseId }) => {
               if (disabledSetVolumePerWeight) {
                 return [Math.round((element[0] - 5) / 10) * 10, element[1] + 5];
               } else {
-                return [0, Math.round(element[1].toFixed(0) / 10) * 10];
+                return [0, Math.round((element[1].toFixed(0) * 1.1) / 10) * 10];
               }
             }}
           />
