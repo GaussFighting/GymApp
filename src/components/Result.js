@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
 import EditResult from "./EditResult";
+import Spinner from "react-bootstrap/Spinner";
 
 function Result() {
   const format = "YYYY-MM-DD dddd";
@@ -13,6 +14,7 @@ function Result() {
   const [results, setResults] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
+  const [loading, setLoading] = useState(true);
 
   function OpenModalEdit(props) {
     return (
@@ -65,23 +67,39 @@ function Result() {
 
   useEffect(() => {
     const fetchResults = async () => {
-      const response = await fetch(`/.netlify/functions/resultRead?id=${id}`);
+      try {
+        setLoading(true);
+        const response = await fetch(`/.netlify/functions/resultRead?id=${id}`);
 
-      const responseData = await response.json();
-      const resultObj = responseData.data.results[0];
-      setResults({
-        id: resultObj._id,
-        templateName: resultObj.templateName,
-        description: resultObj.description,
-        templateExercises: resultObj.templateExercises,
-        bodyWeight: resultObj.bodyWeight,
-        date: resultObj.date,
-      });
+        const responseData = await response.json();
+        const resultObj = responseData.data.results[0];
+        setResults({
+          id: resultObj._id,
+          templateName: resultObj.templateName,
+          description: resultObj.description,
+          templateExercises: resultObj.templateExercises,
+          bodyWeight: resultObj.bodyWeight,
+          date: resultObj.date,
+        });
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
     };
     fetchResults();
   }, [id]);
 
   const navigate = useNavigate();
+
+  if (loading)
+    return (
+      <div className="d-flex spinner">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
 
   async function deleteRecord(id) {
     try {

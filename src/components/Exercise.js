@@ -62,7 +62,7 @@ function Exercise() {
       const response = await fetch(`/.netlify/functions/exerciseRead?id=${id}`);
 
       const responseData = await response.json();
-      const execiseRead = responseData.data.exercises[0];
+      const execiseRead = await responseData.data.exercises[0];
       setExercise({
         id: execiseRead._id,
         nameEn: execiseRead.nameEn,

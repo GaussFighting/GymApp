@@ -1,31 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
+import Spinner from "react-bootstrap/Spinner";
 
 const TemplatesList = (props) => {
   const [templates, setTemplates] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchExercises = async () => {
-      const response = await fetch(`/.netlify/functions/templateRead`);
+      try {
+        setLoading(true);
+        const response = await fetch(`/.netlify/functions/templateRead`);
 
-      const responseData = await response.json();
-      const loadedTemplates = [];
+        console.log(response);
 
-      const templatesArr = responseData.data.templates;
+        const responseData = await response.json();
+        const loadedTemplates = [];
 
-      for (const key in templatesArr) {
-        loadedTemplates.push({
-          id: templatesArr[key]._id,
-          templateName: templatesArr[key].templateName,
-          descritpion: templatesArr[key].description,
-          templateExercises: templatesArr[key].templateExercises,
-        });
+        const templatesArr = responseData.data.templates;
+
+        for (const key in templatesArr) {
+          loadedTemplates.push({
+            id: templatesArr[key]._id,
+            templateName: templatesArr[key].templateName,
+            descritpion: templatesArr[key].description,
+            templateExercises: templatesArr[key].templateExercises,
+          });
+        }
+        setTemplates(loadedTemplates);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
       }
-      setTemplates(loadedTemplates);
     };
 
     fetchExercises();
   }, []);
+
+  if (loading)
+    return (
+      <div className="d-flex spinner">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
 
   const TemplatesList = templates.map((template, index) => (
     <ListGroup key={template.id}>

@@ -115,7 +115,7 @@ function Edit() {
               if (setNumber === index + 1) {
                 return {
                   ...setResult,
-                  ["set" + fieldName]: parseInt(event.target.value),
+                  ["set" + fieldName]: parseFloat(event.target.value),
                 };
               }
               return setResult;
@@ -301,6 +301,7 @@ function Edit() {
                                 <Input
                                   className="input select-name-position"
                                   type="number"
+                                  step="0.1"
                                   value={parseFloat(
                                     formResult.templateExercises[idx]
                                       .addedResults[index].setWeight

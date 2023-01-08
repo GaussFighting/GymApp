@@ -17,7 +17,7 @@ function App() {
     <Router>
       <div>
         <Navigationbar />
-        <div className="container-fluid">
+        <div className="container-sm">
           <Routes>
             <Route path="/exercises" element={<Exercises />} />
             <Route path="/history" element={<History />} />
