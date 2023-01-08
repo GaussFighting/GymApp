@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-
+import Spinner from "react-bootstrap/Spinner";
 import Chart from "./Chart";
 
 const ExerciseCharts = (props) => {
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const format = "YYYY-MM-DD";
   const moment = require("moment");
@@ -14,12 +15,15 @@ const ExerciseCharts = (props) => {
     const fetchResults = async () => {
       let response = "";
       try {
+        setLoading(true);
         response = props.exerciseId
           ? await fetch(
               `/.netlify/functions/resultRead?exerciseId=${props.exerciseId}`
             )
           : await fetch(`/.netlify/functions/resultRead`);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
 
@@ -43,6 +47,16 @@ const ExerciseCharts = (props) => {
 
     fetchResults();
   }, [props.exerciseId]);
+
+  if (loading)
+    return (
+      <div className="d-flex spinner">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
+
   let repMax = Math.max(
     ...results
       .map((training) => {

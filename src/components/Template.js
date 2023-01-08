@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
 import EditTemplate from "./EditTemplate";
+import Spinner from "react-bootstrap/Spinner";
 
 function OpenModalEdit(props) {
   return (
@@ -58,27 +59,45 @@ function Template() {
   const [template, setTemplate] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTemplate = async () => {
-      const response = await fetch(`/.netlify/functions/templateRead?id=${id}`);
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `/.netlify/functions/templateRead?id=${id}`
+        );
 
-      const responseData = await response.json();
+        const responseData = await response.json();
 
-      const templateObj = responseData.data.templates[0];
+        const templateObj = responseData.data.templates[0];
 
-      setTemplate({
-        id: templateObj._id,
-        templateName: templateObj.templateName,
-        description: templateObj.description,
-        templateExercises: templateObj.templateExercises,
-      });
+        setTemplate({
+          id: templateObj._id,
+          templateName: templateObj.templateName,
+          description: templateObj.description,
+          templateExercises: templateObj.templateExercises,
+        });
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
     };
     fetchTemplate();
   }, [id]);
 
   const navigate = useNavigate();
 
+  if (loading)
+    return (
+      <div className="d-flex spinner">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
   async function deleteRecord(id) {
     try {
       await fetch(`/.netlify/functions/templateDelete?id=${id}`, {

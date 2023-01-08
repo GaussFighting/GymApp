@@ -7,6 +7,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Workout = (props) => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const location = useLocation();
 
   const [loadedTemplate, setLoadedTemplate] = useState(

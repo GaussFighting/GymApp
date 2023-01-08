@@ -29,7 +29,12 @@ body {
 .list-group-item {
   color: var(--thirdary-color);
 }
-
+.spinner {
+  margin-top: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @import "navigationbar.css";
 @import "exercises.css";
 @import "formExercises.css";

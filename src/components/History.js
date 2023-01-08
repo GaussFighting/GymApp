@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { FormGroup, Label, Input, Button } from "reactstrap";
+import Spinner from "react-bootstrap/Spinner";
 
 const History = () => {
   const [results, setResults] = useState([]);
   let [startDate, setStartDate] = useState();
   let [endDate, setEndDate] = useState();
   const [filteredResults, setFilteredResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const format = "YYYY-MM-DD";
   const moment = require("moment");
@@ -44,33 +46,49 @@ const History = () => {
 
   useEffect(() => {
     const fetchResults = async () => {
-      const response =
-        startDate && endDate
-          ? await fetch(
-              `/.netlify/functions/resultRead?startDate=${startDate}&endDate=${endDate}`
-            )
-          : await fetch(`/.netlify/functions/resultRead`);
+      try {
+        setLoading(true);
+        const response =
+          startDate && endDate
+            ? await fetch(
+                `/.netlify/functions/resultRead?startDate=${startDate}&endDate=${endDate}`
+              )
+            : await fetch(`/.netlify/functions/resultRead`);
 
-      const responseData = await response.json();
-      const loadedResults = [];
-      const resultArr = responseData.data.results;
+        const responseData = await response.json();
+        const loadedResults = [];
+        const resultArr = responseData.data.results;
 
-      for (const key in resultArr) {
-        loadedResults.push({
-          id: resultArr[key]._id,
-          templateName: resultArr[key].templateName,
-          descritpion: resultArr[key].description,
-          bodyWeight: resultArr[key].bodyWeight,
-          date: resultArr[key].date,
-          templateExercises: resultArr[key].templateExercises,
-        });
+        for (const key in resultArr) {
+          loadedResults.push({
+            id: resultArr[key]._id,
+            templateName: resultArr[key].templateName,
+            descritpion: resultArr[key].description,
+            bodyWeight: resultArr[key].bodyWeight,
+            date: resultArr[key].date,
+            templateExercises: resultArr[key].templateExercises,
+          });
+        }
+        setResults(loadedResults);
+        console.log("loadedResults", loadedResults);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
       }
-      setResults(loadedResults);
-      console.log("loadedResults", loadedResults);
     };
 
     fetchResults();
   }, [startDate, endDate]);
+
+  if (loading)
+    return (
+      <div className="d-flex spinner">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
 
   return (
     <div>

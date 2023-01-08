@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import FormExercises from "./FormExercises";
 import FormSelector from "./FormSelector";
 import AddNewExercise from "./AddNewExercise";
+import Spinner from "react-bootstrap/Spinner";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -12,31 +13,48 @@ const Exercises = () => {
   const [allExercisesForFiltering, setAllExercisesForFiltering] = useState([]);
   const [filterByBodyPart, setFilterByBodyPart] = useState("");
   const [filterByEquipment, setFilterByEquipment] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchExercises = async () => {
-      const response = await fetch("/.netlify/functions/exerciseRead");
-      const responseDataRes = await response.json();
-      const responseData = responseDataRes?.data?.exercises || [];
-      console.log(responseDataRes);
+      try {
+        setLoading(true);
+        const response = await fetch("/.netlify/functions/exerciseRead");
+        const responseDataRes = await response.json();
+        const responseData = responseDataRes?.data?.exercises || [];
+        console.log(responseDataRes);
 
-      const loadedExercises = [];
+        const loadedExercises = [];
 
-      for (const key in responseData) {
-        loadedExercises.push({
-          id: responseData[key]._id,
-          nameEn: responseData[key].nameEn,
-          // namePl: responseData[key].namePl,
-          bodyPart: responseData[key].bodyPart,
-          equipment: responseData[key].equipment,
-        });
+        for (const key in responseData) {
+          loadedExercises.push({
+            id: responseData[key]._id,
+            nameEn: responseData[key].nameEn,
+            // namePl: responseData[key].namePl,
+            bodyPart: responseData[key].bodyPart,
+            equipment: responseData[key].equipment,
+          });
+        }
+        setExercises(loadedExercises);
+        setAllExercisesForFiltering(loadedExercises);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
       }
-      setExercises(loadedExercises);
-      setAllExercisesForFiltering(loadedExercises);
     };
 
     fetchExercises();
   }, []);
+
+  if (loading)
+    return (
+      <div className="d-flex spinner">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
 
   const ExercisesList = exercises.map((exercise, idx) => (
     <ListGroup key={exercise.id}>
