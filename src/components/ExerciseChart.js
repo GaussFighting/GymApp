@@ -191,28 +191,34 @@ const ExerciseCharts = (props) => {
         <Row className="top-row">
           <Row>
             <Col xs="12" md="12">
-              <Row>
-                <Col xs="1" md="2">
-                  RM: <b>{repMax}</b> kg
-                </Col>
-                <Col xs="1" md="2">
-                  RM / mass: <b>{repMaxByMass.toFixed(2)}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  Best Set Volume <b>{bestSetVolume.toFixed(0)}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  Best Set Volume/ mass <b>{bestSetVolumeByMass.toFixed(2)}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  {" "}
-                  Best Total Volume <b>{bestTotalSetVolumeByMass.toFixed(0)}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  Best Total Volume/ mass{" "}
-                  <b>{bestTotalSetVolumeByMassByMass.toFixed(2)}</b>
-                </Col>
-              </Row>
+              {repMax ? (
+                <Row>
+                  <Col xs="1" md="2">
+                    RM: <b>{repMax}</b> kg
+                  </Col>
+                  <Col xs="1" md="2">
+                    RM / mass: <b>{repMaxByMass.toFixed(2)}</b>
+                  </Col>
+                  <Col xs="1" md="2">
+                    Best Set Volume <b>{bestSetVolume.toFixed(0)}</b>
+                  </Col>
+                  <Col xs="1" md="2">
+                    Best Set Volume/ mass{" "}
+                    <b>{bestSetVolumeByMass.toFixed(2)}</b>
+                  </Col>
+                  <Col xs="1" md="2">
+                    {" "}
+                    Best Total Volume{" "}
+                    <b>{bestTotalSetVolumeByMass.toFixed(0)}</b>
+                  </Col>
+                  <Col xs="1" md="2">
+                    Best Total Volume/ mass{" "}
+                    <b>{bestTotalSetVolumeByMassByMass.toFixed(2)}</b>
+                  </Col>
+                </Row>
+              ) : (
+                <Row> Jakieś rekordy tylko dla powtórzeń</Row>
+              )}
               {results.map((ex, index) => {
                 return (
                   <React.Fragment>
@@ -248,8 +254,8 @@ const ExerciseCharts = (props) => {
                         </Col>
                         <Col xs="1" md="1">
                           {ex.templateExercises
-                            .filter((asdf) => {
-                              return asdf.id === props.exerciseId;
+                            .filter((exercise) => {
+                              return exercise.id === props.exerciseId;
                             })
                             .map((element) => {
                               let totalVolume = 0;
@@ -265,7 +271,13 @@ const ExerciseCharts = (props) => {
                                     : 0);
                               }
 
-                              return <Row>{totalVolume.toFixed(1)} </Row>;
+                              return (
+                                <Row>
+                                  {isNaN(totalVolume.toFixed(1))
+                                    ? 0
+                                    : totalVolume.toFixed(1)}{" "}
+                                </Row>
+                              );
                             })}
                         </Col>
                         <Col xs="1" md="1">
@@ -291,7 +303,11 @@ const ExerciseCharts = (props) => {
                               }
 
                               return (
-                                <Row>{totalVolumeDivideBymass.toFixed(2)}</Row>
+                                <Row>
+                                  {isNaN(totalVolumeDivideBymass.toFixed(2))
+                                    ? 0
+                                    : totalVolumeDivideBymass.toFixed(2)}
+                                </Row>
                               );
                             })}
                         </Col>
@@ -311,9 +327,12 @@ const ExerciseCharts = (props) => {
                                         md="2"
                                         style={{ textTransform: "lowercase" }}
                                       >
-                                        {element2.setWeight.toFixed(1)}
-                                        {"kg x "}
-                                        {element2.setRepetition}
+                                        {" "}
+                                        {element2.setWeight
+                                          ? element2.setWeight.toFixed(1) +
+                                            "kg x " +
+                                            element2.setRepetition
+                                          : element2.setRepetition}{" "}
                                       </Col>
                                     )
                                   );

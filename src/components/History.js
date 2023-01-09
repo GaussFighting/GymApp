@@ -47,7 +47,7 @@ const History = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        setLoading(true);
+        // setLoading(true);
         const response =
           startDate && endDate
             ? await fetch(
