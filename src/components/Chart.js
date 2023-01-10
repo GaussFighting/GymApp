@@ -40,12 +40,12 @@ const Chart = ({ results, exerciseId }) => {
         .map((exercise) => {
           let totalVolume = 0;
           for (let i = 0; i < exercise.addedResults.length; i++) {
-            totalVolume +=
-              exercise.addedResults[i].setWeight *
-              (exercise.addedResults[i].setRepetition
-                ? exercise.addedResults[i].setRepetition
-                : 0);
+            totalVolume += exercise.addedResults[i].setRepetition
+              ? exercise.addedResults[i].setWeight *
+                exercise.addedResults[i].setRepetition
+              : 0;
           }
+
           return totalVolume;
         });
       let volumeResultsByMass = volumeResults.map((element) => {
@@ -60,16 +60,25 @@ const Chart = ({ results, exerciseId }) => {
           for (let i = 0; i < exercise.addedResults.length; i++) {
             bestSet = [
               ...bestSet,
+
               exercise.addedResults[i].setWeight *
-                (exercise.addedResults[i].setRepetition
-                  ? exercise.addedResults[i].setRepetition
-                  : 0),
+              exercise.addedResults[i].setRepetition
+                ? exercise.addedResults[i].setWeight *
+                  exercise.addedResults[i].setRepetition
+                : (exercise.addedResults[i].setRepetition =
+                    +exercise.addedResults[i].setRepetition),
             ];
           }
           return bestSet;
         });
+
       let bestSetsResultsByMass = bestSets.map((element) => {
-        return (Math.max(...element) / training.bodyWeight).toFixed(2);
+        let allRepetitions = 0;
+        allRepetitions = element.reduce((sum, arg) => sum + arg, 0);
+
+        return isNaN(volumeResults[0])
+          ? allRepetitions
+          : (Math.max(...element) / training.bodyWeight).toFixed(2);
       });
       return {
         name: moment(training.date).format(format),
@@ -95,111 +104,127 @@ const Chart = ({ results, exerciseId }) => {
         result = [...result, { name: arrOfDates[i] }];
       }
     }
+
     return result;
   };
 
+  console.log(!isNaN(dataTotalVolume()[0].volume));
   return (
     <div>
-      <h5>Total Volume Chart</h5>
-      <Label className="VolumeLine">
-        <Input
-          type="checkbox"
-          onChange={() => {
-            setDisabledVolumeLine(!disabledVolumeLine);
-          }}
-        />{" "}
-        Hide Volume line
-      </Label>{" "}
-      <Label className="BodyWeightLine">
-        <Input
-          type="checkbox"
-          onChange={() => {
-            setDisabledWeightLine(!disabledWeightLine);
-          }}
-        />{" "}
-        Hide Body Weight line
-      </Label>{" "}
-      <Label className="VolumePerBodyWeightLine">
-        <Input
-          type="checkbox"
-          onChange={() => {
-            setDisabledVolumePerWeight(!disabledVolumePerWeight);
-          }}
-        />{" "}
-        Hide Volume per body weight line{" "}
-      </Label>
-      <ResponsiveContainer width="100%" height={624}>
-        <LineChart width={1500} height={300} data={dataTotalVolume()}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="name"
-            padding={{ left: 30, right: 30 }}
-            reverse={true}
-            angle={0}
-            tickMargin={40}
-            height={100}
-            interval={interval}
-          />
-          <YAxis
-            yAxisId="left"
-            tickCount={8}
-            interval="preserveEnd"
-            domain={(element) => {
-              return [0, Math.round((element[1] * 1.1).toFixed(0) / 100) * 100];
-            }}
-          />
-          <YAxis
-            yAxisId="right"
-            orientation="right"
-            domain={(element) => {
-              if (disabledVolumePerWeight) {
-                return [Math.round((element[0] - 5) / 10) * 10, element[1] + 5];
-              } else {
-                return [0, Math.round((element[1].toFixed(0) * 1.1) / 10) * 10];
-              }
-            }}
-          />
-          <Tooltip />
-          <Legend />
-          {!disabledVolumeLine && (
-            <Line
-              index="1"
-              yAxisId="left"
-              dataKey="volume"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-              connectNulls={true}
-            />
-          )}
+      {" "}
+      {!isNaN(dataTotalVolume()[0].volume) && (
+        <div>
+          <h5>Total Volume Chart</h5>
+          <Label className="VolumeLine">
+            <Input
+              type="checkbox"
+              onChange={() => {
+                setDisabledVolumeLine(!disabledVolumeLine);
+              }}
+            />{" "}
+            Hide Volume line
+          </Label>{" "}
+          <Label className="BodyWeightLine">
+            <Input
+              type="checkbox"
+              onChange={() => {
+                setDisabledWeightLine(!disabledWeightLine);
+              }}
+            />{" "}
+            Hide Body Weight line
+          </Label>{" "}
+          <Label className="VolumePerBodyWeightLine">
+            <Input
+              type="checkbox"
+              onChange={() => {
+                setDisabledVolumePerWeight(!disabledVolumePerWeight);
+              }}
+            />{" "}
+            Hide Volume per body weight line{" "}
+          </Label>
+          <ResponsiveContainer width="100%" height={624}>
+            <LineChart width={1500} height={300} data={dataTotalVolume()}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="name"
+                padding={{ left: 30, right: 30 }}
+                reverse={true}
+                angle={0}
+                tickMargin={40}
+                height={100}
+                interval={interval}
+              />
+              <YAxis
+                yAxisId="left"
+                tickCount={8}
+                interval="preserveEnd"
+                domain={(element) => {
+                  return [
+                    0,
+                    Math.round((element[1] * 1.1).toFixed(0) / 100) * 100,
+                  ];
+                }}
+              />
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                domain={(element) => {
+                  if (disabledVolumePerWeight) {
+                    return [
+                      Math.round((element[0] - 5) / 10) * 10,
+                      element[1] + 5,
+                    ];
+                  } else {
+                    return [
+                      0,
+                      Math.round((element[1].toFixed(0) * 1.1) / 10) * 10,
+                    ];
+                  }
+                }}
+              />
+              <Tooltip />
+              <Legend />
+              {!disabledVolumeLine && (
+                <Line
+                  index="1"
+                  yAxisId="left"
+                  dataKey="volume"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                  connectNulls={true}
+                />
+              )}
 
-          {!disabledVolumePerWeight && (
-            <Line
-              yAxisId="right"
-              type="monotone"
-              dataKey="vpm"
-              stroke="#82ca9d"
-              connectNulls={true}
-              // activeDot={true} checkit!
-              // dot={{
-              //   stroke: "#82ca9d",
-              //   strokeWidth: 1,
-              //   r: 2,
-              //   strokeDasharray: "",
-              //   fill: "#82ca9d",
-              // }}
-            />
-          )}
-          {!disabledWeightLine && (
-            <Line
-              yAxisId="right"
-              type="monotone"
-              dataKey="bodyweight"
-              stroke="#ca8284"
-              connectNulls={true}
-            />
-          )}
-        </LineChart>
-      </ResponsiveContainer>
+              {!disabledVolumePerWeight && (
+                <Line
+                  yAxisId="right"
+                  type="monotone"
+                  dataKey="vpm"
+                  stroke="#82ca9d"
+                  connectNulls={true}
+                  // activeDot={true} checkit!
+                  // dot={{
+                  //   stroke: "#82ca9d",
+                  //   strokeWidth: 1,
+                  //   r: 2,
+                  //   strokeDasharray: "",
+                  //   fill: "#82ca9d",
+                  // }}
+                />
+              )}
+              {!disabledWeightLine && (
+                <Line
+                  yAxisId="right"
+                  type="monotone"
+                  dataKey="bodyweight"
+                  stroke="#ca8284"
+                  connectNulls={true}
+                />
+              )}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      )}
       <br />
       <h5>Set Volume Chart</h5>
       <Label className="VolumeLine">

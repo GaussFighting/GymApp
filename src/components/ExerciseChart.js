@@ -183,7 +183,48 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-  console.log(results);
+
+  let setRepMax = Math.max(
+    ...results
+      .map((training) => {
+        let highestNumberOfRepetitionFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((element) => {
+            let arrayOfAllRepetition = element.addedResults.map(
+              (repetition) => {
+                return repetition.setRepetition;
+              }
+            );
+            // console.log(arrayOfAllSetWeights);
+            return Math.max(...arrayOfAllRepetition);
+          });
+        return [...highestNumberOfRepetitionFromSet];
+      })
+      .flat()
+  );
+
+  let totalRepetitions = Math.max(
+    ...results
+      .map((training, index) => {
+        let bestWeightFromSet = training.templateExercises
+          .filter((exercises) => {
+            return exercises.id === props.exerciseId;
+          })
+          .map((set) => {
+            let totalRepetitions = 0;
+            let arrayOfAllSetWeights = set.addedResults.map((repetition) => {
+              return (totalRepetitions += repetition.setRepetition);
+            });
+            // console.log(arrayOfAllSetWeights);
+            return Math.max(...arrayOfAllSetWeights);
+          });
+        return [...bestWeightFromSet];
+      })
+      .flat()
+  );
+
   if (results.length) {
     return (
       <div>
@@ -217,7 +258,16 @@ const ExerciseCharts = (props) => {
                   </Col>
                 </Row>
               ) : (
-                <Row> Jakieś rekordy tylko dla powtórzeń</Row>
+                <Row>
+                  {" "}
+                  <Col xs="1" md="6">
+                    Repetitions Max: <b>{setRepMax}</b>
+                  </Col>
+                  <Col xs="1" md="6">
+                    {" "}
+                    Best Total Repetitions <b>{totalRepetitions.toFixed(0)}</b>
+                  </Col>
+                </Row>
               )}
               {results.map((ex, index) => {
                 return (
@@ -259,6 +309,7 @@ const ExerciseCharts = (props) => {
                             })
                             .map((element) => {
                               let totalVolume = 0;
+                              let totalRepetitions = 0;
                               for (
                                 let i = 0;
                                 i < element.addedResults.length;
@@ -269,18 +320,21 @@ const ExerciseCharts = (props) => {
                                   (element.addedResults[i].setRepetition
                                     ? element.addedResults[i].setRepetition
                                     : 0);
+
+                                totalRepetitions +=
+                                  element.addedResults[i].setRepetition;
                               }
 
                               return (
                                 <Row>
                                   {isNaN(totalVolume.toFixed(1))
-                                    ? 0
+                                    ? totalRepetitions
                                     : totalVolume.toFixed(1)}{" "}
                                 </Row>
                               );
                             })}
                         </Col>
-                        <Col xs="1" md="1">
+                        <Col xs="6" md="1">
                           {ex.templateExercises
                             .filter((asdf) => {
                               return asdf.id === props.exerciseId;
@@ -288,6 +342,8 @@ const ExerciseCharts = (props) => {
                             .map((element) => {
                               let totalVolume = 0;
                               let totalVolumeDivideBymass = 0;
+                              let allRepetitions = [];
+                              let sortedAllRepetitions = [];
                               for (
                                 let i = 0;
                                 i < element.addedResults.length;
@@ -300,12 +356,19 @@ const ExerciseCharts = (props) => {
                                     : 0);
                                 totalVolumeDivideBymass =
                                   totalVolume / ex.bodyWeight;
+                                allRepetitions = [
+                                  ...allRepetitions,
+                                  element.addedResults[i].setRepetition,
+                                ];
+                                sortedAllRepetitions = allRepetitions
+                                  .sort()
+                                  .reverse();
                               }
 
                               return (
                                 <Row>
                                   {isNaN(totalVolumeDivideBymass.toFixed(2))
-                                    ? 0
+                                    ? sortedAllRepetitions[0]
                                     : totalVolumeDivideBymass.toFixed(2)}
                                 </Row>
                               );
@@ -323,7 +386,7 @@ const ExerciseCharts = (props) => {
                                     idx < element.addedResults.length &&
                                     idx > element.addedResults.length - 6 && (
                                       <Col
-                                        xs="1"
+                                        xs="6"
                                         md="2"
                                         style={{ textTransform: "lowercase" }}
                                       >
