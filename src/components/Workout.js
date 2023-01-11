@@ -144,6 +144,7 @@ const Workout = (props) => {
       return (
         <Form>
           {labels.map((label, idx) => {
+            console.log(label);
             let labelName =
               "set" +
               label.charAt(0).toUpperCase() +
@@ -158,7 +159,8 @@ const Workout = (props) => {
                     `${exercise.id}-${i}`
                   )}
                   className="input d-inline-block"
-                  type="number"
+                  type={label === "TIME" ? "time" : "number"}
+                  step="1"
                   min={0}
                   max={1000}
                   value={addedResults[i] ? addedResults[i].labelName : 0}

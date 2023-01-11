@@ -224,7 +224,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  console.log(results);
   if (results.length) {
     return (
       <div>
@@ -340,6 +340,7 @@ const ExerciseCharts = (props) => {
                               return asdf.id === props.exerciseId;
                             })
                             .map((element) => {
+                              console.log(element);
                               let totalVolume = 0;
                               let totalVolumeDivideBymass = 0;
                               let allRepetitions = [];
