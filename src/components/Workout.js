@@ -179,10 +179,16 @@ const Workout = (props) => {
                         ];
                       } else {
                         return prev.map((res) => {
+                          console.log("labelname", labelName);
+                          console.log(typeof event.target.value);
+                          console.log("A", event.target.value);
                           if (res.id === `${exercise.id}-${i}`)
                             return {
                               ...res,
-                              [labelName]: parseFloat(event.target.value),
+                              [labelName]:
+                                labelName === "setTime"
+                                  ? event.target.value
+                                  : parseFloat(event.target.value),
                             };
                           return res;
                         });
@@ -230,6 +236,7 @@ const Workout = (props) => {
       return <div>Dude Wrong Equipment!</div>;
     }
   };
+  console.log(formResults);
   return (
     <div className="main-template-div">
       <ListGroup key={loadedTemplate.id}>
