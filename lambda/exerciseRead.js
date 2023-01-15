@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
         exercises,
       },
     };
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),

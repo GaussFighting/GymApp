@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
     };
 
     const found = await Result.findOneAndUpdate({ _id: id }, data);
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify({ ...response, found }),

@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
     };
 
     await Template.create(template);
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),

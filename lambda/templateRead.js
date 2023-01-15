@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
         templates,
       },
     };
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),

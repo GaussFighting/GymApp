@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
     };
 
     await Result.deleteOne({ _id: id });
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),

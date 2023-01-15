@@ -8,6 +8,7 @@ const connectDb = async (url) => {
   await mongoose.connect(url, {
     useNewUrlParser: true,
   });
+  return mongoose;
 };
 
 module.exports = connectDb;

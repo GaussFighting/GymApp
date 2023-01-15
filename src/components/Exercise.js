@@ -102,7 +102,7 @@ function Exercise() {
         </Col>
       </Row>
 
-      <ExerciseChart exerciseId={id} />
+      {exercise.id && <ExerciseChart exerciseId={id} />}
 
       <Row className="row">
         <Col xs="6" md="6" className="button-new-exercise">

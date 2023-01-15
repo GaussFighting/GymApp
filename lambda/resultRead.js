@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
 const Result = require("../models/resultModel");
 
 exports.handler = async (event, context) => {
-  await connectDb(process.env.REACT_APP_DB);
+  const mongoose = await connectDb(process.env.REACT_APP_DB);
 
   console.log(mongoose.connection.readyState, "ready state result");
   console.log("EVENT", event);
@@ -35,14 +34,14 @@ exports.handler = async (event, context) => {
     } else {
       results = await Result.find({}).sort({ date: -1 });
     }
-
+    console.log("ABC", results);
     const response = {
       msg: "Results successfully found",
       data: {
         results,
       },
     };
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),

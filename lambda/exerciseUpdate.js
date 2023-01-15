@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
     };
 
     await Exercise.findOneAndUpdate({ _id: id }, data);
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),
