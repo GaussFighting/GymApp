@@ -67,23 +67,6 @@ const ExerciseCharts = (props) => {
       </div>
     );
 
-  let timeTypeOfExercise = results.map((training) => {
-    let timeExist = training.templateExercises
-      .filter((exercises) => {
-        return exercises.id === props.exerciseId;
-      })
-      .map((element) => {
-        let arrayOfAllSetWeights = element.addedResults.map((score) => {
-          console.log("ASDF", score.setTime);
-          return score.setTime;
-        });
-        return arrayOfAllSetWeights;
-      });
-    return timeExist;
-  });
-
-  console.log("timeTypeOfExerciseA", timeTypeOfExercise[0]);
-
   let repMax = Math.max(
     ...results
       .map((training) => {
@@ -259,8 +242,11 @@ const ExerciseCharts = (props) => {
           })
           .map((set) => {
             let totalRepetitions = 0;
+
             let arrayOfAllSetWeights = set.addedResults.map((repetition) => {
-              return (totalRepetitions += repetition.setRepetition);
+              return (totalRepetitions += repetition.setRepetition
+                ? repetition.setRepetition
+                : repetition.setDistance);
             });
             return Math.max(...arrayOfAllSetWeights);
           });
@@ -320,7 +306,7 @@ const ExerciseCharts = (props) => {
                   </Col>
                   <Col xs="1" md="6">
                     {" "}
-                    Total Distance: <b>{totalRepetitions.toFixed(0)}</b>
+                    Total Distance: <b>{totalRepetitions.toFixed(0)} meters</b>
                   </Col>
                 </Row>
               )}
@@ -504,20 +490,16 @@ const ExerciseCharts = (props) => {
                                           <Col
                                             key={"exerciseResults" + idx}
                                             xs="6"
-                                            md="2"
+                                            md="6"
                                             style={{
                                               textTransform: "lowercase",
                                             }}
                                           >
                                             {" "}
-                                            {element2.setWeight
-                                              ? element2.setWeight.toFixed(1) +
-                                                "kg x " +
-                                                element2.setRepetition
-                                              : element2.setRepetition
-                                              ? element2.setRepetition
-                                              : element2.setDistance /
-                                                element2.setTime}{" "}
+                                            {velocity}
+                                            {" km/h "}
+                                            {paceAsString}
+                                            {" min/km"}
                                           </Col>
                                         )
                                       );
