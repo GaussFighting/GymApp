@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
 const Template = require("../models/templateModel");
 
 exports.handler = async (event, context) => {
-  await connectDb(process.env.REACT_APP_DB);
+  const mongoose = await connectDb(process.env.REACT_APP_DB);
 
   console.log(mongoose.connection.readyState, "ready state template");
   console.log("EVENT", event);
@@ -21,7 +20,7 @@ exports.handler = async (event, context) => {
         templates,
       },
     };
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),

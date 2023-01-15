@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
 const Template = require("../models/templateModel");
 
 exports.handler = async (event, context) => {
-  await connectDb(process.env.REACT_APP_DB);
+  const mongoose = await connectDb(process.env.REACT_APP_DB);
   context.callbackWaitsForEmptyEventLoop = false;
   try {
     const id = event.queryStringParameters.id;
@@ -13,7 +12,7 @@ exports.handler = async (event, context) => {
     };
 
     await Template.deleteOne({ _id: id });
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify(response),

@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
 const Result = require("../models/resultModel");
 
 exports.handler = async (event, context) => {
-  await connectDb(process.env.REACT_APP_DB);
+  const mongoose = await connectDb(process.env.REACT_APP_DB);
   context.callbackWaitsForEmptyEventLoop = false;
   try {
     const data = JSON.parse(event.body);
@@ -21,7 +20,8 @@ exports.handler = async (event, context) => {
     };
 
     await Result.create(result);
-    mongoose.disconnect();
+    mongoose.connection.close();
+    console.log(JSON.stringify(result));
     return {
       statusCode: 200,
       body: JSON.stringify(response),

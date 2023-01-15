@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
 const connectDb = require("../db/connectDb");
 const Result = require("../models/resultModel");
 
 exports.handler = async (event, context) => {
-  await connectDb(process.env.REACT_APP_DB);
+  const mongoose = await connectDb(process.env.REACT_APP_DB);
   context.callbackWaitsForEmptyEventLoop = false;
   try {
     const id = event.queryStringParameters.id;
@@ -16,7 +15,7 @@ exports.handler = async (event, context) => {
     };
 
     const found = await Result.findOneAndUpdate({ _id: id }, data);
-    mongoose.disconnect();
+    mongoose.connection.close();
     return {
       statusCode: 200,
       body: JSON.stringify({ ...response, found }),

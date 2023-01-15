@@ -34,6 +34,8 @@ const schema = new mongoose.Schema({
           id: String,
           setWeight: Number,
           setRepetition: Number,
+          setDistance: Number,
+          setTime: String,
         },
       ],
     },
