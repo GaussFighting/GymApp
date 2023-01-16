@@ -85,8 +85,40 @@ function Edit() {
       return {
         ...prevFormResult,
         templateExercises: pickedExcercises.map((ex, index) => {
+          console.log(ex);
           if (ex.addedResults) {
             return ex;
+          } else if (ex.equipment === "cardio") {
+            return {
+              ...ex,
+              addedResults: [
+                {
+                  id: ex.id + "-0",
+                  setDistance: 1,
+                  setTime: "",
+                },
+              ],
+            };
+          } else if (ex.equipment === "duration") {
+            return {
+              ...ex,
+              addedResults: [
+                {
+                  id: ex.id + "-0",
+                  setTime: "",
+                },
+              ],
+            };
+          } else if (ex.equipment === "repsonly") {
+            return {
+              ...ex,
+              addedResults: [
+                {
+                  id: ex.id + "-0",
+                  setRep: 1,
+                },
+              ],
+            };
           } else {
             return {
               ...ex,

@@ -144,7 +144,6 @@ const Workout = (props) => {
       return (
         <Form>
           {labels.map((label, idx) => {
-            console.log(label);
             let labelName =
               "set" +
               label.charAt(0).toUpperCase() +
