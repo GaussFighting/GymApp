@@ -3,11 +3,11 @@ import { useParams, useNavigate } from "react-router";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row } from "react-bootstrap";
 
-function Edit() {
+const Edit = ({ exerciseName, bodyPart, equipment }) => {
   const [form, setForm] = useState({
-    nameEn: "",
-    bodyPart: "",
-    equipment: "",
+    nameEn: exerciseName,
+    bodyPart: bodyPart.toUpperCase(),
+    equipment: equipment,
   });
 
   const params = useParams();
@@ -80,19 +80,18 @@ function Edit() {
             className="input select-name-position"
             type="text"
             placeholder="Search..."
-            value={form.nameEn?.toUpperCase()}
+            value={exerciseName.toUpperCase()}
             onChange={(e) => updateForm({ nameEn: e.target.value })}
           ></Input>
         </FormGroup>
         <FormGroup className="form-group">
-          {console.log(form)}
           <Label for="exampleSelect">SELECT BODY PART</Label>
           <Input
             type="select"
             name="select"
             id="exampleSelect"
             className="selector select-name-position"
-            value={form.bodyPart}
+            value={bodyPart.toUpperCase()}
             onChange={(e) => updateForm({ bodyPart: e.target.value })}
           >
             <option>BACK</option>
@@ -115,7 +114,7 @@ function Edit() {
             name="select"
             id="exampleSelect"
             className="selector select-name-position"
-            value={form.equipment}
+            value={equipment.toUpperCase()}
             onChange={(e) => updateForm({ equipment: e.target.value })}
           >
             <option>BAREBELL</option>
@@ -146,6 +145,6 @@ function Edit() {
       </Row>
     </Form>
   );
-}
+};
 
 export default Edit;

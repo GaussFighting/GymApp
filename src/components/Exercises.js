@@ -22,7 +22,6 @@ const Exercises = () => {
         const response = await fetch("/.netlify/functions/exerciseRead");
         const responseDataRes = await response.json();
         const responseData = responseDataRes?.data?.exercises || [];
-        console.log(responseDataRes);
 
         const loadedExercises = [];
 
@@ -30,7 +29,6 @@ const Exercises = () => {
           loadedExercises.push({
             id: responseData[key]._id,
             nameEn: responseData[key].nameEn,
-            // namePl: responseData[key].namePl,
             bodyPart: responseData[key].bodyPart,
             equipment: responseData[key].equipment,
           });
@@ -57,7 +55,7 @@ const Exercises = () => {
     );
 
   const ExercisesList = exercises.map((exercise, idx) => (
-    <ListGroup key={exercise.id}>
+    <ListGroup key={exercise.id + idx}>
       <Button className="button" outline>
         <Link to={`/exercise/${exercise.id}`}>
           <ListGroupItem className="text-align-exercise text-uppercase">

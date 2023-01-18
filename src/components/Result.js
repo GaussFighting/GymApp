@@ -15,7 +15,6 @@ function Result() {
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
   const [loading, setLoading] = useState(true);
-
   function OpenModalEdit(props) {
     return (
       <Modal
@@ -28,14 +27,19 @@ function Result() {
           <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditResult />
+          <EditResult
+            bodyWeight={results.bodyWeight}
+            date={results.date}
+            description={results.description}
+            templateName={results.templateName}
+            templateExercises={results.templateExercises}
+          />
         </Modal.Body>
       </Modal>
     );
   }
 
   function OpenModal(props) {
-    console.log("openmodal", props);
     return (
       <Modal
         onHide={props.onHide}
@@ -141,8 +145,15 @@ function Result() {
       <Row>
         {results.templateExercises &&
           results.templateExercises.map((exercise, idx) => (
-            <Link className="template-link" to={`/exercise/${exercise.id}`}>
-              <Row className="template-single-row-exercise " key={exercise.id}>
+            <Link
+              className="template-link"
+              to={`/exercise/${exercise.id}`}
+              key={exercise.id + idx}
+            >
+              <Row
+                className="template-single-row-exercise "
+                key={idx + exercise.id}
+              >
                 <Col xs="2" md="2" className="px-0 single-col exercise-col">
                   {idx + 1}{" "}
                 </Col>
@@ -168,7 +179,7 @@ function Result() {
                         totalVolume / results.bodyWeight;
                     }
                     return (
-                      <React.Fragment>
+                      <React.Fragment key={result.id + index}>
                         {index === 0 && (
                           <Row>
                             <Col
@@ -206,6 +217,7 @@ function Result() {
                           </Row>
                         )}
                         <Row
+                          key={result.id + index}
                           className={
                             idx % 2 === 0
                               ? "exercise-row-even"
@@ -281,7 +293,6 @@ function Result() {
         </Col>
       </Row>
       <div className="spacer"></div>
-      {console.log(results)}
     </div>
   );
 }

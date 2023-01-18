@@ -10,7 +10,7 @@ function Edit() {
     description: "",
     templateExercises: [],
   });
-
+  console.log(formTemplate);
   const params = useParams();
   const navigate = useNavigate();
 

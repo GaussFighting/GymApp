@@ -6,53 +6,58 @@ import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
 import Edit from "./Edit.js";
 import ExerciseChart from "./ExerciseChart.js";
 
-function OpenModalEdit(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Edit />
-      </Modal.Body>
-    </Modal>
-  );
-}
-function OpenModal(props) {
-  return (
-    <Modal
-      onHide={props.onHide}
-      show={props.show}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        Are you sure you want to continue deleting current exercise?
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          className="start-workout-button"
-          onClick={() => props.deleteRecord(props.id)}
-        >
-          Delete
-        </Button>
-        <Button className="start-workout-button" onClick={props.onHide}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
 function Exercise() {
+  function OpenModalEdit(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Edit
+            exerciseName={exercise.nameEn}
+            bodyPart={exercise.bodyPart}
+            equipment={exercise.equipment}
+          />
+        </Modal.Body>
+      </Modal>
+    );
+  }
+  function OpenModal(props) {
+    return (
+      <Modal
+        onHide={props.onHide}
+        show={props.show}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to continue deleting current exercise?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="start-workout-button"
+            onClick={() => props.deleteRecord(props.id)}
+          >
+            Delete
+          </Button>
+          <Button className="start-workout-button" onClick={props.onHide}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
   let { id } = useParams();
   const [exercise, setExercise] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
@@ -85,7 +90,6 @@ function Exercise() {
     }
     navigate("/exercises");
   }
-  console.log(exercise);
   return (
     <ListGroupItem className="text-align-single-exercise text-uppercase">
       <Row className="row">

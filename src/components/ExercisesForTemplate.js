@@ -17,7 +17,6 @@ const ExercisesForTemplate = (props) => {
 
       const responseData = await response.json();
       const loadedExercises = [];
-      console.log(responseData);
       const exercisesArr = responseData.data.exercises;
       for (const key in exercisesArr) {
         loadedExercises.push({
