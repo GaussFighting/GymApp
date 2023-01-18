@@ -45,7 +45,6 @@ const Chart = ({ results, exerciseId }) => {
                 exercise.addedResults[i].setRepetition
               : 0;
           }
-
           return totalVolume;
         });
       let volumeResultsByMass = volumeResults.map((element) => {
@@ -108,8 +107,6 @@ const Chart = ({ results, exerciseId }) => {
     return result;
   };
 
-  // console.log(dataTotalVolume()[0].volume === 0);
-  // console.log(!isNaN(dataTotalVolume()[0].volume));
   if (!(dataTotalVolume()[0].volume === 0)) {
     return (
       <div>
@@ -204,14 +201,6 @@ const Chart = ({ results, exerciseId }) => {
                     dataKey="vpm"
                     stroke="#82ca9d"
                     connectNulls={true}
-                    // activeDot={true} checkit!
-                    // dot={{
-                    //   stroke: "#82ca9d",
-                    //   strokeWidth: 1,
-                    //   r: 2,
-                    //   strokeDasharray: "",
-                    //   fill: "#82ca9d",
-                    // }}
                   />
                 )}
                 {!disabledWeightLine && (
@@ -322,7 +311,7 @@ const Chart = ({ results, exerciseId }) => {
       </div>
     );
   } else {
-    return <div></div>;
+    return null;
   }
 };
 

@@ -4,15 +4,21 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
 import ChooseExercise from "./ChooseExercise";
 
-function Edit() {
+const EditResult = ({
+  bodyWeight,
+  date,
+  description,
+  templateName,
+  templateExercises,
+}) => {
   const [formResult, setFormResult] = useState({
-    bodyWeight: "",
-    date: "",
-    templateName: "",
-    description: "",
-    templateExercises: [],
+    bodyWeight: bodyWeight,
+    date: date,
+    templateName: templateName,
+    description: description,
+    templateExercises: templateExercises,
   });
-
+  console.log(formResult);
   const params = useParams();
   const navigate = useNavigate();
   const format = "YYYY-MM-DD";
@@ -21,7 +27,6 @@ function Edit() {
   useEffect(() => {
     async function fetchData() {
       const id = params.id.toString();
-      // console.log(id);
       const response = await fetch(
         `/.netlify/functions/resultRead?id=${params.id.toString()}`
       );
@@ -38,7 +43,7 @@ function Edit() {
         navigate("/");
         return;
       }
-      setFormResult(record.data.results[0]); // ?? added last
+      setFormResult(record.data.results[0]);
     }
 
     fetchData();
@@ -46,7 +51,6 @@ function Edit() {
 
   // These methods will update the state properties.
   function updateForm(value) {
-    // console.log("blebleble", value);
     return setFormResult((prev) => {
       return { ...prev, ...value };
     });
@@ -75,7 +79,6 @@ function Edit() {
     }
     console.log(params.id);
     navigate("/history");
-    // debugger;
   }
 
   const addExercises = (callback) => {
@@ -85,7 +88,6 @@ function Edit() {
       return {
         ...prevFormResult,
         templateExercises: pickedExcercises.map((ex, index) => {
-          console.log(ex);
           if (ex.addedResults) {
             return ex;
           } else if (ex.equipment === "cardio" || ex.equipment === "CARDIO") {
@@ -141,7 +143,6 @@ function Edit() {
       };
     });
   };
-  console.log(formResult);
 
   const ResultFieldType = ({
     inputType,
@@ -203,7 +204,6 @@ function Edit() {
       return {
         ...prev,
         templateExercises: prev.templateExercises.map((exercise, index) => {
-          console.log(setNumber, 1 + index);
           if (exercise.id === exerciseId) {
             return {
               ...exercise,
@@ -231,7 +231,6 @@ function Edit() {
       };
     };
     setFormResult(stateUpdater);
-    // setLoadedTemplate(stateUpdater);
   };
 
   return (
@@ -281,14 +280,6 @@ function Edit() {
               updateForm({
                 date: moment(e.target.value).format(format),
               });
-
-              // const editedDate = moment(new Date(e.target.value)).format(
-              //   format
-              // );
-              // updateForm({
-              //   date: editedDate,
-              // });
-              console.log("date");
             }}
           />
         </FormGroup>
@@ -320,7 +311,7 @@ function Edit() {
                 {exercise.addedResults &&
                   exercise.addedResults.map((result, index) => {
                     return (
-                      <React.Fragment>
+                      <React.Fragment key={result - index}>
                         {index === 0 && (
                           <Row>
                             <Col
@@ -454,27 +445,6 @@ function Edit() {
                 >
                   DELETE EXERCISE
                 </Button>
-                {/* <Col xs="1" md="1" className="px-0 single-col">
-                  <Button
-                    className="delete-exercise"
-                    onClick={() => {
-                      setFormResult((template) => {
-                        console.log(template.templateExercises);
-                        return {
-                          templateName: template.templateName,
-                          description: template.description,
-                          templateExercises: template.templateExercises.filter(
-                            (ex) => {
-                              return ex.id !== exercise.id;
-                            }
-                          ),
-                        };
-                      });
-                    }}
-                  >
-                    -
-                  </Button>
-                </Col> */}
               </Row>
             ))}
         </Row>
@@ -505,6 +475,6 @@ function Edit() {
       </Row>
     </Form>
   );
-}
+};
 
-export default Edit;
+export default EditResult;

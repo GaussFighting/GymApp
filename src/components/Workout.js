@@ -19,7 +19,11 @@ const Workout = (props) => {
   const [loadedTemplate, setLoadedTemplate] = useState(
     props.template
       ? location.state.templateObj
-      : { templateName: "", description: "", templateExercises: [] }
+      : {
+          templateName: "Quick workout",
+          description: "Workout without description",
+          templateExercises: [],
+        }
   );
 
   const [bodyWeightConfirmed, setBodyWeightConfirmed] = useState();
@@ -28,7 +32,9 @@ const Workout = (props) => {
 
   const [formResults, setFormResults] = useState({
     templateName: loadedTemplate.templateName.toUpperCase(),
-    description: loadedTemplate.descritpion,
+    description: loadedTemplate.descritpion
+      ? loadedTemplate.descritpion
+      : "Workout without description",
     date: startDate,
     templateExercises: loadedTemplate.templateExercises,
   });
@@ -72,7 +78,7 @@ const Workout = (props) => {
     });
     navigate("/");
   }
-
+  console.log(formResults);
   let changeSetNumber = (exerciseId, isIncreasing) => {
     let stateUpdater = (prev) => {
       return {
@@ -149,7 +155,7 @@ const Workout = (props) => {
               label.charAt(0).toUpperCase() +
               label.toLowerCase().slice(1);
             return (
-              <React.Fragment>
+              <React.Fragment key={idx + label}>
                 {" "}
                 <span>{`${(idx === 0 ? i + 1 : " ") + " " + label}`}</span>
                 <Input
@@ -178,9 +184,6 @@ const Workout = (props) => {
                         ];
                       } else {
                         return prev.map((res) => {
-                          console.log("labelname", labelName);
-                          console.log(typeof event.target.value);
-                          console.log("A", event.target.value);
                           if (res.id === `${exercise.id}-${i}`)
                             return {
                               ...res,
@@ -235,7 +238,6 @@ const Workout = (props) => {
       return <div>Dude Wrong Equipment!</div>;
     }
   };
-  console.log(formResults);
   return (
     <div className="main-template-div">
       <ListGroup key={loadedTemplate.id}>

@@ -12,8 +12,6 @@ const TemplatesList = (props) => {
         setLoading(true);
         const response = await fetch(`/.netlify/functions/templateRead`);
 
-        console.log(response);
-
         const responseData = await response.json();
         const loadedTemplates = [];
 
@@ -59,7 +57,6 @@ const TemplatesList = (props) => {
           </Col>
         </Link>
       </Row>
-      {console.log(template.templateExercises)}
       <Row className="template-row">
         {template.templateExercises.map((exercise, idx) => (
           <Row className="template-row-exercise" key={exercise.id}>

@@ -69,8 +69,6 @@ function AddNewTemplate() {
     });
   }, [addedExercises]);
 
-  console.log(exercises);
-
   let exercisesForTemplate = addedExercises.map((exercise, idx) => (
     <ListGroupItem
       className="text-align-exercise text-uppercase"

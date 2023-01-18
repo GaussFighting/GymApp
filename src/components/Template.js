@@ -124,7 +124,11 @@ function Template() {
       <Row>
         {template.templateExercises &&
           template.templateExercises.map((exercise, idx) => (
-            <Link className="template-link" to={`/exercise/${exercise.id}`}>
+            <Link
+              className="template-link"
+              to={`/exercise/${exercise.id}`}
+              key={exercise.id + idx}
+            >
               <Row className="template-single-row-exercise" key={exercise.id}>
                 <Col xs="1" md="1" className="px-0 single-col">
                   {idx + 1}{" "}
@@ -179,7 +183,6 @@ function Template() {
         </Col>
       </Row>
       <div className="spacer"></div>
-      {console.log(template)}
     </div>
   );
 }

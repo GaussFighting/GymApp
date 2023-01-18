@@ -213,7 +213,6 @@ const ExerciseCharts = (props) => {
   let distanceMax = Math.max(
     ...results
       .map((training) => {
-        console.log("traingi", training);
         let distance = training.templateExercises
           .filter((exercises) => {
             return exercises.id === props.exerciseId;
@@ -230,8 +229,6 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
-  console.log("distanceMax", distanceMax);
 
   let totalRepetitions = Math.max(
     ...results
@@ -254,7 +251,6 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-  console.log(results);
   if (results.length) {
     return (
       <div>
@@ -472,17 +468,6 @@ const ExerciseCharts = (props) => {
 
                                       let paceAsString = arrayPace.join(":");
 
-                                      console.log(
-                                        arrayTime,
-                                        timeInSeconds,
-                                        distanceInMeters,
-                                        velocity,
-                                        paceAsANumber,
-                                        paceMinutes,
-                                        paceSeconds,
-                                        arrayPace,
-                                        paceAsString
-                                      );
                                       return (
                                         idx < element.addedResults.length &&
                                         idx >
