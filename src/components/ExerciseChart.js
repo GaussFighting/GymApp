@@ -66,7 +66,72 @@ const ExerciseCharts = (props) => {
         </Spinner>
       </div>
     );
+  console.log("results", results);
+  let allTypeResults = () => {
+    let arrayOfFilteredExercises = [];
+    results.forEach((training) => {
+      training.templateExercises.forEach((exercise) => {
+        if (exercise.id === props.exerciseId) {
+          arrayOfFilteredExercises = [
+            ...arrayOfFilteredExercises,
+            {
+              setsList: exercise.addedResults,
+              bodyWeight: training.bodyWeight,
+            },
+          ];
+        }
+      });
+    });
 
+    console.log("filteredExercises", arrayOfFilteredExercises);
+
+    let arrayOfWeightOfAllRepetitions = [];
+    let arrayOfWeightByWeightOfAllRepetitions = [];
+    arrayOfFilteredExercises.forEach((exercise) => {
+      exercise.setsList.forEach((set) => {
+        arrayOfWeightOfAllRepetitions = [
+          ...arrayOfWeightOfAllRepetitions,
+          set.setWeight,
+        ];
+        arrayOfWeightByWeightOfAllRepetitions = [
+          ...arrayOfWeightByWeightOfAllRepetitions,
+          set.setWeight / exercise.bodyWeight,
+        ];
+      });
+    });
+
+    console.log(
+      "repetitionMax:",
+      Math.max(...arrayOfWeightOfAllRepetitions),
+      "repetitionMaxByWeight:",
+      Math.max(...arrayOfWeightByWeightOfAllRepetitions)
+    );
+
+    // let arrayOfWeightByMassOfAllRepetitions = [];
+    // arrayOfFilteredExercises.forEach((exercise) => {
+    //   exercise.forEach((set) => {
+    //     arrayOfWeightOfAllRepetitions = [
+    //       ...arrayOfWeightOfAllRepetitions,
+    //       set.setWeight,
+    //     ];
+    //   });
+    // });
+
+    return {
+      repetitionMax: 105,
+      repetitionMaxByWeight: 1.25,
+      volumeBestSet: 700,
+      volumeBestSetByWeight: 8.38,
+      volumeBestTotal: 3600,
+      volumeBestTotalByWeight: 44.23,
+      repetitionBestSet: 40,
+      distanceBest: 21590,
+      repetitionBestTotal: 110,
+      distanceTotal: 309460,
+    };
+  };
+  console.log("allTypeResults", allTypeResults());
+  // repetitionMax
   let repMax = Math.max(
     ...results
       .map((training) => {
@@ -84,6 +149,9 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
+
+  console.log(repMax);
+  // repetitionMaxByWeight
   let repMaxByMass = Math.max(
     ...results
       .map((training) => {
@@ -101,7 +169,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  // volumeBestSet
   let bestSetVolume = Math.max(
     ...results
       .map((training) => {
@@ -122,7 +190,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  // volumeBestSetByWeight
   let bestSetVolumeByMass = Math.max(
     ...results
       .map((training, index) => {
@@ -144,7 +212,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  // volumeBestTotal
   let bestTotalSetVolumeByMass = Math.max(
     ...results
       .map((training, index) => {
@@ -165,7 +233,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  // volumeBestTotalByWeight
   let bestTotalSetVolumeByMassByMass = Math.max(
     ...results
       .map((training, index) => {
@@ -189,7 +257,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  // repetitionBestSet
   let setRepMax = Math.max(
     ...results
       .map((training) => {
@@ -209,7 +277,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  // distanceBest
   let distanceMax = Math.max(
     ...results
       .map((training) => {
@@ -229,7 +297,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-
+  // repetitionBestTotal
   let totalRepetitions = Math.max(
     ...results
       .map((training, index) => {
@@ -251,6 +319,28 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
+  // distanceTotal
+  // let totalDistance = results
+  //   .map((training, index) => {
+  //     let bestWeightFromSet = training.templateExercises
+  //       .filter((exercises) => {
+  //         return exercises.id === props.exerciseId;
+  //       })
+  //       .map((set) => {
+  //         let totalRepetitions = 0;
+
+  //         let arrayOfAllSetWeights = set.addedResults.map((repetition) => {
+  //           return (totalRepetitions += repetition.setRepetition
+  //             ? repetition.setRepetition
+  //             : repetition.setDistance);
+  //         });
+  //         return Math.max(...arrayOfAllSetWeights);
+  //       });
+  //     return [...bestWeightFromSet];
+  //   })
+  //   .flat()
+  //   .reduce((a, b) => a + b, 0);
+
   if (results.length) {
     return (
       <div>
@@ -300,10 +390,13 @@ const ExerciseCharts = (props) => {
                   <Col xs="1" md="6">
                     Distance Max: <b>{distanceMax} meteres</b>
                   </Col>
-                  <Col xs="1" md="6">
+                  {/* <Col xs="1" md="6">
                     {" "}
-                    Total Distance: <b>{totalRepetitions.toFixed(0)} meters</b>
-                  </Col>
+                    Total Distance:{" "}
+                    <b>
+                      {totalDistance ? totalDistance / 1000 : null} kilometers
+                    </b>
+                  </Col> */}
                 </Row>
               )}
               {results.map((ex, index) => {
@@ -320,6 +413,9 @@ const ExerciseCharts = (props) => {
                           </Col>
                           <Col xs="1" md="1">
                             BW
+                          </Col>
+                          <Col xs="1" md="1">
+                            V/m
                           </Col>
                         </Row>
                       </React.Fragment>
@@ -439,8 +535,8 @@ const ExerciseCharts = (props) => {
                                         parseInt(arrayTime[1], 10) * 60 +
                                         parseInt(arrayTime[2], 10);
 
-                                      let distanceInMeters =
-                                        element2.setDistance;
+                                      // let distanceInMeters =
+                                      //   element2.setDistance;
 
                                       let velocity =
                                         Math.round(
