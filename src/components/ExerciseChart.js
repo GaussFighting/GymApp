@@ -107,7 +107,7 @@ const ExerciseCharts = (props) => {
       Math.max(...arrayOfWeightByWeightOfAllRepetitions)
     );
 
-    // let arrayOfWeightByMassOfAllRepetitions = [];
+    // let arrayOfWeightByMassOfAllRepetitions = []; xD
     // arrayOfFilteredExercises.forEach((exercise) => {
     //   exercise.forEach((set) => {
     //     arrayOfWeightOfAllRepetitions = [
