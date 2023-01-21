@@ -83,11 +83,18 @@ const ExerciseCharts = (props) => {
       });
     });
 
-    console.log("filteredExercises", arrayOfFilteredExercises);
+    console.log("arrayOfFilteredExercises", arrayOfFilteredExercises);
 
     let arrayOfWeightOfAllRepetitions = [];
     let arrayOfWeightByWeightOfAllRepetitions = [];
+    let arrayOfSetsVolume = [];
+    let arrayOfSetsVolumeByWeight = [];
+    let arrayOfBestExerciseVolume = [];
+    let arrayOfBestExerciseVolumeByWeight = [];
+
     arrayOfFilteredExercises.forEach((exercise) => {
+      let sum = 0;
+
       exercise.setsList.forEach((set) => {
         arrayOfWeightOfAllRepetitions = [
           ...arrayOfWeightOfAllRepetitions,
@@ -97,25 +104,39 @@ const ExerciseCharts = (props) => {
           ...arrayOfWeightByWeightOfAllRepetitions,
           set.setWeight / exercise.bodyWeight,
         ];
+        arrayOfSetsVolume = [
+          ...arrayOfSetsVolume,
+          set.setWeight * set.setRepetition,
+        ];
+
+        arrayOfSetsVolumeByWeight = [
+          ...arrayOfSetsVolumeByWeight,
+          (set.setWeight * set.setRepetition) / exercise.bodyWeight,
+        ];
+
+        sum += set.setWeight * set.setRepetition;
+
+        arrayOfBestExerciseVolume = [...arrayOfBestExerciseVolume, sum];
+        arrayOfBestExerciseVolumeByWeight = [
+          ...arrayOfBestExerciseVolumeByWeight,
+          sum / exercise.bodyWeight,
+        ];
       });
     });
-
     console.log(
       "repetitionMax:",
       Math.max(...arrayOfWeightOfAllRepetitions),
       "repetitionMaxByWeight:",
-      Math.max(...arrayOfWeightByWeightOfAllRepetitions)
+      Math.max(...arrayOfWeightByWeightOfAllRepetitions),
+      "bestSetVolume:",
+      Math.max(...arrayOfSetsVolume),
+      "bestTotalVolume/mass:",
+      Math.max(...arrayOfSetsVolumeByWeight),
+      "bestTotalVolume:",
+      Math.max(...arrayOfBestExerciseVolume),
+      "volumeBestTotalByWeight:",
+      Math.max(...arrayOfBestExerciseVolumeByWeight)
     );
-
-    // let arrayOfWeightByMassOfAllRepetitions = []; xD
-    // arrayOfFilteredExercises.forEach((exercise) => {
-    //   exercise.forEach((set) => {
-    //     arrayOfWeightOfAllRepetitions = [
-    //       ...arrayOfWeightOfAllRepetitions,
-    //       set.setWeight,
-    //     ];
-    //   });
-    // });
 
     return {
       repetitionMax: 105,
@@ -131,7 +152,7 @@ const ExerciseCharts = (props) => {
     };
   };
   console.log("allTypeResults", allTypeResults());
-  // repetitionMax
+  // repetitionMax done
   let repMax = Math.max(
     ...results
       .map((training) => {
@@ -151,7 +172,7 @@ const ExerciseCharts = (props) => {
   );
 
   console.log(repMax);
-  // repetitionMaxByWeight
+  // repetitionMaxByWeight done
   let repMaxByMass = Math.max(
     ...results
       .map((training) => {
@@ -169,7 +190,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-  // volumeBestSet
+  // volumeBestSet done
   let bestSetVolume = Math.max(
     ...results
       .map((training) => {
@@ -190,7 +211,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-  // volumeBestSetByWeight
+  // volumeBestSetByWeight done
   let bestSetVolumeByMass = Math.max(
     ...results
       .map((training, index) => {
@@ -212,7 +233,7 @@ const ExerciseCharts = (props) => {
       })
       .flat()
   );
-  // volumeBestTotal
+  // volumeBestTotal done
   let bestTotalSetVolumeByMass = Math.max(
     ...results
       .map((training, index) => {
@@ -423,8 +444,7 @@ const ExerciseCharts = (props) => {
                     <div key={"exerciseLink" + index}>
                       <Link
                         className="template-link-chart"
-                        to={`/results/${results[index].id}`}
-                      >
+                        to={`/results/${results[index].id}`}>
                         <Row className="template-link-chart">
                           <Col xs="1" md="1">
                             {index + 1}
@@ -574,8 +594,7 @@ const ExerciseCharts = (props) => {
                                             md="6"
                                             style={{
                                               textTransform: "lowercase",
-                                            }}
-                                          >
+                                            }}>
                                             {" "}
                                             {velocity}
                                             {" km/h "}
@@ -595,8 +614,7 @@ const ExerciseCharts = (props) => {
                                             md="2"
                                             style={{
                                               textTransform: "lowercase",
-                                            }}
-                                          >
+                                            }}>
                                             {" "}
                                             {element2.setWeight
                                               ? element2.setWeight.toFixed(1) +
