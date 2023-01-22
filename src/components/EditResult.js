@@ -466,7 +466,7 @@ const EditResult = ({
         <div className="row-position">
           <Button
             className="button-edit"
-            disabled={!localStorage.getItem("isAdmin")}
+            // disabled={!localStorage.getItem("isAdmin")}
             onClick={(e) => onSubmit(e)}
           >
             EDIT
