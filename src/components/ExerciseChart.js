@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
+// import moment from "moment";
 import Spinner from "react-bootstrap/Spinner";
 import Chart from "./Chart";
 
@@ -66,7 +67,7 @@ const ExerciseCharts = (props) => {
         </Spinner>
       </div>
     );
-  console.log("results", results);
+
   let allTypeResults = () => {
     let arrayOfFilteredExercises = [];
     results.forEach((training) => {
@@ -83,17 +84,21 @@ const ExerciseCharts = (props) => {
       });
     });
 
-    console.log("arrayOfFilteredExercises", arrayOfFilteredExercises);
-
     let arrayOfWeightOfAllRepetitions = [];
     let arrayOfWeightByWeightOfAllRepetitions = [];
     let arrayOfSetsVolume = [];
     let arrayOfSetsVolumeByWeight = [];
     let arrayOfBestExerciseVolume = [];
     let arrayOfBestExerciseVolumeByWeight = [];
+    let arrayOfRepetitionInSet = [];
+    let arrayOfBestSumRepetitionInTraining = [];
+    let arrayOfAllDistances = [];
+    let arrayOfAllDurations = [];
+    let durationMaxInHHMMSS = "";
 
     arrayOfFilteredExercises.forEach((exercise) => {
-      let sum = 0;
+      let sumVolume = 0;
+      let sumRepetition = 0;
 
       exercise.setsList.forEach((set) => {
         arrayOfWeightOfAllRepetitions = [
@@ -114,253 +119,262 @@ const ExerciseCharts = (props) => {
           (set.setWeight * set.setRepetition) / exercise.bodyWeight,
         ];
 
-        sum += set.setWeight * set.setRepetition;
+        sumVolume += set.setWeight * set.setRepetition;
 
-        arrayOfBestExerciseVolume = [...arrayOfBestExerciseVolume, sum];
+        arrayOfBestExerciseVolume = [...arrayOfBestExerciseVolume, sumVolume];
         arrayOfBestExerciseVolumeByWeight = [
           ...arrayOfBestExerciseVolumeByWeight,
-          sum / exercise.bodyWeight,
+          sumVolume / exercise.bodyWeight,
         ];
+
+        arrayOfRepetitionInSet = [...arrayOfRepetitionInSet, set.setRepetition];
+
+        sumRepetition += set.setRepetition;
+
+        arrayOfBestSumRepetitionInTraining = [
+          ...arrayOfBestSumRepetitionInTraining,
+          sumRepetition,
+        ];
+
+        arrayOfAllDistances = [...arrayOfAllDistances, set.setDistance];
+        if (set.setTime) {
+          let timeAsArray = set.setTime.split(":");
+
+          let timeInSeconds =
+            parseInt(timeAsArray[0], 10) * 3600 +
+            parseInt(timeAsArray[1], 10) * 60 +
+            parseInt(timeAsArray[2], 10);
+
+          arrayOfAllDurations = [...arrayOfAllDurations, timeInSeconds];
+
+          let durationMax = Math.max(...arrayOfAllDurations);
+
+          durationMaxInHHMMSS = moment()
+            .startOf("day")
+            .seconds(durationMax)
+            .format("H:mm:ss");
+        }
       });
     });
-    console.log(
-      "repetitionMax:",
-      Math.max(...arrayOfWeightOfAllRepetitions),
-      "repetitionMaxByWeight:",
-      Math.max(...arrayOfWeightByWeightOfAllRepetitions),
-      "bestSetVolume:",
-      Math.max(...arrayOfSetsVolume),
-      "bestTotalVolume/mass:",
-      Math.max(...arrayOfSetsVolumeByWeight),
-      "bestTotalVolume:",
-      Math.max(...arrayOfBestExerciseVolume),
-      "volumeBestTotalByWeight:",
-      Math.max(...arrayOfBestExerciseVolumeByWeight)
-    );
 
     return {
-      repetitionMax: 105,
-      repetitionMaxByWeight: 1.25,
-      volumeBestSet: 700,
-      volumeBestSetByWeight: 8.38,
-      volumeBestTotal: 3600,
-      volumeBestTotalByWeight: 44.23,
-      repetitionBestSet: 40,
-      distanceBest: 21590,
-      repetitionBestTotal: 110,
-      distanceTotal: 309460,
+      repetitionMax: Math.max(...arrayOfWeightOfAllRepetitions),
+      repetitionMaxByWeight: Math.max(...arrayOfWeightByWeightOfAllRepetitions),
+      bestSetVolume: Math.max(...arrayOfSetsVolume),
+      bestTotalVolumeByMass: Math.max(...arrayOfSetsVolumeByWeight),
+      bestTotalVolume: parseInt(
+        Math.max(...arrayOfBestExerciseVolume).toFixed(2)
+      ),
+      volumeBestTotalByWeight: parseInt(
+        Math.max(...arrayOfBestExerciseVolumeByWeight).toFixed(2)
+      ),
+      repetitionBestSet: Math.max(...arrayOfRepetitionInSet),
+      bestTotalRepetitions: Math.max(...arrayOfBestSumRepetitionInTraining),
+      distanceMax: Math.max(...arrayOfAllDistances),
+      durationMax: durationMaxInHHMMSS,
     };
   };
+
+  let {
+    repetitionMax,
+    repetitionMaxByWeight,
+    bestSetVolume,
+    bestTotalVolumeByMass,
+    bestTotalVolume,
+    volumeBestTotalByWeight,
+    repetitionBestSet,
+    bestTotalRepetitions,
+    distanceMax,
+    durationMax,
+  } = allTypeResults();
+
   console.log("allTypeResults", allTypeResults());
   // repetitionMax done
-  let repMax = Math.max(
-    ...results
-      .map((training) => {
-        let bestWeightFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let arrayOfAllSetWeights = element.addedResults.map((score) => {
-              return score.setWeight;
-            });
-            return Math.max(...arrayOfAllSetWeights);
-          });
-        return [...bestWeightFromSet];
-      })
-      .flat()
-  );
-
-  console.log(repMax);
-  // repetitionMaxByWeight done
-  let repMaxByMass = Math.max(
-    ...results
-      .map((training) => {
-        let bestWeightFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let arrayOfAllSetWeights = element.addedResults.map((score) => {
-              return score.setWeight / training.bodyWeight;
-            });
-            return Math.max(...arrayOfAllSetWeights);
-          });
-        return [...bestWeightFromSet];
-      })
-      .flat()
-  );
-  // volumeBestSet done
-  let bestSetVolume = Math.max(
-    ...results
-      .map((training) => {
-        let bestWeightFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let arrayOfAllSetWeights = element.addedResults.map((score) => {
-              return (
-                score.setWeight *
-                (score.setRepetition ? score.setRepetition : 0)
-              );
-            });
-            return Math.max(...arrayOfAllSetWeights);
-          });
-        return [...bestWeightFromSet];
-      })
-      .flat()
-  );
-  // volumeBestSetByWeight done
-  let bestSetVolumeByMass = Math.max(
-    ...results
-      .map((training, index) => {
-        let bestWeightFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let arrayOfAllSetWeights = element.addedResults.map((score) => {
-              return (
-                (score.setWeight *
-                  (score.setRepetition ? score.setRepetition : 0)) /
-                training.bodyWeight
-              );
-            });
-            return Math.max(...arrayOfAllSetWeights);
-          });
-        return [...bestWeightFromSet];
-      })
-      .flat()
-  );
-  // volumeBestTotal done
-  let bestTotalSetVolumeByMass = Math.max(
-    ...results
-      .map((training, index) => {
-        let bestWeightFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let totalVolume = 0;
-            let arrayOfAllSetWeights = element.addedResults.map((score) => {
-              return (totalVolume +=
-                score.setWeight *
-                (score.setRepetition ? score.setRepetition : 0));
-            });
-            return Math.max(...arrayOfAllSetWeights);
-          });
-        return [...bestWeightFromSet];
-      })
-      .flat()
-  );
-  // volumeBestTotalByWeight
-  let bestTotalSetVolumeByMassByMass = Math.max(
-    ...results
-      .map((training, index) => {
-        let bestWeightFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let totalVolume = 0;
-            let arrayOfAllSetWeights = element.addedResults.map((score) => {
-              return (
-                (totalVolume +=
-                  score.setWeight *
-                  (score.setRepetition ? score.setRepetition : 0)) /
-                training.bodyWeight
-              );
-            });
-            return Math.max(...arrayOfAllSetWeights);
-          });
-        return [...bestWeightFromSet];
-      })
-      .flat()
-  );
-  // repetitionBestSet
-  let setRepMax = Math.max(
-    ...results
-      .map((training) => {
-        let highestNumberOfRepetitionFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let arrayOfAllRepetition = element.addedResults.map(
-              (repetition) => {
-                return repetition.setRepetition;
-              }
-            );
-            return Math.max(...arrayOfAllRepetition);
-          });
-        return [...highestNumberOfRepetitionFromSet];
-      })
-      .flat()
-  );
-  // distanceBest
-  let distanceMax = Math.max(
-    ...results
-      .map((training) => {
-        let distance = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((element) => {
-            let arrayOfAllRepetition = element.addedResults.map(
-              (repetition) => {
-                return repetition.setDistance;
-              }
-            );
-            return Math.max(...arrayOfAllRepetition);
-          });
-        return [...distance];
-      })
-      .flat()
-  );
-  // repetitionBestTotal
-  let totalRepetitions = Math.max(
-    ...results
-      .map((training, index) => {
-        let bestWeightFromSet = training.templateExercises
-          .filter((exercises) => {
-            return exercises.id === props.exerciseId;
-          })
-          .map((set) => {
-            let totalRepetitions = 0;
-
-            let arrayOfAllSetWeights = set.addedResults.map((repetition) => {
-              return (totalRepetitions += repetition.setRepetition
-                ? repetition.setRepetition
-                : repetition.setDistance);
-            });
-            return Math.max(...arrayOfAllSetWeights);
-          });
-        return [...bestWeightFromSet];
-      })
-      .flat()
-  );
-  // distanceTotal
-  // let totalDistance = results
-  //   .map((training, index) => {
-  //     let bestWeightFromSet = training.templateExercises
-  //       .filter((exercises) => {
-  //         return exercises.id === props.exerciseId;
-  //       })
-  //       .map((set) => {
-  //         let totalRepetitions = 0;
-
-  //         let arrayOfAllSetWeights = set.addedResults.map((repetition) => {
-  //           return (totalRepetitions += repetition.setRepetition
-  //             ? repetition.setRepetition
-  //             : repetition.setDistance);
+  // let repMax = Math.max(
+  //   ...results
+  //     .map((training) => {
+  //       let bestWeightFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let arrayOfAllSetWeights = element.addedResults.map((score) => {
+  //             return score.setWeight;
+  //           });
+  //           return Math.max(...arrayOfAllSetWeights);
   //         });
-  //         return Math.max(...arrayOfAllSetWeights);
-  //       });
-  //     return [...bestWeightFromSet];
-  //   })
-  //   .flat()
-  //   .reduce((a, b) => a + b, 0);
+  //       return [...bestWeightFromSet];
+  //     })
+  //     .flat()
+  // );
+  // repetitionMaxByWeight done
+  // let repMaxByMass = Math.max(
+  //   ...results
+  //     .map((training) => {
+  //       let bestWeightFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let arrayOfAllSetWeights = element.addedResults.map((score) => {
+  //             return score.setWeight / training.bodyWeight;
+  //           });
+  //           return Math.max(...arrayOfAllSetWeights);
+  //         });
+  //       return [...bestWeightFromSet];
+  //     })
+  //     .flat()
+  // );
+  // volumeBestSet done
+  // let bestSetVolume = Math.max(
+  //   ...results
+  //     .map((training) => {
+  //       let bestWeightFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let arrayOfAllSetWeights = element.addedResults.map((score) => {
+  //             return (
+  //               score.setWeight *
+  //               (score.setRepetition ? score.setRepetition : 0)
+  //             );
+  //           });
+  //           return Math.max(...arrayOfAllSetWeights);
+  //         });
+  //       return [...bestWeightFromSet];
+  //     })
+  //     .flat()
+  // );
+  // volumeBestSetByWeight done
+  // let bestSetVolumeByMass = Math.max(
+  //   ...results
+  //     .map((training, index) => {
+  //       let bestWeightFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let arrayOfAllSetWeights = element.addedResults.map((score) => {
+  //             return (
+  //               (score.setWeight *
+  //                 (score.setRepetition ? score.setRepetition : 0)) /
+  //               training.bodyWeight
+  //             );
+  //           });
+  //           return Math.max(...arrayOfAllSetWeights);
+  //         });
+  //       return [...bestWeightFromSet];
+  //     })
+  //     .flat()
+  // );
+  // volumeBestTotal done
+  // let bestTotalSetVolumeByMass = Math.max(
+  //   ...results
+  //     .map((training, index) => {
+  //       let bestWeightFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let totalVolume = 0;
+  //           let arrayOfAllSetWeights = element.addedResults.map((score) => {
+  //             return (totalVolume +=
+  //               score.setWeight *
+  //               (score.setRepetition ? score.setRepetition : 0));
+  //           });
+  //           return Math.max(...arrayOfAllSetWeights);
+  //         });
+  //       return [...bestWeightFromSet];
+  //     })
+  //     .flat()
+  // );
+  // volumeBestTotalByWeight done
+  // let bestTotalSetVolumeByMassByMass = Math.max(
+  //   ...results
+  //     .map((training, index) => {
+  //       let bestWeightFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let totalVolume = 0;
+  //           let arrayOfAllSetWeights = element.addedResults.map((score) => {
+  //             return (
+  //               (totalVolume +=
+  //                 score.setWeight *
+  //                 (score.setRepetition ? score.setRepetition : 0)) /
+  //               training.bodyWeight
+  //             );
+  //           });
+  //           return Math.max(...arrayOfAllSetWeights);
+  //         });
+  //       return [...bestWeightFromSet];
+  //     })
+  //     .flat()
+  // );
+  // repetitionBestSet done
+  // let setRepMax = Math.max(
+  //   ...results
+  //     .map((training) => {
+  //       let highestNumberOfRepetitionFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let arrayOfAllRepetition = element.addedResults.map(
+  //             (repetition) => {
+  //               return repetition.setRepetition;
+  //             }
+  //           );
+  //           return Math.max(...arrayOfAllRepetition);
+  //         });
+  //       return [...highestNumberOfRepetitionFromSet];
+  //     })
+  //     .flat()
+  // );
+  // distanceBest done
+  // let distanceMax = Math.max(
+  //   ...results
+  //     .map((training) => {
+  //       let distance = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((element) => {
+  //           let arrayOfAllRepetition = element.addedResults.map(
+  //             (repetition) => {
+  //               return repetition.setDistance;
+  //             }
+  //           );
+  //           return Math.max(...arrayOfAllRepetition);
+  //         });
+  //       return [...distance];
+  //     })
+  //     .flat()
+  // );
+  // repetitionBestTotal done
+  // let totalRepetitions = Math.max(
+  //   ...results
+  //     .map((training, index) => {
+  //       let bestWeightFromSet = training.templateExercises
+  //         .filter((exercises) => {
+  //           return exercises.id === props.exerciseId;
+  //         })
+  //         .map((set) => {
+  //           let totalRepetitions = 0;
+
+  //           let arrayOfAllSetWeights = set.addedResults.map((repetition) => {
+  //             return (totalRepetitions += repetition.setRepetition
+  //               ? repetition.setRepetition
+  //               : repetition.setDistance);
+  //           });
+  //           return Math.max(...arrayOfAllSetWeights);
+  //         });
+  //       return [...bestWeightFromSet];
+  //     })
+  //     .flat()
+  // );
 
   if (results.length) {
     return (
@@ -369,40 +383,37 @@ const ExerciseCharts = (props) => {
         <Row className="top-row">
           <Row>
             <Col xs="12" md="12">
-              {repMax ? (
+              {repetitionMax ? (
                 <Row>
                   <Col xs="1" md="2">
-                    RM: <b>{repMax}</b> kg
+                    RM: <b>{repetitionMax}</b> kg
                   </Col>
                   <Col xs="1" md="2">
-                    RM / mass: <b>{repMaxByMass.toFixed(2)}</b>
+                    RM / mass: <b>{repetitionMaxByWeight}</b>
                   </Col>
                   <Col xs="1" md="2">
-                    Best Set Volume <b>{bestSetVolume.toFixed(0)}</b>
+                    Best Set Volume <b>{bestSetVolume}</b>
                   </Col>
                   <Col xs="1" md="2">
-                    Best Set Volume/ mass{" "}
-                    <b>{bestSetVolumeByMass.toFixed(2)}</b>
+                    Best Set Volume/ mass <b>{bestTotalVolumeByMass}</b>
                   </Col>
                   <Col xs="1" md="2">
                     {" "}
-                    Best Total Volume{" "}
-                    <b>{bestTotalSetVolumeByMass.toFixed(0)}</b>
+                    Best Total Volume <b>{bestTotalVolume}</b>
                   </Col>
                   <Col xs="1" md="2">
-                    Best Total Volume/ mass{" "}
-                    <b>{bestTotalSetVolumeByMassByMass.toFixed(2)}</b>
+                    Best Total Volume/ mass <b>{volumeBestTotalByWeight}</b>
                   </Col>
                 </Row>
-              ) : setRepMax ? (
+              ) : repetitionBestSet ? (
                 <Row>
                   {" "}
                   <Col xs="1" md="6">
-                    Repetitions Max: <b>{setRepMax}</b>
+                    Repetitions Max: <b>{repetitionBestSet}</b>
                   </Col>
                   <Col xs="1" md="6">
                     {" "}
-                    Best Total Repetitions <b>{totalRepetitions.toFixed(0)}</b>
+                    Best Total Repetitions <b>{bestTotalRepetitions}</b>
                   </Col>
                 </Row>
               ) : (
