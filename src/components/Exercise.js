@@ -4,7 +4,7 @@ import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
 import Edit from "./Edit.js";
-import ExerciseChart from "./ExerciseChart.js";
+import ExerciseChart from "./ExerciseChart/ExerciseChart.js";
 
 function Exercise() {
   function OpenModalEdit(props) {
@@ -13,8 +13,7 @@ function Exercise() {
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+        centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
         </Modal.Header>
@@ -35,8 +34,7 @@ function Exercise() {
         show={props.show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+        centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
         </Modal.Header>
@@ -46,8 +44,7 @@ function Exercise() {
         <Modal.Footer>
           <Button
             className="start-workout-button"
-            onClick={() => props.deleteRecord(props.id)}
-          >
+            onClick={() => props.deleteRecord(props.id)}>
             Delete
           </Button>
           <Button className="start-workout-button" onClick={props.onHide}>
@@ -113,8 +110,7 @@ function Exercise() {
           <Button
             className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => setModalShowEdit(true)}
-          >
+            onClick={() => setModalShowEdit(true)}>
             EDIT
           </Button>
           <OpenModalEdit
@@ -127,8 +123,7 @@ function Exercise() {
           <Button
             className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => setModalShow(true)}
-          >
+            onClick={() => setModalShow(true)}>
             DELETE
           </Button>
           <OpenModal
