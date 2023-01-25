@@ -4,6 +4,8 @@ import { Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import Chart from "../Chart";
 import allTypeResults from "../../utils/allTypeResults";
+import ExerciseChartHeader from "./ExerciseChartHeader";
+import ExerciseChartSubHeader from "./ExerciseChartSubHeader";
 
 const ExerciseCharts = ({ exerciseId }) => {
   const [results, setResults] = useState([]);
@@ -67,18 +69,9 @@ const ExerciseCharts = ({ exerciseId }) => {
         </Spinner>
       </div>
     );
-  let {
-    repetitionMax,
-    repetitionMaxByWeight,
-    bestSetVolume,
-    bestTotalVolumeByMass,
-    bestTotalVolume,
-    volumeBestTotalByWeight,
-    repetitionBestSet,
-    bestTotalRepetitions,
-    distanceMax,
-    durationMax,
-  } = allTypeResults(results, exerciseId);
+  const bestResults = allTypeResults(results, exerciseId);
+
+  // let { repetitionMax, repetitionBestSet, distanceMax } = bestResults;
 
   if (!results.length) {
     return (
@@ -93,105 +86,12 @@ const ExerciseCharts = ({ exerciseId }) => {
       <Row className="top-row">
         <Row>
           <Col xs="12" md="12">
-            {repetitionMax ? (
-              <Row>
-                <Col xs="1" md="2">
-                  RM: <b>{repetitionMax + "kg"}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  RM / mass: <b>{repetitionMaxByWeight}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  Best Set Volume <b>{bestSetVolume + "kg"}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  Best Set Volume/ mass <b>{bestTotalVolumeByMass}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  {" "}
-                  Best Total Volume <b>{bestTotalVolume + "kg"}</b>
-                </Col>
-                <Col xs="1" md="2">
-                  Best Total Volume/ mass <b>{volumeBestTotalByWeight}</b>
-                </Col>
-              </Row>
-            ) : repetitionBestSet ? (
-              <Row>
-                {" "}
-                <Col xs="1" md="6">
-                  Repetitions Max: <b>{repetitionBestSet}</b>
-                </Col>
-                <Col xs="1" md="6">
-                  {" "}
-                  Best Total Repetitions <b>{bestTotalRepetitions}</b>
-                </Col>
-              </Row>
-            ) : (
-              <Row>
-                {" "}
-                <Col xs="1" md="6">
-                  Distance Max: <b>{distanceMax} meteres</b>
-                </Col>
-                {/* <Col xs="1" md="6">
-                    {" "}
-                    Total Distance:{" "}
-                    <b>
-                      {totalDistance ? totalDistance / 1000 : null} kilometers
-                    </b>
-                  </Col> */}
-              </Row>
-            )}
+            <ExerciseChartHeader bestResults={bestResults} />
             {results.map((ex, index) => {
               return (
                 <React.Fragment key={"mainRow" + index}>
                   {index === 0 && (
-                    <React.Fragment>
-                      <Row>
-                        <Col xs="1" md="1">
-                          No.
-                        </Col>
-                        <Col xs="1" md="1">
-                          Date
-                        </Col>
-                        <Col xs="1" md="1">
-                          BW
-                        </Col>
-                        {repetitionMax ? (
-                          <React.Fragment>
-                            <Col xs="1" md="1">
-                              V
-                            </Col>
-                            <Col xs="1" md="1">
-                              V/m
-                            </Col>
-                          </React.Fragment>
-                        ) : repetitionBestSet ? (
-                          <React.Fragment>
-                            <Col xs="1" md="1">
-                              V
-                            </Col>
-                            <Col xs="1" md="1">
-                              set
-                            </Col>
-                          </React.Fragment>
-                        ) : distanceMax ? (
-                          <React.Fragment>
-                            <Col xs="1" md="1">
-                              Distance
-                            </Col>
-                            <Col xs="1" md="1">
-                              Time
-                            </Col>
-                          </React.Fragment>
-                        ) : (
-                          <React.Fragment>
-                            <Col xs="1" md="1">
-                              Duration
-                            </Col>
-                          </React.Fragment>
-                        )}
-                      </Row>
-                    </React.Fragment>
+                    <ExerciseChartSubHeader bestResults={bestResults} />
                   )}
                   <div key={"exerciseLink" + index}>
                     <Link
