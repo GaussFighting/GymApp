@@ -21,8 +21,7 @@ function Result() {
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+        centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
         </Modal.Header>
@@ -46,8 +45,7 @@ function Result() {
         show={props.show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+        centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
         </Modal.Header>
@@ -57,8 +55,7 @@ function Result() {
         <Modal.Footer>
           <Button
             className="start-workout-button"
-            onClick={() => props.deleteRecord(props.id)}
-          >
+            onClick={() => props.deleteRecord(props.id)}>
             Delete
           </Button>
           <Button className="start-workout-button" onClick={props.onHide}>
@@ -148,12 +145,10 @@ function Result() {
             <Link
               className="template-link"
               to={`/exercise/${exercise.id}`}
-              key={exercise.id + idx}
-            >
+              key={exercise.id + idx}>
               <Row
                 className="template-single-row-exercise "
-                key={idx + exercise.id}
-              >
+                key={idx + exercise.id}>
                 <Col xs="2" md="2" className="px-0 single-col exercise-col">
                   {idx + 1}{" "}
                 </Col>
@@ -184,8 +179,9 @@ function Result() {
                           <Row>
                             <Col
                               className="firstCol"
-                              md={!result.setWeight && !result.setDistance && 4}
-                            >
+                              md={
+                                !result.setWeight && !result.setDistance && 4
+                              }>
                               SET
                             </Col>
                             {result.setWeight && (
@@ -196,8 +192,7 @@ function Result() {
                                 md={
                                   !result.setWeight && !result.setDistance && 4
                                 }
-                                className="firstCol"
-                              >
+                                className="firstCol">
                                 REPETITION
                               </Col>
                             )}{" "}
@@ -209,8 +204,7 @@ function Result() {
                                 md={
                                   !result.setWeight && !result.setDistance && 4
                                 }
-                                className="firstCol"
-                              >
+                                className="firstCol">
                                 TIME
                               </Col>
                             )}
@@ -222,8 +216,7 @@ function Result() {
                             idx % 2 === 0
                               ? "exercise-row-even"
                               : "exercise-row-odd"
-                          }
-                        >
+                          }>
                           <Col> {index + 1}. </Col>
                           {(result.setWeight || result.setDistance) && (
                             <Col>
@@ -266,8 +259,7 @@ function Result() {
           <Button
             className="delete-exercise"
             // disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => setModalShowEdit(true)}
-          >
+            onClick={() => setModalShowEdit(true)}>
             EDIT
           </Button>
           <OpenModalEdit
@@ -279,9 +271,8 @@ function Result() {
         <Col xs="6" md="6" className="button-new-exercise">
           <Button
             className="delete-exercise"
-            disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => setModalShow(true)}
-          >
+            // disabled={!localStorage.getItem("isAdmin")}
+            onClick={() => setModalShow(true)}>
             DELETE
           </Button>
           <OpenModal
