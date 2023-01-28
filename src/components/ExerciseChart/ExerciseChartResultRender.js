@@ -2,11 +2,18 @@ import React from "react";
 import ExerciseChartSubHeader from "./ExerciseChartSubHeader";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
+import ExerciseChartSingleResultRender from "./ExerciseChartSingleResultRender";
+import ExerciseChartsTrainingShortcut from "./ExerciseChartTrainingShortcut";
+import twoColResRend from "../../utils/twoColResRend";
+import singleTrainingResults from "../../utils/singleTrainingResults";
+import moment from "moment";
 
 const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
   const format = "YYYY-MM-DD";
-  const moment = require("moment");
+
   let renderedResults = results.map((ex, index) => {
+    const shortTrainingSummary = twoColResRend(ex, exerciseId);
+    const singleTrainRes = singleTrainingResults(ex, exerciseId);
     return (
       <React.Fragment key={"mainRow" + index}>
         {index === 0 && <ExerciseChartSubHeader bestResults={bestResults} />}
@@ -25,77 +32,13 @@ const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
                 {ex.bodyWeight.toFixed(1)}
                 {" kg"}
               </Col>
-              <Col xs="1" md="1">
-                {ex.templateExercises
-                  .filter((exercise) => {
-                    return exercise.id === exerciseId;
-                  })
-                  .map((element, index) => {
-                    let totalVolume = 0;
-                    let totalRepetitions = 0;
-                    let distance = 0;
-
-                    for (let i = 0; i < element.addedResults.length; i++) {
-                      totalVolume +=
-                        element.addedResults[i].setWeight *
-                        (element.addedResults[i].setRepetition
-                          ? element.addedResults[i].setRepetition
-                          : 0);
-
-                      totalRepetitions += element.addedResults[i].setRepetition;
-
-                      distance = element.addedResults[0].setDistance;
-                    }
-
-                    return (
-                      <Row key={"noTotalVolume" + index}>
-                        {isNaN(totalVolume.toFixed(1))
-                          ? totalRepetitions
-                            ? totalRepetitions
-                            : distance
-                          : totalVolume.toFixed(1)}{" "}
-                      </Row>
-                    );
-                  })}
-              </Col>
-              <Col xs="6" md="1">
-                {ex.templateExercises
-                  .filter((asdf) => {
-                    return asdf.id === exerciseId;
-                  })
-                  .map((element, index) => {
-                    let totalVolume = 0;
-                    let totalVolumeDivideBymass = 0;
-                    let allRepetitions = [];
-                    let sortedAllRepetitions = [];
-                    let time = 0;
-                    for (let i = 0; i < element.addedResults.length; i++) {
-                      totalVolume +=
-                        element.addedResults[i].setWeight *
-                        (element.addedResults[i].setRepetition
-                          ? element.addedResults[i].setRepetition
-                          : 0);
-                      totalVolumeDivideBymass = totalVolume / ex.bodyWeight;
-                      allRepetitions = [
-                        ...allRepetitions,
-                        element.addedResults[i].setRepetition,
-                      ];
-                      sortedAllRepetitions = allRepetitions.sort().reverse();
-                      time = element.addedResults[0].setTime;
-                    }
-
-                    return (
-                      <Row key={"noVolumeByMass" + index}>
-                        {isNaN(totalVolumeDivideBymass.toFixed(2))
-                          ? sortedAllRepetitions[0]
-                            ? sortedAllRepetitions[0]
-                            : time
-                          : totalVolumeDivideBymass.toFixed(2)}
-                      </Row>
-                    );
-                  })}
-              </Col>
+              <ExerciseChartSingleResultRender
+                shortTrainingSummary={shortTrainingSummary}
+              />
               <Col>
+                <ExerciseChartsTrainingShortcut
+                  singleTrainRes={singleTrainRes}
+                />
                 {ex.templateExercises
                   .filter((asdf) => {
                     return asdf.id === exerciseId;

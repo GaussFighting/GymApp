@@ -6,7 +6,7 @@ const ExerciseChartSubHeader = ({ bestResults }) => {
 
   if (repetitionMax) {
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col xs="1" md="1">
             No.
@@ -24,12 +24,12 @@ const ExerciseChartSubHeader = ({ bestResults }) => {
             V/m
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   }
   if (repetitionBestSet) {
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col xs="1" md="1">
             No.
@@ -47,12 +47,12 @@ const ExerciseChartSubHeader = ({ bestResults }) => {
             set
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   }
   if (distanceMax) {
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col xs="1" md="1">
             No.
@@ -70,11 +70,11 @@ const ExerciseChartSubHeader = ({ bestResults }) => {
             Time
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   } else {
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col xs="1" md="1">
             No.
@@ -89,7 +89,7 @@ const ExerciseChartSubHeader = ({ bestResults }) => {
             Duration
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 };

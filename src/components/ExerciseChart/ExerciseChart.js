@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import Chart from "../Chart";
 import allTypeResults from "../../utils/allTypeResults";
 import ExerciseChartHeader from "./ExerciseChartHeader";
-import ExerciseChartSubHeader from "./ExerciseChartSubHeader";
 import ExerciseChartResultRender from "./ExerciseChartResultRender";
 
 const ExerciseCharts = ({ exerciseId }) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(null);
-
-  const format = "YYYY-MM-DD";
-  const moment = require("moment");
 
   useEffect(() => {
     const fetchResults = async () => {
