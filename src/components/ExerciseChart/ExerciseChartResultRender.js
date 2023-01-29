@@ -37,98 +37,13 @@ const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
               />
               <Col>
                 <ExerciseChartsTrainingShortcut
-                  singleTrainRes={singleTrainRes}
+                  exResults={singleTrainRes}
+                  rowKey={"row" + index}
                 />
-                {ex.templateExercises
-                  .filter((asdf) => {
-                    return asdf.id === exerciseId;
-                  })
-                  .map((element, index) => {
-                    let exResults = element.addedResults.map(
-                      (element2, idx) => {
-                        if (element2.setDistance) {
-                          let arrayTime = element2.setTime.split(":");
-                          let timeInSeconds =
-                            parseInt(arrayTime[0], 10) * 3600 +
-                            parseInt(arrayTime[1], 10) * 60 +
-                            parseInt(arrayTime[2], 10);
-
-                          // let distanceInMeters =
-                          //   element2.setDistance;
-
-                          let velocity =
-                            Math.round(
-                              100 *
-                                (element2.setDistance /
-                                  1000 /
-                                  (timeInSeconds / 3600))
-                            ) / 100;
-                          let paceAsANumber =
-                            timeInSeconds / 60 / (element2.setDistance / 1000);
-
-                          let paceMinutes = Math.floor(paceAsANumber);
-                          let paceSeconds = Math.ceil(
-                            (Math.round(100 * paceAsANumber) / 100 -
-                              paceMinutes) *
-                              60
-                          );
-                          let arrayPace = [
-                            paceMinutes.toString(),
-                            paceSeconds.toString(),
-                          ];
-
-                          let paceAsString = arrayPace.join(":");
-
-                          return (
-                            idx < element.addedResults.length &&
-                            idx > element.addedResults.length - 6 && (
-                              <Col
-                                key={"exerciseResults" + idx}
-                                xs="6"
-                                md="6"
-                                style={{
-                                  textTransform: "lowercase",
-                                }}>
-                                {" "}
-                                {velocity}
-                                {" km/h "}
-                                {paceAsString}
-                                {" min/km"}
-                              </Col>
-                            )
-                          );
-                        } else {
-                          return (
-                            idx < element.addedResults.length &&
-                            idx > element.addedResults.length - 6 && (
-                              <Col
-                                key={"exerciseResults" + idx}
-                                xs="6"
-                                md="2"
-                                style={{
-                                  textTransform: "lowercase",
-                                }}>
-                                {" "}
-                                {element2.setWeight
-                                  ? element2.setWeight.toFixed(1) +
-                                    "kg x " +
-                                    element2.setRepetition
-                                  : element2.setRepetition
-                                  ? element2.setRepetition
-                                  : element2.setDistance /
-                                    element2.setTime}{" "}
-                              </Col>
-                            )
-                          );
-                        }
-                      }
-                    );
-                    return <Row key={"result" + index}>{exResults}</Row>;
-                  })}
               </Col>
             </Row>
           </Link>
-        </div>{" "}
+        </div>
       </React.Fragment>
     );
   });

@@ -4,94 +4,39 @@ import { Row, Col } from "react-bootstrap";
 const ExerciseChartSubHeader = ({ bestResults }) => {
   let { repetitionMax, repetitionBestSet, distanceMax } = bestResults;
 
+  let textPreLastCol = "Duration";
+  let textLastCol = "";
   if (repetitionMax) {
-    return (
-      <>
-        <Row>
-          <Col xs="1" md="1">
-            No.
-          </Col>
-          <Col xs="1" md="1">
-            Date
-          </Col>
-          <Col xs="1" md="1">
-            BW
-          </Col>
-          <Col xs="1" md="1">
-            V
-          </Col>
-          <Col xs="1" md="1">
-            V/m
-          </Col>
-        </Row>
-      </>
-    );
+    textPreLastCol = "V";
+    textLastCol = "V/m";
   }
   if (repetitionBestSet) {
-    return (
-      <>
-        <Row>
-          <Col xs="1" md="1">
-            No.
-          </Col>
-          <Col xs="1" md="1">
-            Date
-          </Col>
-          <Col xs="1" md="1">
-            BW
-          </Col>
-          <Col xs="1" md="1">
-            V
-          </Col>
-          <Col xs="1" md="1">
-            set
-          </Col>
-        </Row>
-      </>
-    );
+    textLastCol = "set";
   }
   if (distanceMax) {
-    return (
-      <>
-        <Row>
-          <Col xs="1" md="1">
-            No.
-          </Col>
-          <Col xs="1" md="1">
-            Date
-          </Col>
-          <Col xs="1" md="1">
-            BW
-          </Col>
-          <Col xs="1" md="1">
-            Distance
-          </Col>
-          <Col xs="1" md="1">
-            Time
-          </Col>
-        </Row>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Row>
-          <Col xs="1" md="1">
-            No.
-          </Col>
-          <Col xs="1" md="1">
-            Date
-          </Col>
-          <Col xs="1" md="1">
-            BW
-          </Col>
-          <Col xs="1" md="1">
-            Duration
-          </Col>
-        </Row>
-      </>
-    );
+    textPreLastCol = "Distance";
+    textLastCol = "Time";
   }
+
+  return (
+    <Row>
+      <Col xs="1" md="1">
+        No.
+      </Col>
+      <Col xs="1" md="1">
+        Date
+      </Col>
+      <Col xs="1" md="1">
+        BW
+      </Col>
+      <Col xs="1" md="1">
+        {textPreLastCol}
+      </Col>
+      <Col xs="1" md="1">
+        {textLastCol}
+      </Col>
+    </Row>
+  );
 };
 
 export default ExerciseChartSubHeader;
