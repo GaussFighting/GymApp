@@ -2,14 +2,22 @@ import { Row, Col } from "react-bootstrap";
 import React from "react";
 
 const ExerciseChartsTrainingShortcut = ({ exResults, rowKey }) => {
-  let stefan = exResults.map((exercise) => {
-    let asdf = exercise.map((set, idx2) => {
-      console.log(set);
+  let allResultsForCurrentExercise = exResults.map((exercise) => {
+    let singleTrainingResults = exercise.map((set, idx2) => {
       let text = "";
       let colSize = "2";
       if (set.velocity && set.pace) {
-        text = set.velocity + " km/h " + set.pace + " min/km";
-        colSize = "6";
+        text =
+          set.velocity +
+          " km/h " +
+          "\xA0" +
+          "\xA0" +
+          "\xA0" +
+          "\xA0" +
+          "\xA0" +
+          set.pace +
+          " min/km";
+        colSize = "7";
       }
       if (set.weight && set.repetition) {
         text = set.weight + "kg x " + set.repetition;
@@ -21,7 +29,7 @@ const ExerciseChartsTrainingShortcut = ({ exResults, rowKey }) => {
       return (
         <Col
           key={"exerciseResults-" + rowKey + idx2}
-          xs="6"
+          xs="1"
           md={colSize}
           style={{
             textTransform: "lowercase",
@@ -30,11 +38,15 @@ const ExerciseChartsTrainingShortcut = ({ exResults, rowKey }) => {
         </Col>
       );
     });
-
-    return asdf;
+    return singleTrainingResults;
   });
+
   return (
-    <Row key={rowKey}>{stefan[0].slice(Math.max(stefan[0].length - 5, 0))}</Row>
+    <Row key={rowKey}>
+      {allResultsForCurrentExercise[0].slice(
+        Math.max(allResultsForCurrentExercise[0].length - 5, 0)
+      )}
+    </Row>
   );
 };
 

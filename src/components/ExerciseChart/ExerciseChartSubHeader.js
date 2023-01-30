@@ -3,19 +3,38 @@ import { Row, Col } from "react-bootstrap";
 
 const ExerciseChartSubHeader = ({ bestResults }) => {
   let { repetitionMax, repetitionBestSet, distanceMax } = bestResults;
+  let thirdCol = "Duration";
+  let fourthCol = "";
+  let fifthCol = "";
+  let sixthCol = "";
+  let seventhCol = "";
+  let eightCol = "";
+  let ninethCol = "";
 
-  let textPreLastCol = "Duration";
-  let textLastCol = "";
   if (repetitionMax) {
-    textPreLastCol = "V";
-    textLastCol = "V/m";
+    thirdCol = "V";
+    fourthCol = "V/m";
+    fifthCol = "Set1";
+    sixthCol = "Set2";
+    seventhCol = "Set3";
+    eightCol = "Set4";
+    ninethCol = "Set5";
   }
-  if (repetitionBestSet) {
-    textLastCol = "set";
+  if (!repetitionMax && repetitionBestSet) {
+    thirdCol = "Total";
+    fourthCol = "Best Set";
+    fifthCol = "Set1";
+    sixthCol = "Set2";
+    seventhCol = "Set3";
+    eightCol = "Set4";
+    ninethCol = "Set5";
   }
   if (distanceMax) {
-    textPreLastCol = "Distance";
-    textLastCol = "Time";
+    thirdCol = "Distance";
+    fourthCol = "Time";
+    fifthCol = " ";
+    sixthCol = "Speed";
+    seventhCol = "Pace";
   }
 
   return (
@@ -30,10 +49,25 @@ const ExerciseChartSubHeader = ({ bestResults }) => {
         BW
       </Col>
       <Col xs="1" md="1">
-        {textPreLastCol}
+        {thirdCol}
       </Col>
       <Col xs="1" md="1">
-        {textLastCol}
+        {fourthCol}
+      </Col>
+      <Col xs="1" md="1">
+        {fifthCol}
+      </Col>
+      <Col xs="1" md="1">
+        {sixthCol}
+      </Col>
+      <Col xs="1" md="1">
+        {seventhCol}
+      </Col>
+      <Col xs="1" md="1">
+        {eightCol}
+      </Col>
+      <Col xs="1" md="1">
+        {ninethCol}
       </Col>
     </Row>
   );
