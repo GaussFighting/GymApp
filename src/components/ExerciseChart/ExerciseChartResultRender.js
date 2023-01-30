@@ -35,7 +35,7 @@ const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
               <ExerciseChartSingleResultRender
                 shortTrainingSummary={shortTrainingSummary}
               />
-              <Col>
+              <Col xs="7" md="7">
                 <ExerciseChartsTrainingShortcut
                   exResults={singleTrainRes}
                   rowKey={"row" + index}

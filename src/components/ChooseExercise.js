@@ -15,9 +15,7 @@ function ChooseExercise(props) {
         ADD NEW EXERCISE
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <ModalHeader toggle={function noRefCheck() {}}>
-          CHOOSE EXERCISE
-        </ModalHeader>
+        <ModalHeader>CHOOSE EXERCISE</ModalHeader>
         <ExercisesForTemplate
           setAddedExercises={props.setAddedExercises}
           addedExercises={props.addedExercises}
@@ -27,8 +25,7 @@ function ChooseExercise(props) {
             color="primary add-button"
             onClick={() => {
               handleClose();
-            }}
-          >
+            }}>
             Add to Template
           </Button>
           <Button
@@ -36,8 +33,7 @@ function ChooseExercise(props) {
             onClick={() => {
               handleClose();
               handleCancel();
-            }}
-          >
+            }}>
             Cancel
           </Button>
         </ModalFooter>

@@ -90,6 +90,20 @@ const History = () => {
       </div>
     );
 
+  const csvDownload = () => {
+    const mainData = "1;2;3\na;b;c";
+    const mainData2 = '{"abc": 123, "def": "aa"}';
+    const CSVfile = `data:text/json;charset=utf-8,${mainData2}`;
+    const encodedUri = encodeURI(CSVfile);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "exercises.json");
+    document.body.appendChild(link);
+    link.click();
+    window.open(encodedUri);
+    document.body.removeChild(link);
+  };
+
   return (
     <div>
       <FormGroup>
@@ -127,22 +141,26 @@ const History = () => {
           if (startDate && endDate) {
             filterResults();
           }
-        }}
-      >
+        }}>
         SHOW RESULTS
       </Button>
       <Button
         className="add-new-template-cancel-button"
         onClick={() => {
           allResults();
-        }}
-      >
+        }}>
         SHOW ALL RESULTS
       </Button>
       {/* <Button className="add-new-template-cancel-button" onClick={() => {}}>
         NEXT PAGE
       </Button> */}
-
+      <Button
+        className="add-new-template-cancel-button"
+        onClick={() => {
+          csvDownload();
+        }}>
+        DOWNLOAD CSV
+      </Button>
       <ul className="ul-exercise">{displayedWorkouts()}</ul>
       <div className="spacer"></div>
     </div>
