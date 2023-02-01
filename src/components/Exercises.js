@@ -54,6 +54,27 @@ const Exercises = () => {
       </div>
     );
 
+  const downloadCSV = () => {
+    const csvString = [
+      ["Id", "name", "bodyPart", "equipment"],
+      ...exercises.map((item) => {
+        return [item.id, item.nameEn, item.bodyPart, item.equipment];
+      }),
+    ]
+      .map((e) => e.join(";"))
+      .join("\n");
+
+    const CSVfile = `data:text/csv;charset=utf-8,${csvString}`;
+    const encodedUri = encodeURI(CSVfile);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "exercises.csv");
+    document.body.appendChild(link);
+    link.click();
+    window.open(encodedUri);
+    document.body.removeChild(link);
+  };
+
   const ExercisesList = exercises.map((exercise, idx) => (
     <ListGroup key={exercise.id + idx}>
       <Button className="button" outline>
@@ -137,6 +158,13 @@ const Exercises = () => {
         </Col>
       </Row>
       <ul className="ul-exercise">{ExercisesList}</ul>
+      <Button
+        className="add-new-template-cancel-button"
+        onClick={() => {
+          downloadCSV();
+        }}>
+        DOWNLOAD CSV
+      </Button>
       <div className="spacer"></div>
     </div>
   );

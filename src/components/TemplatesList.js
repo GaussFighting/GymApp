@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
+import { CSVLink, CSVDownload } from "react-csv";
+import { Button } from "reactstrap";
 
 const TemplatesList = (props) => {
   const [templates, setTemplates] = useState([]);
@@ -44,6 +46,23 @@ const TemplatesList = (props) => {
         </Spinner>
       </div>
     );
+
+  const data = templates;
+  const headers = [
+    { label: "Template id", key: "id" },
+    { label: "Template Name", key: "templateName" },
+    { label: "Descritpion", key: "descritpion" },
+  ];
+  // const data2 = templates.map((trn, trnIdx) => {
+  //   let asdf = trn.templateExercises.map((ex, exIdx) => {
+  //     console.log(ex);
+  //     return { [`id${trnIdx}`]: ex.id, [`nameEn${trnIdx}`]: ex.nameEn };
+  //   });
+  //   console.log("asdf", asdf);
+  //   return { ...trn.id, ...asdf };
+  // });
+  // console.log(data2);
+
   // without slice, reverse gaves unexpected results and dont reverse array templates!
   const TemplatesList = templates
     .slice(0)
@@ -85,6 +104,17 @@ const TemplatesList = (props) => {
   return (
     <div>
       <ul className="ul-exercise">{TemplatesList}</ul>
+
+      <CSVLink
+        data={data}
+        headers={headers}
+        separator={";"}
+        filename={"template-exercises.csv"}
+        className="add-new-template-cancel-button"
+        target="_blank">
+        {" "}
+        Download CSV
+      </CSVLink>
       <div className="spacer"></div>
     </div>
   );
