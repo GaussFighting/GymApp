@@ -90,10 +90,9 @@ const History = () => {
       </div>
     );
 
-  const jsonDownload = () => {
+  const downloadJson = () => {
     const mainData = results;
     const JSONfile = `data:text/json;charset=utf-8,${JSON.stringify(mainData)}`;
-    console.log(JSON.stringify(JSONfile));
     const encodedUri = encodeURI(JSONfile);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -103,20 +102,6 @@ const History = () => {
     window.open(encodedUri);
     document.body.removeChild(link);
   };
-
-  // const csvDownload = () => {
-  //   const mainData = "1;2;3\na;b;c";
-  //   const mainData2 = '{"abc": 123, "def": "aa"}';
-  //   const CSVfile = `data:text/json;charset=utf-8,${mainData2};
-  //   const encodedUri = encodeURI(CSVfile);
-  //   const link = document.createElement("a");
-  //   link.setAttribute("href", encodedUri);
-  //   link.setAttribute("download", "exercises.json");
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   window.open(encodedUri);
-  //   document.body.removeChild(link);
-  // };
 
   return (
     <div>
@@ -171,7 +156,7 @@ const History = () => {
       <Button
         className="add-new-template-cancel-button"
         onClick={() => {
-          jsonDownload();
+          downloadJson();
         }}>
         DOWNLOAD JSON
       </Button>
