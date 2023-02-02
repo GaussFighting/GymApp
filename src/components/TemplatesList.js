@@ -47,21 +47,33 @@ const TemplatesList = (props) => {
       </div>
     );
 
-  const data = templates;
   const headers = [
-    { label: "Template id", key: "id" },
-    { label: "Template Name", key: "templateName" },
-    { label: "Descritpion", key: "descritpion" },
+    { label: "Template id", key: "idTemplate" },
+    { label: "Template Name", key: "nameTemplate" },
+    { label: "Template Descritpion", key: "descriptionTemplate" },
+    { label: "Exercise id", key: "id" },
+    { label: "Exercise MongoDB id", key: "_id" },
+    { label: "Exercise Name", key: "nameEn" },
+    { label: "Exercise Body Part", key: "bodyPart" },
+    { label: "Exercise Equipment", key: "equipment" },
+    { label: "Exercise Sets", key: "sets" },
   ];
-  // const data2 = templates.map((trn, trnIdx) => {
-  //   let asdf = trn.templateExercises.map((ex, exIdx) => {
-  //     console.log(ex);
-  //     return { [`id${trnIdx}`]: ex.id, [`nameEn${trnIdx}`]: ex.nameEn };
-  //   });
-  //   console.log("asdf", asdf);
-  //   return { ...trn.id, ...asdf };
-  // });
-  // console.log(data2);
+
+  const data2 = templates.map((trn) => {
+    let asdf = trn.templateExercises.map((ex) => {
+      return {
+        ...ex,
+        idTemplate: trn.id,
+        nameTemplate: trn.templateName,
+        descriptionTemplate: trn.descritpion,
+      };
+    });
+    console.log("asdf:", asdf);
+    return asdf;
+  });
+  console.log("data2:", data2.flat());
+
+  const data = data2.flat();
 
   // without slice, reverse gaves unexpected results and dont reverse array templates!
   const TemplatesList = templates
