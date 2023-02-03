@@ -59,8 +59,8 @@ const TemplatesList = (props) => {
     { label: "Exercise Sets", key: "sets" },
   ];
 
-  const data2 = templates.map((trn) => {
-    let asdf = trn.templateExercises.map((ex) => {
+  const dataSketch = templates.map((trn) => {
+    let exerciseWithTempAtr = trn.templateExercises.map((ex) => {
       return {
         ...ex,
         idTemplate: trn.id,
@@ -68,12 +68,10 @@ const TemplatesList = (props) => {
         descriptionTemplate: trn.descritpion,
       };
     });
-    console.log("asdf:", asdf);
-    return asdf;
+    return exerciseWithTempAtr;
   });
-  console.log("data2:", data2.flat());
 
-  const data = data2.flat();
+  const data = dataSketch.flat();
 
   // without slice, reverse gaves unexpected results and dont reverse array templates!
   const TemplatesList = templates
