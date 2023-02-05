@@ -17,23 +17,23 @@ const ExerciseChartHeader = ({ bestResults }) => {
   if (repetitionMax) {
     return (
       <Row>
-        <Col xs="1" md="2">
+        <Col xs="6" md="2">
           RM: <b>{repetitionMax + "kg"}</b>
         </Col>
-        <Col xs="1" md="2">
+        <Col xs="6" md="2">
           RM / mass: <b>{repetitionMaxByWeight}</b>
         </Col>
-        <Col xs="1" md="2">
+        <Col xs="6" md="2">
           Best Set Volume <b>{bestSetVolume + "kg"}</b>
         </Col>
-        <Col xs="1" md="2">
+        <Col xs="6" md="2">
           Best Set Volume/ mass <b>{bestTotalVolumeByMass}</b>
         </Col>
-        <Col xs="1" md="2">
+        <Col xs="6" md="2">
           {" "}
           Best Total Volume <b>{bestTotalVolume + "kg"}</b>
         </Col>
-        <Col xs="1" md="2">
+        <Col xs="6" md="2">
           Best Total Volume/ mass <b>{volumeBestTotalByWeight}</b>
         </Col>
       </Row>
@@ -43,10 +43,10 @@ const ExerciseChartHeader = ({ bestResults }) => {
     return (
       <Row>
         {" "}
-        <Col xs="1" md="6">
+        <Col xs="5" md="6">
           Repetitions Max: <b>{repetitionBestSet}</b>
         </Col>
-        <Col xs="1" md="6">
+        <Col xs="7" md="6">
           {" "}
           Best Total Repetitions <b>{bestTotalRepetitions}</b>
         </Col>
@@ -57,7 +57,7 @@ const ExerciseChartHeader = ({ bestResults }) => {
     return (
       <Row>
         {" "}
-        <Col xs="1" md="6">
+        <Col xs="12" md="12">
           Distance Max: <b>{distanceMax} meteres</b>
         </Col>
       </Row>
@@ -66,7 +66,7 @@ const ExerciseChartHeader = ({ bestResults }) => {
   if (durationMax) {
     return (
       <Row>
-        <Col xs="1" md="6">
+        <Col xs="12" md="12">
           {" "}
           Duration Max: <b>{durationMax ? durationMax : null}</b>
         </Col>

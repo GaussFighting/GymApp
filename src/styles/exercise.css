@@ -48,4 +48,11 @@ a {
   .col-position-equipment {
     margin-left: 0%;
   }
+  .template-link-chart {
+    font-size: 5px;
+  }
+  .row {
+    font-size: 10px;
+    display: flex;
+  }
 }
