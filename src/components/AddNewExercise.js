@@ -42,8 +42,7 @@ function MyVerticallyCenteredModal(props) {
       show={props.show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Please add new exercise
@@ -60,8 +59,7 @@ function MyVerticallyCenteredModal(props) {
                 value={form.exerciseName}
                 onChange={(event) =>
                   updateForm({ exerciseName: event.target.value })
-                }
-              ></Input>
+                }></Input>
             </FormGroup>
           </Row>
           <Row>
@@ -80,8 +78,7 @@ function MyVerticallyCenteredModal(props) {
                   value={form.selectedBodyPart}
                   onChange={(event) =>
                     updateForm({ selectedBodyPart: event.target.value })
-                  }
-                >
+                  }>
                   {props.optionsBodyPart}
                 </Input>
               </FormGroup>
@@ -100,8 +97,7 @@ function MyVerticallyCenteredModal(props) {
                   value={form.selectedEquipment}
                   onChange={(event) =>
                     updateForm({ selectedEquipment: event.target.value })
-                  }
-                >
+                  }>
                   {props.optionsEquipment}
                 </Input>
               </FormGroup>
@@ -141,9 +137,8 @@ const AddNewExercise = ({
     <div>
       <Button
         color="link"
-        className="new-exercise "
-        onClick={() => setModalShow(true)}
-      >
+        className="new-exercise"
+        onClick={() => setModalShow(true)}>
         ADD NEW EXERCISE
       </Button>
 

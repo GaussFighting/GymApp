@@ -1,9 +1,9 @@
 $grid-breakpoints: (
-  xs: 0,
-  sm: 999px,
-  md: 1000px,
-  lg: 1200px,
-  xl: 1400px,
+  xs: 376px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1024px,
   xxl: 2200px,
 );
 // // copy
@@ -17,6 +17,9 @@ $grid-breakpoints: (
 // BS overwrites
 $primary: #232f34;
 $secondary: #f9aa33;
+$light: #fff;
+$dark: #232f34;
+$--bs-body-line-height: 100px;
 
 // COLOURS
 $body-bg: #f3f2f2;
@@ -25,26 +28,52 @@ $nav-link-color: #f3f2f2;
 $nav-pills-link-active-color: #f9aa33;
 $nav-link-hover-color: #f9aa33;
 
+@font-face {
+  font-family: mainfont;
+  src: url(./fonts/Roboto-Regular.ttf);
+}
+
+// FONTS
+$font-family-base: mainfont, "Montserrat", sans-serif;
+
 @import "~bootstrap/scss/bootstrap.scss";
 
 .navbar {
   .container-fluid {
     display: inline-block;
+    height: 100px;
+    padding-right: 0px;
+    padding-left: 0px;
+    .nav {
+      padding-top: 10px;
+    }
   }
+}
+.form-control {
+  background-color: $light;
+}
+.btn-link {
+  @include button-variant(
+    $dark,
+    darken($primary, 7.5%),
+    white,
+    darken($primary, 5%),
+    darken($primary, 5%),
+    white
+  );
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  background-color: $secondary;
+  color: $dark;
+  text-decoration: none;
 }
 // .nav-pills .nav-link {
 //   color: $primary;
 // }
 
 // $link-color:
-
-// FONTS
-// $font-family-base: "Montserrat", sans-serif;
-
-// @font-face {
-//   font-family: mainfont;
-//   src: url(./fonts/Roboto-Regular.ttf);
-// }
 
 // a {
 //   text-decoration: none;

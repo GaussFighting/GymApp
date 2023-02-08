@@ -115,7 +115,7 @@ const Exercises = () => {
   ];
 
   return (
-    <div className="margin-top">
+    <div className="mt-4">
       <Row>
         <Col className="margin-input">
           <FormExercises

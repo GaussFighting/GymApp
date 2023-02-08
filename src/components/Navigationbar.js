@@ -12,8 +12,8 @@ import {
 function Navigationbar() {
   return (
     <div>
-      <Navbar color="primary">
-        <Nav justified="true" pills>
+      <Navbar color="primary pt-0 pb-0 ">
+        <Nav justified="true " pills>
           <NavItem>
             <NavLink className="nav-link" to="/">
               Profile <br></br>
