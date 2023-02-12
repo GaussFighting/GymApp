@@ -135,6 +135,7 @@ const History = () => {
         />
       </FormGroup>
       <Button
+        color="primary"
         className="add-new-template-cancel-button"
         onClick={() => {
           if (startDate && endDate) {
@@ -144,6 +145,7 @@ const History = () => {
         SHOW RESULTS
       </Button>
       <Button
+        color="primary"
         className="add-new-template-cancel-button"
         onClick={() => {
           allResults();
@@ -154,6 +156,7 @@ const History = () => {
         NEXT PAGE
       </Button> */}
       <Button
+        color="primary"
         className="add-new-template-cancel-button"
         onClick={() => {
           downloadJson();

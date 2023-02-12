@@ -18,15 +18,18 @@ $grid-breakpoints: (
 $primary: #232f34;
 $secondary: #f9aa33;
 $light: #fff;
-$dark: #232f34;
+$dark: #070101;
+$muted: #d1d1d1;
+$warning: #716f6f;
+
 $--bs-body-line-height: 100px;
 
 // COLOURS
 $body-bg: #f3f2f2;
-$body-color: #070101;
+$body-color: $dark;
 $nav-link-color: #f3f2f2;
-$nav-pills-link-active-color: #f9aa33;
-$nav-link-hover-color: #f9aa33;
+$nav-pills-link-active-color: $secondary;
+$nav-link-hover-color: $secondary;
 
 @font-face {
   font-family: mainfont;
@@ -37,6 +40,18 @@ $nav-link-hover-color: #f9aa33;
 $font-family-base: mainfont, "Montserrat", sans-serif;
 
 @import "~bootstrap/scss/bootstrap.scss";
+
+a {
+  text-decoration: none;
+  color: $light;
+}
+
+.spinner {
+  margin-top: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .navbar {
   .container-fluid {
@@ -49,12 +64,14 @@ $font-family-base: mainfont, "Montserrat", sans-serif;
     }
   }
 }
-.form-control {
+.form-control,
+.form-select {
   background-color: $light;
 }
-.btn-link {
+.btn-link,
+.btn-primary {
   @include button-variant(
-    $dark,
+    $primary,
     darken($primary, 7.5%),
     white,
     darken($primary, 5%),
@@ -64,11 +81,159 @@ $font-family-base: mainfont, "Montserrat", sans-serif;
   text-decoration: none;
 }
 
-.btn-link:hover {
+.btn-link:hover,
+.btn-primary:hover {
   background-color: $secondary;
   color: $dark;
   text-decoration: none;
 }
+
+.btn-secondary:hover {
+  background-color: $primary;
+  color: $dark;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  border: none;
+  background-color: transparent;
+  color: $dark;
+}
+
+.btn-primary {
+  margin-top: 20px;
+  top: 40px;
+  height: 50px;
+  left: 10px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  width: 30%;
+  margin-left: 35%;
+}
+
+.template-row {
+  text-align: center;
+  margin-left: -50px;
+  margin-right: -50px;
+}
+
+.template-row-exercise:nth-child(2n) {
+  text-align: center;
+  background-color: $muted;
+}
+
+.col-name {
+  font-size: 22px;
+  background-color: $primary;
+}
+.col-name:hover {
+  color: $secondary;
+  background-color: $primary;
+}
+
+.row {
+  padding: 10px;
+}
+
+.button-clicked {
+  padding-left: 0px;
+  margin-top: 5px;
+  background-color: $secondary;
+}
+
+.single-col-name {
+  text-align: center;
+  font-size: 22px;
+  color: $primary;
+  color: $light;
+  background-color: $primary;
+}
+.template-single-row-exercise {
+  color: $dark;
+  display: flex;
+  text-align: center;
+  margin-left: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.template-single-row-exercise:nth-child(2n),
+.template-link:nth-child(2n) {
+  text-align: center;
+  background-color: $muted;
+}
+
+.template-link:hover,
+.template-link:nth-child(2n):hover {
+  color: $dark;
+  background-color: $muted;
+}
+
+.input {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  height: 40px;
+  font-size: 1rem;
+  padding-left: 10px;
+}
+
+.form-check-input {
+  background-color: $light;
+}
+
+.text-align-single-exercise {
+  text-align: center;
+  line-height: 20px;
+  padding: 10px;
+}
+
+.VolumeLine {
+  color: #8884d8;
+}
+
+.BodyWeightLine {
+  color: #ca8284;
+}
+
+.VolumePerBodyWeightLine {
+  color: #82ca9d;
+}
+
+.top-row {
+  background-color: $muted;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 10px;
+}
+
+.template-link-chart {
+  color: $dark;
+  border-radius: 10px;
+}
+.template-link-chart:hover {
+  color: $dark;
+  font-weight: solid;
+  background-color: $warning;
+  border-radius: 5px;
+}
+// .template-link-chart:nth-child(2n):hover {
+//   color: $dark;
+//   background-color: $primary;
+// }
+// .template-link-chart:nth-child(2n) {
+//   text-align: center;
+//   background-color: $primary;
+// }
+
+// .single-col {
+//   padding-left: 0px;
+//   padding-right: 0px;
+// }
+// .sets {
+//   white-space: nowrap;
+// }
+
 // .nav-pills .nav-link {
 //   color: $primary;
 // }

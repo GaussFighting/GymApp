@@ -77,7 +77,7 @@ const Exercises = () => {
 
   const ExercisesList = exercises.map((exercise, idx) => (
     <ListGroup key={exercise.id + idx}>
-      <Button className="button" outline>
+      <Button className="button">
         <Link to={`/exercise/${exercise.id}`}>
           <ListGroupItem className="text-align-exercise text-uppercase">
             <Row>
@@ -159,6 +159,7 @@ const Exercises = () => {
       </Row>
       <ul className="ul-exercise">{ExercisesList}</ul>
       <Button
+        color="primary"
         className="add-new-template-cancel-button"
         onClick={() => {
           downloadCSV();

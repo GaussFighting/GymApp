@@ -7,28 +7,28 @@ function StartWorkout() {
   return (
     <div>
       <Row>
-        <Button className="start-workout-button">
+        <Button color="primary" className="start-workout-button">
           <Link className="start-workout-navlink" to="/choosetemplate">
             Start Workout from Template
           </Link>
         </Button>
       </Row>
       <Row>
-        <Button className="start-workout-button">
+        <Button color="primary" className="start-workout-button">
           <Link className="start-workout-navlink" to="/emptyworkout">
             Start an Empty Workout
           </Link>
         </Button>
       </Row>
       <Row>
-        <Button className="start-workout-button">
+        <Button color="primary" className="start-workout-button">
           <Link className="start-workout-navlink" to="/addnewtemplate">
             Add a New Templates
           </Link>
         </Button>
       </Row>
       <Row>
-        <Button className="start-workout-button">
+        <Button color="primary" className="start-workout-button">
           <Link className="start-workout-navlink" to="/templatelist">
             List of Templates
           </Link>

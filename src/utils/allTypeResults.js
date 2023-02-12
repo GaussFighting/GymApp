@@ -92,8 +92,10 @@ let allTypeResults = (results, exerciseId) => {
 
   return {
     repetitionMax: Math.max(...arrayOfWeightOfAllRepetitions),
-    repetitionMaxByWeight: Math.max(...arrayOfWeightByWeightOfAllRepetitions),
-    bestSetVolume: Math.max(...arrayOfSetsVolume),
+    repetitionMaxByWeight: Math.max(
+      ...arrayOfWeightByWeightOfAllRepetitions
+    ).toFixed(2),
+    bestSetVolume: Math.max(...arrayOfSetsVolume).toFixed(2),
     bestTotalVolumeByMass: parseFloat(
       Math.max(...arrayOfSetsVolumeByWeight).toFixed(2)
     ),

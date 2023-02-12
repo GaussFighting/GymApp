@@ -106,10 +106,13 @@ function MyVerticallyCenteredModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button className="new-exercise" onClick={(e) => onSubmit(e)}>
+        <Button
+          color="primary"
+          className="new-exercise"
+          onClick={(e) => onSubmit(e)}>
           Save
         </Button>
-        <Button className="new-exercise" onClick={props.onHide}>
+        <Button color="primary" className="new-exercise" onClick={props.onHide}>
           Close
         </Button>
       </Modal.Footer>

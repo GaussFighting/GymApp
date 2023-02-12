@@ -196,8 +196,7 @@ const Workout = (props) => {
                         });
                       }
                     });
-                  }}
-                ></Input>
+                  }}></Input>
               </React.Fragment>
             );
           })}
@@ -277,8 +276,7 @@ const Workout = (props) => {
                   updateFormResults({
                     bodyWeight: parseFloat(event.target.value),
                   });
-                }}
-              ></Input>
+                }}></Input>
               <Label check>
                 <Input
                   type="checkbox"
@@ -306,16 +304,16 @@ const Workout = (props) => {
               </Col>
               <Row>{valueOfSets(exercise)}</Row>
               <Button
+                color="primary"
                 onClick={() => changeSetNumber(exercise.id, true)}
-                className="add-new-template-cancel-button"
-              >
+                className="add-new-template-cancel-button">
                 ADD SET
               </Button>
               <Button
+                color="primary"
                 onClick={() => changeSetNumber(exercise.id, false)}
                 disabled={!localStorage.getItem("isAdmin")}
-                className="add-new-template-cancel-button"
-              >
+                className="add-new-template-cancel-button">
                 DELETE SET
               </Button>
             </Row>
@@ -337,6 +335,7 @@ const Workout = (props) => {
           addedExercises={formResults.templateExercises}
         />
         <Button
+          color="primary"
           onClick={(e) => {
             if (arrayOfSetsIds.length !== disabledCheckboxesArr.length) {
               return;
@@ -350,8 +349,7 @@ const Workout = (props) => {
             }
             if (bodyWeightConfirmed) onSubmit(e);
           }}
-          className="add-new-template-cancel-button"
-        >
+          className="add-new-template-cancel-button">
           FINISH
         </Button>
       </FormGroup>

@@ -24,7 +24,7 @@ let twoColResRend = (ex, exerciseId) => {
       }
       let res = { element };
       if (totalVolumeOfTraining) {
-        res.totalVolumeOfTraining = totalVolumeOfTraining;
+        res.totalVolumeOfTraining = totalVolumeOfTraining.toFixed(0);
         res.totalVolumeOfTrainingByWeight =
           totalVolumeOfTrainingByWeight.toFixed(2);
       }

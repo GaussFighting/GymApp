@@ -55,7 +55,7 @@ const ExercisesForTemplate = (props) => {
 
     return (
       <ListGroup key={exercise.id}>
-        <Button className="button" outline>
+        <Button color="link" className="button" outline>
           <ListGroupItem
             className={
               isAdded
@@ -64,8 +64,7 @@ const ExercisesForTemplate = (props) => {
             }
             onClick={() => {
               isAdded ? removeExercise(exercise) : addExercise(exercise);
-            }}
-          >
+            }}>
             <Row>
               <Col xs="1" md="1">
                 {idx + 1}

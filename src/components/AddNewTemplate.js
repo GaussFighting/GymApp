@@ -74,8 +74,7 @@ function AddNewTemplate() {
   let exercisesForTemplate = addedExercises.map((exercise, idx) => (
     <ListGroupItem
       className="text-align-exercise text-uppercase"
-      key={exercise.id}
-    >
+      key={exercise.id}>
       <Row className="text-wraper">
         <Col xs="1" md="1">
           {idx + 1}
@@ -93,6 +92,7 @@ function AddNewTemplate() {
       <Row>
         <Col xs="4" md="6">
           <Button
+            color="primary"
             className="delete-button"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => {
@@ -101,8 +101,7 @@ function AddNewTemplate() {
                   return ex.id !== exercise.id;
                 });
               });
-            }}
-          >
+            }}>
             DELETE
           </Button>
         </Col>
@@ -131,8 +130,7 @@ function AddNewTemplate() {
                       return ex;
                     });
                   });
-                }}
-              ></Input>
+                }}></Input>
             </FormGroup>
           </Form>
         </Col>
@@ -150,8 +148,7 @@ function AddNewTemplate() {
           // value={}
           onChange={(event) =>
             updateFormTemplate({ templateName: event.target.value })
-          }
-        ></Input>
+          }></Input>
       </FormGroup>
       <FormGroup className="add-new-template-input">
         <Label for="exampleText">Descritpion</Label>
@@ -176,9 +173,9 @@ function AddNewTemplate() {
       </FormGroup>
       <FormGroup>
         <Button
+          color="primary"
           onClick={(e) => onSubmit(e)}
-          className="add-new-template-cancel-button"
-        >
+          className="add-new-template-cancel-button">
           SUBMIT
         </Button>
       </FormGroup>
