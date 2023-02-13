@@ -167,8 +167,7 @@ const EditResult = ({
           value={inputType === "number" ? parseFloat(inputValue) : inputValue}
           onChange={(event) => {
             callback(event, exercise, inputTitle, resultIdx + 1);
-          }}
-        ></Input>
+          }}></Input>
         {inputUnit}
       </Col>
     );
@@ -243,8 +242,9 @@ const EditResult = ({
             type="text"
             placeholder="Search..."
             value={formResult.templateName}
-            onChange={(e) => updateForm({ templateName: e.target.value })}
-          ></Input>
+            onChange={(e) =>
+              updateForm({ templateName: e.target.value })
+            }></Input>
         </FormGroup>
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW DESCRIPTION</Label>
@@ -253,8 +253,9 @@ const EditResult = ({
             type="textarea"
             placeholder="Search..."
             value={formResult.description}
-            onChange={(e) => updateForm({ description: e.target.value })}
-          ></Input>
+            onChange={(e) =>
+              updateForm({ description: e.target.value })
+            }></Input>
         </FormGroup>
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW BODY WEIGHT</Label>
@@ -265,8 +266,7 @@ const EditResult = ({
             value={parseFloat(formResult.bodyWeight)}
             onChange={(e) =>
               updateForm({ bodyWeight: parseFloat(e.target.value) })
-            }
-          ></Input>
+            }></Input>
         </FormGroup>
         <FormGroup>
           <Label for="exampleDate">Date</Label>
@@ -316,8 +316,9 @@ const EditResult = ({
                           <Row>
                             <Col
                               className="firstCol"
-                              md={!result.setWeight && !result.setDistance && 4}
-                            >
+                              md={
+                                !result.setWeight && !result.setDistance && 4
+                              }>
                               SET
                             </Col>
                             {result.setWeight && (
@@ -328,8 +329,7 @@ const EditResult = ({
                                 md={
                                   !result.setWeight && !result.setDistance && 4
                                 }
-                                className="firstCol"
-                              >
+                                className="firstCol">
                                 REPETITION
                               </Col>
                             )}{" "}
@@ -341,8 +341,7 @@ const EditResult = ({
                                 md={
                                   !result.setWeight && !result.setDistance && 4
                                 }
-                                className="firstCol"
-                              >
+                                className="firstCol">
                                 TIME
                               </Col>
                             )}
@@ -353,8 +352,7 @@ const EditResult = ({
                             idx % 2 === 0
                               ? "exercise-row-even"
                               : "exercise-row-odd"
-                          }
-                        >
+                          }>
                           <Col> {index + 1}. </Col>
                           {result.setWeight && (
                             <ResultFieldType
@@ -405,11 +403,11 @@ const EditResult = ({
                           <Col>
                             {" "}
                             <Button
+                              color="primary"
                               className="delete-exercise"
                               onClick={() =>
                                 changeSetNumber(exercise.id, false, index)
-                              }
-                            >
+                              }>
                               {" "}
                               -
                             </Button>
@@ -422,12 +420,13 @@ const EditResult = ({
                     );
                   })}
                 <Button
+                  color="primary"
                   onClick={() => changeSetNumber(exercise.id, true)}
-                  className="add-new-template-cancel-button"
-                >
+                  className="add-new-template-cancel-button">
                   ADD SET
                 </Button>
                 <Button
+                  color="primary"
                   onClick={() =>
                     setFormResult(() => {
                       return {
@@ -441,8 +440,7 @@ const EditResult = ({
                     })
                   }
                   disabled={!localStorage.getItem("isAdmin")}
-                  className="add-new-template-cancel-button"
-                >
+                  className="add-new-template-cancel-button">
                   DELETE EXERCISE
                 </Button>
               </Row>
@@ -465,10 +463,10 @@ const EditResult = ({
       <Row>
         <div className="row-position">
           <Button
+            color="primary"
             className="button-edit"
             // disabled={!localStorage.getItem("isAdmin")}
-            onClick={(e) => onSubmit(e)}
-          >
+            onClick={(e) => onSubmit(e)}>
             EDIT
           </Button>
         </div>

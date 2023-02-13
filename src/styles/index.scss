@@ -67,6 +67,7 @@ a {
 .form-control,
 .form-select {
   background-color: $light;
+  text-align: center;
 }
 .btn-link,
 .btn-primary {
@@ -167,7 +168,7 @@ a {
 .template-link:hover,
 .template-link:nth-child(2n):hover {
   color: $dark;
-  background-color: $muted;
+  background-color: $warning;
 }
 
 .input {
@@ -200,11 +201,16 @@ a {
   color: #82ca9d;
 }
 
+.row {
+  padding: 10px;
+}
 .top-row {
   background-color: $muted;
   padding-top: 0px;
   padding-bottom: 0px;
   border-radius: 10px;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .template-link-chart {
@@ -217,6 +223,27 @@ a {
   background-color: $warning;
   border-radius: 5px;
 }
+
+.exercise-col {
+  background-color: $primary;
+  color: $light;
+}
+
+.exercise-row-even {
+  border-top: 1px solid;
+  border-color: $muted;
+}
+
+.form-group,
+.row-position {
+  text-align: center;
+}
+
+// .row-position {
+//   text-align: center;
+//   font-size: 1.2rem;
+// }
+
 // .template-link-chart:nth-child(2n):hover {
 //   color: $dark;
 //   background-color: $primary;
