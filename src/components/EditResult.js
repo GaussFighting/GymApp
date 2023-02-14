@@ -447,30 +447,29 @@ const EditResult = ({
             ))}
         </Row>
       </Row>
-      <Row></Row>
-      <Row>
-        <ChooseExercise
-          setAddedExercises={addExercises}
-          addedExercises={formResult.templateExercises}
-        />
-      </Row>
-      <Row>
-        <div className="row-position">
-          {" "}
-          Are you sure you want to edit current template?
-        </div>
-      </Row>
-      <Row>
-        <div className="row-position">
+      <div className="row-position">
+        <Row>
+          <ChooseExercise
+            setAddedExercises={addExercises}
+            addedExercises={formResult.templateExercises}
+          />
+        </Row>
+        <Row>
+          <div className="row-position">
+            {" "}
+            Are you sure you want to edit current template?
+          </div>
+        </Row>
+        <Row>
           <Button
             color="primary"
-            className="button-edit"
+            className="button-edit flex"
             // disabled={!localStorage.getItem("isAdmin")}
             onClick={(e) => onSubmit(e)}>
             EDIT
           </Button>
-        </div>
-      </Row>
+        </Row>
+      </div>
     </Form>
   );
 };

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
-import { CSVLink, CSVDownload } from "react-csv";
-import { Button } from "reactstrap";
+import { CSVLink } from "react-csv";
 
 const TemplatesList = (props) => {
   const [templates, setTemplates] = useState([]);

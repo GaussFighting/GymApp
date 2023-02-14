@@ -92,8 +92,9 @@ function Edit() {
             type="text"
             placeholder="Search..."
             value={formTemplate.templateName}
-            onChange={(e) => updateForm({ templateName: e.target.value })}
-          ></Input>
+            onChange={(e) =>
+              updateForm({ templateName: e.target.value })
+            }></Input>
         </FormGroup>
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW DESCRIPTION</Label>
@@ -102,8 +103,9 @@ function Edit() {
             type="textarea"
             placeholder="Search..."
             value={formTemplate.description}
-            onChange={(e) => updateForm({ description: e.target.value })}
-          ></Input>
+            onChange={(e) =>
+              updateForm({ description: e.target.value })
+            }></Input>
         </FormGroup>
       </Row>
       <Row>
@@ -152,8 +154,7 @@ function Edit() {
                         };
                       });
                       console.log(event.target.value);
-                    }}
-                  ></Input>{" "}
+                    }}></Input>{" "}
                   <div className="sets-view">SETS</div>
                 </Col>
                 <Col xs="1" md="1" className="px-0 single-col">
@@ -172,8 +173,7 @@ function Edit() {
                           ),
                         };
                       });
-                    }}
-                  >
+                    }}>
                     -
                   </Button>
                 </Col>
@@ -197,10 +197,10 @@ function Edit() {
       <Row>
         <div className="row-position">
           <Button
-            className="button-edit"
+            color="primary"
+            className="button-edit ml-0"
             disabled={!localStorage.getItem("isAdmin")}
-            onClick={(e) => onSubmit(e)}
-          >
+            onClick={(e) => onSubmit(e)}>
             EDIT
           </Button>
         </div>
