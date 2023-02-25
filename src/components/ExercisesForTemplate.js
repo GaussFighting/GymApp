@@ -66,16 +66,16 @@ const ExercisesForTemplate = (props) => {
               isAdded ? removeExercise(exercise) : addExercise(exercise);
             }}>
             <Row>
-              <Col xs="1" md="1">
+              <Col sm="6" md="1">
                 {idx + 1}
               </Col>
-              <Col xs="5" md="5">
+              <Col sm="6" md="5">
                 {exercise.nameEn}
               </Col>
-              <Col xs="3" md="3">
+              <Col sm="6" md="3">
                 {exercise.bodyPart}
               </Col>
-              <Col xs="3" md="3">
+              <Col sm="6" md="3">
                 {exercise.equipment}
               </Col>
             </Row>
@@ -102,7 +102,7 @@ const ExercisesForTemplate = (props) => {
   return (
     <div className="margin-top">
       <Row>
-        <Col className="margin-input">
+        <Col sm="12" md="12" className="margin-input">
           <FormExercises
             filterName={filterName}
             exercises={exercises}
@@ -114,7 +114,7 @@ const ExercisesForTemplate = (props) => {
         <Col className="button-new-exercise"></Col>
       </Row>
       <Row className="margin-input">
-        <Col xs="5" md="6">
+        <Col sm="12" md="12">
           <FormSelector
             name={bodyPart}
             uniqueList={bodyPartUniqueList}
@@ -124,7 +124,7 @@ const ExercisesForTemplate = (props) => {
             allExercisesForFiltering={allExercisesForFiltering}
           />
         </Col>
-        <Col xs="6" md="6">
+        <Col sm="12" md="12">
           <FormSelector
             name={equipment}
             uniqueList={equipmentUniqueList}

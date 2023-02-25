@@ -34,7 +34,7 @@ const History = () => {
         <ListGroup key={result.id}>
           <Row className="template-row">
             <Link to={`/results/${result.id}`}>
-              <Col xs="12" md="12" className="col-name">
+              <Col sm="12" md="12" className="col-name">
                 {index + 1} {moment(result.date).format(format)}
               </Col>
             </Link>
@@ -105,7 +105,7 @@ const History = () => {
 
   return (
     <div>
-      <FormGroup>
+      <FormGroup className="py-1">
         <Label for="exampleDate">START DATE</Label>
         <Input
           id="exampleDate"
@@ -136,7 +136,7 @@ const History = () => {
       </FormGroup>
       <Button
         color="primary"
-        className="add-new-template-cancel-button"
+        className="add-new-template-cancel-button "
         onClick={() => {
           if (startDate && endDate) {
             filterResults();

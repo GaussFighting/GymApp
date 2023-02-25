@@ -24,9 +24,9 @@ const FormSelector = ({
   };
 
   return (
-    <Form>
+    <Form className="center-block flex">
       <FormGroup>
-        <Label for="exampleSelect">SELECT {humanName}</Label>
+        <Label for="exampleSelect ">SELECT {humanName}</Label>
         <Input
           type="select"
           name="select"
@@ -36,8 +36,7 @@ const FormSelector = ({
           onChange={(event) => {
             setFilterByOption(event.target.value);
             getByOption(event.target.value);
-          }}
-        >
+          }}>
           <option>ANY {humanName}</option> {options}
         </Input>
       </FormGroup>

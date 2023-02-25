@@ -7,10 +7,10 @@ const ExerciseChartSinglestsultRender = ({ shortTrainingSummary }) => {
   if (sts.totalVolumeOfTraining && sts.totalVolumeOfTrainingByWeight) {
     return (
       <>
-        <Col xs="1" md="1">
-          {sts.totalVolumeOfTraining}
+        <Col sm="12" md="1">
+          {sts.totalVolumeOfTraining} {" kg"}
         </Col>
-        <Col xs="1" md="1">
+        <Col sm="12" md="1">
           {sts.totalVolumeOfTrainingByWeight}
         </Col>
       </>
@@ -24,11 +24,11 @@ const ExerciseChartSinglestsultRender = ({ shortTrainingSummary }) => {
   ) {
     return (
       <>
-        <Col xs="1" md="1">
-          <Row>{sts.totalRepetitionsOfTraining}</Row>
+        <Col sm="12" md="1">
+          <Row className="center">{sts.totalRepetitionsOfTraining} </Row>
         </Col>
-        <Col xs="1" md="1">
-          <Row>{sts.maxSetRepetition}</Row>
+        <Col sm="12" md="1">
+          <Row className="center">{sts.maxSetRepetition}</Row>
         </Col>
       </>
     );
@@ -36,11 +36,11 @@ const ExerciseChartSinglestsultRender = ({ shortTrainingSummary }) => {
   if (sts.distanceOfTraining && sts.durationOfTraining) {
     return (
       <>
-        <Col xs="1" md="1">
-          <Row>{sts.distanceOfTraining}</Row>
+        <Col sm="12" md="1">
+          <Row className="center">{sts.distanceOfTraining}</Row>
         </Col>
-        <Col xs="1" md="1">
-          <Row>{sts.durationOfTraining}</Row>
+        <Col sm="12" md="1">
+          <Row className="center">{sts.durationOfTraining}</Row>
         </Col>
       </>
     );
@@ -48,8 +48,8 @@ const ExerciseChartSinglestsultRender = ({ shortTrainingSummary }) => {
   if (!sts.distanceOfTraining && sts.durationOfTraining) {
     return (
       <>
-        <Col xs="1" md="1">
-          <Row>{sts.durationOfTraining}</Row>
+        <Col sm="12" md="1">
+          <Row className="center">{sts.durationOfTraining}</Row>
         </Col>
       </>
     );

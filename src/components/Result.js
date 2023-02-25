@@ -53,12 +53,10 @@ function Result() {
           Are you sure you want to continue deleting current training?
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="start-workout-button"
-            onClick={() => props.deleteRecord(props.id)}>
+          <Button color="primary" onClick={() => props.deleteRecord(props.id)}>
             Delete
           </Button>
-          <Button className="start-workout-button" onClick={props.onHide}>
+          <Button color="primary" onClick={props.onHide}>
             Close
           </Button>
         </Modal.Footer>
@@ -117,22 +115,18 @@ function Result() {
     <div className="main-template-div">
       <Row className="top-row">
         <Row>
-          <Col xs="12" md="12" className="single-col-name">
+          <Col md="12" className="single-col-name">
             {results.templateName}
           </Col>
         </Row>
         <Row>
-          <Col xs="12" md="12">
-            {results.description}
-          </Col>
+          <Col md="12">{results.description}</Col>
         </Row>
         <Row>
-          <Col xs="12" md="12">
-            {moment(results.date).format(format)}
-          </Col>
+          <Col md="12">{moment(results.date).format(format)}</Col>
         </Row>
         <Row>
-          <Col xs="12" md="12">
+          <Col md="12">
             {"BODY WEIGHT: "}
             {results.bodyWeight}
             {" kg"}
@@ -149,14 +143,14 @@ function Result() {
               <Row
                 className="template-single-row-exercise "
                 key={idx + exercise.id}>
-                <Col xs="2" md="2" className="px-0 single-col exercise-col">
+                <Col sm="2" md="2" className="px-0 single-col exercise-col">
                   {idx + 1}{" "}
                 </Col>
-                <Col xs="5" md="5" className="px-0 single-col exercise-col">
+                <Col sm="5" md="5" className="px-0 single-col exercise-col">
                   {exercise.nameEn.toUpperCase()} (
                   {exercise.equipment.toUpperCase()})
                 </Col>
-                <Col xs="5" md="5" className="px-0 single-col exercise-col">
+                <Col sm="5" md="5" className="px-0 single-col exercise-col">
                   {" "}
                   {exercise.bodyPart.toUpperCase()}
                 </Col>
@@ -255,7 +249,7 @@ function Result() {
           ))}
       </Row>
       <Row className="row">
-        <Col xs="6" md="6" className="button-new-exercise">
+        <Col sm="6" md="6" className="button-new-exercise">
           <Button
             color="primary"
             className="delete-exercise"
@@ -269,7 +263,7 @@ function Result() {
             onHide={() => setModalShowEdit(false)}
           />
         </Col>
-        <Col xs="6" md="6" className="button-new-exercise">
+        <Col sm="6" md="6" className="button-new-exercise">
           <Button
             color="primary"
             className="delete-exercise"

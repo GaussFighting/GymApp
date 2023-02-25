@@ -76,41 +76,26 @@ function AddNewTemplate() {
       className="text-align-exercise text-uppercase"
       key={exercise.id}>
       <Row className="text-wraper">
-        <Col xs="1" md="1">
+        <Col sm="6" md="1">
           {idx + 1}
         </Col>
-        <Col xs="5" md="5">
+        <Col sm="6" md="5">
           {exercise.nameEn}
         </Col>
-        <Col xs="3" md="3">
+        <Col sm="6" md="3">
           {exercise.bodyPart}
         </Col>
-        <Col xs="3" md="3">
+        <Col sm="6" md="3">
           {exercise.equipment}
         </Col>
       </Row>
       <Row>
-        <Col xs="4" md="6">
-          <Button
-            color="primary"
-            className="delete-button"
-            disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => {
-              setAddedExercises((exercises) => {
-                return exercises.filter((ex) => {
-                  return ex.id !== exercise.id;
-                });
-              });
-            }}>
-            DELETE
-          </Button>
-        </Col>
-        <Col xs="4" md="3">
+        <Col sm="12" md="6" xl="3">
           <FormGroup className="add-new-template-input">
             <Label for="exampleEmail">Enter number of sets</Label>
           </FormGroup>
         </Col>
-        <Col xs="4" md="3">
+        <Col sm="12" md="6" xl="3">
           <Form>
             {" "}
             <FormGroup className="add-new-template-input">
@@ -133,6 +118,20 @@ function AddNewTemplate() {
                 }}></Input>
             </FormGroup>
           </Form>
+        </Col>
+        <Col sm="12" md="12" xl="6">
+          <Button
+            color="primary"
+            disabled={!localStorage.getItem("isAdmin")}
+            onClick={() => {
+              setAddedExercises((exercises) => {
+                return exercises.filter((ex) => {
+                  return ex.id !== exercise.id;
+                });
+              });
+            }}>
+            DELETE
+          </Button>
         </Col>
       </Row>
     </ListGroupItem>
@@ -157,7 +156,7 @@ function AddNewTemplate() {
           name="text"
           id="exampleText"
           placeholder="Descritpion"
-          className="add-new-template-input-position"
+          className=""
           onChange={(event) =>
             updateFormTemplate({ description: event.target.value })
           }

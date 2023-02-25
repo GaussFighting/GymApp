@@ -77,7 +77,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW NAME</Label>
           <Input
-            className="input select-name-position"
+            className="input "
             type="text"
             placeholder="Search..."
             value={exerciseName.toUpperCase()}
@@ -89,7 +89,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector select-name-position"
+            className="selector "
             value={bodyPart.toUpperCase()}
             onChange={(e) => updateForm({ bodyPart: e.target.value })}>
             <option>BACK</option>
@@ -111,7 +111,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector select-name-position"
+            className="selector "
             value={equipment.toUpperCase()}
             onChange={(e) => updateForm({ equipment: e.target.value })}>
             <option>BAREBELL</option>
