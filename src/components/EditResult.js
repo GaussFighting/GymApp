@@ -311,7 +311,9 @@ const EditResult = ({
                       <React.Fragment key={result - index}>
                         {index === 0 && (
                           <Row>
+
                             <Col sm="12" className="firstCol" md="4">
+
                               SET
                             </Col>
                             {result.setWeight && (
@@ -320,7 +322,9 @@ const EditResult = ({
                               </Col>
                             )}
                             {result.setRepetition && (
+
                               <Col sm="12" md="4" className="firstCol">
+
                                 REPETITION
                               </Col>
                             )}{" "}
@@ -330,7 +334,9 @@ const EditResult = ({
                               </Col>
                             )}
                             {result.setTime && (
+
                               <Col sm="12" md="4" className="firstCol">
+
                                 TIME
                               </Col>
                             )}
@@ -342,10 +348,12 @@ const EditResult = ({
                               ? "exercise-row-even"
                               : "exercise-row-odd"
                           }>
+
                           <Col sm="12" md="4">
                             {" "}
                             {index + 1}.{" "}
                           </Col>
+
                           {result.setWeight && (
                             <ResultFieldType
                               inputType="number"
@@ -454,9 +462,11 @@ const EditResult = ({
         </Row>
         <Row>
           <Button
+
             color="primary"
             className="button-edit flex"
             // disabled={!localStorage.getItem("isAdmin")}
+
             onClick={(e) => onSubmit(e)}>
             EDIT
           </Button>
