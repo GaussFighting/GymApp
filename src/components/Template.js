@@ -12,8 +12,7 @@ function OpenModalEdit(props) {
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
       </Modal.Header>
@@ -31,8 +30,7 @@ function OpenModal(props) {
       show={props.show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Warning</Modal.Title>
       </Modal.Header>
@@ -40,13 +38,10 @@ function OpenModal(props) {
         Are you sure you want to continue deleting current template?
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          className="start-workout-button"
-          onClick={() => props.deleteRecord(props.id)}
-        >
+        <Button color="primary" onClick={() => props.deleteRecord(props.id)}>
           Delete
         </Button>
-        <Button className="start-workout-button" onClick={props.onHide}>
+        <Button color="primary" onClick={props.onHide}>
           Close
         </Button>
       </Modal.Footer>
@@ -112,12 +107,12 @@ function Template() {
   return (
     <div className="main-template-div">
       <Row>
-        <Col xs="12" md="12" className="single-col-name">
+        <Col sm="12" md="12" className="single-col-name">
           {template.templateName}
         </Col>
       </Row>
       <Row>
-        <Col xs="12" md="12">
+        <Col sm="12" md="12">
           {template.description}
         </Col>
       </Row>
@@ -127,24 +122,23 @@ function Template() {
             <Link
               className="template-link"
               to={`/exercise/${exercise.id}`}
-              key={exercise.id + idx}
-            >
+              key={exercise.id + idx}>
               <Row className="template-single-row-exercise" key={exercise.id}>
-                <Col xs="1" md="1" className="px-0 single-col">
+                <Col sm="1" md="1" className="px-0 single-col">
                   {idx + 1}{" "}
                 </Col>
-                <Col xs="3" md="3" className="px-0 single-col">
+                <Col sm="11" md="4" className="px-0 single-col">
                   {exercise.nameEn.toUpperCase()}
                 </Col>
-                <Col xs="3" md="3" className="px-0 single-col">
+                <Col sm="3" md="2" className="px-0 single-col">
                   {" "}
                   {exercise.bodyPart.toUpperCase()}
                 </Col>
-                <Col xs="3" md="3" className="px-0 single-col">
+                <Col sm="5" md="4" className="px-0 single-col">
                   {" "}
                   {exercise.equipment.toUpperCase()}
                 </Col>
-                <Col xs="1" md="1" className="px-0 sets">
+                <Col sm="4" md="1" className="px-0 sets">
                   {exercise.sets} SETS
                 </Col>
               </Row>
@@ -152,12 +146,12 @@ function Template() {
           ))}
       </Row>
       <Row className="row">
-        <Col xs="6" md="6" className="button-new-exercise">
+        <Col sm="12" md="12" className="button-new-exercise">
           <Button
+            color="primary"
             className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => setModalShowEdit(true)}
-          >
+            onClick={() => setModalShowEdit(true)}>
             EDIT
           </Button>
           <OpenModalEdit
@@ -166,12 +160,12 @@ function Template() {
             onHide={() => setModalShowEdit(false)}
           />
         </Col>
-        <Col xs="6" md="6" className="button-new-exercise">
+        <Col sm="12" md="12" className="button-new-exercise">
           <Button
+            color="primary"
             className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => setModalShow(true)}
-          >
+            onClick={() => setModalShow(true)}>
             DELETE
           </Button>
           <OpenModal

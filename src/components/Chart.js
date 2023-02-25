@@ -28,7 +28,7 @@ const Chart = ({ results, exerciseId }) => {
 
   let range = endDate.diff(firstDate, "days");
 
-  let interval = parseInt((range / 8).toFixed(0));
+  // let interval = parseInt((range / 6).toFixed(0)) + 1;
 
   const dataTotalVolume = () => {
     let arrOfDates = [];
@@ -151,12 +151,12 @@ const Chart = ({ results, exerciseId }) => {
                   angle={0}
                   tickMargin={40}
                   height={100}
-                  interval={interval}
+                  interval={"preserveStartEnd"}
                 />
                 <YAxis
                   yAxisId="left"
                   tickCount={8}
-                  interval="preserveEnd"
+                  interval="preserveStartEnd"
                   domain={(element) => {
                     return [
                       0,
@@ -255,7 +255,7 @@ const Chart = ({ results, exerciseId }) => {
               angle={0}
               tickMargin={40}
               height={100}
-              interval={interval}
+              interval={"preserveStartEnd"}
             />
             <YAxis yAxisId="left" domain={[0, "dataMax + 200"]} />
             <YAxis

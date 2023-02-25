@@ -10,31 +10,35 @@ function ChooseExercise(props) {
   const handleCancel = () => props.setAddedExercises(() => []);
 
   return (
-    <div>
-      <Button color="danger" className="open-modal-button" onClick={handleShow}>
+    <div className="addButtonWidth">
+      <Button
+        color="primary"
+        className="open-modal-button"
+        onClick={handleShow}>
         ADD NEW EXERCISE
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <ModalHeader>CHOOSE EXERCISE</ModalHeader>
+        <ModalHeader className="form-label">CHOOSE EXERCISE</ModalHeader>
         <ExercisesForTemplate
           setAddedExercises={props.setAddedExercises}
           addedExercises={props.addedExercises}
         />
-        <ModalFooter className="modal-footer-buttons">
+        <ModalFooter className="modal-footer-buttons center-block-button">
           <Button
-            color="primary add-button"
+            color="primary"
             onClick={() => {
               handleClose();
             }}>
-            Add to Template
+            ADD
           </Button>
           <Button
+            color="primary"
             className="cancel-button"
             onClick={() => {
               handleClose();
               handleCancel();
             }}>
-            Cancel
+            CANCEL
           </Button>
         </ModalFooter>
       </Modal>

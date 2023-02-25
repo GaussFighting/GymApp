@@ -79,8 +79,8 @@ const ExerciseCharts = ({ exerciseId }) => {
       <Chart results={results} exerciseId={exerciseId} />
       <Row className="top-row">
         <Row>
-          <Col xs="12" md="12">
-            <ExerciseChartHeader bestResults={bestResults} />
+          <Col sm="12" md="12">
+            <ExerciseChartHeader bestResults={bestResults} className="mobile" />
             <ExerciseChartResultRender
               results={results}
               bestResults={bestResults}

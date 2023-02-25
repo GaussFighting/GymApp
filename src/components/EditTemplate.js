@@ -88,22 +88,24 @@ function Edit() {
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW TEMPLATE NAME</Label>
           <Input
-            className="input select-name-position"
+            className="input"
             type="text"
             placeholder="Search..."
             value={formTemplate.templateName}
-            onChange={(e) => updateForm({ templateName: e.target.value })}
-          ></Input>
+            onChange={(e) =>
+              updateForm({ templateName: e.target.value })
+            }></Input>
         </FormGroup>
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW DESCRIPTION</Label>
           <Input
-            className="input select-name-position descritpion"
+            className="input descritpion"
             type="textarea"
             placeholder="Search..."
             value={formTemplate.description}
-            onChange={(e) => updateForm({ description: e.target.value })}
-          ></Input>
+            onChange={(e) =>
+              updateForm({ description: e.target.value })
+            }></Input>
         </FormGroup>
       </Row>
       <Row>
@@ -115,23 +117,23 @@ function Edit() {
           {formTemplate.templateExercises &&
             formTemplate.templateExercises.map((exercise, idx) => (
               <Row className="template-single-row-exercise" key={exercise.id}>
-                <Col xs="1" md="1" className="px-0 single-col">
+                <Col sm="12" md="1" className="single-col">
                   {idx + 1}{" "}
                 </Col>
-                <Col xs="2" md="3" className="px-0 single-col">
+                <Col sm="12" md="3" className="single-col">
                   {exercise.nameEn.toUpperCase()}
                 </Col>
-                <Col xs="2" md="2" className="px-0 single-col">
+                <Col sm="12" md="2" className="single-col">
                   {" "}
                   {exercise.bodyPart.toUpperCase()}
                 </Col>
-                <Col xs="3" md="3" className="px-0 single-col">
+                <Col sm="12" md="2" className="single-col">
                   {" "}
                   {exercise.equipment.toUpperCase()}
                 </Col>
-                <Col xs="2" md="1" className="px-0 sets">
+                <Col sm="12" md="2" className="sets">
                   <Input
-                    className="input-sets"
+                    className="input-sets edit-input"
                     type="number"
                     value={exercise.sets}
                     onChange={(event) => {
@@ -152,12 +154,12 @@ function Edit() {
                         };
                       });
                       console.log(event.target.value);
-                    }}
-                  ></Input>{" "}
+                    }}></Input>{" "}
                   <div className="sets-view">SETS</div>
                 </Col>
-                <Col xs="1" md="1" className="px-0 single-col">
+                <Col sm="12" md="12" className="single-col">
                   <Button
+                    color="primary"
                     className="delete-exercise"
                     onClick={() => {
                       setFormTemplate((template) => {
@@ -172,8 +174,7 @@ function Edit() {
                           ),
                         };
                       });
-                    }}
-                  >
+                    }}>
                     -
                   </Button>
                 </Col>
@@ -197,10 +198,10 @@ function Edit() {
       <Row>
         <div className="row-position">
           <Button
-            className="button-edit"
+            color="primary"
+            className="button-edit ml-0"
             disabled={!localStorage.getItem("isAdmin")}
-            onClick={(e) => onSubmit(e)}
-          >
+            onClick={(e) => onSubmit(e)}>
             EDIT
           </Button>
         </div>

@@ -74,44 +74,28 @@ function AddNewTemplate() {
   let exercisesForTemplate = addedExercises.map((exercise, idx) => (
     <ListGroupItem
       className="text-align-exercise text-uppercase"
-      key={exercise.id}
-    >
+      key={exercise.id}>
       <Row className="text-wraper">
-        <Col xs="1" md="1">
+        <Col sm="6" md="1">
           {idx + 1}
         </Col>
-        <Col xs="5" md="5">
+        <Col sm="6" md="5">
           {exercise.nameEn}
         </Col>
-        <Col xs="3" md="3">
+        <Col sm="6" md="3">
           {exercise.bodyPart}
         </Col>
-        <Col xs="3" md="3">
+        <Col sm="6" md="3">
           {exercise.equipment}
         </Col>
       </Row>
       <Row>
-        <Col xs="4" md="6">
-          <Button
-            className="delete-button"
-            disabled={!localStorage.getItem("isAdmin")}
-            onClick={() => {
-              setAddedExercises((exercises) => {
-                return exercises.filter((ex) => {
-                  return ex.id !== exercise.id;
-                });
-              });
-            }}
-          >
-            DELETE
-          </Button>
-        </Col>
-        <Col xs="4" md="3">
+        <Col sm="12" md="6" xl="3">
           <FormGroup className="add-new-template-input">
             <Label for="exampleEmail">Enter number of sets</Label>
           </FormGroup>
         </Col>
-        <Col xs="4" md="3">
+        <Col sm="12" md="6" xl="3">
           <Form>
             {" "}
             <FormGroup className="add-new-template-input">
@@ -131,10 +115,23 @@ function AddNewTemplate() {
                       return ex;
                     });
                   });
-                }}
-              ></Input>
+                }}></Input>
             </FormGroup>
           </Form>
+        </Col>
+        <Col sm="12" md="12" xl="6">
+          <Button
+            color="primary"
+            disabled={!localStorage.getItem("isAdmin")}
+            onClick={() => {
+              setAddedExercises((exercises) => {
+                return exercises.filter((ex) => {
+                  return ex.id !== exercise.id;
+                });
+              });
+            }}>
+            DELETE
+          </Button>
         </Col>
       </Row>
     </ListGroupItem>
@@ -150,8 +147,7 @@ function AddNewTemplate() {
           // value={}
           onChange={(event) =>
             updateFormTemplate({ templateName: event.target.value })
-          }
-        ></Input>
+          }></Input>
       </FormGroup>
       <FormGroup className="add-new-template-input">
         <Label for="exampleText">Descritpion</Label>
@@ -160,7 +156,7 @@ function AddNewTemplate() {
           name="text"
           id="exampleText"
           placeholder="Descritpion"
-          className="add-new-template-input-position"
+          className=""
           onChange={(event) =>
             updateFormTemplate({ description: event.target.value })
           }
@@ -176,9 +172,9 @@ function AddNewTemplate() {
       </FormGroup>
       <FormGroup>
         <Button
+          color="primary"
           onClick={(e) => onSubmit(e)}
-          className="add-new-template-cancel-button"
-        >
+          className="add-new-template-cancel-button">
           SUBMIT
         </Button>
       </FormGroup>

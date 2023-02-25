@@ -77,20 +77,20 @@ const Exercises = () => {
 
   const ExercisesList = exercises.map((exercise, idx) => (
     <ListGroup key={exercise.id + idx}>
-      <Button className="button" outline>
+      <Button className="button">
         <Link to={`/exercise/${exercise.id}`}>
           <ListGroupItem className="text-align-exercise text-uppercase">
             <Row>
-              <Col xs="1" md="1">
+              <Col sm="2" md="1">
                 {idx + 1}
               </Col>
-              <Col xs="5" md="5">
+              <Col sm="10" md="5">
                 {exercise.nameEn}
               </Col>
-              <Col xs="3" md="3">
+              <Col sm="6" md="3">
                 {exercise.bodyPart}
               </Col>
-              <Col xs="3" md="3">
+              <Col sm="6" md="3">
                 {exercise.equipment}
               </Col>
             </Row>
@@ -115,9 +115,9 @@ const Exercises = () => {
   ];
 
   return (
-    <div className="margin-top">
+    <div className="mt-4">
       <Row>
-        <Col className="margin-input">
+        <Col sm="12" md="6" className="margin-input">
           <FormExercises
             filterName={filterName}
             exercises={exercises}
@@ -126,7 +126,7 @@ const Exercises = () => {
             allExercisesForFiltering={allExercisesForFiltering}
           />
         </Col>
-        <Col className="button-new-exercise">
+        <Col sm="12" md="6" className="button-new-exercise ">
           <AddNewExercise
             nameBodyPart={bodyPart}
             nameEquipment={equipment}
@@ -136,7 +136,7 @@ const Exercises = () => {
         </Col>
       </Row>
       <Row className="margin-input">
-        <Col xs="5" md="6">
+        <Col sm="12" md="6">
           <FormSelector
             name={bodyPart}
             uniqueList={bodyPartUniqueList}
@@ -146,7 +146,7 @@ const Exercises = () => {
             allExercisesForFiltering={allExercisesForFiltering}
           />
         </Col>
-        <Col xs="6" md="6">
+        <Col sm="12" md="6">
           <FormSelector
             name={equipment}
             uniqueList={equipmentUniqueList}
@@ -159,7 +159,8 @@ const Exercises = () => {
       </Row>
       <ul className="ul-exercise">{ExercisesList}</ul>
       <Button
-        className="add-new-template-cancel-button"
+        color="primary"
+        className="add-new-template-cancel-button center-block"
         onClick={() => {
           downloadCSV();
         }}>

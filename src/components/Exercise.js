@@ -42,12 +42,10 @@ function Exercise() {
           Are you sure you want to continue deleting current exercise?
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="start-workout-button"
-            onClick={() => props.deleteRecord(props.id)}>
+          <Button color="primary" onClick={() => props.deleteRecord(props.id)}>
             Delete
           </Button>
-          <Button className="start-workout-button" onClick={props.onHide}>
+          <Button color="primary" onClick={props.onHide}>
             Close
           </Button>
         </Modal.Footer>
@@ -91,15 +89,15 @@ function Exercise() {
   return (
     <ListGroupItem className="text-align-single-exercise text-uppercase">
       <Row className="row">
-        <Col xs="12" md="12">
+        <Col sm="12" md="12">
           <h1>{exercise.nameEn}</h1>
         </Col>
       </Row>
       <Row>
-        <Col xs="6" md="6" className="col-position-body-part">
+        <Col sm="12" md="6" className="col-position-body-part">
           <h4>Body Part: {exercise.bodyPart}</h4>
         </Col>
-        <Col xs="6" md="6" className="col-position-equipment">
+        <Col sm="12" md="6" className="col-position-equipment">
           <h4>Equipment: {exercise.equipment}</h4>
         </Col>
       </Row>
@@ -107,8 +105,9 @@ function Exercise() {
       {exercise.id && <ExerciseChart exerciseId={id} />}
 
       <Row className="row">
-        <Col xs="6" md="6" className="button-new-exercise">
+        <Col sm="12" md="6" className="button-new-exercise">
           <Button
+            color="primary"
             className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShowEdit(true)}>
@@ -120,8 +119,9 @@ function Exercise() {
             onHide={() => setModalShowEdit(false)}
           />
         </Col>
-        <Col xs="6" md="6" className="button-new-exercise">
+        <Col sm="12" md="6" className="button-new-exercise">
           <Button
+            color="primary"
             className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShow(true)}>

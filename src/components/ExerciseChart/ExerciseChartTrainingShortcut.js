@@ -29,7 +29,7 @@ const ExerciseChartsTrainingShortcut = ({ exResults, rowKey }) => {
       return (
         <Col
           key={"exerciseResults-" + rowKey + idx2}
-          xs="1"
+          sm="12"
           md={colSize}
           style={{
             textTransform: "lowercase",
@@ -42,7 +42,7 @@ const ExerciseChartsTrainingShortcut = ({ exResults, rowKey }) => {
   });
 
   return (
-    <Row key={rowKey}>
+    <Row key={rowKey} className="mobile-row">
       {allResultsForCurrentExercise[0].slice(
         Math.max(allResultsForCurrentExercise[0].length - 5, 0)
       )}

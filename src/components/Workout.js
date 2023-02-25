@@ -129,7 +129,9 @@ const Workout = (props) => {
     for (let i = 0; i < exercise.sets; i++) {
       arrayOfSetsIds = [...arrayOfSetsIds, `${exercise.id}-${i}`];
       arrayOfSets.push(
-        <Row key={`${exercise.id}-${i}`}>{valueOfExercises(exercise, i)}</Row>
+        <Row key={`${exercise.id}-${i}`}>
+          <Col>{valueOfExercises(exercise, i)}</Col>
+        </Row>
       );
     }
     return arrayOfSets;
@@ -148,76 +150,77 @@ const Workout = (props) => {
 
     let labelsFunction = (labels) => {
       return (
-        <Form>
-          {labels.map((label, idx) => {
-            let labelName =
-              "set" +
-              label.charAt(0).toUpperCase() +
-              label.toLowerCase().slice(1);
-            return (
-              <React.Fragment key={idx + label}>
-                {" "}
-                <span>{`${(idx === 0 ? i + 1 : " ") + " " + label}`}</span>
-                <Input
-                  key={`${exercise.id}-${i}`}
-                  disabled={disabledCheckboxesArr.includes(
-                    `${exercise.id}-${i}`
-                  )}
-                  className="input d-inline-block"
-                  type={label === "TIME" ? "time" : "number"}
-                  step="1"
-                  min={0}
-                  max={1000}
-                  value={addedResults[i] ? addedResults[i].labelName : 0}
-                  onChange={(event) => {
-                    setAddedResults((prev) => {
-                      const isExisting = prev.find((set) => {
-                        return set.id === `${exercise.id}-${i}`;
-                      });
-                      if (!isExisting) {
-                        return [
-                          ...prev,
-                          {
-                            id: `${exercise.id}-${i}`,
-                            [labelName]: parseFloat(event.target.value),
-                          },
-                        ];
-                      } else {
-                        return prev.map((res) => {
-                          if (res.id === `${exercise.id}-${i}`)
-                            return {
-                              ...res,
-                              [labelName]:
-                                labelName === "setTime"
-                                  ? event.target.value
-                                  : parseFloat(event.target.value),
-                            };
-                          return res;
+        <div className="row">
+          <Form>
+            {labels.map((label, idx) => {
+              let labelName =
+                "set" +
+                label.charAt(0).toUpperCase() +
+                label.toLowerCase().slice(1);
+              return (
+                <React.Fragment key={idx + label}>
+                  {" "}
+                  <span>{`${(idx === 0 ? i + 1 : " ") + " " + label}`}</span>
+                  <Input
+                    key={`${exercise.id}-${i}`}
+                    disabled={disabledCheckboxesArr.includes(
+                      `${exercise.id}-${i}`
+                    )}
+                    className="input d-inline-block col-sm-12 col-lg-6 edit-input"
+                    type={label === "TIME" ? "time" : "number"}
+                    step="1"
+                    min={0}
+                    max={1000}
+                    value={addedResults[i] ? addedResults[i].labelName : 0}
+                    onChange={(event) => {
+                      setAddedResults((prev) => {
+                        const isExisting = prev.find((set) => {
+                          return set.id === `${exercise.id}-${i}`;
                         });
-                      }
-                    });
-                  }}
-                ></Input>
-              </React.Fragment>
-            );
-          })}
-          <Label check>
-            <Input
-              type="checkbox"
-              onChange={(event) => {
-                setDisabledCheckboxesArr((prev) => {
-                  if (event.target.checked) {
-                    return [...prev, `${exercise.id}-${i}`];
-                  } else {
-                    return prev.filter(
-                      (setId) => setId !== `${exercise.id}-${i}`
-                    );
-                  }
-                });
-              }}
-            />
-          </Label>
-        </Form>
+                        if (!isExisting) {
+                          return [
+                            ...prev,
+                            {
+                              id: `${exercise.id}-${i}`,
+                              [labelName]: parseFloat(event.target.value),
+                            },
+                          ];
+                        } else {
+                          return prev.map((res) => {
+                            if (res.id === `${exercise.id}-${i}`)
+                              return {
+                                ...res,
+                                [labelName]:
+                                  labelName === "setTime"
+                                    ? event.target.value
+                                    : parseFloat(event.target.value),
+                              };
+                            return res;
+                          });
+                        }
+                      });
+                    }}></Input>
+                </React.Fragment>
+              );
+            })}
+            <Label check>
+              <Input
+                type="checkbox"
+                onChange={(event) => {
+                  setDisabledCheckboxesArr((prev) => {
+                    if (event.target.checked) {
+                      return [...prev, `${exercise.id}-${i}`];
+                    } else {
+                      return prev.filter(
+                        (setId) => setId !== `${exercise.id}-${i}`
+                      );
+                    }
+                  });
+                }}
+              />
+            </Label>
+          </Form>
+        </div>
       );
     };
     if (exerciseArray.includes(exercise.equipment.toLowerCase())) {
@@ -242,17 +245,17 @@ const Workout = (props) => {
     <div className="main-template-div">
       <ListGroup key={loadedTemplate.id}>
         <Row className="template-row ">
-          <Col xs="12" md="12" className="single-col-name">
+          <Col sm="12" md="12" className="single-col-name">
             {loadedTemplate.templateName.toUpperCase()}
           </Col>
         </Row>
         <Row>
-          <Col xs="12" md="12">
+          <Col sm="12" md="12">
             {loadedTemplate.descritpion}
           </Col>
         </Row>
         <Row>
-          <Col xs="6" md="6">
+          <Col sm="12" md="6">
             <DatePicker
               selected={startDate}
               onChange={(date) => {
@@ -263,7 +266,7 @@ const Workout = (props) => {
               }}
             />
           </Col>
-          <Col xs="6" md="6">
+          <Col sm="12" md="6">
             <Form>
               <span>BODY WEIGHT:</span>
               <Input
@@ -277,8 +280,7 @@ const Workout = (props) => {
                   updateFormResults({
                     bodyWeight: parseFloat(event.target.value),
                   });
-                }}
-              ></Input>
+                }}></Input>
               <Label check>
                 <Input
                   type="checkbox"
@@ -293,10 +295,10 @@ const Workout = (props) => {
         <Row className="template-row">
           {loadedTemplate.templateExercises.map((exercise, idx) => (
             <Row className="template-row-exercise" key={exercise.id}>
-              <Col xs="1" md="2">
+              <Col sm="1" md="2">
                 {idx + 1}{" "}
               </Col>
-              <Col xs="7" md="8">
+              <Col sm="11" md="8">
                 <h5>
                   {exercise.nameEn.toUpperCase()}
                   {" ("}
@@ -306,16 +308,16 @@ const Workout = (props) => {
               </Col>
               <Row>{valueOfSets(exercise)}</Row>
               <Button
+                color="primary"
                 onClick={() => changeSetNumber(exercise.id, true)}
-                className="add-new-template-cancel-button"
-              >
+                className="add-new-template-cancel-button">
                 ADD SET
               </Button>
               <Button
+                color="primary"
                 onClick={() => changeSetNumber(exercise.id, false)}
                 disabled={!localStorage.getItem("isAdmin")}
-                className="add-new-template-cancel-button"
-              >
+                className="add-new-template-cancel-button">
                 DELETE SET
               </Button>
             </Row>
@@ -337,6 +339,7 @@ const Workout = (props) => {
           addedExercises={formResults.templateExercises}
         />
         <Button
+          color="primary"
           onClick={(e) => {
             if (arrayOfSetsIds.length !== disabledCheckboxesArr.length) {
               return;
@@ -350,8 +353,7 @@ const Workout = (props) => {
             }
             if (bodyWeightConfirmed) onSubmit(e);
           }}
-          className="add-new-template-cancel-button"
-        >
+          className="add-new-template-cancel-button margin-left">
           FINISH
         </Button>
       </FormGroup>

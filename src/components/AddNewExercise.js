@@ -42,10 +42,9 @@ function MyVerticallyCenteredModal(props) {
       show={props.show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      centered>
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title id="contained-modal-title-vcenter ">
           Please add new exercise
         </Modal.Title>
       </Modal.Header>
@@ -60,8 +59,7 @@ function MyVerticallyCenteredModal(props) {
                 value={form.exerciseName}
                 onChange={(event) =>
                   updateForm({ exerciseName: event.target.value })
-                }
-              ></Input>
+                }></Input>
             </FormGroup>
           </Row>
           <Row>
@@ -80,8 +78,7 @@ function MyVerticallyCenteredModal(props) {
                   value={form.selectedBodyPart}
                   onChange={(event) =>
                     updateForm({ selectedBodyPart: event.target.value })
-                  }
-                >
+                  }>
                   {props.optionsBodyPart}
                 </Input>
               </FormGroup>
@@ -100,8 +97,7 @@ function MyVerticallyCenteredModal(props) {
                   value={form.selectedEquipment}
                   onChange={(event) =>
                     updateForm({ selectedEquipment: event.target.value })
-                  }
-                >
+                  }>
                   {props.optionsEquipment}
                 </Input>
               </FormGroup>
@@ -109,11 +105,11 @@ function MyVerticallyCenteredModal(props) {
           </Row>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button className="new-exercise" onClick={(e) => onSubmit(e)}>
+      <Modal.Footer className="center-block-button">
+        <Button color="primary" onClick={(e) => onSubmit(e)}>
           Save
         </Button>
-        <Button className="new-exercise" onClick={props.onHide}>
+        <Button color="primary" onClick={props.onHide}>
           Close
         </Button>
       </Modal.Footer>
@@ -138,12 +134,8 @@ const AddNewExercise = ({
   ));
 
   return (
-    <div>
-      <Button
-        color="link"
-        className="new-exercise "
-        onClick={() => setModalShow(true)}
-      >
+    <div className="center-block">
+      <Button color="link" onClick={() => setModalShow(true)}>
         ADD NEW EXERCISE
       </Button>
 

@@ -77,12 +77,11 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW NAME</Label>
           <Input
-            className="input select-name-position"
+            className="input "
             type="text"
             placeholder="Search..."
             value={exerciseName.toUpperCase()}
-            onChange={(e) => updateForm({ nameEn: e.target.value })}
-          ></Input>
+            onChange={(e) => updateForm({ nameEn: e.target.value })}></Input>
         </FormGroup>
         <FormGroup className="form-group">
           <Label for="exampleSelect">SELECT BODY PART</Label>
@@ -90,10 +89,9 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector select-name-position"
+            className="selector "
             value={bodyPart.toUpperCase()}
-            onChange={(e) => updateForm({ bodyPart: e.target.value })}
-          >
+            onChange={(e) => updateForm({ bodyPart: e.target.value })}>
             <option>BACK</option>
             <option>LEGS</option>
             <option>SHOULDERS</option>
@@ -113,10 +111,9 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector select-name-position"
+            className="selector "
             value={equipment.toUpperCase()}
-            onChange={(e) => updateForm({ equipment: e.target.value })}
-          >
+            onChange={(e) => updateForm({ equipment: e.target.value })}>
             <option>BAREBELL</option>
             <option>DUMBBELL</option>
             <option>REPS ONLY</option>
@@ -136,10 +133,10 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
           </div>
         </Row>
         <Button
+          color="primary"
           className="button-edit"
           disabled={!localStorage.getItem("isAdmin")}
-          onClick={(e) => onSubmit(e)}
-        >
+          onClick={(e) => onSubmit(e)}>
           EDIT
         </Button>
       </Row>

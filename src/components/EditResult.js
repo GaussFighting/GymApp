@@ -159,9 +159,9 @@ const EditResult = ({
         inputName
       ];
     return (
-      <Col>
+      <Col sm="12" md="4">
         <Input
-          className="input select-name-position"
+          className="input edit-input"
           type={inputType}
           step={inputType === "time" ? "1" : "0.1"}
           value={inputType === "number" ? parseFloat(inputValue) : inputValue}
@@ -238,7 +238,6 @@ const EditResult = ({
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW TEMPLATE NAME</Label>
           <Input
-            className="input select-name-position"
             type="text"
             placeholder="Search..."
             value={formResult.templateName}
@@ -249,7 +248,6 @@ const EditResult = ({
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW DESCRIPTION</Label>
           <Input
-            className="input select-name-position descritpion"
             type="textarea"
             placeholder="Search..."
             value={formResult.description}
@@ -260,7 +258,6 @@ const EditResult = ({
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW BODY WEIGHT</Label>
           <Input
-            className="input select-name-position"
             type="number"
             placeholder="Search..."
             value={parseFloat(formResult.bodyWeight)}
@@ -293,17 +290,17 @@ const EditResult = ({
           {formResult.templateExercises &&
             formResult.templateExercises.map((exercise, idx) => (
               <Row className="template-single-row-exercise" key={exercise.id}>
-                <Col xs="1" md="1" className="px-0 single-col">
+                <Col sm="1" md="1" className="px-0 single-col">
                   {idx + 1}{" "}
                 </Col>
-                <Col xs="2" md="3" className="px-0 single-col">
+                <Col sm="11" md="3" className="px-0 single-col">
                   {exercise.nameEn.toUpperCase()}
                 </Col>
-                <Col xs="2" md="2" className="px-0 single-col">
+                <Col sm="6" md="2" className="px-0 single-col">
                   {" "}
                   {exercise.bodyPart.toUpperCase()}
                 </Col>
-                <Col xs="3" md="3" className="px-0 single-col">
+                <Col sm="6" md="3" className="px-0 single-col">
                   {" "}
                   {exercise.equipment.toUpperCase()}
                 </Col>
@@ -314,34 +311,32 @@ const EditResult = ({
                       <React.Fragment key={result - index}>
                         {index === 0 && (
                           <Row>
-                            <Col
-                              className="firstCol"
-                              md={
-                                !result.setWeight && !result.setDistance && 4
-                              }>
+
+                            <Col sm="12" className="firstCol" md="4">
+
                               SET
                             </Col>
                             {result.setWeight && (
-                              <Col className="firstCol">WEIGHT</Col>
+                              <Col sm="12" md="4" className="firstCol">
+                                WEIGHT
+                              </Col>
                             )}
                             {result.setRepetition && (
-                              <Col
-                                md={
-                                  !result.setWeight && !result.setDistance && 4
-                                }
-                                className="firstCol">
+
+                              <Col sm="12" md="4" className="firstCol">
+
                                 REPETITION
                               </Col>
                             )}{" "}
                             {result.setDistance && (
-                              <Col className="firstCol">DISTANCE</Col>
+                              <Col sm="12" md="4" className="firstCol">
+                                DISTANCE
+                              </Col>
                             )}
                             {result.setTime && (
-                              <Col
-                                md={
-                                  !result.setWeight && !result.setDistance && 4
-                                }
-                                className="firstCol">
+
+                              <Col sm="12" md="4" className="firstCol">
+
                                 TIME
                               </Col>
                             )}
@@ -353,7 +348,12 @@ const EditResult = ({
                               ? "exercise-row-even"
                               : "exercise-row-odd"
                           }>
-                          <Col> {index + 1}. </Col>
+
+                          <Col sm="12" md="4">
+                            {" "}
+                            {index + 1}.{" "}
+                          </Col>
+
                           {result.setWeight && (
                             <ResultFieldType
                               inputType="number"
@@ -400,9 +400,10 @@ const EditResult = ({
                               callback={resultEdit}
                             />
                           )}
-                          <Col>
+                          <Col sm="12">
                             {" "}
                             <Button
+                              color="primary"
                               className="delete-exercise"
                               onClick={() =>
                                 changeSetNumber(exercise.id, false, index)
@@ -412,18 +413,20 @@ const EditResult = ({
                             </Button>
                           </Col>
                           {!result.setWeight && !result.setDistance && (
-                            <Col>{""}</Col>
+                            <Col sm="12">{""}</Col>
                           )}
                         </Row>
                       </React.Fragment>
                     );
                   })}
                 <Button
+                  color="primary"
                   onClick={() => changeSetNumber(exercise.id, true)}
                   className="add-new-template-cancel-button">
                   ADD SET
                 </Button>
                 <Button
+                  color="primary"
                   onClick={() =>
                     setFormResult(() => {
                       return {
@@ -444,29 +447,31 @@ const EditResult = ({
             ))}
         </Row>
       </Row>
-      <Row></Row>
-      <Row>
-        <ChooseExercise
-          setAddedExercises={addExercises}
-          addedExercises={formResult.templateExercises}
-        />
-      </Row>
-      <Row>
-        <div className="row-position">
-          {" "}
-          Are you sure you want to edit current template?
-        </div>
-      </Row>
-      <Row>
-        <div className="row-position">
+      <div className="row-position">
+        <Row>
+          <ChooseExercise
+            setAddedExercises={addExercises}
+            addedExercises={formResult.templateExercises}
+          />
+        </Row>
+        <Row>
+          <div className="row-position">
+            {" "}
+            Are you sure you want to edit current template?
+          </div>
+        </Row>
+        <Row>
           <Button
-            className="button-edit"
-            disabled={!localStorage.getItem("isAdmin")}
+
+            color="primary"
+            className="button-edit flex"
+            // disabled={!localStorage.getItem("isAdmin")}
+
             onClick={(e) => onSubmit(e)}>
             EDIT
           </Button>
-        </div>
-      </Row>
+        </Row>
+      </div>
     </Form>
   );
 };
