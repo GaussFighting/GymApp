@@ -255,8 +255,9 @@ const Workout = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col sm="12" md="6">
+          <Col sm="12" md="6" className="py-3">
             <DatePicker
+              className="date-picker"
               selected={startDate}
               onChange={(date) => {
                 setStartDate(date);

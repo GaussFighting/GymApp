@@ -81,6 +81,7 @@ const ExerciseCharts = ({ exerciseId }) => {
         <Row>
           <Col sm="12" md="12">
             <ExerciseChartHeader bestResults={bestResults} className="mobile" />
+
             <ExerciseChartResultRender
               results={results}
               bestResults={bestResults}

@@ -8,22 +8,22 @@ function StartWorkout() {
     <div>
       <Row>
         <Button color="primary">
-          <Link to="/choosetemplate">Start Workout from Template</Link>
+          <Link to="/choosetemplate">START WORKOUT FROM TEMPLATE</Link>
         </Button>
       </Row>
       <Row>
         <Button color="primary">
-          <Link to="/emptyworkout">Start an Empty Workout</Link>
+          <Link to="/emptyworkout">START AN EMPTY WORKOUT</Link>
         </Button>
       </Row>
       <Row>
         <Button color="primary">
-          <Link to="/addnewtemplate">Add a New Templates</Link>
+          <Link to="/addnewtemplate">ADD A NEW TEMPLATE</Link>
         </Button>
       </Row>
       <Row>
         <Button color="primary">
-          <Link to="/templatelist">List of Templates</Link>
+          <Link to="/templatelist">LIST OF TEMPLATES</Link>
         </Button>
       </Row>
     </div>
