@@ -23,32 +23,32 @@ function Navigationbar() {
   return (
     <div>
       <Navbar color="primary pt-0 pb-0 " expand="md">
-        <div className="toggler">
+        <div className="toggler  py-3">
           <NavbarToggler onClick={toggle} className="navbar-light" />
         </div>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="justify-content-end" justified="true " navbar pills>
             <NavItem onClick={navTogglerClose}>
               <NavLink className="nav-link" to="/">
-                Profile <br></br>
+                PROFILE <br></br>
                 <FontAwesomeIcon icon={faUser} size="2x" />
               </NavLink>
             </NavItem>
             <NavItem onClick={navTogglerClose}>
               <NavLink className="nav-link" to="/exercises">
-                Exercises <br></br>
+                EXERCISES <br></br>
                 <FontAwesomeIcon icon={faDumbbell} size="2x" />
               </NavLink>
             </NavItem>
             <NavItem onClick={navTogglerClose}>
               <NavLink className="nav-link" to="/history">
-                History <br></br>
+                HISTORY <br></br>
                 <FontAwesomeIcon icon={faMedal} size="2x" />
               </NavLink>
             </NavItem>
             <NavItem onClick={navTogglerClose}>
               <NavLink className="nav-link" to="/startworkout">
-                Start Workout <br></br>
+                START WORKOUT <br></br>
                 <FontAwesomeIcon icon={faHeartPulse} size="2x" />
               </NavLink>
             </NavItem>

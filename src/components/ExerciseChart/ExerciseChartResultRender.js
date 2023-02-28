@@ -15,36 +15,38 @@ const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
     const shortTrainingSummary = twoColResRend(ex, exerciseId);
     const singleTrainRes = singleTrainingResults(ex, exerciseId);
     return (
-      <React.Fragment key={"mainRow" + index}>
-        {index === 0 && <ExerciseChartSubHeader bestResults={bestResults} />}
-        <div key={"exerciseLink" + index}>
-          <Link
-            className="template-link-chart"
-            to={`/results/${results[index].id}`}>
-            <Row className="template-link-chart">
-              <Col sm="12" md="1" lg="1">
-                {index + 1}
-              </Col>
-              <Col sm="12" md="1" lg="1">
-                {moment(ex.date).format(format)}
-              </Col>
-              <Col sm="12" md="1" lg="1">
-                {ex.bodyWeight.toFixed(1)}
-                {" kg"}
-              </Col>
-              <ExerciseChartSingleResultRender
-                shortTrainingSummary={shortTrainingSummary}
-              />
-              <Col sm="12" md="6" lg="6">
-                <ExerciseChartsTrainingShortcut
-                  exResults={singleTrainRes}
-                  rowKey={"row" + index}
+      <div className="single-training-result">
+        <React.Fragment key={"mainRow" + index}>
+          {index === 0 && <ExerciseChartSubHeader bestResults={bestResults} />}
+          <div key={"exerciseLink" + index}>
+            <Link
+              className="template-link-chart"
+              to={`/results/${results[index].id}`}>
+              <Row className="template-link-chart">
+                <Col sm="12" md="1" lg="1">
+                  {index + 1}
+                </Col>
+                <Col sm="12" md="1" lg="1">
+                  {moment(ex.date).format(format)}
+                </Col>
+                <Col sm="12" md="1" lg="1">
+                  {ex.bodyWeight.toFixed(1)}
+                  {" kg"}
+                </Col>
+                <ExerciseChartSingleResultRender
+                  shortTrainingSummary={shortTrainingSummary}
                 />
-              </Col>
-            </Row>
-          </Link>
-        </div>
-      </React.Fragment>
+                <Col sm="12" md="6" lg="6">
+                  <ExerciseChartsTrainingShortcut
+                    exResults={singleTrainRes}
+                    rowKey={"row" + index}
+                  />
+                </Col>
+              </Row>
+            </Link>
+          </div>
+        </React.Fragment>
+      </div>
     );
   });
   return renderedResults;

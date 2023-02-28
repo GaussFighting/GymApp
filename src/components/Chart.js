@@ -109,7 +109,7 @@ const Chart = ({ results, exerciseId }) => {
 
   if (!(dataTotalVolume()[0].volume === 0)) {
     return (
-      <div>
+      <div className="small-view">
         {" "}
         {!isNaN(dataTotalVolume()[0].volume) && (
           <div>
@@ -120,7 +120,8 @@ const Chart = ({ results, exerciseId }) => {
                 onChange={() => {
                   setDisabledVolumeLine(!disabledVolumeLine);
                 }}
-              />{" "}
+              />
+              <div>&nbsp;</div>
               Hide Volume line
             </Label>{" "}
             <Label className="BodyWeightLine">
@@ -130,6 +131,7 @@ const Chart = ({ results, exerciseId }) => {
                   setDisabledWeightLine(!disabledWeightLine);
                 }}
               />{" "}
+              <div>&nbsp;</div>
               Hide Body Weight line
             </Label>{" "}
             <Label className="VolumePerBodyWeightLine">
@@ -139,6 +141,7 @@ const Chart = ({ results, exerciseId }) => {
                   setDisabledVolumePerWeight(!disabledVolumePerWeight);
                 }}
               />{" "}
+              <div>&nbsp;</div>
               Hide Volume per body weight line{" "}
             </Label>
             <ResponsiveContainer width="100%" height={624}>
@@ -225,6 +228,7 @@ const Chart = ({ results, exerciseId }) => {
               setDisabledSetVolumeLine(!disabledSetVolumeLine);
             }}
           />{" "}
+          <div>&nbsp;</div>
           Hide Volume line
         </Label>{" "}
         <Label className="BodyWeightLine">
@@ -234,6 +238,7 @@ const Chart = ({ results, exerciseId }) => {
               setDisabledSetWeightLine(!disabledSetWeightLine);
             }}
           />{" "}
+          <div>&nbsp;</div>
           Hide Body Weight line
         </Label>{" "}
         <Label className="VolumePerBodyWeightLine">
@@ -243,6 +248,7 @@ const Chart = ({ results, exerciseId }) => {
               setDisabledSetVolumePerWeight(!disabledSetVolumePerWeight);
             }}
           />{" "}
+          <div>&nbsp;</div>
           Hide Volume per body weight line
         </Label>
         <ResponsiveContainer width="100%" height={624}>
