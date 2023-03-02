@@ -58,9 +58,7 @@ const ExercisesForTemplate = (props) => {
         <Button color="link" className="button" outline>
           <ListGroupItem
             className={
-              isAdded
-                ? "text-align-exercise text-uppercase button-clicked"
-                : "text-align-exercise text-uppercase "
+              isAdded ? "text-uppercase button-clicked" : "text-uppercase "
             }
             onClick={() => {
               isAdded ? removeExercise(exercise) : addExercise(exercise);

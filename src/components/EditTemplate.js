@@ -99,7 +99,7 @@ function Edit() {
         <FormGroup className="form-group">
           <Label for="exampleSelect ">PUT NEW DESCRIPTION</Label>
           <Input
-            className="input descritpion"
+            className="input"
             type="textarea"
             placeholder="Search..."
             value={formTemplate.description}
@@ -160,7 +160,6 @@ function Edit() {
                 <Col sm="12" md="12" className="single-col">
                   <Button
                     color="primary"
-                    className="delete-exercise"
                     onClick={() => {
                       setFormTemplate((template) => {
                         console.log(template.templateExercises);
@@ -199,7 +198,7 @@ function Edit() {
         <div className="row-position">
           <Button
             color="primary"
-            className="button-edit ml-0"
+            className="ml-0"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={(e) => onSubmit(e)}>
             EDIT

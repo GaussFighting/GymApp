@@ -42,7 +42,7 @@ const ExerciseChartsTrainingShortcut = ({ exResults, rowKey }) => {
   });
 
   return (
-    <Row key={rowKey} className="mobile-row">
+    <Row key={rowKey}>
       {allResultsForCurrentExercise[0].slice(
         Math.max(allResultsForCurrentExercise[0].length - 5, 0)
       )}

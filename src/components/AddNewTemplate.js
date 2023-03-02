@@ -72,9 +72,7 @@ function AddNewTemplate() {
   console.log(exercises);
 
   let exercisesForTemplate = addedExercises.map((exercise, idx) => (
-    <ListGroupItem
-      className="text-align-exercise text-uppercase"
-      key={exercise.id}>
+    <ListGroupItem className="text-uppercase" key={exercise.id}>
       <Row className="text-wraper">
         <Col sm="6" md="1">
           {idx + 1}
@@ -91,14 +89,14 @@ function AddNewTemplate() {
       </Row>
       <Row>
         <Col sm="12" md="6" xl="3">
-          <FormGroup className="add-new-template-input">
+          <FormGroup>
             <Label for="exampleEmail">Enter number of sets</Label>
           </FormGroup>
         </Col>
         <Col sm="12" md="6" xl="3">
           <Form>
             {" "}
-            <FormGroup className="add-new-template-input">
+            <FormGroup>
               <Input
                 className="input"
                 type="number"
@@ -138,7 +136,7 @@ function AddNewTemplate() {
   ));
   return (
     <Form>
-      <FormGroup className="add-new-template-input">
+      <FormGroup>
         <Label for="exampleEmail">Name</Label>
         <Input
           className="input"
@@ -149,14 +147,13 @@ function AddNewTemplate() {
             updateFormTemplate({ templateName: event.target.value })
           }></Input>
       </FormGroup>
-      <FormGroup className="add-new-template-input">
+      <FormGroup>
         <Label for="exampleText">Descritpion</Label>
         <Input
           type="textarea"
           name="text"
           id="exampleText"
           placeholder="Descritpion"
-          className=""
           onChange={(event) =>
             updateFormTemplate({ description: event.target.value })
           }

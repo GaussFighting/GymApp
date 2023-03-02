@@ -94,10 +94,10 @@ function Exercise() {
         </Col>
       </Row>
       <Row>
-        <Col sm="12" md="6" className="col-position-body-part">
+        <Col sm="12" md="6">
           <h4>Body Part: {exercise.bodyPart}</h4>
         </Col>
-        <Col sm="12" md="6" className="col-position-equipment">
+        <Col sm="12" md="6">
           <h4>Equipment: {exercise.equipment}</h4>
         </Col>
       </Row>
@@ -108,7 +108,6 @@ function Exercise() {
         <Col sm="12" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
@@ -122,7 +121,6 @@ function Exercise() {
         <Col sm="12" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShow(true)}>
             DELETE

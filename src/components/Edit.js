@@ -89,7 +89,6 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector "
             value={bodyPart.toUpperCase()}
             onChange={(e) => updateForm({ bodyPart: e.target.value })}>
             <option>BACK</option>
@@ -111,7 +110,6 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector "
             value={equipment.toUpperCase()}
             onChange={(e) => updateForm({ equipment: e.target.value })}>
             <option>BAREBELL</option>

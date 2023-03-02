@@ -79,7 +79,7 @@ const Exercises = () => {
     <ListGroup key={exercise.id + idx}>
       <Button className="button">
         <Link to={`/exercise/${exercise.id}`}>
-          <ListGroupItem className="text-align-exercise text-uppercase">
+          <ListGroupItem className="text-uppercase">
             <Row>
               <Col sm="2" md="1">
                 {idx + 1}

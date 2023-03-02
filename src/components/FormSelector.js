@@ -31,7 +31,6 @@ const FormSelector = ({
           type="select"
           name="select"
           id="exampleSelect"
-          className="selector"
           value={filterOption}
           onChange={(event) => {
             setFilterByOption(event.target.value);

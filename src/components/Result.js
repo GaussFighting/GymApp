@@ -252,7 +252,6 @@ function Result() {
         <Col sm="6" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
@@ -266,7 +265,6 @@ function Result() {
         <Col sm="6" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShow(true)}>
             DELETE

@@ -149,7 +149,6 @@ function Template() {
         <Col sm="12" md="12" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
@@ -163,7 +162,6 @@ function Template() {
         <Col sm="12" md="12" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShow(true)}>
             DELETE

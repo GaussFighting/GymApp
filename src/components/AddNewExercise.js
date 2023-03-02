@@ -74,7 +74,6 @@ function MyVerticallyCenteredModal(props) {
                   type="select"
                   name="select"
                   id="exampleSelect"
-                  className="selector"
                   value={form.selectedBodyPart}
                   onChange={(event) =>
                     updateForm({ selectedBodyPart: event.target.value })
@@ -93,7 +92,6 @@ function MyVerticallyCenteredModal(props) {
                   type="select"
                   name="select"
                   id="exampleSelect"
-                  className="selector"
                   value={form.selectedEquipment}
                   onChange={(event) =>
                     updateForm({ selectedEquipment: event.target.value })
