@@ -6,8 +6,8 @@ import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
 import Edit from "./Edit.js";
 import ExerciseChart from "./ExerciseChart/ExerciseChart.js";
 
-function Exercise() {
-  function OpenModalEdit(props) {
+const Exercise = () => {
+  const OpenModalEdit = (props) => {
     return (
       <Modal
         {...props}
@@ -26,8 +26,8 @@ function Exercise() {
         </Modal.Body>
       </Modal>
     );
-  }
-  function OpenModal(props) {
+  };
+  const OpenModal = (props) => {
     return (
       <Modal
         onHide={props.onHide}
@@ -51,7 +51,7 @@ function Exercise() {
         </Modal.Footer>
       </Modal>
     );
-  }
+  };
 
   let { id } = useParams();
   const [exercise, setExercise] = useState({});
@@ -75,7 +75,7 @@ function Exercise() {
 
   const navigate = useNavigate();
 
-  async function deleteRecord(id) {
+  const deleteRecord = async (id) => {
     try {
       await fetch(`/.netlify/functions/exerciseDelete?id=${id}`, {
         method: "DELETE",
@@ -84,7 +84,7 @@ function Exercise() {
       console.log(error);
     }
     navigate("/exercises");
-  }
+  };
 
   return (
     <ListGroupItem className="text-align-single-exercise text-uppercase">
@@ -135,6 +135,6 @@ function Exercise() {
       </Row>
     </ListGroupItem>
   );
-}
+};
 
 export default Exercise;

@@ -9,7 +9,7 @@ import {
   faHeartPulse,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Navigationbar() {
+const Navigationbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
@@ -57,6 +57,6 @@ function Navigationbar() {
       </Navbar>
     </div>
   );
-}
+};
 
 export default Navigationbar;

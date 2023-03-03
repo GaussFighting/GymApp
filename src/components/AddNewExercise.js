@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Modal, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function MyVerticallyCenteredModal(props) {
+const MyVerticallyCenteredModal = (props) => {
   const [form, setForm] = useState({
     exerciseName: "",
     selectedBodyPart: "CHEST",
@@ -12,12 +12,12 @@ function MyVerticallyCenteredModal(props) {
 
   const navigate = useNavigate();
 
-  function updateForm(value) {
+  let updateForm = (value) => {
     return setForm((prev) => {
       return { ...prev, ...value };
     });
-  }
-  async function onSubmit(e) {
+  };
+  const onSubmit = async (e) => {
     e.preventDefault();
     const newExercise = { ...form };
     try {
@@ -35,7 +35,7 @@ function MyVerticallyCenteredModal(props) {
 
     setForm({ exerciseName: "", selectedBodyPart: "", selectedEquipment: "" });
     navigate("/exercises");
-  }
+  };
   return (
     <Modal
       onHide={props.onHide}
@@ -113,7 +113,7 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 const AddNewExercise = ({
   nameBodyPart,

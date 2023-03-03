@@ -4,20 +4,20 @@ import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function AddNewTemplate() {
+const AddNewTemplate = () => {
   const [addedExercises, setAddedExercises] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [formTemplate, setFormTemplate] = useState({});
 
   const navigate = useNavigate();
 
-  function updateFormTemplate(value) {
+  const updateFormTemplate = (value) => {
     return setFormTemplate((prev) => {
       return { ...prev, ...value };
     });
-  }
+  };
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
       await fetch(`/.netlify/functions/templateCreate`, {
@@ -37,7 +37,7 @@ function AddNewTemplate() {
       templateExercises: [],
     });
     navigate("/templatelist");
-  }
+  };
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -178,6 +178,6 @@ function AddNewTemplate() {
       <div className="spacer"></div>
     </Form>
   );
-}
+};
 
 export default AddNewTemplate;

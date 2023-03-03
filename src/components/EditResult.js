@@ -25,7 +25,7 @@ const EditResult = ({
   const moment = require("moment");
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const id = params.id.toString();
       const response = await fetch(
         `/.netlify/functions/resultRead?id=${params.id.toString()}`
@@ -44,19 +44,19 @@ const EditResult = ({
         return;
       }
       setFormResult(record.data.results[0]);
-    }
+    };
 
     fetchData();
   }, [params.id, navigate]);
 
   // These methods will update the state properties.
-  function updateForm(value) {
+  const updateForm = (value) => {
     return setFormResult((prev) => {
       return { ...prev, ...value };
     });
-  }
+  };
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const editedResult = {
       bodyWeight: formResult.bodyWeight,
@@ -79,7 +79,7 @@ const EditResult = ({
     }
     console.log(params.id);
     navigate("/history");
-  }
+  };
 
   const addExercises = (callback) => {
     setFormResult((prevFormResult) => {

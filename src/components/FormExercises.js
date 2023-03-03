@@ -1,12 +1,12 @@
 import React from "react";
 import { Form, FormGroup, Input } from "reactstrap";
 
-function FormExercises({
+const FormExercises = ({
   setExercises,
   filterName,
   setFilterName,
   allExercisesForFiltering,
-}) {
+}) => {
   const getByName = (value) => {
     const filteredExercises = allExercisesForFiltering.filter((exercise) => {
       return exercise.nameEn.toLowerCase().includes(value.toLowerCase());
@@ -25,11 +25,10 @@ function FormExercises({
           onChange={(event) => {
             setFilterName(event.target.value);
             getByName(event.target.value);
-          }}
-        ></Input>
+          }}></Input>
       </FormGroup>
     </Form>
   );
-}
+};
 
 export default FormExercises;

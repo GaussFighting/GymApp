@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
 import ChooseExercise from "./ChooseExercise";
 
-function Edit() {
+const Edit = () => {
   const [formTemplate, setFormTemplate] = useState({
     templateName: "",
     description: "",
@@ -15,7 +15,7 @@ function Edit() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const id = params.id.toString();
       console.log(id);
       const response = await fetch(
@@ -36,19 +36,19 @@ function Edit() {
       }
 
       setFormTemplate(record.data.templates[0]);
-    }
+    };
 
     fetchData();
   }, [params.id, navigate]);
 
   // These methods will update the state properties.
-  function updateForm(value) {
+  const updateForm = (value) => {
     return setFormTemplate((prev) => {
       return { ...prev, ...value };
     });
-  }
+  };
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const editedTemplate = {
       templateName: formTemplate.templateName,
@@ -70,7 +70,7 @@ function Edit() {
     }
     console.log(params.id);
     navigate("/templatelist");
-  }
+  };
 
   const addExercises = (callback) => {
     setFormTemplate((prevFormTemplate) => {
@@ -207,6 +207,6 @@ function Edit() {
       </Row>
     </Form>
   );
-}
+};
 
 export default Edit;

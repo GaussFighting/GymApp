@@ -6,7 +6,7 @@ import { Row, Col, Modal } from "react-bootstrap";
 import EditResult from "./EditResult";
 import Spinner from "react-bootstrap/Spinner";
 
-function Result() {
+const Result = () => {
   const format = "YYYY-MM-DD dddd";
   const moment = require("moment");
 
@@ -15,7 +15,7 @@ function Result() {
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
   const [loading, setLoading] = useState(true);
-  function OpenModalEdit(props) {
+  const OpenModalEdit = (props) => {
     return (
       <Modal
         {...props}
@@ -36,9 +36,9 @@ function Result() {
         </Modal.Body>
       </Modal>
     );
-  }
+  };
 
-  function OpenModal(props) {
+  const OpenModal = (props) => {
     return (
       <Modal
         onHide={props.onHide}
@@ -62,7 +62,7 @@ function Result() {
         </Modal.Footer>
       </Modal>
     );
-  }
+  };
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -100,7 +100,7 @@ function Result() {
       </div>
     );
 
-  async function deleteRecord(id) {
+  const deleteRecord = async (id) => {
     try {
       await fetch(`/.netlify/functions/resultDelete?id=${id}`, {
         method: "DELETE",
@@ -109,7 +109,7 @@ function Result() {
       console.log(error);
     }
     navigate("/results");
-  }
+  };
 
   return (
     <div className="main-template-div">
@@ -280,6 +280,6 @@ function Result() {
       <div className="spacer"></div>
     </div>
   );
-}
+};
 
 export default Result;
