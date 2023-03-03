@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { Row } from "react-bootstrap";
 
-function StartWorkout() {
+const StartWorkout = () => {
   return (
     <div>
       <Row>
@@ -28,6 +28,6 @@ function StartWorkout() {
       </Row>
     </div>
   );
-}
+};
 
 export default StartWorkout;

@@ -6,7 +6,7 @@ import { Row, Col, Modal } from "react-bootstrap";
 import EditTemplate from "./EditTemplate";
 import Spinner from "react-bootstrap/Spinner";
 
-function OpenModalEdit(props) {
+const OpenModalEdit = (props) => {
   return (
     <Modal
       {...props}
@@ -21,9 +21,9 @@ function OpenModalEdit(props) {
       </Modal.Body>
     </Modal>
   );
-}
+};
 
-function OpenModal(props) {
+const OpenModal = (props) => {
   return (
     <Modal
       onHide={props.onHide}
@@ -47,9 +47,9 @@ function OpenModal(props) {
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
-function Template() {
+const Template = () => {
   let { id } = useParams();
   const [template, setTemplate] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
@@ -93,7 +93,7 @@ function Template() {
         </Spinner>
       </div>
     );
-  async function deleteRecord(id) {
+  const deleteRecord = async (id) => {
     try {
       await fetch(`/.netlify/functions/templateDelete?id=${id}`, {
         method: "DELETE",
@@ -102,7 +102,7 @@ function Template() {
       console.log(error);
     }
     navigate("/templatelist");
-  }
+  };
 
   return (
     <div className="main-template-div">
@@ -149,7 +149,6 @@ function Template() {
         <Col sm="12" md="12" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
@@ -163,7 +162,6 @@ function Template() {
         <Col sm="12" md="12" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShow(true)}>
             DELETE
@@ -179,6 +177,6 @@ function Template() {
       <div className="spacer"></div>
     </div>
   );
-}
+};
 
 export default Template;

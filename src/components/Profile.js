@@ -1,4 +1,4 @@
-function Profile() {
+const Profile = () => {
   return (
     <div>
       he standardLorem Ipsum passage, used since the 1500s "Lorem ipsum dolor
@@ -66,6 +66,6 @@ function Profile() {
       <div className="spacer"></div>
     </div>
   );
-}
+};
 
 export default Profile;

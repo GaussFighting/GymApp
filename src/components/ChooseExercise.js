@@ -3,7 +3,7 @@ import ExercisesForTemplate from "./ExercisesForTemplate";
 import { Button } from "reactstrap";
 import { Modal, ModalHeader, ModalFooter } from "react-bootstrap";
 
-function ChooseExercise(props) {
+const ChooseExercise = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,6 +44,6 @@ function ChooseExercise(props) {
       </Modal>
     </div>
   );
-}
+};
 
 export default ChooseExercise;

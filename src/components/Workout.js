@@ -42,11 +42,11 @@ const Workout = (props) => {
   const [disabledCheckboxesArr, setDisabledCheckboxesArr] = useState([]);
   const navigate = useNavigate();
 
-  function updateFormResults(value) {
+  const updateFormResults = (value) => {
     return setFormResults((prev) => {
       return { ...prev, ...value };
     });
-  }
+  };
 
   let filteredResultsWithExistingExercises = () => {
     let realResults = formResults.templateExercises.filter((exerciseObj) => {
@@ -55,9 +55,12 @@ const Workout = (props) => {
     return { ...formResults, templateExercises: realResults };
   };
 
-  async function onSubmit(e) {
+  const [isWaiting, setWaiting] = useState(false);
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
+      setWaiting(true);
       await fetch(`/.netlify/functions/resultCreate`, {
         method: "POST",
         headers: {
@@ -77,7 +80,7 @@ const Workout = (props) => {
       templateExercises: [],
     });
     navigate("/");
-  }
+  };
   console.log(formResults);
   let changeSetNumber = (exerciseId, isIncreasing) => {
     let stateUpdater = (prev) => {
@@ -341,6 +344,7 @@ const Workout = (props) => {
         />
         <Button
           color="primary"
+          disabled={isWaiting}
           onClick={(e) => {
             if (arrayOfSetsIds.length !== disabledCheckboxesArr.length) {
               return;

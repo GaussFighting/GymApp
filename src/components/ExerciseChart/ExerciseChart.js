@@ -80,8 +80,7 @@ const ExerciseCharts = ({ exerciseId }) => {
       <Row className="top-row">
         <Row>
           <Col sm="12" md="12">
-            <ExerciseChartHeader bestResults={bestResults} className="mobile" />
-
+            <ExerciseChartHeader bestResults={bestResults} />
             <ExerciseChartResultRender
               results={results}
               bestResults={bestResults}

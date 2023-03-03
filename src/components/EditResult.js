@@ -25,7 +25,7 @@ const EditResult = ({
   const moment = require("moment");
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const id = params.id.toString();
       const response = await fetch(
         `/.netlify/functions/resultRead?id=${params.id.toString()}`
@@ -44,19 +44,19 @@ const EditResult = ({
         return;
       }
       setFormResult(record.data.results[0]);
-    }
+    };
 
     fetchData();
   }, [params.id, navigate]);
 
   // These methods will update the state properties.
-  function updateForm(value) {
+  const updateForm = (value) => {
     return setFormResult((prev) => {
       return { ...prev, ...value };
     });
-  }
+  };
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const editedResult = {
       bodyWeight: formResult.bodyWeight,
@@ -79,7 +79,7 @@ const EditResult = ({
     }
     console.log(params.id);
     navigate("/history");
-  }
+  };
 
   const addExercises = (callback) => {
     setFormResult((prevFormResult) => {
@@ -311,9 +311,7 @@ const EditResult = ({
                       <React.Fragment key={result - index}>
                         {index === 0 && (
                           <Row>
-
                             <Col sm="12" className="firstCol" md="4">
-
                               SET
                             </Col>
                             {result.setWeight && (
@@ -322,9 +320,7 @@ const EditResult = ({
                               </Col>
                             )}
                             {result.setRepetition && (
-
                               <Col sm="12" md="4" className="firstCol">
-
                                 REPETITION
                               </Col>
                             )}{" "}
@@ -334,9 +330,7 @@ const EditResult = ({
                               </Col>
                             )}
                             {result.setTime && (
-
                               <Col sm="12" md="4" className="firstCol">
-
                                 TIME
                               </Col>
                             )}
@@ -348,7 +342,6 @@ const EditResult = ({
                               ? "exercise-row-even"
                               : "exercise-row-odd"
                           }>
-
                           <Col sm="12" md="4">
                             {" "}
                             {index + 1}.{" "}
@@ -404,7 +397,6 @@ const EditResult = ({
                             {" "}
                             <Button
                               color="primary"
-                              className="delete-exercise"
                               onClick={() =>
                                 changeSetNumber(exercise.id, false, index)
                               }>
@@ -462,9 +454,8 @@ const EditResult = ({
         </Row>
         <Row>
           <Button
-
             color="primary"
-            className="button-edit flex"
+            className="flex"
             // disabled={!localStorage.getItem("isAdmin")}
 
             onClick={(e) => onSubmit(e)}>

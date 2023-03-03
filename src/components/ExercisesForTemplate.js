@@ -3,6 +3,7 @@ import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { Button } from "reactstrap";
 import FormExercises from "./FormExercises";
 import FormSelector from "./FormSelector";
+import Spinner from "react-bootstrap/Spinner";
 
 const ExercisesForTemplate = (props) => {
   const [exercises, setExercises] = useState([]);
@@ -10,29 +11,46 @@ const ExercisesForTemplate = (props) => {
   const [allExercisesForFiltering, setAllExercisesForFiltering] = useState([]);
   const [filterByBodyPart, setFilterByBodyPart] = useState("");
   const [filterByEquipment, setFilterByEquipment] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchExercises = async () => {
-      const response = await fetch("/.netlify/functions/exerciseRead");
+      try {
+        setLoading(true);
+        const response = await fetch("/.netlify/functions/exerciseRead");
 
-      const responseData = await response.json();
-      const loadedExercises = [];
-      const exercisesArr = responseData.data.exercises;
-      for (const key in exercisesArr) {
-        loadedExercises.push({
-          id: exercisesArr[key]._id,
-          nameEn: exercisesArr[key].nameEn,
-          bodyPart: exercisesArr[key].bodyPart,
-          equipment: exercisesArr[key].equipment,
-          sets: 1,
-        });
+        const responseData = await response.json();
+        const loadedExercises = [];
+        const exercisesArr = responseData.data.exercises;
+        for (const key in exercisesArr) {
+          loadedExercises.push({
+            id: exercisesArr[key]._id,
+            nameEn: exercisesArr[key].nameEn,
+            bodyPart: exercisesArr[key].bodyPart,
+            equipment: exercisesArr[key].equipment,
+            sets: 1,
+          });
+        }
+        setExercises(loadedExercises);
+        setAllExercisesForFiltering(loadedExercises);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
       }
-      setExercises(loadedExercises);
-      setAllExercisesForFiltering(loadedExercises);
     };
 
     fetchExercises();
   }, []);
+
+  if (loading)
+    return (
+      <div className="d-flex spinner">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
 
   const addExercise = (exercise) => {
     props.setAddedExercises((prev) => {
@@ -58,9 +76,7 @@ const ExercisesForTemplate = (props) => {
         <Button color="link" className="button" outline>
           <ListGroupItem
             className={
-              isAdded
-                ? "text-align-exercise text-uppercase button-clicked"
-                : "text-align-exercise text-uppercase "
+              isAdded ? "text-uppercase button-clicked" : "text-uppercase "
             }
             onClick={() => {
               isAdded ? removeExercise(exercise) : addExercise(exercise);

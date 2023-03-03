@@ -6,8 +6,8 @@ import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
 import Edit from "./Edit.js";
 import ExerciseChart from "./ExerciseChart/ExerciseChart.js";
 
-function Exercise() {
-  function OpenModalEdit(props) {
+const Exercise = () => {
+  const OpenModalEdit = (props) => {
     return (
       <Modal
         {...props}
@@ -26,8 +26,8 @@ function Exercise() {
         </Modal.Body>
       </Modal>
     );
-  }
-  function OpenModal(props) {
+  };
+  const OpenModal = (props) => {
     return (
       <Modal
         onHide={props.onHide}
@@ -51,7 +51,7 @@ function Exercise() {
         </Modal.Footer>
       </Modal>
     );
-  }
+  };
 
   let { id } = useParams();
   const [exercise, setExercise] = useState({});
@@ -75,7 +75,7 @@ function Exercise() {
 
   const navigate = useNavigate();
 
-  async function deleteRecord(id) {
+  const deleteRecord = async (id) => {
     try {
       await fetch(`/.netlify/functions/exerciseDelete?id=${id}`, {
         method: "DELETE",
@@ -84,7 +84,7 @@ function Exercise() {
       console.log(error);
     }
     navigate("/exercises");
-  }
+  };
 
   return (
     <ListGroupItem className="text-align-single-exercise text-uppercase">
@@ -94,10 +94,10 @@ function Exercise() {
         </Col>
       </Row>
       <Row>
-        <Col sm="12" md="6" className="col-position-body-part">
+        <Col sm="12" md="6">
           <h4>Body Part: {exercise.bodyPart}</h4>
         </Col>
-        <Col sm="12" md="6" className="col-position-equipment">
+        <Col sm="12" md="6">
           <h4>Equipment: {exercise.equipment}</h4>
         </Col>
       </Row>
@@ -108,7 +108,6 @@ function Exercise() {
         <Col sm="12" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
@@ -122,7 +121,6 @@ function Exercise() {
         <Col sm="12" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            className="delete-exercise"
             disabled={!localStorage.getItem("isAdmin")}
             onClick={() => setModalShow(true)}>
             DELETE
@@ -137,6 +135,6 @@ function Exercise() {
       </Row>
     </ListGroupItem>
   );
-}
+};
 
 export default Exercise;

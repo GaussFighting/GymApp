@@ -12,7 +12,7 @@ import Template from "./components/Template";
 import Workout from "./components/Workout";
 import Result from "./components/Result";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div>
@@ -45,6 +45,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

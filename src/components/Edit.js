@@ -14,7 +14,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const id = params.id.toString();
       const response = await fetch(
         `/.netlify/functions/exerciseRead?id=${params.id.toString()}`
@@ -34,19 +34,19 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
       }
 
       setForm(record);
-    }
+    };
 
     fetchData();
   }, [params.id, navigate]);
 
   // These methods will update the state properties.
-  function updateForm(value) {
+  const updateForm = (value) => {
     return setForm((prev) => {
       return { ...prev, ...value };
     });
-  }
+  };
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const editedExercise = {
       nameEn: form.nameEn,
@@ -68,7 +68,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
     }
     console.log(params.id);
     navigate("/exercises");
-  }
+  };
 
   // This following section will display the form that takes input from the user to update the data.
   return (
@@ -89,7 +89,6 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector "
             value={bodyPart.toUpperCase()}
             onChange={(e) => updateForm({ bodyPart: e.target.value })}>
             <option>BACK</option>
@@ -111,7 +110,6 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            className="selector "
             value={equipment.toUpperCase()}
             onChange={(e) => updateForm({ equipment: e.target.value })}>
             <option>BAREBELL</option>
