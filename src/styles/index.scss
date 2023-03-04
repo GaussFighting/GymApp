@@ -102,6 +102,7 @@ a {
   background-color: $light;
   text-align: center;
   width: 22vh;
+  min-width: 175px;
   margin: 1rem;
 }
 .edit-input {
@@ -151,7 +152,16 @@ a {
   align-items: center;
   justify-content: space-evenly;
   width: 32vh;
+  max-width: 250px;
   height: 64px;
+}
+.button-modal {
+  max-width: 150px;
+  max-height: 80px;
+}
+.button-hyphen {
+  max-width: 50px;
+  max-height: 50px;
 }
 .btn-link:hover,
 .btn-primary:hover,
@@ -178,7 +188,6 @@ a {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  width: 30%;
   margin: auto;
   margin-top: 2rem;
   display: block;
@@ -189,6 +198,9 @@ a {
   text-align: center;
 }
 
+.input-exercises {
+  margin-top: 12px;
+}
 .template-row-exercise:nth-child(2n) {
   text-align: center;
   background-color: $muted;
@@ -331,6 +343,10 @@ a {
   .edit-input:focus {
     width: 18vh;
   }
+  .button-modal {
+    max-width: 180px;
+    max-height: 75px;
+  }
 }
 @media only screen and (max-width: rem(1024)) {
   .nav,
@@ -343,8 +359,15 @@ a {
   }
   .btn-primary,
   .btn-link {
-    width: 32vh;
+    width: 22vh;
     padding: 10px;
+    max-width: 150px;
+    min-width: 175px;
+    max-height: 100px;
+  }
+  .button-modal {
+    max-width: 150px;
+    max-height: 50px;
   }
   .edit-input,
   .edit-input:focus {

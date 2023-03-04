@@ -108,7 +108,7 @@ const Result = () => {
     } catch (error) {
       console.log(error);
     }
-    navigate("/results");
+    navigate("/history");
   };
 
   return (

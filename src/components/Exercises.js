@@ -117,7 +117,7 @@ const Exercises = () => {
   return (
     <div className="mt-4">
       <Row>
-        <Col sm="12" md="6" className="margin-input">
+        <Col sm="12" md="6" className="margin-input input-exercises">
           <FormExercises
             filterName={filterName}
             exercises={exercises}

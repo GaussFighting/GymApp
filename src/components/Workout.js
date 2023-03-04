@@ -79,9 +79,8 @@ const Workout = (props) => {
       date: startDate,
       templateExercises: [],
     });
-    navigate("/");
+    navigate("/history");
   };
-  console.log(formResults);
   let changeSetNumber = (exerciseId, isIncreasing) => {
     let stateUpdater = (prev) => {
       return {
@@ -314,14 +313,14 @@ const Workout = (props) => {
               <Button
                 color="primary"
                 onClick={() => changeSetNumber(exercise.id, true)}
-                className="add-new-template-cancel-button">
+                className="add-new-template-cancel-button button-modal">
                 ADD SET
               </Button>
               <Button
                 color="primary"
                 onClick={() => changeSetNumber(exercise.id, false)}
                 disabled={!localStorage.getItem("isAdmin")}
-                className="add-new-template-cancel-button">
+                className="add-new-template-cancel-button button-modal">
                 DELETE SET
               </Button>
             </Row>
@@ -358,7 +357,7 @@ const Workout = (props) => {
             }
             if (bodyWeightConfirmed) onSubmit(e);
           }}
-          className="add-new-template-cancel-button margin-left">
+          className="add-new-template-cancel-button margin-left button-modal">
           FINISH
         </Button>
       </FormGroup>

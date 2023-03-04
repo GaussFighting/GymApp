@@ -13,7 +13,7 @@ const ChooseExercise = (props) => {
     <div className="addButtonWidth">
       <Button
         color="primary"
-        className="open-modal-button"
+        className="open-modal-button button-modal"
         onClick={handleShow}>
         ADD NEW EXERCISE
       </Button>
@@ -25,14 +25,14 @@ const ChooseExercise = (props) => {
         />
         <ModalFooter className="modal-footer-buttons center-block-button">
           <Button
-            color="primary"
+            color="primary button-modal"
             onClick={() => {
               handleClose();
             }}>
             ADD
           </Button>
           <Button
-            color="primary"
+            color="primary button-modal"
             className="cancel-button"
             onClick={() => {
               handleClose();
