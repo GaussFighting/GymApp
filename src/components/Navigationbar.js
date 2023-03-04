@@ -19,7 +19,6 @@ const Navigationbar = () => {
   const navTogglerClose = () => {
     setIsOpen(false);
   };
-  console.log(isOpen);
   return (
     <div>
       <Navbar color="primary pt-0 pb-0 " expand="md">

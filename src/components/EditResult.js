@@ -396,7 +396,7 @@ const EditResult = ({
                           <Col sm="12">
                             {" "}
                             <Button
-                              color="primary"
+                              color="primary button-hyphen"
                               onClick={() =>
                                 changeSetNumber(exercise.id, false, index)
                               }>
@@ -414,7 +414,7 @@ const EditResult = ({
                 <Button
                   color="primary"
                   onClick={() => changeSetNumber(exercise.id, true)}
-                  className="add-new-template-cancel-button">
+                  className="add-new-template-cancel-button button-modal">
                   ADD SET
                 </Button>
                 <Button
@@ -432,7 +432,7 @@ const EditResult = ({
                     })
                   }
                   disabled={!localStorage.getItem("isAdmin")}
-                  className="add-new-template-cancel-button">
+                  className="add-new-template-cancel-button button-modal">
                   DELETE EXERCISE
                 </Button>
               </Row>
