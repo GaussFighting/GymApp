@@ -338,6 +338,15 @@ a {
 .textarea-form-control {
   min-height: 12rem;
 }
+.empty-page {
+  font-weight: bold;
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 50vh;
+}
 @media only screen and (max-width: rem(2560)) {
   .edit-input,
   .edit-input:focus {

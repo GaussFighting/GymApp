@@ -11,6 +11,7 @@ import TemplatesList from "./components/TemplatesList";
 import Template from "./components/Template";
 import Workout from "./components/Workout";
 import Result from "./components/Result";
+import NoPage from "./components/NoPage";
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
               path="/emptyworkout"
               element={<Workout template={false} />}
             />
+            <Route path="/*" element={<NoPage />} />
           </Routes>
         </div>
       </div>

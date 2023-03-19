@@ -21,12 +21,18 @@ const MyVerticallyCenteredModal = (props) => {
     e.preventDefault();
     const newExercise = { ...form };
     try {
-      await fetch("/.netlify/functions/exerciseCreate", {
+      const res = await fetch("/.netlify/functions/exerciseCreate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newExercise),
+      });
+      console.log("res", res);
+      const record = await res.json();
+      console.log("record:", record);
+      props.setExercises((prev) => {
+        return [...prev, record.data];
       });
     } catch (error) {
       console.log(error);
@@ -34,7 +40,6 @@ const MyVerticallyCenteredModal = (props) => {
 
     setForm({ exerciseName: "", selectedBodyPart: "", selectedEquipment: "" });
     props.onHide();
-    navigate("/exercises");
   };
   return (
     <Modal
@@ -120,6 +125,7 @@ const AddNewExercise = ({
   uniqueListBodyPart,
   nameEquipment,
   uniqueListEquipment,
+  setExercises,
 }) => {
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -145,6 +151,7 @@ const AddNewExercise = ({
         optionsBodyPart={optionsBodyPart}
         optionsEquipment={optionsEquipment}
         show={modalShow}
+        setExercises={setExercises}
         onHide={() => setModalShow(false)}
       />
     </div>
