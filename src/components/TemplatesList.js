@@ -1,41 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import { CSVLink } from "react-csv";
+import useFetchTemplates from "../hooks/useFetchTemplates";
 
 const TemplatesList = (props) => {
-  const [templates, setTemplates] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchExercises = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/.netlify/functions/templateRead`);
-
-        const responseData = await response.json();
-        const loadedTemplates = [];
-
-        const templatesArr = responseData.data.templates;
-
-        for (const key in templatesArr) {
-          loadedTemplates.push({
-            id: templatesArr[key]._id,
-            templateName: templatesArr[key].templateName,
-            descritpion: templatesArr[key].description,
-            templateExercises: templatesArr[key].templateExercises,
-          });
-        }
-        setTemplates(loadedTemplates);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-      }
-    };
-
-    fetchExercises();
-  }, []);
+  const { templates, loading } = useFetchTemplates();
 
   if (loading)
     return (
@@ -114,7 +85,6 @@ const TemplatesList = (props) => {
   return (
     <div>
       <ul className="ul-exercise">{TemplatesList}</ul>
-
       <CSVLink
         data={data}
         headers={headers}
@@ -122,7 +92,6 @@ const TemplatesList = (props) => {
         filename={"template-exercises.csv"}
         className="add-new-template-cancel-button"
         target="_blank">
-        {" "}
         Download CSV
       </CSVLink>
       <div className="spacer"></div>

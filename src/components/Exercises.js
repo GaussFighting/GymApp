@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -6,44 +6,15 @@ import FormExercises from "./FormExercises";
 import FormSelector from "./FormSelector";
 import AddNewExercise from "./AddNewExercise";
 import Spinner from "react-bootstrap/Spinner";
+import useFetchExercises from "../hooks/useFetchExercises";
 
 const Exercises = () => {
-  const [exercises, setExercises] = useState([]);
   const [filterName, setFilterName] = useState("");
-  const [allExercisesForFiltering, setAllExercisesForFiltering] = useState([]);
   const [filterByBodyPart, setFilterByBodyPart] = useState("");
   const [filterByEquipment, setFilterByEquipment] = useState("");
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchExercises = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("/.netlify/functions/exerciseRead");
-        const responseDataRes = await response.json();
-        const responseData = responseDataRes?.data?.exercises || [];
-
-        const loadedExercises = [];
-
-        for (const key in responseData) {
-          loadedExercises.push({
-            id: responseData[key]._id,
-            nameEn: responseData[key].nameEn,
-            bodyPart: responseData[key].bodyPart,
-            equipment: responseData[key].equipment,
-          });
-        }
-        setExercises(loadedExercises);
-        setAllExercisesForFiltering(loadedExercises);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-      }
-    };
-
-    fetchExercises();
-  }, []);
+  const { loading, exercises, allExercisesForFiltering, setExercises } =
+    useFetchExercises();
 
   if (loading)
     return (

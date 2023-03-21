@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
 import EditResult from "./EditResult";
 import Spinner from "react-bootstrap/Spinner";
+import useFetchResult from "../hooks/useFetchResult";
 
 const Result = () => {
   const format = "YYYY-MM-DD dddd";
   const moment = require("moment");
-
-  let { id } = useParams();
-  const [results, setResults] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
-  const [loading, setLoading] = useState(true);
   const OpenModalEdit = (props) => {
     return (
       <Modal
@@ -64,30 +60,7 @@ const Result = () => {
     );
   };
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/.netlify/functions/resultRead?id=${id}`);
-
-        const responseData = await response.json();
-        const resultObj = responseData.data.results[0];
-        setResults({
-          id: resultObj._id,
-          templateName: resultObj.templateName,
-          description: resultObj.description,
-          templateExercises: resultObj.templateExercises,
-          bodyWeight: resultObj.bodyWeight,
-          date: resultObj.date,
-        });
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-      }
-    };
-    fetchResults();
-  }, [id]);
+  const { id, loading, results } = useFetchResult({});
 
   const navigate = useNavigate();
 

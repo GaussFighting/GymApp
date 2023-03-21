@@ -1,58 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import Chart from "../Chart";
 import allTypeResults from "../../utils/allTypeResults";
 import ExerciseChartHeader from "./ExerciseChartHeader";
 import ExerciseChartResultRender from "./ExerciseChartResultRender";
+import useFetchResults from "../../hooks/useFetchResults";
 
-const ExerciseCharts = ({ exerciseId }) => {
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isError, setIsError] = useState(null);
-
-  useEffect(() => {
-    const fetchResults = async () => {
-      let response = "";
-      try {
-        setLoading(true);
-        response = exerciseId
-          ? await fetch(
-              `/.netlify/functions/resultRead?exerciseId=${exerciseId}`
-            )
-          : await fetch(`/.netlify/functions/resultRead`);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        setIsError("server error");
-        console.log(error);
-      }
-      if (!(200 <= response.status && response.status < 300)) {
-        setIsError("error - status is not 2XX");
-        console.log("error", response);
-      } else {
-        const responseData = await response.json();
-        const loadedResults = [];
-
-        const resultArr = responseData.data.results;
-
-        for (const key in resultArr) {
-          loadedResults.push({
-            id: resultArr[key]._id,
-            templateName: resultArr[key].templateName,
-            descritpion: resultArr[key].description,
-            bodyWeight: resultArr[key].bodyWeight,
-            date: resultArr[key].date,
-            templateExercises: resultArr[key].templateExercises,
-          });
-        }
-        setResults(loadedResults);
-      }
-    };
-
-    fetchResults();
-  }, [exerciseId]);
-
+const ExerciseChart = ({ exerciseId }) => {
+  const { results, loading, isError } = useFetchResults({ exerciseId });
   if (isError) {
     return <div>{isError}</div>;
   }
@@ -93,4 +49,4 @@ const ExerciseCharts = ({ exerciseId }) => {
     </div>
   );
 };
-export default ExerciseCharts;
+export default ExerciseChart;

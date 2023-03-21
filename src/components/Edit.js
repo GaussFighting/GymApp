@@ -1,43 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
+import React from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row } from "react-bootstrap";
+import useFetchExercise from "../hooks/useFetchExercise";
 
 const Edit = ({ exerciseName, bodyPart, equipment }) => {
-  const [form, setForm] = useState({
-    nameEn: exerciseName,
-    bodyPart: bodyPart.toUpperCase(),
-    equipment: equipment,
+  const { form, setForm, params, navigate } = useFetchExercise({
+    exerciseName,
+    bodyPart,
+    equipment,
   });
-
-  const params = useParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const id = params.id.toString();
-      const response = await fetch(
-        `/.netlify/functions/exerciseRead?id=${params.id.toString()}`
-      );
-
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const record = await response.json();
-      if (!record) {
-        window.alert(`Record with id ${id} not found`);
-        navigate("/");
-        return;
-      }
-
-      setForm(record);
-    };
-
-    fetchData();
-  }, [params.id, navigate]);
 
   // These methods will update the state properties.
   const updateForm = (value) => {

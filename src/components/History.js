@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import Spinner from "react-bootstrap/Spinner";
+import useFetchResults from "../hooks/useFetchResults";
 
 const History = () => {
-  const [results, setResults] = useState([]);
   let [startDate, setStartDate] = useState();
   let [endDate, setEndDate] = useState();
   const [filteredResults, setFilteredResults] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const format = "YYYY-MM-DD";
   const moment = require("moment");
 
@@ -44,42 +42,7 @@ const History = () => {
     });
   };
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        // setLoading(true);
-        const response =
-          startDate && endDate
-            ? await fetch(
-                `/.netlify/functions/resultRead?startDate=${startDate}&endDate=${endDate}`
-              )
-            : await fetch(`/.netlify/functions/resultRead`);
-
-        const responseData = await response.json();
-        const loadedResults = [];
-        const resultArr = responseData.data.results;
-
-        for (const key in resultArr) {
-          loadedResults.push({
-            id: resultArr[key]._id,
-            templateName: resultArr[key].templateName,
-            descritpion: resultArr[key].description,
-            bodyWeight: resultArr[key].bodyWeight,
-            date: resultArr[key].date,
-            templateExercises: resultArr[key].templateExercises,
-          });
-        }
-        setResults(loadedResults);
-        console.log("loadedResults", loadedResults);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-      }
-    };
-
-    fetchResults();
-  }, [startDate, endDate]);
+  const { results, loading } = useFetchResults({ startDate, endDate });
 
   if (loading)
     return (
