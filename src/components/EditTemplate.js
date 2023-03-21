@@ -3,44 +3,13 @@ import { useParams, useNavigate } from "react-router";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
 import ChooseExercise from "./ChooseExercise";
+import useFetchTempalte from "../hooks/useFetchTemplate";
 
 const Edit = () => {
-  const [formTemplate, setFormTemplate] = useState({
-    templateName: "",
-    description: "",
-    templateExercises: [],
-  });
-  console.log(formTemplate);
   const params = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const id = params.id.toString();
-      console.log(id);
-      const response = await fetch(
-        `/.netlify/functions/templateRead?id=${params.id.toString()}`
-      );
-
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const record = await response.json();
-      if (!record) {
-        window.alert(`Record with id ${id} not found`);
-        navigate("/");
-        return;
-      }
-
-      setFormTemplate(record.data.templates[0]);
-    };
-
-    fetchData();
-  }, [params.id, navigate]);
-
+  const { formTemplate, setFormTemplate } = useFetchTempalte();
   // These methods will update the state properties.
   const updateForm = (value) => {
     return setFormTemplate((prev) => {

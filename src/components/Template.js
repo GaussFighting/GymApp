@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
 import EditTemplate from "./EditTemplate";
 import Spinner from "react-bootstrap/Spinner";
+import useFetchTempalte from "../hooks/useFetchTemplate";
 
 const OpenModalEdit = (props) => {
   return (
@@ -50,39 +50,9 @@ const OpenModal = (props) => {
 };
 
 const Template = () => {
-  let { id } = useParams();
-  const [template, setTemplate] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTemplate = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `/.netlify/functions/templateRead?id=${id}`
-        );
-
-        const responseData = await response.json();
-
-        const templateObj = responseData.data.templates[0];
-
-        setTemplate({
-          id: templateObj._id,
-          templateName: templateObj.templateName,
-          description: templateObj.description,
-          templateExercises: templateObj.templateExercises,
-        });
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-      }
-    };
-    fetchTemplate();
-  }, [id]);
-
+  const { id, loading, template } = useFetchTempalte();
   const navigate = useNavigate();
 
   if (loading)
@@ -103,7 +73,7 @@ const Template = () => {
     }
     navigate("/templatelist");
   };
-
+  console.log(template);
   return (
     <div className="main-template-div">
       <Row>

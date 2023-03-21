@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
 import ChooseExercise from "./ChooseExercise";
+import useFetchResult from "../hooks/useFetchResult";
 
 const EditResult = ({
   bodyWeight,
@@ -11,45 +12,20 @@ const EditResult = ({
   templateName,
   templateExercises,
 }) => {
-  const [formResult, setFormResult] = useState({
-    bodyWeight: bodyWeight,
-    date: date,
-    templateName: templateName,
-    description: description,
-    templateExercises: templateExercises,
+  const { formResult, setFormResult } = useFetchResult({
+    bodyWeight,
+    date,
+    description,
+    templateName,
+    templateExercises,
   });
+
   console.log(formResult);
   const params = useParams();
   const navigate = useNavigate();
   const format = "YYYY-MM-DD";
   const moment = require("moment");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const id = params.id.toString();
-      const response = await fetch(
-        `/.netlify/functions/resultRead?id=${params.id.toString()}`
-      );
-
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const record = await response.json();
-      if (!record) {
-        window.alert(`Record with id ${id} not found`);
-        navigate("/");
-        return;
-      }
-      setFormResult(record.data.results[0]);
-    };
-
-    fetchData();
-  }, [params.id, navigate]);
-
-  // These methods will update the state properties.
   const updateForm = (value) => {
     return setFormResult((prev) => {
       return { ...prev, ...value };

@@ -3,10 +3,10 @@ import ChooseExercise from "./ChooseExercise";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import useFetchExercises from "../hooks/useFetchExercises";
 
 const AddNewTemplate = () => {
   const [addedExercises, setAddedExercises] = useState([]);
-  const [exercises, setExercises] = useState([]);
   const [formTemplate, setFormTemplate] = useState({});
 
   const navigate = useNavigate();
@@ -39,26 +39,7 @@ const AddNewTemplate = () => {
     navigate("/templatelist");
   };
 
-  useEffect(() => {
-    const fetchExercises = async () => {
-      const response = await fetch("/.netlify/functions/exerciseRead");
-
-      const responseData = await response.json();
-      const loadedExercises = [];
-
-      for (const key in responseData) {
-        loadedExercises.push({
-          id: responseData[key]._id,
-          nameEn: responseData[key].nameEn,
-          bodyPart: responseData[key].bodyPart,
-          equipment: responseData[key].equipment,
-        });
-      }
-      setExercises(loadedExercises);
-    };
-
-    fetchExercises();
-  }, []);
+  const { exercises } = useFetchExercises();
 
   useEffect(() => {
     setFormTemplate((prev) => {

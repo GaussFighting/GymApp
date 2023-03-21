@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { ListGroupItem, Row, Col, Modal } from "react-bootstrap";
 import Edit from "./Edit.js";
 import ExerciseChart from "./ExerciseChart/ExerciseChart.js";
+import useFetchExercise from "../hooks/useFetchExercise.js";
 
 const Exercise = () => {
   const OpenModalEdit = (props) => {
@@ -53,25 +53,10 @@ const Exercise = () => {
     );
   };
 
-  let { id } = useParams();
-  const [exercise, setExercise] = useState({});
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowEdit, setModalShowEdit] = React.useState(false);
-  useEffect(() => {
-    const fetchExercise = async () => {
-      const response = await fetch(`/.netlify/functions/exerciseRead?id=${id}`);
 
-      const responseData = await response.json();
-      const execiseRead = await responseData.data.exercises[0];
-      setExercise({
-        id: execiseRead._id,
-        nameEn: execiseRead.nameEn,
-        bodyPart: execiseRead.bodyPart,
-        equipment: execiseRead.equipment,
-      });
-    };
-    fetchExercise();
-  }, [id]);
+  const { exercise, id } = useFetchExercise({});
 
   const navigate = useNavigate();
 
