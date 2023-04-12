@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useParams, useNavigate } from "react-router";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
@@ -17,29 +17,32 @@ const Edit = () => {
     });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const editedTemplate = {
-      templateName: formTemplate.templateName,
-      description: formTemplate.description,
-      templateExercises: formTemplate.templateExercises,
-    };
+  const onSubmit = useCallback(
+    async (e, dataOnSubmit, params) => {
+      e.preventDefault();
+      const editedTemplate = {
+        templateName: dataOnSubmit.templateName,
+        description: dataOnSubmit.description,
+        templateExercises: dataOnSubmit.templateExercises,
+      };
 
-    // This will send a post request to update the data in the database.
-    try {
-      await fetch(`/.netlify/functions/templateUpdate?id=${params.id}`, {
-        method: "PUT",
-        body: JSON.stringify(editedTemplate),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(params.id);
-    navigate("/templatelist");
-  };
+      // This will send a post request to update the data in the database.
+      try {
+        await fetch(`/.netlify/functions/templateUpdate?id=${params.id}`, {
+          method: "PUT",
+          body: JSON.stringify(editedTemplate),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      console.log(params.id);
+      navigate("/templatelist");
+    },
+    [navigate]
+  );
 
   const addExercises = (callback) => {
     setFormTemplate((prevFormTemplate) => {
@@ -169,7 +172,7 @@ const Edit = () => {
             color="primary"
             className="ml-0"
             disabled={!localStorage.getItem("isAdmin")}
-            onClick={(e) => onSubmit(e)}>
+            onClick={(e) => onSubmit(e, formTemplate, params)}>
             EDIT
           </Button>
         </div>

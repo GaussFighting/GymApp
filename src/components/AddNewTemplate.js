@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ChooseExercise from "./ChooseExercise";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
@@ -17,27 +17,29 @@ const AddNewTemplate = () => {
     });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await fetch(`/.netlify/functions/templateCreate`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formTemplate),
+  const onSubmit = useCallback(
+    async (e, dataOnSubmit) => {
+      e.preventDefault();
+      try {
+        await fetch(`/.netlify/functions/templateCreate`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataOnSubmit),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      setFormTemplate({
+        templateName: "",
+        description: "",
+        templateExercises: [],
       });
-    } catch (error) {
-      console.log(error);
-    }
-
-    setFormTemplate({
-      templateName: "",
-      description: "",
-      templateExercises: [],
-    });
-    navigate("/templatelist");
-  };
+      navigate("/templatelist");
+    },
+    [navigate]
+  );
 
   const { exercises } = useFetchExercises();
 
@@ -151,7 +153,7 @@ const AddNewTemplate = () => {
       <FormGroup>
         <Button
           color="primary"
-          onClick={(e) => onSubmit(e)}
+          onClick={(e) => onSubmit(e, formTemplate)}
           className="add-new-template-cancel-button">
           SUBMIT
         </Button>

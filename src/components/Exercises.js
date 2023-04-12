@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import FormExercises from "./FormExercises";
 import FormSelector from "./FormSelector";
 import AddNewExercise from "./AddNewExercise";
-import Spinner from "react-bootstrap/Spinner";
 import useFetchExercises from "../hooks/useFetchExercises";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Exercises = () => {
   const [filterName, setFilterName] = useState("");
@@ -16,14 +17,24 @@ const Exercises = () => {
   const { loading, exercises, allExercisesForFiltering, setExercises } =
     useFetchExercises();
 
-  if (loading)
-    return (
-      <div className="d-flex spinner">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Preparing data in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
 
   const downloadCSV = () => {
     const csvString = [
