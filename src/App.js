@@ -12,10 +12,15 @@ import Template from "./components/Template";
 import Workout from "./components/Workout";
 import Result from "./components/Result";
 import NoPage from "./components/NoPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <Router>
+      <div>
+        <ToastContainer />
+      </div>
       <div>
         <Navigationbar />
         <div className="container-sm">

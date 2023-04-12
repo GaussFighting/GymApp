@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Modal, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 const MyVerticallyCenteredModal = (props) => {
   const [form, setForm] = useState({
@@ -10,16 +9,14 @@ const MyVerticallyCenteredModal = (props) => {
     selectedEquipment: "BAREBELL",
   });
 
-  const navigate = useNavigate();
-
   let updateForm = (value) => {
     return setForm((prev) => {
       return { ...prev, ...value };
     });
   };
-  const onSubmit = async (e) => {
+  const onSubmit = useCallback(async (e, dataOnSubmit) => {
     e.preventDefault();
-    const newExercise = { ...form };
+    const newExercise = { ...dataOnSubmit };
     try {
       const res = await fetch("/.netlify/functions/exerciseCreate", {
         method: "POST",
@@ -40,7 +37,8 @@ const MyVerticallyCenteredModal = (props) => {
 
     setForm({ exerciseName: "", selectedBodyPart: "", selectedEquipment: "" });
     props.onHide();
-  };
+  }, []);
+
   return (
     <Modal
       onHide={props.onHide}
@@ -109,7 +107,7 @@ const MyVerticallyCenteredModal = (props) => {
         </Form>
       </Modal.Body>
       <Modal.Footer className="center-block-button">
-        <Button color="primary" onClick={(e) => onSubmit(e)}>
+        <Button color="primary" onClick={(e) => onSubmit(e, form)}>
           Save
         </Button>
         <Button color="primary" onClick={props.onHide}>

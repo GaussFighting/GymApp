@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row } from "react-bootstrap";
 import useFetchExercise from "../hooks/useFetchExercise";
 
 const Edit = ({ exerciseName, bodyPart, equipment }) => {
-  const { form, setForm, params, navigate } = useFetchExercise({
+  const { form, setForm, id, navigate } = useFetchExercise({
     exerciseName,
     bodyPart,
     equipment,
@@ -17,29 +17,33 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
     });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const editedExercise = {
-      nameEn: form.nameEn,
-      bodyPart: form.bodyPart,
-      equipment: form.equipment,
-    };
+  const onSubmit = useCallback(
+    async (e, dataOnSubmit, id) => {
+      e.preventDefault();
+      const editedExercise = {
+        nameEn: dataOnSubmit.nameEn,
+        bodyPart: dataOnSubmit.bodyPart,
+        equipment: dataOnSubmit.equipment,
+      };
+      console.log("editedExercise", editedExercise);
 
-    // This will send a post request to update the data in the database.
-    try {
-      await fetch(`/.netlify/functions/exerciseUpdate?id=${params.id}`, {
-        method: "PUT",
-        body: JSON.stringify(editedExercise),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(params.id);
-    navigate("/exercises");
-  };
+      // This will send a post request to update the data in the database.
+      try {
+        await fetch(`/.netlify/functions/exerciseUpdate?id=${id}`, {
+          method: "PUT",
+          body: JSON.stringify(editedExercise),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      // console.log(params.id);
+      navigate("/exercises");
+    },
+    [navigate]
+  );
 
   // This following section will display the form that takes input from the user to update the data.
   return (
@@ -51,7 +55,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             className="input "
             type="text"
             placeholder="Search..."
-            value={exerciseName.toUpperCase()}
+            value={form.nameEn}
             onChange={(e) => updateForm({ nameEn: e.target.value })}></Input>
         </FormGroup>
         <FormGroup className="form-group">
@@ -60,7 +64,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            value={bodyPart.toUpperCase()}
+            value={form.bodyPart}
             onChange={(e) => updateForm({ bodyPart: e.target.value })}>
             <option>BACK</option>
             <option>LEGS</option>
@@ -81,7 +85,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             type="select"
             name="select"
             id="exampleSelect"
-            value={equipment.toUpperCase()}
+            value={form.equipment}
             onChange={(e) => updateForm({ equipment: e.target.value })}>
             <option>BAREBELL</option>
             <option>DUMBBELL</option>
@@ -105,7 +109,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
           color="primary"
           className="button-edit"
           disabled={!localStorage.getItem("isAdmin")}
-          onClick={(e) => onSubmit(e)}>
+          onClick={(e) => onSubmit(e, form, id)}>
           EDIT
         </Button>
       </Row>

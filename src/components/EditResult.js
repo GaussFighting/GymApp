@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useParams, useNavigate } from "react-router";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
@@ -32,30 +32,33 @@ const EditResult = ({
     });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const editedResult = {
-      bodyWeight: formResult.bodyWeight,
-      date: formResult.date,
-      templateName: formResult.templateName,
-      description: formResult.description,
-      templateExercises: formResult.templateExercises,
-    };
-    // This will send a post request to update the data in the database.
-    try {
-      await fetch(`/.netlify/functions/resultUpdate?id=${params.id}`, {
-        method: "PUT",
-        body: JSON.stringify(editedResult),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(params.id);
-    navigate("/history");
-  };
+  const onSubmit = useCallback(
+    async (e, dataOnSubmit, params) => {
+      e.preventDefault();
+      const editedResult = {
+        bodyWeight: dataOnSubmit.bodyWeight,
+        date: dataOnSubmit.date,
+        templateName: dataOnSubmit.templateName,
+        description: dataOnSubmit.description,
+        templateExercises: dataOnSubmit.templateExercises,
+      };
+      // This will send a post request to update the data in the database.
+      try {
+        await fetch(`/.netlify/functions/resultUpdate?id=${params.id}`, {
+          method: "PUT",
+          body: JSON.stringify(editedResult),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      console.log(params.id);
+      navigate("/history");
+    },
+    [navigate]
+  );
 
   const addExercises = (callback) => {
     setFormResult((prevFormResult) => {
@@ -434,7 +437,7 @@ const EditResult = ({
             className="flex"
             // disabled={!localStorage.getItem("isAdmin")}
 
-            onClick={(e) => onSubmit(e)}>
+            onClick={(e) => onSubmit(e, formResult, params)}>
             EDIT
           </Button>
         </Row>

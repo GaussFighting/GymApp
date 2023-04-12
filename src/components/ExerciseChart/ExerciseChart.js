@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import Chart from "../Chart";
@@ -9,6 +9,14 @@ import useFetchResults from "../../hooks/useFetchResults";
 
 const ExerciseChart = ({ exerciseId }) => {
   const { results, loading, isError } = useFetchResults({ exerciseId });
+  const bestResults = useMemo(() => {
+    if (results.length > 0) {
+      return allTypeResults(results, exerciseId);
+    } else {
+      return {};
+    }
+  }, [results, exerciseId]);
+  console.log("bestResults", bestResults, results.length);
   if (isError) {
     return <div>{isError}</div>;
   }
@@ -21,7 +29,8 @@ const ExerciseChart = ({ exerciseId }) => {
         </Spinner>
       </div>
     );
-  const bestResults = allTypeResults(results, exerciseId);
+  // const bestResults = allTypeResults(results, exerciseId);
+  // console.log("bestResults", bestResults);
 
   if (!results.length) {
     return (
