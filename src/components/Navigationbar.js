@@ -26,7 +26,7 @@ const Navigationbar = () => {
           <NavbarToggler onClick={toggle} className="navbar-light" />
         </div>
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="justify-content-end" justified="true " navbar pills>
+          <Nav className="justify-content-end" justified navbar pills>
             <NavItem onClick={navTogglerClose}>
               <NavLink className="nav-link" to="/">
                 PROFILE <br></br>

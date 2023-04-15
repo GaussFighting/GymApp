@@ -73,7 +73,6 @@ const Template = () => {
     }
     navigate("/templatelist");
   };
-  console.log(template);
   return (
     <div className="main-template-div">
       <Row>

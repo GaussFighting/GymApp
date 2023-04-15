@@ -4,9 +4,6 @@ const Template = require("../models/templateModel");
 exports.handler = async (event, context) => {
   const mongoose = await connectDb(process.env.REACT_APP_DB);
 
-  console.log(mongoose.connection.readyState, "ready state template");
-  console.log("EVENT", event);
-  console.log("CONTEXT", context);
   context.callbackWaitsForEmptyEventLoop = false;
   const id = event.queryStringParameters.id;
   try {

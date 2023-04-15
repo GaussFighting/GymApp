@@ -1,7 +1,6 @@
 import moment from "moment";
 
 let allTypeResults = (results, exerciseId) => {
-  console.log(results);
   let arrayOfFilteredExercises = [];
   results.forEach((training) => {
     training.templateExercises.forEach((exercise) => {

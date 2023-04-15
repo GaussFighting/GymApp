@@ -25,9 +25,7 @@ const MyVerticallyCenteredModal = (props) => {
         },
         body: JSON.stringify(newExercise),
       });
-      console.log("res", res);
       const record = await res.json();
-      console.log("record:", record);
       props.setExercises((prev) => {
         return [...prev, record.data];
       });

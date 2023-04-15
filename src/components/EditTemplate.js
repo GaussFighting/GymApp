@@ -38,7 +38,7 @@ const Edit = () => {
       } catch (error) {
         console.log(error);
       }
-      console.log(params.id);
+
       navigate("/templatelist");
     },
     [navigate]
@@ -125,7 +125,6 @@ const Edit = () => {
                           ),
                         };
                       });
-                      console.log(event.target.value);
                     }}></Input>{" "}
                   <div className="sets-view">SETS</div>
                 </Col>
@@ -134,7 +133,6 @@ const Edit = () => {
                     color="primary"
                     onClick={() => {
                       setFormTemplate((template) => {
-                        console.log(template.templateExercises);
                         return {
                           templateName: template.templateName,
                           description: template.description,

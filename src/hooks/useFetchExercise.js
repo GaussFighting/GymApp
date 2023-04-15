@@ -37,7 +37,7 @@ const useFetchExercise = ({ exerciseName, bodyPart, equipment }) => {
           equipment: execiseRead.equipment,
         });
 
-        setForm(record);
+        setForm(execiseRead);
       } catch (error) {
         console.log(error);
       }

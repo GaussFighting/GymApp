@@ -16,7 +16,6 @@ const ExerciseChart = ({ exerciseId }) => {
       return {};
     }
   }, [results, exerciseId]);
-  console.log("bestResults", bestResults, results.length);
   if (isError) {
     return <div>{isError}</div>;
   }
@@ -29,8 +28,6 @@ const ExerciseChart = ({ exerciseId }) => {
         </Spinner>
       </div>
     );
-  // const bestResults = allTypeResults(results, exerciseId);
-  // console.log("bestResults", bestResults);
 
   if (!results.length) {
     return (

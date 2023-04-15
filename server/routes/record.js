@@ -62,7 +62,6 @@ recordRoutes.route("/results").get(function (req, res) {
 
 // This section will help you get a list of all the records.
 recordRoutes.route("/results_per_exercise").get(function (req, res) {
-  console.log("AAA", req.query.exerciseId);
   const exerciseId = req.query.exerciseId;
 
   let db_connect = dbo.getDb("GYMAPP");
@@ -75,8 +74,6 @@ recordRoutes.route("/results_per_exercise").get(function (req, res) {
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
-      console.log(result);
-      console.log(result.length);
     });
 });
 
@@ -156,8 +153,6 @@ recordRoutes.route("/results").post(function (req, response) {
 
 // This section will help you update a record by id.
 recordRoutes.route("/exercise/:id").put(function (req, response) {
-  console.log("asdf");
-
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
@@ -178,8 +173,6 @@ recordRoutes.route("/exercise/:id").put(function (req, response) {
 
 // This section will help you update a record by id.
 recordRoutes.route("/template/:id").put(function (req, response) {
-  console.log("asdf");
-
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
@@ -200,8 +193,6 @@ recordRoutes.route("/template/:id").put(function (req, response) {
 
 // This section will help you update a record by id.
 recordRoutes.route("/results/:id").put(function (req, response) {
-  console.log("asdf");
-
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
