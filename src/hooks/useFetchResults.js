@@ -5,7 +5,6 @@ const useFetchResults = (propsObj) => {
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(null);
 
-  console.log("aa", typeof propsObj.exerciseId);
   let urlChecker = `/.netlify/functions/resultRead`;
   if (propsObj.exerciseId)
     urlChecker = `/.netlify/functions/resultRead?exerciseId=${propsObj.exerciseId}`;

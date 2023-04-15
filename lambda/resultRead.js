@@ -4,9 +4,6 @@ const Result = require("../models/resultModel");
 exports.handler = async (event, context) => {
   const mongoose = await connectDb(process.env.REACT_APP_DB);
 
-  console.log(mongoose.connection.readyState, "ready state result");
-  console.log("EVENT", event);
-  console.log("CONTEXT", context);
   context.callbackWaitsForEmptyEventLoop = false;
   const id = event.queryStringParameters.id;
   const exerciseId = event.queryStringParameters.exerciseId;
@@ -34,7 +31,6 @@ exports.handler = async (event, context) => {
     } else {
       results = await Result.find({}).sort({ date: -1 });
     }
-    console.log("ABC", results);
     const response = {
       msg: "Results successfully found",
       data: {

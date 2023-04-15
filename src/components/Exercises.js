@@ -56,7 +56,6 @@ const Exercises = () => {
     window.open(encodedUri);
     document.body.removeChild(link);
   };
-  console.log(exercises);
   const ExercisesList = exercises.map((exercise, idx) => (
     <ListGroup key={exercise.id + idx}>
       <Button className="button">

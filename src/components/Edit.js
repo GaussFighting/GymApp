@@ -4,7 +4,7 @@ import { Row } from "react-bootstrap";
 import useFetchExercise from "../hooks/useFetchExercise";
 
 const Edit = ({ exerciseName, bodyPart, equipment }) => {
-  const { form, setForm, id, navigate } = useFetchExercise({
+  const { form, setForm, id, navigate, exercise } = useFetchExercise({
     exerciseName,
     bodyPart,
     equipment,
@@ -25,7 +25,6 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
         bodyPart: dataOnSubmit.bodyPart,
         equipment: dataOnSubmit.equipment,
       };
-      console.log("editedExercise", editedExercise);
 
       // This will send a post request to update the data in the database.
       try {
@@ -39,7 +38,6 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
       } catch (error) {
         console.log(error);
       }
-      // console.log(params.id);
       navigate("/exercises");
     },
     [navigate]
@@ -53,6 +51,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
           <Label for="exampleSelect ">PUT NEW NAME</Label>
           <Input
             className="input "
+            name="exerciseName"
             type="text"
             placeholder="Search..."
             value={form.nameEn}

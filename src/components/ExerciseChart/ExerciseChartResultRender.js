@@ -15,7 +15,7 @@ const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
     const shortTrainingSummary = twoColResRend(ex, exerciseId);
     const singleTrainRes = singleTrainingResults(ex, exerciseId);
     return (
-      <div className="single-training-result">
+      <div className="single-training-result" key={"ResultRender" + index}>
         <React.Fragment key={"mainRow" + index}>
           {index === 0 && <ExerciseChartSubHeader bestResults={bestResults} />}
           <div key={"exerciseLink" + index}>

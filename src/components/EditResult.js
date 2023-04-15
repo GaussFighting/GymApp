@@ -20,7 +20,6 @@ const EditResult = ({
     templateExercises,
   });
 
-  console.log(formResult);
   const params = useParams();
   const navigate = useNavigate();
   const format = "YYYY-MM-DD";
@@ -54,7 +53,6 @@ const EditResult = ({
       } catch (error) {
         console.log(error);
       }
-      console.log(params.id);
       navigate("/history");
     },
     [navigate]
@@ -63,10 +61,10 @@ const EditResult = ({
   const addExercises = (callback) => {
     setFormResult((prevFormResult) => {
       const pickedExcercises = callback(prevFormResult.templateExercises);
-      console.log(pickedExcercises);
+
       return {
         ...prevFormResult,
-        templateExercises: pickedExcercises.map((ex, index) => {
+        templateExercises: pickedExcercises.map((ex) => {
           if (ex.addedResults) {
             return ex;
           } else if (ex.equipment === "cardio" || ex.equipment === "CARDIO") {
@@ -268,7 +266,9 @@ const EditResult = ({
         <Row>
           {formResult.templateExercises &&
             formResult.templateExercises.map((exercise, idx) => (
-              <Row className="template-single-row-exercise" key={exercise.id}>
+              <Row
+                className="template-single-row-exercise"
+                key={exercise.id + idx}>
                 <Col sm="1" md="1" className="px-0 single-col">
                   {idx + 1}{" "}
                 </Col>
@@ -287,7 +287,7 @@ const EditResult = ({
                 {exercise.addedResults &&
                   exercise.addedResults.map((result, index) => {
                     return (
-                      <React.Fragment key={result - index}>
+                      <React.Fragment key={result + index}>
                         {index === 0 && (
                           <Row>
                             <Col sm="12" className="firstCol" md="4">

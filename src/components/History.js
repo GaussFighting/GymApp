@@ -76,7 +76,6 @@ const History = () => {
           placeholder="date placeholder"
           type="date"
           onChange={(date) => {
-            console.log(date.target.value);
             setStartDate(() => {
               return moment(date.target.value).toDate();
             });
