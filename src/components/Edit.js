@@ -42,7 +42,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
     },
     [navigate]
   );
-
+  console.log(form.bodyPart);
   // This following section will display the form that takes input from the user to update the data.
   return (
     <Form className="edit-form">
@@ -61,7 +61,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
           <Label for="exampleSelect">SELECT BODY PART</Label>
           <Input
             type="select"
-            name="select"
+            name="bodyPart"
             id="exampleSelect"
             value={form.bodyPart}
             onChange={(e) => updateForm({ bodyPart: e.target.value })}>
@@ -82,7 +82,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
           <Label for="exampleSelect">SELECT BODY PART</Label>
           <Input
             type="select"
-            name="select"
+            name="equipment"
             id="exampleSelect"
             value={form.equipment}
             onChange={(e) => updateForm({ equipment: e.target.value })}>
