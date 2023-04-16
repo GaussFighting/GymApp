@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Modal, Row, Col } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const MyVerticallyCenteredModal = (props) => {
   const [form, setForm] = useState({
@@ -8,9 +9,34 @@ const MyVerticallyCenteredModal = (props) => {
     selectedBodyPart: "CHEST",
     selectedEquipment: "BAREBELL",
   });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isWaiting, setIsWaiting] = useState(false);
+  console.log(isWaiting);
+
+  const toastId = React.useRef(null);
+
+  console.log("errorMsg", errorMsg);
+
+  useEffect(() => {
+    if (errorMsg) {
+      setIsWaiting(true);
+      toastId.current = toast(errorMsg, {
+        position: "top-center",
+        autoClose: 100000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    setErrorMsg("");
+  }, [errorMsg]);
 
   let updateForm = (value) => {
     return setForm((prev) => {
+      setIsWaiting(false);
       return { ...prev, ...value };
     });
   };
@@ -26,6 +52,12 @@ const MyVerticallyCenteredModal = (props) => {
         body: JSON.stringify(newExercise),
       });
       const record = await res.json();
+      if (res.status < 200 || res.status > 299) {
+        // errorMsg = alert(record.msg);
+        setErrorMsg(record.msg);
+
+        return;
+      }
       props.setExercises((prev) => {
         return [...prev, record.data];
       });
@@ -37,6 +69,11 @@ const MyVerticallyCenteredModal = (props) => {
     props.onHide();
   }, []);
 
+  const onClose = () => {
+    props.onHide();
+    setIsWaiting(false);
+  };
+
   return (
     <Modal
       onHide={props.onHide}
@@ -44,7 +81,7 @@ const MyVerticallyCenteredModal = (props) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered>
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter ">
           Please add new exercise
         </Modal.Title>
@@ -105,10 +142,13 @@ const MyVerticallyCenteredModal = (props) => {
         </Form>
       </Modal.Body>
       <Modal.Footer className="center-block-button">
-        <Button color="primary" onClick={(e) => onSubmit(e, form)}>
+        <Button
+          disabled={isWaiting}
+          color="primary"
+          onClick={(e) => onSubmit(e, form)}>
           Save
         </Button>
-        <Button color="primary" onClick={props.onHide}>
+        <Button color="primary" onClick={onClose}>
           Close
         </Button>
       </Modal.Footer>
@@ -123,7 +163,7 @@ const AddNewExercise = ({
   uniqueListEquipment,
   setExercises,
 }) => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   const optionsBodyPart = uniqueListBodyPart.map((item, idx) => (
     <option key={item + idx}>{item}</option>
