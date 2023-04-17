@@ -4,6 +4,7 @@ const useFetchResults = (propsObj) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(null);
+  const [count, setCount] = useState(0);
 
   let urlChecker = `/.netlify/functions/resultRead`;
   if (propsObj.exerciseId)
@@ -12,13 +13,18 @@ const useFetchResults = (propsObj) => {
   if (propsObj.startDate && propsObj.endDate)
     urlChecker = `/.netlify/functions/resultRead?startDate=${propsObj.startDate}&endDate=${propsObj.endDate}`;
 
+  if (propsObj.countTrainings)
+    urlChecker = `/.netlify/functions/resultRead?countTrainings=${propsObj.countTrainings}`;
+
   useEffect(() => {
     const fetchResults = async () => {
       let res = "";
       try {
         setLoading(true);
         res = await fetch(urlChecker);
+
         setLoading(false);
+        console.log("propsObj", res);
       } catch (error) {
         setLoading(false);
         setIsError("server error");
@@ -29,8 +35,10 @@ const useFetchResults = (propsObj) => {
         console.log("error", res);
       } else {
         const responseData = await res.json();
+        console.log("responseData", responseData);
         const loadedResults = [];
-        const resultArr = responseData.data.results;
+        const resultArr = responseData.data.res.results;
+        console.log("resultArr", resultArr);
         resultArr.forEach((el) => {
           loadedResults.push({
             id: el._id,
@@ -42,11 +50,13 @@ const useFetchResults = (propsObj) => {
           });
         });
         setResults(loadedResults);
+        setCount(responseData.data.res.count);
       }
     };
     fetchResults();
   }, [urlChecker]);
-  return { results, loading, isError };
+
+  return { results, loading, isError, count };
 };
 
 export default useFetchResults;

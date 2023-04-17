@@ -15,28 +15,38 @@ exports.handler = async (event, context) => {
     new Date(event.queryStringParameters.endDate);
   const isoStartDate = startDate && startDate.toISOString();
   const isoEndDate = endDate && endDate.toISOString();
+  const countTrainings = event.queryStringParameters.countTrainings;
 
+  console.log("numberOfTrainings", event.queryStringParameters);
   try {
-    let results = {};
+    let res = {};
     if (id) {
-      results = await Result.find({ _id: id }).sort({ date: -1 });
+      res = { results: await Result.find({ _id: id }).sort({ date: -1 }) };
     } else if (exerciseId) {
-      results = await Result.find({
-        templateExercises: { $elemMatch: { id: exerciseId } },
-      }).sort({ date: -1 });
+      res = {
+        results: await Result.find({
+          templateExercises: { $elemMatch: { id: exerciseId } },
+        }).sort({ date: -1 }),
+      };
     } else if (isoStartDate && isoEndDate) {
-      results = await Result.find({
-        date: { $gte: isoStartDate, $lte: isoEndDate },
-      }).sort({ date: -1 });
+      res = {
+        results: await Result.find({
+          date: { $gte: isoStartDate, $lte: isoEndDate },
+        }).sort({ date: -1 }),
+      };
+    } else if (countTrainings) {
+      res = { results: [], count: await Result.find({}).count() };
     } else {
-      results = await Result.find({}).sort({ date: -1 });
+      res = { results: await Result.find({}).sort({ date: -1 }) };
     }
+
     const response = {
       msg: "Results successfully found",
       data: {
-        results,
+        res,
       },
     };
+    console.log("response", response);
     mongoose.connection.close();
     return {
       statusCode: 200,

@@ -11,11 +11,8 @@ const MyVerticallyCenteredModal = (props) => {
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [isWaiting, setIsWaiting] = useState(false);
-  console.log(isWaiting);
 
   const toastId = React.useRef(null);
-
-  console.log("errorMsg", errorMsg);
 
   useEffect(() => {
     if (errorMsg) {

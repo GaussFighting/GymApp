@@ -44,6 +44,8 @@ const History = () => {
 
   const { results, loading } = useFetchResults({ startDate, endDate });
 
+  console.log(results);
+
   if (loading)
     return (
       <div className="d-flex spinner">
