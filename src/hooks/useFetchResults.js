@@ -15,6 +15,8 @@ const useFetchResults = (propsObj) => {
 
   if (propsObj.countTrainings)
     urlChecker = `/.netlify/functions/resultRead?countTrainings=${propsObj.countTrainings}`;
+  if (propsObj.countTrainings2023)
+    urlChecker = `/.netlify/functions/resultRead?countTrainings2023=${propsObj.countTrainings2023}`;
 
   useEffect(() => {
     const fetchResults = async () => {

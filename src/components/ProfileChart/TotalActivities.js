@@ -5,10 +5,10 @@ const TotalActivities = () => {
   const { count } = useFetchResults({
     countTrainings: true,
   });
-  console.log("results", count);
+  console.log("TotalActivities", count);
   return (
     <div>
-      TotalActivities
+      <h4>Total number of trainings : {count}</h4>
       <div className="spacer"></div>
     </div>
   );

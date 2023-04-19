@@ -16,6 +16,9 @@ exports.handler = async (event, context) => {
   const isoStartDate = startDate && startDate.toISOString();
   const isoEndDate = endDate && endDate.toISOString();
   const countTrainings = event.queryStringParameters.countTrainings;
+  const countTrainings2023 = event.queryStringParameters.countTrainings2023;
+
+  console.log("2023", event);
 
   console.log("numberOfTrainings", event.queryStringParameters);
   try {
@@ -29,6 +32,7 @@ exports.handler = async (event, context) => {
         }).sort({ date: -1 }),
       };
     } else if (isoStartDate && isoEndDate) {
+      console.log("Data", isoStartDate, typeof isoStartDate);
       res = {
         results: await Result.find({
           date: { $gte: isoStartDate, $lte: isoEndDate },
@@ -36,9 +40,22 @@ exports.handler = async (event, context) => {
       };
     } else if (countTrainings) {
       res = { results: [], count: await Result.find({}).count() };
+    } else if (countTrainings2023) {
+      res = {
+        results: [],
+        count: await Result.find({
+          date: {
+            $gte: "2023-01-01T00:00:00.000Z",
+            $lte: "2024-01-01T00:00:00.000Z",
+          },
+        }).count(),
+      };
     } else {
       res = { results: await Result.find({}).sort({ date: -1 }) };
     }
+    console.log("startDate", startDate, typeof startDate);
+    console.log("isoStartDate", isoStartDate, typeof isoStartDate);
+    console.log("2023-01-01T00:00:00.000Z");
 
     const response = {
       msg: "Results successfully found",
