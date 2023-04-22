@@ -16,11 +16,30 @@ exports.handler = async (event, context) => {
   const isoStartDate = startDate && startDate.toISOString();
   const isoEndDate = endDate && endDate.toISOString();
   const countTrainings = event.queryStringParameters.countTrainings;
-  const countTrainings2023 = event.queryStringParameters.countTrainings2023;
+  const countTrainingsPerYears =
+    event.queryStringParameters.countTrainingsPerYears;
+  const countWeights = event.queryStringParameters.countWeights;
 
-  console.log("2023", event);
+  let arrayOfTraining = async () => {
+    let currentYear = new Date().getFullYear();
+    let arrayOfTotalTrainings = [];
+    for (let i = currentYear; i > 2015; i--) {
+      let isoCurrentYear = new Date(i.toString()).toISOString();
+      let isoEndOfYear = new Date((i + 1).toString()).toISOString();
 
-  console.log("numberOfTrainings", event.queryStringParameters);
+      arrayOfTotalTrainings = [
+        ...arrayOfTotalTrainings,
+        await Result.find({
+          date: {
+            $gte: isoCurrentYear,
+            $lte: isoEndOfYear,
+          },
+        }).count(),
+      ];
+    }
+    return arrayOfTotalTrainings;
+  };
+
   try {
     let res = {};
     if (id) {
@@ -40,22 +59,20 @@ exports.handler = async (event, context) => {
       };
     } else if (countTrainings) {
       res = { results: [], count: await Result.find({}).count() };
-    } else if (countTrainings2023) {
+    } else if (countTrainingsPerYears) {
       res = {
         results: [],
-        count: await Result.find({
-          date: {
-            $gte: "2023-01-01T00:00:00.000Z",
-            $lte: "2024-01-01T00:00:00.000Z",
-          },
-        }).count(),
+        count: await arrayOfTraining(),
+      };
+    } else if (countWeights) {
+      res = {
+        results: await Result.find({}, { templateExercises: 0 }).sort({
+          date: -1,
+        }),
       };
     } else {
       res = { results: await Result.find({}).sort({ date: -1 }) };
     }
-    console.log("startDate", startDate, typeof startDate);
-    console.log("isoStartDate", isoStartDate, typeof isoStartDate);
-    console.log("2023-01-01T00:00:00.000Z");
 
     const response = {
       msg: "Results successfully found",
@@ -64,7 +81,7 @@ exports.handler = async (event, context) => {
       },
     };
     console.log("response", response);
-    mongoose.connection.close();
+    // mongoose.connection.close(); was it necessery? MongoNotConnectedError: Client must be connected before running operations
     return {
       statusCode: 200,
       body: JSON.stringify(response),

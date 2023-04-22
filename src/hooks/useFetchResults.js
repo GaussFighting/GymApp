@@ -15,8 +15,10 @@ const useFetchResults = (propsObj) => {
 
   if (propsObj.countTrainings)
     urlChecker = `/.netlify/functions/resultRead?countTrainings=${propsObj.countTrainings}`;
-  if (propsObj.countTrainings2023)
-    urlChecker = `/.netlify/functions/resultRead?countTrainings2023=${propsObj.countTrainings2023}`;
+  if (propsObj.countTrainingsPerYears)
+    urlChecker = `/.netlify/functions/resultRead?countTrainingsPerYears=${propsObj.countTrainingsPerYears}`;
+  if (propsObj.countWeights)
+    urlChecker = `/.netlify/functions/resultRead?countWeights=${propsObj.countWeights}`;
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -42,6 +44,27 @@ const useFetchResults = (propsObj) => {
         const resultArr = responseData.data.res.results;
         console.log("resultArr", resultArr);
         resultArr.forEach((el) => {
+          // if (
+          //   el._id &&
+          //   el.bodyWeight &&
+          //   el.date &&
+          //   !el.templateName &&
+          //   !el.description
+          // ) {
+          //   loadedResults.push({
+          //     id: el._id,
+          //     bodyWeight: el.bodyWeight,
+          //     date: el.date,
+          //   });
+          // }
+          // if (
+          //   el._id &&
+          //   el.bodyWeight &&
+          //   el.date &&
+          //   el.templateName &&
+          //   el.description &&
+          //   el.templateExercises
+          // )
           loadedResults.push({
             id: el._id,
             templateName: el.templateName,

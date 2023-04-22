@@ -8,7 +8,9 @@ const TotalActivities = () => {
   console.log("TotalActivities", count);
   return (
     <div>
-      <h4>Total number of trainings : {count}</h4>
+      <h4 className="my-3">
+        Total number of trainings : <b>{count}</b>
+      </h4>
       <div className="spacer"></div>
     </div>
   );
