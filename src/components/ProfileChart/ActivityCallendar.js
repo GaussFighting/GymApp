@@ -1,12 +1,12 @@
 import React from "react";
 
-const CurrentYearCallendar = () => {
+const ActivityCallendar = () => {
   return (
     <div>
-      CurrentYearCallendar
+      ActivityCallendar
       <div className="spacer"></div>
     </div>
   );
 };
 
-export default CurrentYearCallendar;
+export default ActivityCallendar;

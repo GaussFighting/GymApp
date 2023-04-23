@@ -44,35 +44,36 @@ const useFetchResults = (propsObj) => {
         const resultArr = responseData.data.res.results;
         console.log("resultArr", resultArr);
         resultArr.forEach((el) => {
-          // if (
-          //   el._id &&
-          //   el.bodyWeight &&
-          //   el.date &&
-          //   !el.templateName &&
-          //   !el.description
-          // ) {
-          //   loadedResults.push({
-          //     id: el._id,
-          //     bodyWeight: el.bodyWeight,
-          //     date: el.date,
-          //   });
-          // }
-          // if (
-          //   el._id &&
-          //   el.bodyWeight &&
-          //   el.date &&
-          //   el.templateName &&
-          //   el.description &&
-          //   el.templateExercises
-          // )
-          loadedResults.push({
-            id: el._id,
-            templateName: el.templateName,
-            descritpion: el.description,
-            bodyWeight: el.bodyWeight,
-            date: el.date,
-            templateExercises: el.templateExercises,
-          });
+          if (
+            el._id &&
+            el.bodyWeight &&
+            el.date &&
+            !el.templateName &&
+            !el.description &&
+            !el.templateExercises
+          ) {
+            loadedResults.push({
+              id: el._id,
+              bodyWeight: el.bodyWeight,
+              date: el.date,
+            });
+          }
+          if (
+            el._id &&
+            el.bodyWeight &&
+            el.date &&
+            el.templateName &&
+            el.description &&
+            el.templateExercises
+          )
+            loadedResults.push({
+              id: el._id,
+              templateName: el.templateName,
+              descritpion: el.description,
+              bodyWeight: el.bodyWeight,
+              date: el.date,
+              templateExercises: el.templateExercises,
+            });
         });
         setResults(loadedResults);
         setCount(responseData.data.res.count);

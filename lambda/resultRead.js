@@ -66,7 +66,7 @@ exports.handler = async (event, context) => {
       };
     } else if (countWeights) {
       res = {
-        results: await Result.find({}, { templateExercises: 0 }).sort({
+        results: await Result.find({}, { bodyWeight: 1, date: 1 }).sort({
           date: -1,
         }),
       };
