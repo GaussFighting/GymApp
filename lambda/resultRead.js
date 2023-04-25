@@ -19,12 +19,14 @@ exports.handler = async (event, context) => {
   const countTrainingsPerYears =
     event.queryStringParameters.countTrainingsPerYears;
   const countWeights = event.queryStringParameters.countWeights;
+  const countDays = event.queryStringParameters.countDays;
 
   let arrayOfTraining = async () => {
     let currentYear = new Date().getFullYear();
     let arrayOfTotalTrainings = [];
     for (let i = currentYear; i > 2015; i--) {
       let isoCurrentYear = new Date(i.toString()).toISOString();
+      const aYearAgoFromNow = new Date();
       let isoEndOfYear = new Date((i + 1).toString()).toISOString();
 
       arrayOfTotalTrainings = [
@@ -68,6 +70,21 @@ exports.handler = async (event, context) => {
       res = {
         results: await Result.find({}, { bodyWeight: 1, date: 1 }).sort({
           date: -1,
+        }),
+      };
+    } else if (countDays) {
+      let isoCurrenttDate = new Date().toISOString();
+      let isoYearAgoDate = new Date(
+        new Date().setFullYear(new Date().getFullYear() - 1)
+      ).toISOString();
+      res = {
+        results: await Result.find(
+          {
+            date: { $gte: isoYearAgoDate, $lte: isoCurrenttDate },
+          },
+          { date: 1 }
+        ).sort({
+          date: 1,
         }),
       };
     } else {

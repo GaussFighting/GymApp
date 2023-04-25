@@ -56,7 +56,6 @@ const DayOfTheWeekDiagram = () => {
   };
 
   const data = dataOfDays();
-  console.log("data", data);
 
   const COLORS = [
     "#f9aa33",
@@ -78,6 +77,7 @@ const DayOfTheWeekDiagram = () => {
     percent,
     name,
     fill,
+    payload,
   }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const radius1 = innerRadius + (outerRadius - innerRadius) * 1.1;
@@ -96,7 +96,7 @@ const DayOfTheWeekDiagram = () => {
           {`${(percent * 100).toFixed(0)}%`}
         </text>
         <text x={x1} y={y1} fill={fill} textAnchor={x > cx ? "start" : "end"}>
-          {name}
+          {name} {`\n`} {`(${payload.value})`}
         </text>
       </>
     );
@@ -114,7 +114,7 @@ const DayOfTheWeekDiagram = () => {
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
-              outerRadius={200}
+              outerRadius={250}
               fill="#8884d8"
               dataKey="value">
               {data.map((entry, index) => (
