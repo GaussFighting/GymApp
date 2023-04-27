@@ -52,11 +52,12 @@ const useFetchResults = (propsObj) => {
             el.date &&
             !el.templateName &&
             !el.description &&
-            !el.templateExercises
+            el.templateExercises
           ) {
             loadedResults.push({
               id: el._id,
               date: el.date,
+              templateExercises: el.templateExercises,
             });
           }
           if (

@@ -12,9 +12,12 @@ const ActivityCallendar = () => {
   const { results } = useFetchResults({
     countDays: true,
   });
+
+  console.log("AAAAAAAAA", results);
   const format = "YYYY-MM-DD";
   let omg = () => {
     if (results.length > 0) {
+      console.log("A", results);
       let lastYearArr = [];
       for (let i = 0; i < results.length; i++) {
         lastYearArr = [
@@ -22,7 +25,7 @@ const ActivityCallendar = () => {
           {
             date: moment(results[i].date).format(format),
             count: 1,
-            level: 4,
+            level: results[i].templateExercises.length - 3,
           },
         ];
       }

@@ -82,7 +82,7 @@ exports.handler = async (event, context) => {
           {
             date: { $gte: isoYearAgoDate, $lte: isoCurrenttDate },
           },
-          { date: 1 }
+          { date: 1, templateExercises: 1 }
         ).sort({
           date: 1,
         }),
