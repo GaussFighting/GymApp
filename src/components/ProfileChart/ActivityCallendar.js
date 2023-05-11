@@ -1,14 +1,9 @@
 import React from "react";
-import ActivityCalendar, { ThemeInput } from "react-activity-calendar";
+import ActivityCalendar from "react-activity-calendar";
 import useFetchResults from "../../hooks/useFetchResults";
 import moment from "moment";
 
 const ActivityCallendar = () => {
-  const minimalTheme = {
-    light: ["hsl(0, 0%, 92%)", "rebeccapurple"],
-    // dark: the default theme will be used as fallback
-  };
-
   const { results } = useFetchResults({
     countDays: true,
   });
