@@ -4,7 +4,7 @@ import { Row } from "react-bootstrap";
 import useFetchExercise from "../hooks/useFetchExercise";
 
 const Edit = ({ exerciseName, bodyPart, equipment }) => {
-  const { form, setForm, id, navigate, exercise } = useFetchExercise({
+  const { form, setForm, id, navigate } = useFetchExercise({
     exerciseName,
     bodyPart,
     equipment,

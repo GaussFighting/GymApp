@@ -3,7 +3,7 @@ import ChooseExercise from "./ChooseExercise";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import useFetchExercises from "../hooks/useFetchExercises";
+// import useFetchExercises from "../hooks/useFetchExercises";
 
 const AddNewTemplate = () => {
   const [addedExercises, setAddedExercises] = useState([]);
@@ -41,7 +41,7 @@ const AddNewTemplate = () => {
     [navigate]
   );
 
-  const { exercises } = useFetchExercises();
+  // const { exercises } = useFetchExercises();
 
   useEffect(() => {
     setFormTemplate((prev) => {
