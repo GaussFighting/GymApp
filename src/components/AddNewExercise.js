@@ -37,7 +37,7 @@ const MyVerticallyCenteredModal = (props) => {
       return { ...prev, ...value };
     });
   };
-  const onSubmit = useCallback(async (e, dataOnSubmit) => {
+  const onSubmit = useCallback(async (e, dataOnSubmit, props) => {
     e.preventDefault();
     const newExercise = { ...dataOnSubmit };
     try {
