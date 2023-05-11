@@ -218,6 +218,30 @@ a {
   text-align: center;
   background-color: $muted;
 }
+.profile-table {
+  text-align: center;
+  font-weight: bold;
+}
+.profile-table-item {
+  padding-bottom: 10px;
+  border-bottom: 1px solid;
+}
+.profile-table-item:nth-child(n + 1) {
+  border-right: 1px solid;
+}
+.profile-table-item:last-child {
+  border-right: none;
+}
+.profile-table-item-result {
+  padding-top: 10px;
+}
+.profile-table-item-result:nth-child(n + 1) {
+  border-right: 1px solid;
+}
+.profile-table-item-result:last-child {
+  border-right: none;
+}
+
 .col-name {
   font-size: rem(22);
   background-color: $primary;

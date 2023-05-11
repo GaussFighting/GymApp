@@ -15,29 +15,90 @@ exports.handler = async (event, context) => {
     new Date(event.queryStringParameters.endDate);
   const isoStartDate = startDate && startDate.toISOString();
   const isoEndDate = endDate && endDate.toISOString();
+  const countTrainings = event.queryStringParameters.countTrainings;
+  const countTrainingsPerYears =
+    event.queryStringParameters.countTrainingsPerYears;
+  const countWeights = event.queryStringParameters.countWeights;
+  const countDays = event.queryStringParameters.countDays;
+
+  let arrayOfTraining = async () => {
+    let currentYear = new Date().getFullYear();
+    let arrayOfTotalTrainings = [];
+    for (let i = currentYear; i > 2015; i--) {
+      let isoCurrentYear = new Date(i.toString()).toISOString();
+      const aYearAgoFromNow = new Date();
+      let isoEndOfYear = new Date((i + 1).toString()).toISOString();
+
+      arrayOfTotalTrainings = [
+        ...arrayOfTotalTrainings,
+        await Result.find({
+          date: {
+            $gte: isoCurrentYear,
+            $lte: isoEndOfYear,
+          },
+        }).count(),
+      ];
+    }
+    return arrayOfTotalTrainings;
+  };
 
   try {
-    let results = {};
+    let res = {};
     if (id) {
-      results = await Result.find({ _id: id }).sort({ date: -1 });
+      res = { results: await Result.find({ _id: id }).sort({ date: -1 }) };
     } else if (exerciseId) {
-      results = await Result.find({
-        templateExercises: { $elemMatch: { id: exerciseId } },
-      }).sort({ date: -1 });
+      res = {
+        results: await Result.find({
+          templateExercises: { $elemMatch: { id: exerciseId } },
+        }).sort({ date: -1 }),
+      };
     } else if (isoStartDate && isoEndDate) {
-      results = await Result.find({
-        date: { $gte: isoStartDate, $lte: isoEndDate },
-      }).sort({ date: -1 });
+      console.log("Data", isoStartDate, typeof isoStartDate);
+      res = {
+        results: await Result.find({
+          date: { $gte: isoStartDate, $lte: isoEndDate },
+        }).sort({ date: -1 }),
+      };
+    } else if (countTrainings) {
+      res = { results: [], count: await Result.find({}).count() };
+    } else if (countTrainingsPerYears) {
+      res = {
+        results: [],
+        count: await arrayOfTraining(),
+      };
+    } else if (countWeights) {
+      res = {
+        results: await Result.find({}, { bodyWeight: 1, date: 1 }).sort({
+          date: -1,
+        }),
+      };
+    } else if (countDays) {
+      let isoCurrenttDate = new Date().toISOString();
+      let isoYearAgoDate = new Date(
+        new Date().setFullYear(new Date().getFullYear() - 1)
+      ).toISOString();
+      res = {
+        results: await Result.find(
+          {
+            date: { $gte: isoYearAgoDate, $lte: isoCurrenttDate },
+          },
+          { date: 1, templateExercises: 1 }
+        ).sort({
+          date: 1,
+        }),
+      };
     } else {
-      results = await Result.find({}).sort({ date: -1 });
+      res = { results: await Result.find({}).sort({ date: -1 }) };
     }
+
     const response = {
       msg: "Results successfully found",
       data: {
-        results,
+        res,
       },
     };
-    mongoose.connection.close();
+    console.log("response", response);
+    // mongoose.connection.close(); was it necessery? MongoNotConnectedError: Client must be connected before running operations
     return {
       statusCode: 200,
       body: JSON.stringify(response),

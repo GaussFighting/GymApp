@@ -27,7 +27,7 @@ const useFetchResult = ({
         setLoading(true);
         const res = await fetch(`/.netlify/functions/resultRead?id=${id}`);
         const resData = await res.json();
-        const resultObj = resData.data.results[0];
+        const resultObj = resData.data.res.results[0];
         setResults({
           id: resultObj._id,
           templateName: resultObj.templateName,

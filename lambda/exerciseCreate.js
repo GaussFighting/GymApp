@@ -7,7 +7,6 @@ exports.handler = async (event, context) => {
 
   const data = JSON.parse(event.body);
 
-  console.log("data", data);
   const exerciseName = data.exerciseName;
   const equipment = data.selectedEquipment;
   const exercises = await Exercise.find({
@@ -20,7 +19,6 @@ exports.handler = async (event, context) => {
       exercises,
     },
   };
-  console.log("exercises:", exercises);
 
   if (response1)
     try {
