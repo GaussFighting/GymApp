@@ -1,5 +1,6 @@
 const connectDb = require("../db/connectDb");
 const User = require("../models/userModel");
+const bcrypt = require("bcryptjs");
 
 exports.handler = async (event, context) => {
   const mongoose = await connectDb(process.env.REACT_APP_DB);
@@ -7,11 +8,13 @@ exports.handler = async (event, context) => {
 
   const data = JSON.parse(event.body);
 
-  const username = data.username;
+  const firstname = data.firstname;
+  const lastname = data.lastname;
   const password = data.password;
   const email = data.email;
   const users = await User.find({
-    username: username,
+    firstname: firstname,
+    lastname: lastname,
     password: password,
     email: email,
   });
@@ -24,17 +27,22 @@ exports.handler = async (event, context) => {
 
   if (response1)
     try {
-      if (users.length > 0) {
+      const oldUser = await User.findOne({ email });
+      console.log(oldUser);
+      if (oldUser) {
         console.log("This User exists in database!");
         const response = {
           msg: "This User exists in database!",
         };
         return { statusCode: 409, body: JSON.stringify(response) };
       }
+      let encryptedPassword = await bcrypt.hash(data.password, 10);
+
       const user = {
         _id: mongoose.Types.ObjectId(),
-        username: data.username,
-        password: data.password,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        password: encryptedPassword,
         email: data.email,
       };
       const response = {

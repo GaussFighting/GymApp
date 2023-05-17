@@ -4,9 +4,14 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  username: {
+  firstname: {
     type: String,
-    required: [true, "Username field is required"],
+    required: [true, "Firstname field is required"],
+    max: 200,
+  },
+  lastname: {
+    type: String,
+    required: [true, "Lastname field is required"],
     max: 200,
   },
   password: {
@@ -16,6 +21,7 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: [true, "Email field is required"],
     max: 200,
   },

@@ -2,21 +2,55 @@ import React, { useState } from "react";
 
 const SignUp = () => {
   const [form, setForm] = useState({
-    username: "",
+    firstname: "",
+    lastname: "",
     password: "",
     email: "",
   });
+  console.log(form);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/.netlify/functions/userCreate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  let updateForm = (value) => {
+    return setForm((prev) => {
+      return { ...prev, ...value };
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={(e) => onSubmit(e, form)}>
       <h3>Sign Up</h3>
 
       <div>
-        <label>UserName</label>
+        <label>First name</label>
         <input
           type="text"
-          placeholder="Enter username"
+          placeholder="Enter First Name"
           onChange={(event) =>
-            useState({ username: event.target.value })
+            updateForm({ firstname: event.target.value })
+          }></input>
+      </div>
+      <div>
+        <label>Last name</label>
+        <input
+          type="text"
+          placeholder="Enter Last Name"
+          onChange={(event) =>
+            updateForm({ lastname: event.target.value })
           }></input>
       </div>
       <div>
@@ -25,7 +59,7 @@ const SignUp = () => {
           type="password"
           placeholder="Enter password"
           onChange={(event) =>
-            useState({ password: event.target.value })
+            updateForm({ password: event.target.value })
           }></input>
       </div>
       <div>
@@ -33,13 +67,15 @@ const SignUp = () => {
         <input
           type="email"
           placeholder="Enter email"
-          onChange={(event) => useState({ email: event.target.value })}></input>
+          onChange={(event) =>
+            updateForm({ email: event.target.value })
+          }></input>
       </div>
       <div>
         <button type="submit">Sign Up</button>
       </div>
       <p>
-        Already registered <a href="/sign-in">sign in!</a>
+        Already registered? <a href="/signin">sign in!</a>
       </p>
     </form>
   );

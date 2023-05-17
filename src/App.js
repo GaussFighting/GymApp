@@ -14,6 +14,9 @@ import Result from "./components/Result";
 import NoPage from "./components/NoPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
+import UserDetails from "./components/UserDetails";
 
 const App = () => {
   return (
@@ -46,6 +49,9 @@ const App = () => {
               path="/emptyworkout"
               element={<Workout template={false} />}
             />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/userdetails" element={<UserDetails />} />
             <Route path="/*" element={<NoPage />} />
           </Routes>
         </div>
