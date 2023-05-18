@@ -15,7 +15,16 @@ exports.handler = async (event, context) => {
   console.log("data", event.body);
   const token = data.token;
   try {
-    const user = jwt.verify(token, jwtSecret);
+    const user = jwt.verify(token, jwtSecret, (err, res) => {
+      if (err) {
+        return "token expired";
+      }
+      return res;
+    });
+    if (user == "token expired") {
+      return { statusCode: 500, body: JSON.stringify("token expired") };
+    }
+
     const useremail = user.email;
     const userData = await User.findOne({ email: useremail }).then((data) => {
       return data;

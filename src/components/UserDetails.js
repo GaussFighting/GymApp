@@ -15,14 +15,25 @@ const UserDetails = () => {
       const asdf = await res.json();
       console.log("RES", asdf);
       setUserData(asdf);
+      if (asdf == "token expired") {
+        alert("Token expired login again");
+        window.localStorage.clear();
+        window.location.href = "/signin";
+      }
     };
     asdf();
   }, []);
+
+  const logOut = () => {
+    window.localStorage.clear();
+    window.location.href = "./signin";
+  };
 
   return (
     <div>
       Name<h1>{userData.firstname}</h1>
       Last Name <h1>{userData.lastname}</h1>
+      <button onClick={(e) => logOut(e)}>Log Out</button>
     </div>
   );
 };

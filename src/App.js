@@ -19,6 +19,7 @@ import SignIn from "./components/SignIn";
 import UserDetails from "./components/UserDetails";
 
 const App = () => {
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
   return (
     <Router>
       <div>
@@ -28,11 +29,18 @@ const App = () => {
         <Navigationbar />
         <div className="container-sm">
           <Routes>
+            <Route
+              path="/"
+              element={isLoggedIn == "true" ? <UserDetails /> : <SignIn />}
+            />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/userdetails" element={<UserDetails />} />
             <Route path="/exercises" element={<Exercises />} />
             <Route path="/history" element={<History />} />
             <Route path="/results/:id" element={<Result />} />
             <Route path="/startworkout" element={<StartWorkout />} />
-            <Route path="/" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/exercise/:id" element={<Exercise />} />
             <Route path="/addnewtemplate" element={<AddNewTemplate />} />
             <Route path="/templatelist" element={<TemplatesList />} />
@@ -49,9 +57,7 @@ const App = () => {
               path="/emptyworkout"
               element={<Workout template={false} />}
             />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/userdetails" element={<UserDetails />} />
+
             <Route path="/*" element={<NoPage />} />
           </Routes>
         </div>

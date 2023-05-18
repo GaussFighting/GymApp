@@ -19,7 +19,9 @@ const SignIn = () => {
 
       const myToken = await res.json();
       console.log(myToken);
+      alert("login successful");
       window.localStorage.setItem("token", myToken);
+      window.localStorage.setItem("loggedIn", true);
       window.location.href = "./userDetails";
     } catch (error) {
       console.log(error);
