@@ -26,12 +26,12 @@ const App = () => {
         <ToastContainer />
       </div>
       <div>
-        <Navigationbar />
+        {isLoggedIn && <Navigationbar />}
         <div className="container-sm">
           <Routes>
             <Route
               path="/"
-              element={isLoggedIn == "true" ? <UserDetails /> : <SignIn />}
+              element={isLoggedIn === "true" ? <UserDetails /> : <SignIn />}
             />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />

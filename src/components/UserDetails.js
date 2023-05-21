@@ -15,7 +15,7 @@ const UserDetails = () => {
       const asdf = await res.json();
       console.log("RES", asdf);
       setUserData(asdf);
-      if (asdf == "token expired") {
+      if (asdf === "token expired") {
         alert("Token expired login again");
         window.localStorage.clear();
         window.location.href = "/signin";

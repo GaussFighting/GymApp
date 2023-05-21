@@ -68,6 +68,23 @@ a {
   text-decoration: none;
   color: $light;
 }
+.sign-in {
+  color: $dark;
+}
+.sign-in:hover {
+  color: $secondary;
+}
+.signup {
+  border: 1px solid black;
+  border-radius: 40px;
+
+  width: 50%;
+  height: 65vh;
+  margin: auto;
+  margin-top: 15vh;
+
+  background-color: $muted;
+}
 .body {
   font-size: 1rem;
 }
