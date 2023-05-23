@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
     }
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign({ email: user.email }, jwtSecret, {
-        expiresIn: 100,
+        expiresIn: 3600,
       });
       console.log("token", token);
       return { statusCode: 200, body: JSON.stringify(token) };

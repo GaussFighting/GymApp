@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
+// import axios from "axios";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -7,22 +8,33 @@ const SignUp = () => {
     lastname: "",
     password: "",
     email: "",
+    userType: "",
+    // ipAdress: "",
   });
+  // const [ip, setIp] = useState("");
+  const userTypeKey = process.env.REACT_APP_API_KEY;
+  const [secretKey, setSecretKey] = useState("");
   console.log(form);
+  console.log("A", secretKey !== userTypeKey);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch("/.netlify/functions/userCreate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-      console.log(res);
-    } catch (error) {
-      console.log(error);
+    if (form.userType === "Admin" && secretKey !== userTypeKey) {
+      alert("Invalid Admin");
+    } else {
+      try {
+        const res = await fetch("/.netlify/functions/userCreate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+        console.log(res);
+        window.location.href = "./signin";
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -32,11 +44,20 @@ const SignUp = () => {
     });
   };
 
+  // const getData = async () => {
+  //   const res = await axios.get("https://api.ipify.org/?format=json");
+  //   console.log(res.data);
+  //   updateForm({ ipAdress: res.data.ip });
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
   return (
     <div className="signup">
       <form className="mb-3 py-5">
         <h3>Sign Up</h3>
-
         <div className="mb-3 pt-3">
           <label>First name</label>
           <input
@@ -58,16 +79,6 @@ const SignUp = () => {
             }></input>
         </div>
         <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter password"
-            className="form-control"
-            onChange={(event) =>
-              updateForm({ password: event.target.value })
-            }></input>
-        </div>
-        <div className="mb-3">
           <label>Email adress</label>
           <input
             type="email"
@@ -77,6 +88,45 @@ const SignUp = () => {
               updateForm({ email: event.target.value })
             }></input>
         </div>
+        <div className="mb-3">
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            className="form-control"
+            onChange={(event) =>
+              updateForm({ password: event.target.value })
+            }></input>
+        </div>
+        <div>
+          {" "}
+          Register As{" "}
+          <input
+            type="radio"
+            name="UserType"
+            value="User"
+            onChange={(event) => updateForm({ userType: event.target.value })}
+          />{" "}
+          User{" "}
+          <input
+            type="radio"
+            name="UserType"
+            value="Admin"
+            onChange={(event) => updateForm({ userType: event.target.value })}
+          />{" "}
+          Admin
+        </div>
+        {form.userType === "Admin" && (
+          <div className="mb-3">
+            <label>Secret Key</label>
+            <input
+              type="text"
+              placeholder="Secret Key"
+              className="form-control"
+              onChange={(event) => setSecretKey(event.target.value)}></input>
+          </div>
+        )}
+
         <div className="mb-3 pb-3">
           <Button
             color="primary"
@@ -88,9 +138,11 @@ const SignUp = () => {
         <p>Already registered? </p>
         <p>
           {" "}
-          <a className="sign-in" href="/signin">
-            Sign in!
-          </a>
+          <strong>
+            <a className="sign-in" href="/signin">
+              Sign in!
+            </a>
+          </strong>
         </p>
       </form>
     </div>

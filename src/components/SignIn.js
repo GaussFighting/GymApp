@@ -23,7 +23,7 @@ const SignIn = () => {
       alert("login successful");
       window.localStorage.setItem("token", myToken);
       window.localStorage.setItem("loggedIn", true);
-      window.location.href = "./userdetails";
+      window.location.href = "./";
     } catch (error) {
       console.log(error);
     }
@@ -36,39 +36,41 @@ const SignIn = () => {
   };
 
   return (
-    <form className="mb-3 py-5">
-      <h3>Sign In</h3>
+    <div className="signin">
+      <form className="mb-3 py-5">
+        <h3>Sign In</h3>
 
-      <div className="mb-3 pt-3">
-        <label>Email adress</label>
-        <input
-          type="email"
-          placeholder="Enter email"
-          className="form-control"
-          onChange={(event) =>
-            updateForm({ email: event.target.value })
-          }></input>
-      </div>
-      <div className="mb-3">
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          className="form-control"
-          onChange={(event) =>
-            updateForm({ password: event.target.value })
-          }></input>
-      </div>
+        <div className="mb-3 pt-3">
+          <label>Email adress</label>
+          <input
+            type="email"
+            placeholder="Enter email"
+            className="form-control"
+            onChange={(event) =>
+              updateForm({ email: event.target.value })
+            }></input>
+        </div>
+        <div className="mb-3">
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            className="form-control"
+            onChange={(event) =>
+              updateForm({ password: event.target.value })
+            }></input>
+        </div>
 
-      <div className="mb-3">
-        <Button
-          color="primary"
-          className="add-new-template-cancel-button center-block"
-          onClick={(e) => onSubmit(e, form)}>
-          Log in!
-        </Button>
-      </div>
-    </form>
+        <div className="mb-3">
+          <Button
+            color="primary"
+            className="add-new-template-cancel-button center-block"
+            onClick={(e) => onSubmit(e, form)}>
+            Log in!
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

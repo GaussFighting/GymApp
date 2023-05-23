@@ -12,11 +12,13 @@ exports.handler = async (event, context) => {
   const lastname = data.lastname;
   const password = data.password;
   const email = data.email;
+  const userType = data.userType;
   const users = await User.find({
     firstname: firstname,
     lastname: lastname,
     password: password,
     email: email,
+    user: userType,
   });
   const response1 = {
     msg: "User successfully found",
@@ -44,6 +46,7 @@ exports.handler = async (event, context) => {
         lastname: data.lastname,
         password: encryptedPassword,
         email: data.email,
+        userType: data.userType,
       };
       const response = {
         msg: "Users successfully created",

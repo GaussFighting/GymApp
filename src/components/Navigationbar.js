@@ -28,7 +28,7 @@ const Navigationbar = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="justify-content-end" justified navbar pills>
             <NavItem onClick={navTogglerClose}>
-              <NavLink className="nav-link" to="/profile">
+              <NavLink className="nav-link" to="/">
                 PROFILE <br></br>
                 <FontAwesomeIcon icon={faUser} size="2x" />
               </NavLink>

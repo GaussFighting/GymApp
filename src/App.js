@@ -16,7 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
-import UserDetails from "./components/UserDetails";
+// import UserDetails from "./components/UserDetails";
 
 const App = () => {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
@@ -31,16 +31,15 @@ const App = () => {
           <Routes>
             <Route
               path="/"
-              element={isLoggedIn === "true" ? <UserDetails /> : <SignIn />}
+              element={isLoggedIn === "true" ? <Profile /> : <SignUp />}
             />
-            <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/userdetails" element={<UserDetails />} />
+            {/* <Route path="/userdetails" element={<UserDetails />} /> */}
             <Route path="/exercises" element={<Exercises />} />
             <Route path="/history" element={<History />} />
             <Route path="/results/:id" element={<Result />} />
             <Route path="/startworkout" element={<StartWorkout />} />
-            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="/profile" element={<Profile />} /> */}
             <Route path="/exercise/:id" element={<Exercise />} />
             <Route path="/addnewtemplate" element={<AddNewTemplate />} />
             <Route path="/templatelist" element={<TemplatesList />} />

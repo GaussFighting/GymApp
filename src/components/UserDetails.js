@@ -4,7 +4,7 @@ const UserDetails = () => {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const asdf = async () => {
+    const dataOfUser = async () => {
       const res = await fetch("/.netlify/functions/userDataCreate", {
         method: "POST",
         headers: {
@@ -12,21 +12,21 @@ const UserDetails = () => {
         },
         body: JSON.stringify({ token: window.localStorage.getItem("token") }),
       });
-      const asdf = await res.json();
-      console.log("RES", asdf);
-      setUserData(asdf);
-      if (asdf === "token expired") {
+      const dataOfUserResponse = await res.json();
+      console.log("RES", dataOfUserResponse);
+      setUserData(dataOfUserResponse);
+      if (dataOfUserResponse === "token expired") {
         alert("Token expired login again");
         window.localStorage.clear();
         window.location.href = "/signin";
       }
     };
-    asdf();
+    dataOfUser();
   }, []);
 
   const logOut = () => {
     window.localStorage.clear();
-    window.location.href = "./signin";
+    window.location.href = "./";
   };
 
   return (

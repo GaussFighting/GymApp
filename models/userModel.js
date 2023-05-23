@@ -25,6 +25,11 @@ const userSchema = new Schema({
     required: [true, "Email field is required"],
     max: 200,
   },
+  userType: {
+    type: String,
+    required: [true, "Email field is required"],
+    max: 200,
+  },
 });
 
 module.exports = mongoose.model("Users", userSchema);
