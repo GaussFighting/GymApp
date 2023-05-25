@@ -7,6 +7,11 @@ const SignIn = () => {
     email: "",
   });
   console.log(form);
+
+  const isEmpty = Object.values(form).some((el) => {
+    return !el;
+  });
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -19,11 +24,17 @@ const SignIn = () => {
       });
 
       const myToken = await res.json();
-      console.log(myToken);
-      alert("login successful");
-      window.localStorage.setItem("token", myToken);
-      window.localStorage.setItem("loggedIn", true);
-      window.location.href = "./";
+      console.log("myToken", myToken);
+      if (myToken.msg) {
+        alert(`${myToken.msg}`);
+        window.location.href = "./";
+      } else {
+        console.log(myToken);
+        alert("login successful");
+        window.localStorage.setItem("token", myToken);
+        window.localStorage.setItem("loggedIn", true);
+        window.location.href = "./";
+      }
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +75,7 @@ const SignIn = () => {
         <div className="mb-3">
           <Button
             color="primary"
+            disabled={!!isEmpty}
             className="add-new-template-cancel-button center-block"
             onClick={(e) => onSubmit(e, form)}>
             Log in!

@@ -14,6 +14,11 @@ const SignUp = () => {
   // const [ip, setIp] = useState("");
   const userTypeKey = process.env.REACT_APP_API_KEY;
   const [secretKey, setSecretKey] = useState("");
+
+  const isEmpty = Object.values(form).some((el) => {
+    return !el;
+  });
+
   console.log(form);
   console.log("A", secretKey !== userTypeKey);
 
@@ -43,6 +48,18 @@ const SignUp = () => {
       return { ...prev, ...value };
     });
   };
+
+  // useEffect(() => {
+  //   console.log("a");
+  //   for (var key in form) {
+  //     console.log("b", form[key] !== null, form[key] !== "", key, form[key]);
+  //     if (form[key] !== null && form[key] !== "") {
+  //       setFormEmpty(true);
+  //     } else {
+  //       setFormEmpty(false);
+  //     }
+  //   }
+  // }, [form]);
 
   // const getData = async () => {
   //   const res = await axios.get("https://api.ipify.org/?format=json");
@@ -130,6 +147,7 @@ const SignUp = () => {
         <div className="mb-3 pb-3">
           <Button
             color="primary"
+            disabled={!!isEmpty}
             className="add-new-template-cancel-button center-block"
             onClick={(e) => onSubmit(e, form)}>
             Submit
