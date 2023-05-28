@@ -101,7 +101,7 @@ const AddNewTemplate = () => {
         <Col sm="12" md="12" xl="6">
           <Button
             color="primary"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => {
               setAddedExercises((exercises) => {
                 return exercises.filter((ex) => {

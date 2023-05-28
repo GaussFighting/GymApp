@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
+import { Row, Col } from "react-bootstrap";
 import TotalActivities from "./ProfileChart/TotalActivities";
 import TableActivities from "./ProfileChart/TableActivities";
 import WeightChart from "./ProfileChart/WeightChart";
@@ -19,7 +20,6 @@ const Profile = () => {
         body: JSON.stringify({ token: window.localStorage.getItem("token") }),
       });
       const dataOfUserResponse = await res.json();
-      console.log("RES", dataOfUserResponse);
       setUserData(dataOfUserResponse);
       if (dataOfUserResponse === "token expired") {
         alert("Token expired login again");
@@ -37,7 +37,20 @@ const Profile = () => {
 
   return (
     <div className="mt-5">
-      <h1 className="my-3">Profile</h1>{" "}
+      <Row>
+        <Col>
+          <h1>Profile</h1>{" "}
+        </Col>
+        <Col>
+          {" "}
+          <Button
+            color="primary"
+            className="add-new-template-cancel-button center-block "
+            onClick={(e) => logOut(e)}>
+            LOG OUT
+          </Button>
+        </Col>
+      </Row>
       <h2 className="my-3">
         <strong>
           {userData.firstname} {userData.lastname}
@@ -48,14 +61,7 @@ const Profile = () => {
       <ActivityCallendar />
       <WeightChart />
       <DayOfTheWeekDiagram />
-      <div className="mb-5">
-        <Button
-          color="primary"
-          className="add-new-template-cancel-button center-block "
-          onClick={(e) => logOut(e)}>
-          Log Out
-        </Button>
-      </div>
+      <div className="mb-5"></div>
       <div className="spacer"></div>
     </div>
   );

@@ -8,23 +8,20 @@ const SignUp = () => {
     lastname: "",
     password: "",
     email: "",
-    userType: "",
+    role: "",
     // ipAdress: "",
   });
   // const [ip, setIp] = useState("");
-  const userTypeKey = process.env.REACT_APP_API_KEY;
+  const roleKey = process.env.REACT_APP_API_KEY;
   const [secretKey, setSecretKey] = useState("");
 
   const isEmpty = Object.values(form).some((el) => {
     return !el;
   });
 
-  console.log(form);
-  console.log("A", secretKey !== userTypeKey);
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (form.userType === "Admin" && secretKey !== userTypeKey) {
+    if (form.role === "Admin" && secretKey !== roleKey) {
       alert("Invalid Admin");
     } else {
       try {
@@ -35,7 +32,6 @@ const SignUp = () => {
           },
           body: JSON.stringify(form),
         });
-        console.log(res);
         window.location.href = "./signin";
       } catch (error) {
         console.log(error);
@@ -48,28 +44,6 @@ const SignUp = () => {
       return { ...prev, ...value };
     });
   };
-
-  // useEffect(() => {
-  //   console.log("a");
-  //   for (var key in form) {
-  //     console.log("b", form[key] !== null, form[key] !== "", key, form[key]);
-  //     if (form[key] !== null && form[key] !== "") {
-  //       setFormEmpty(true);
-  //     } else {
-  //       setFormEmpty(false);
-  //     }
-  //   }
-  // }, [form]);
-
-  // const getData = async () => {
-  //   const res = await axios.get("https://api.ipify.org/?format=json");
-  //   console.log(res.data);
-  //   updateForm({ ipAdress: res.data.ip });
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <div className="signup">
@@ -120,20 +94,20 @@ const SignUp = () => {
           Register As{" "}
           <input
             type="radio"
-            name="UserType"
+            name="role"
             value="User"
-            onChange={(event) => updateForm({ userType: event.target.value })}
+            onChange={(event) => updateForm({ role: event.target.value })}
           />{" "}
           User{" "}
           <input
             type="radio"
-            name="UserType"
+            name="role"
             value="Admin"
-            onChange={(event) => updateForm({ userType: event.target.value })}
+            onChange={(event) => updateForm({ role: event.target.value })}
           />{" "}
           Admin
         </div>
-        {form.userType === "Admin" && (
+        {form.role === "Admin" && (
           <div className="mb-3">
             <label>Secret Key</label>
             <input

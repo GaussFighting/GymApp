@@ -6,7 +6,6 @@ const SignIn = () => {
     password: "",
     email: "",
   });
-  console.log(form);
 
   const isEmpty = Object.values(form).some((el) => {
     return !el;
@@ -15,7 +14,7 @@ const SignIn = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/.netlify/functions/loginCreate", {
+      const res = await fetch("/.netlify/functions/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,16 +22,15 @@ const SignIn = () => {
         body: JSON.stringify(form),
       });
 
-      const myToken = await res.json();
-      console.log("myToken", myToken);
-      if (myToken.msg) {
-        alert(`${myToken.msg}`);
+      const logRes = await res.json();
+      if (logRes.msg) {
+        alert(`${logRes.msg}`);
         window.location.href = "./";
       } else {
-        console.log(myToken);
         alert("login successful");
-        window.localStorage.setItem("token", myToken);
+        window.localStorage.setItem("token", logRes.token);
         window.localStorage.setItem("loggedIn", true);
+        window.localStorage.setItem("role", logRes.role);
         window.location.href = "./";
       }
     } catch (error) {

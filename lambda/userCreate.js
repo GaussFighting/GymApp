@@ -12,13 +12,13 @@ exports.handler = async (event, context) => {
   const lastname = data.lastname;
   const password = data.password;
   const email = data.email;
-  const userType = data.userType;
+  const role = data.role;
   const users = await User.find({
     firstname: firstname,
     lastname: lastname,
     password: password,
     email: email,
-    user: userType,
+    user: role,
   });
   const response1 = {
     msg: "User successfully found",
@@ -30,7 +30,6 @@ exports.handler = async (event, context) => {
   if (response1)
     try {
       const oldUser = await User.findOne({ email });
-      console.log(oldUser);
       if (oldUser) {
         console.log("This User exists in database!");
         const response = {
@@ -46,7 +45,7 @@ exports.handler = async (event, context) => {
         lastname: data.lastname,
         password: encryptedPassword,
         email: data.email,
-        userType: data.userType,
+        role: data.role,
       };
       const response = {
         msg: "Users successfully created",

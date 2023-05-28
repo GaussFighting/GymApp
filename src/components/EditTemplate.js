@@ -169,7 +169,7 @@ const Edit = () => {
           <Button
             color="primary"
             className="ml-0"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={(e) => onSubmit(e, formTemplate, params)}>
             EDIT
           </Button>

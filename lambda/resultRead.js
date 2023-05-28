@@ -53,7 +53,6 @@ exports.handler = async (event, context) => {
         }).sort({ date: -1 }),
       };
     } else if (isoStartDate && isoEndDate) {
-      console.log("Data", isoStartDate, typeof isoStartDate);
       res = {
         results: await Result.find({
           date: { $gte: isoStartDate, $lte: isoEndDate },

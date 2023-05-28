@@ -8,11 +8,9 @@ const ActivityCallendar = () => {
     countDays: true,
   });
 
-  console.log("AAAAAAAAA", results);
   const format = "YYYY-MM-DD";
-  let omg = () => {
+  let data = () => {
     if (results.length > 0) {
-      console.log("A", results);
       let lastYearArr = [];
       for (let i = 0; i < results.length; i++) {
         lastYearArr = [
@@ -60,9 +58,9 @@ const ActivityCallendar = () => {
     <div>
       <h4 className="my-3"> ActivityCallendar</h4>
       <div className="d-flex justify-content-center">
-        {omg().length && (
+        {data().length && (
           <ActivityCalendar
-            data={omg()}
+            data={data()}
             blockMargin={10}
             blockSize={14}
             showWeekdayLabels={true}

@@ -319,7 +319,7 @@ const Workout = (props) => {
               <Button
                 color="primary"
                 onClick={() => changeSetNumber(exercise.id, false)}
-                disabled={!localStorage.getItem("isAdmin")}
+                disabled={!(localStorage.getItem("role") === "Admin")}
                 className="add-new-template-cancel-button button-modal">
                 DELETE SET
               </Button>

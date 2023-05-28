@@ -5,7 +5,6 @@ const TotalActivities = () => {
   const { count } = useFetchResults({
     countTrainings: true,
   });
-  console.log("TotalActivities", count);
   return (
     <div>
       <h4 className="my-3">

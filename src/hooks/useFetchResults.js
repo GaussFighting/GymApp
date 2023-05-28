@@ -30,7 +30,6 @@ const useFetchResults = (propsObj) => {
         res = await fetch(urlChecker);
 
         setLoading(false);
-        console.log("propsObj", res);
       } catch (error) {
         setLoading(false);
         setIsError("server error");
@@ -41,10 +40,10 @@ const useFetchResults = (propsObj) => {
         console.log("error", res);
       } else {
         const responseData = await res.json();
-        console.log("responseData", responseData);
+
         const loadedResults = [];
         const resultArr = responseData.data.res.results;
-        console.log("resultArr", resultArr);
+
         resultArr.forEach((el) => {
           if (
             el._id &&

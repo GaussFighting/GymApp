@@ -17,7 +17,11 @@ exports.handler = async (event, context) => {
   const user = await User.findOne({
     email,
   });
-  console.log("paswword", password, "email", email, "user", user);
+  const role = user.role;
+
+  const expiresIn = 60000;
+  const date = new Date();
+  const expireTime = new Date(date.getTime() + expiresIn * 1000).toUTCString();
 
   try {
     if (!user) {
@@ -31,10 +35,23 @@ exports.handler = async (event, context) => {
     }
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign({ email: user.email }, jwtSecret, {
-        expiresIn: 3600,
+        expiresIn: expiresIn,
       });
-      console.log("token", token);
-      return { statusCode: 200, body: JSON.stringify(token) };
+
+      return {
+        statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "front-end domain",
+          "Content-Type": "application/json",
+          "Set-Cookie":
+            "token=" +
+            token +
+            ";path=/; HttpOnly=true; SameSite=Strict; secure; expires=" +
+            expireTime +
+            ";",
+        },
+        body: JSON.stringify({ token, role }),
+      };
     }
     return {
       statusCode: 403,

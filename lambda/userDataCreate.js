@@ -12,7 +12,6 @@ exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
   const data = JSON.parse(event.body);
-  console.log("data", event.body);
   const token = data.token;
   try {
     const user = jwt.verify(token, jwtSecret, (err, res) => {
@@ -29,7 +28,6 @@ exports.handler = async (event, context) => {
     const userData = await User.findOne({ email: useremail }).then((data) => {
       return data;
     });
-    console.log("userData", userData);
     return { statusCode: 200, body: JSON.stringify(userData) };
   } catch (err) {
     console.log(err);

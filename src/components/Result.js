@@ -225,7 +225,7 @@ const Result = () => {
         <Col sm="6" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
           </Button>
@@ -238,7 +238,7 @@ const Result = () => {
         <Col sm="6" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => setModalShow(true)}>
             DELETE
           </Button>

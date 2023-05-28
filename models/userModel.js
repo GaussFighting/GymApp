@@ -25,9 +25,9 @@ const userSchema = new Schema({
     required: [true, "Email field is required"],
     max: 200,
   },
-  userType: {
+  role: {
     type: String,
-    required: [true, "Email field is required"],
+    required: [true, "User type field is required"],
     max: 200,
   },
 });
