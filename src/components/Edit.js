@@ -30,7 +30,10 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
       try {
         await fetch(`/.netlify/functions/exerciseUpdate?id=${id}`, {
           method: "PUT",
-          body: JSON.stringify(editedExercise),
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+            editedExercise: editedExercise,
+          }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -42,7 +45,6 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
     },
     [navigate]
   );
-  console.log(form.bodyPart);
   // This following section will display the form that takes input from the user to update the data.
   return (
     <Form className="edit-form">
@@ -107,7 +109,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
         <Button
           color="primary"
           className="button-edit"
-          disabled={!localStorage.getItem("isAdmin")}
+          disabled={!(localStorage.getItem("role") === "Admin")}
           onClick={(e) => onSubmit(e, form, id)}>
           EDIT
         </Button>

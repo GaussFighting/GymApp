@@ -42,7 +42,10 @@ const Exercise = () => {
           Are you sure you want to continue deleting current exercise?
         </Modal.Body>
         <Modal.Footer>
-          <Button color="primary" onClick={() => props.deleteRecord(props.id)}>
+          <Button
+            color="primary"
+            disabled={!localStorage.getItem("role") === "Admin"}
+            onClick={() => props.deleteRecord(props.id)}>
             Delete
           </Button>
           <Button color="primary" onClick={props.onHide}>
@@ -64,13 +67,16 @@ const Exercise = () => {
     try {
       await fetch(`/.netlify/functions/exerciseDelete?id=${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(localStorage.getItem("token")),
       });
     } catch (error) {
       console.log(error);
     }
     navigate("/exercises");
   };
-
   return (
     <ListGroupItem className="text-align-single-exercise text-uppercase">
       <Row className="row">
@@ -93,7 +99,7 @@ const Exercise = () => {
         <Col sm="12" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
           </Button>
@@ -106,7 +112,7 @@ const Exercise = () => {
         <Col sm="12" md="6" className="button-new-exercise">
           <Button
             color="primary"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => setModalShow(true)}>
             DELETE
           </Button>

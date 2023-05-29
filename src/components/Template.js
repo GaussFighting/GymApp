@@ -67,6 +67,10 @@ const Template = () => {
     try {
       await fetch(`/.netlify/functions/templateDelete?id=${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(localStorage.getItem("token")),
       });
     } catch (error) {
       console.log(error);
@@ -118,7 +122,7 @@ const Template = () => {
         <Col sm="12" md="12" className="button-new-exercise">
           <Button
             color="primary"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => setModalShowEdit(true)}>
             EDIT
           </Button>
@@ -131,7 +135,7 @@ const Template = () => {
         <Col sm="12" md="12" className="button-new-exercise">
           <Button
             color="primary"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => setModalShow(true)}>
             DELETE
           </Button>

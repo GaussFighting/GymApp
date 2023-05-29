@@ -45,7 +45,10 @@ const EditResult = ({
       try {
         await fetch(`/.netlify/functions/resultUpdate?id=${params.id}`, {
           method: "PUT",
-          body: JSON.stringify(editedResult),
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+            editedResult: editedResult,
+          }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -410,7 +413,7 @@ const EditResult = ({
                       };
                     })
                   }
-                  disabled={!localStorage.getItem("isAdmin")}
+                  disabled={!(localStorage.getItem("role") === "Admin")}
                   className="add-new-template-cancel-button button-modal">
                   DELETE EXERCISE
                 </Button>
@@ -435,8 +438,7 @@ const EditResult = ({
           <Button
             color="primary"
             className="flex"
-            // disabled={!localStorage.getItem("isAdmin")}
-
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={(e) => onSubmit(e, formResult, params)}>
             EDIT
           </Button>

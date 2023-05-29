@@ -30,7 +30,10 @@ const Edit = () => {
       try {
         await fetch(`/.netlify/functions/templateUpdate?id=${params.id}`, {
           method: "PUT",
-          body: JSON.stringify(editedTemplate),
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+            editedTemplate: editedTemplate,
+          }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -169,7 +172,7 @@ const Edit = () => {
           <Button
             color="primary"
             className="ml-0"
-            disabled={!localStorage.getItem("isAdmin")}
+            disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={(e) => onSubmit(e, formTemplate, params)}>
             EDIT
           </Button>

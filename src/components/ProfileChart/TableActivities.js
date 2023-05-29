@@ -7,8 +7,6 @@ const TableActivities = () => {
     countTrainingsPerYears: true,
   });
 
-  console.log("count", count, typeof count);
-
   let TableYear = () => {
     return (
       <div className="profile-table">
