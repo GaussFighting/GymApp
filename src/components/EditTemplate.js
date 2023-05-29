@@ -30,7 +30,10 @@ const Edit = () => {
       try {
         await fetch(`/.netlify/functions/templateUpdate?id=${params.id}`, {
           method: "PUT",
-          body: JSON.stringify(editedTemplate),
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+            editedTemplate: editedTemplate,
+          }),
           headers: {
             "Content-Type": "application/json",
           },

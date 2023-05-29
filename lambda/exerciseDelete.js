@@ -9,9 +9,7 @@ exports.handler = async (event, context) => {
   const mongoose = await connectDb(process.env.REACT_APP_DB);
   context.callbackWaitsForEmptyEventLoop = false;
   const jwtSecret = process.env.JWT_SECRET;
-
   const data = JSON.parse(event.body);
-
   const verifiedToken = jwt.verify(data, jwtSecret);
 
   try {

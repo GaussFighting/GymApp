@@ -66,7 +66,11 @@ const Workout = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(filteredResultsWithExistingExercises()),
+        body: JSON.stringify({
+          token: localStorage.getItem("token"),
+          filteredResultsWithExistingExercises:
+            filteredResultsWithExistingExercises(),
+        }),
       });
     } catch (error) {
       console.log(error);
@@ -319,7 +323,6 @@ const Workout = (props) => {
               <Button
                 color="primary"
                 onClick={() => changeSetNumber(exercise.id, false)}
-                disabled={!(localStorage.getItem("role") === "Admin")}
                 className="add-new-template-cancel-button button-modal">
                 DELETE SET
               </Button>

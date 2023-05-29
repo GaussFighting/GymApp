@@ -67,6 +67,10 @@ const Template = () => {
     try {
       await fetch(`/.netlify/functions/templateDelete?id=${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(localStorage.getItem("token")),
       });
     } catch (error) {
       console.log(error);

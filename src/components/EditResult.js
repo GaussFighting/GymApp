@@ -45,7 +45,10 @@ const EditResult = ({
       try {
         await fetch(`/.netlify/functions/resultUpdate?id=${params.id}`, {
           method: "PUT",
-          body: JSON.stringify(editedResult),
+          body: JSON.stringify({
+            token: localStorage.getItem("token"),
+            editedResult: editedResult,
+          }),
           headers: {
             "Content-Type": "application/json",
           },

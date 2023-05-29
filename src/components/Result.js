@@ -49,7 +49,10 @@ const Result = () => {
           Are you sure you want to continue deleting current training?
         </Modal.Body>
         <Modal.Footer>
-          <Button color="primary" onClick={() => props.deleteRecord(props.id)}>
+          <Button
+            color="primary"
+            disabled={!(localStorage.getItem("role") === "Admin")}
+            onClick={() => props.deleteRecord(props.id)}>
             Delete
           </Button>
           <Button color="primary" onClick={props.onHide}>
@@ -77,6 +80,10 @@ const Result = () => {
     try {
       await fetch(`/.netlify/functions/resultDelete?id=${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(localStorage.getItem("token")),
       });
     } catch (error) {
       console.log(error);
