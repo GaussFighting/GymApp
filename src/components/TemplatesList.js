@@ -1,12 +1,61 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import { CSVLink } from "react-csv";
 import useFetchTemplates from "../hooks/useFetchTemplates";
+import ReactPaginate from "react-paginate";
 
 const TemplatesList = (props) => {
-  const { templates, loading } = useFetchTemplates();
+  const {
+    templates,
+    loading,
+    pageCount,
+    limit,
+    currentPage,
+    setCurrentPage,
+    handlePageClick,
+  } = useFetchTemplates();
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [limit, setLimit] = useState(3);
+  // const [pageCount, setPageCount] = useState(0);
+
+  // const getPaginatedUsers = async () => {
+  //   try {
+  //     // setLoading(true);
+  //     const res = await fetch(
+  //       `/.netlify/functions/templateRead?page=${currentPage}$limit=${limit}`
+  //     );
+  //     const resData = await res.json();
+  //     console.log("resData.pageCount)", resData);
+  //     console.log(
+  //       `/.netlify/functions/templateRead?page=${currentPage}$limit=${limit}`
+  //     );
+  //     setPageCount(resData.data.results.pageCount);
+  //     const loadedTemplates = [];
+
+  //     const templatesArr = resData.data.results.result
+  //       ? resData.data.results.result
+  //       : resData.data.templates;
+  //     templatesArr.forEach((el) => {
+  //       loadedTemplates.push({
+  //         id: el._id,
+  //         templateName: el.templateName,
+  //         descritpion: el.description,
+  //         templateExercises: el.templateExercises,
+  //       });
+  //     });
+  //     // setTemplates(loadedTemplates);
+  //     // setLoading(false);
+  //   } catch (error) {
+  //     // setLoading(false);
+  //     console.log(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getPaginatedUsers();
+  // }, []);
 
   if (loading)
     return (
@@ -85,15 +134,38 @@ const TemplatesList = (props) => {
   return (
     <div>
       <ul className="ul-exercise">{TemplatesList}</ul>
-      <CSVLink
-        data={data}
-        headers={headers}
-        separator={";"}
-        filename={"template-exercises.csv"}
-        className="add-new-template-cancel-button"
-        target="_blank">
-        Download CSV
-      </CSVLink>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        initialPage={currentPage}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        marginPagesDisplayed={2}
+        containerClassName="pagination justify-content-center"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        activeClassName="active"
+      />
+      <Button color="primary">
+        {" "}
+        <CSVLink
+          data={data}
+          headers={headers}
+          separator={";"}
+          filename={"template-exercises.csv"}
+          className="add-new-template-cancel-button"
+          target="_blank">
+          Download CSV
+        </CSVLink>
+      </Button>
+
       <div className="spacer"></div>
     </div>
   );
