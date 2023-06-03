@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
   const id = event.queryStringParameters.id;
   const page = parseInt(event.queryStringParameters.page);
   const limit = parseInt(event.queryStringParameters.limit);
-  console.log(event.queryStringParameters);
+
   try {
     const templates = id
       ? await Template.find({ _id: id })
@@ -20,8 +20,6 @@ exports.handler = async (event, context) => {
     const results = {};
     results.totalTemplates = templates.length;
     results.pageCount = Math.ceil(templates.length / limit);
-    console.log(limit);
-    console.log("AAAAAAAAAAA", results.pageCount);
 
     if (lastIndex < templates.length) {
       results.next = {
@@ -34,11 +32,9 @@ exports.handler = async (event, context) => {
         page: page - 1,
       };
     }
-    console.log("DDDDDDDDD", startIndex, lastIndex);
 
     results.result = templates.slice(startIndex, lastIndex);
-    console.log("BBBBBBBBBBBB", results.pageCount);
-    console.log("CCCCCCCCCC", templates.length, limit);
+
     const response = {
       msg: "Templates successfully found",
       data: {

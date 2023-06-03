@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Input } from "reactstrap";
+import { Button, Input, Label } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import { CSVLink } from "react-csv";
@@ -13,16 +13,12 @@ const TemplatesList = (props) => {
     loading,
     pageCount,
     currentPage,
+    setCurrentPage,
     limit,
     setLimit,
     handlePageClick,
   } = useFetchTemplates();
 
-  const [userLimitValue, setUserLimitValue] = useState();
-
-  const changeLimit = () => {
-    setLimit(userLimitValue);
-  };
   if (loading)
     return (
       <div className="d-flex spinner">
@@ -100,6 +96,24 @@ const TemplatesList = (props) => {
   return (
     <div>
       <ul className="ul-exercise">{TemplatesList}</ul>
+      <Label for="setLimit">SET NUMBER OF TEMPLATE</Label>
+      <div className="input-limit mb-3">
+        <Input
+          className="input "
+          type="select"
+          name="Set Limit"
+          value={limit}
+          onChange={(event) => {
+            setLimit(event.target.value);
+            setCurrentPage(1);
+          }}>
+          <option>1</option>
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+        </Input>
+      </div>
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
@@ -120,25 +134,6 @@ const TemplatesList = (props) => {
         activeClassName="active"
       />
 
-      <Input
-        className="input"
-        type="select"
-        name="Set Limit"
-        value={limit}
-        onChange={(event) => setLimit(event.target.value)}>
-        <option>1</option>
-        <option>5</option>
-        <option>10</option>
-        <option>20</option>
-        <option>50</option>
-      </Input>
-      {/* <button
-        onClick={(e) => {
-          changeLimit(e);
-        }}>
-        {" "}
-        Set Limit
-      </button> */}
       <Button color="primary">
         {" "}
         <CSVLink

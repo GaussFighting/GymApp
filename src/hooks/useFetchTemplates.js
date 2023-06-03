@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const useFetchTemplates = () => {
   const [templates, setTemplates] = useState([]);
@@ -8,7 +8,6 @@ const useFetchTemplates = () => {
   const [pageCount, setPageCount] = useState(0);
 
   const handlePageClick = (e) => {
-    console.log(e.selected + 1);
     setCurrentPage(e.selected + 1);
   };
 
@@ -20,7 +19,6 @@ const useFetchTemplates = () => {
           `/.netlify/functions/templateRead?page=${currentPage}&limit=${limit}`
         );
         const resData = await res.json();
-        console.log(resData);
 
         const loadedTemplates = [];
         setPageCount(resData.data.results.pageCount);
@@ -51,6 +49,7 @@ const useFetchTemplates = () => {
     limit,
     setLimit,
     currentPage,
+    setCurrentPage,
     handlePageClick,
   };
 };
