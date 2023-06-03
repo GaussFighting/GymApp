@@ -1,12 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button, Input, Label } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import { CSVLink } from "react-csv";
 import useFetchTemplates from "../hooks/useFetchTemplates";
+import ReactPaginate from "react-paginate";
 
 const TemplatesList = (props) => {
-  const { templates, loading } = useFetchTemplates();
+  const {
+    templates,
+    loading,
+    pageCount,
+    currentPage,
+    setCurrentPage,
+    limit,
+    setLimit,
+    handlePageClick,
+  } = useFetchTemplates();
 
   if (loading)
     return (
@@ -85,15 +96,57 @@ const TemplatesList = (props) => {
   return (
     <div>
       <ul className="ul-exercise">{TemplatesList}</ul>
-      <CSVLink
-        data={data}
-        headers={headers}
-        separator={";"}
-        filename={"template-exercises.csv"}
-        className="add-new-template-cancel-button"
-        target="_blank">
-        Download CSV
-      </CSVLink>
+      <Label for="setLimit">SET NUMBER OF TEMPLATE</Label>
+      <div className="input-limit mb-3">
+        <Input
+          className="input "
+          type="select"
+          name="Set Limit"
+          value={limit}
+          onChange={(event) => {
+            setLimit(event.target.value);
+            setCurrentPage(1);
+          }}>
+          <option>1</option>
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+        </Input>
+      </div>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        forcePage={currentPage - 1}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        marginPagesDisplayed={2}
+        containerClassName="pagination justify-content-center"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        activeClassName="active"
+      />
+
+      <Button color="primary">
+        {" "}
+        <CSVLink
+          data={data}
+          headers={headers}
+          separator={";"}
+          filename={"template-exercises.csv"}
+          className="add-new-template-cancel-button"
+          target="_blank">
+          Download CSV
+        </CSVLink>
+      </Button>
+
       <div className="spacer"></div>
     </div>
   );

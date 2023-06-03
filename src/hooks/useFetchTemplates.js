@@ -3,14 +3,28 @@ import { useState, useEffect } from "react";
 const useFetchTemplates = () => {
   const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [pageCount, setPageCount] = useState(0);
+
+  const handlePageClick = (e) => {
+    setCurrentPage(e.selected + 1);
+  };
+
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/.netlify/functions/templateRead`);
+        const res = await fetch(
+          `/.netlify/functions/templateRead?page=${currentPage}&limit=${limit}`
+        );
         const resData = await res.json();
+
         const loadedTemplates = [];
-        const templatesArr = resData.data.templates;
+        setPageCount(resData.data.results.pageCount);
+        const templatesArr = resData.data.results.result
+          ? resData.data.results.result
+          : resData.data.templates;
         templatesArr.forEach((el) => {
           loadedTemplates.push({
             id: el._id,
@@ -27,8 +41,17 @@ const useFetchTemplates = () => {
       }
     };
     fetchTemplates();
-  }, []);
-  return { templates, loading };
+  }, [currentPage, limit]);
+  return {
+    templates,
+    loading,
+    pageCount,
+    limit,
+    setLimit,
+    currentPage,
+    setCurrentPage,
+    handlePageClick,
+  };
 };
 
 export default useFetchTemplates;
