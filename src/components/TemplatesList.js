@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Button, Input } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import { CSVLink } from "react-csv";
@@ -12,51 +12,17 @@ const TemplatesList = (props) => {
     templates,
     loading,
     pageCount,
-    limit,
     currentPage,
-    setCurrentPage,
+    limit,
+    setLimit,
     handlePageClick,
   } = useFetchTemplates();
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [limit, setLimit] = useState(3);
-  // const [pageCount, setPageCount] = useState(0);
 
-  // const getPaginatedUsers = async () => {
-  //   try {
-  //     // setLoading(true);
-  //     const res = await fetch(
-  //       `/.netlify/functions/templateRead?page=${currentPage}$limit=${limit}`
-  //     );
-  //     const resData = await res.json();
-  //     console.log("resData.pageCount)", resData);
-  //     console.log(
-  //       `/.netlify/functions/templateRead?page=${currentPage}$limit=${limit}`
-  //     );
-  //     setPageCount(resData.data.results.pageCount);
-  //     const loadedTemplates = [];
+  const [userLimitValue, setUserLimitValue] = useState();
 
-  //     const templatesArr = resData.data.results.result
-  //       ? resData.data.results.result
-  //       : resData.data.templates;
-  //     templatesArr.forEach((el) => {
-  //       loadedTemplates.push({
-  //         id: el._id,
-  //         templateName: el.templateName,
-  //         descritpion: el.description,
-  //         templateExercises: el.templateExercises,
-  //       });
-  //     });
-  //     // setTemplates(loadedTemplates);
-  //     // setLoading(false);
-  //   } catch (error) {
-  //     // setLoading(false);
-  //     console.log(error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getPaginatedUsers();
-  // }, []);
-
+  const changeLimit = () => {
+    setLimit(userLimitValue);
+  };
   if (loading)
     return (
       <div className="d-flex spinner">
@@ -140,7 +106,7 @@ const TemplatesList = (props) => {
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        initialPage={currentPage}
+        forcePage={currentPage - 1}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
         marginPagesDisplayed={2}
@@ -153,6 +119,26 @@ const TemplatesList = (props) => {
         nextLinkClassName="page-link"
         activeClassName="active"
       />
+
+      <Input
+        className="input"
+        type="select"
+        name="Set Limit"
+        value={limit}
+        onChange={(event) => setLimit(event.target.value)}>
+        <option>1</option>
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+        <option>50</option>
+      </Input>
+      {/* <button
+        onClick={(e) => {
+          changeLimit(e);
+        }}>
+        {" "}
+        Set Limit
+      </button> */}
       <Button color="primary">
         {" "}
         <CSVLink

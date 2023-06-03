@@ -4,11 +4,11 @@ const useFetchTemplates = () => {
   const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(5);
   const [pageCount, setPageCount] = useState(0);
 
   const handlePageClick = (e) => {
-    console.log(e);
+    console.log(e.selected + 1);
     setCurrentPage(e.selected + 1);
   };
 
@@ -43,8 +43,16 @@ const useFetchTemplates = () => {
       }
     };
     fetchTemplates();
-  }, [currentPage]);
-  return { templates, loading, pageCount, limit, handlePageClick };
+  }, [currentPage, limit]);
+  return {
+    templates,
+    loading,
+    pageCount,
+    limit,
+    setLimit,
+    currentPage,
+    handlePageClick,
+  };
 };
 
 export default useFetchTemplates;
