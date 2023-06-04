@@ -4,30 +4,45 @@ import { ListGroup, Row, Col } from "react-bootstrap";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import Spinner from "react-bootstrap/Spinner";
 import useFetchResults from "../hooks/useFetchResults";
+import ReactPaginate from "react-paginate";
 
 const History = () => {
   let [startDate, setStartDate] = useState();
   let [endDate, setEndDate] = useState();
-  const [filteredResults, setFilteredResults] = useState([]);
+  // const [filteredResults, setFilteredResults] = useState([]);
   const format = "YYYY-MM-DD";
   const moment = require("moment");
 
-  const filterResults = () => {
-    const resultsList = results.filter((result) => {
-      return (
-        moment(result.date).isAfter(startDate) &&
-        moment(result.date).isBefore(endDate)
-      );
-    });
+  // const filterResults = () => {
+  //   const resultsList = results.filter((result) => {
+  //     return (
+  //       moment(result.date).isAfter(startDate) &&
+  //       moment(result.date).isBefore(endDate)
+  //     );
+  //   });
 
-    return setFilteredResults(resultsList);
-  };
+  //   return setFilteredResults(resultsList);
+  // };
 
-  const allResults = () => {
-    return setFilteredResults(results);
-  };
+  // const allResults = () => {
+  //   return setFilteredResults(results);
+  // };
+
+  const {
+    results,
+    loading,
+    pageCount,
+    currentPage,
+    setCurrentPage,
+    limit,
+    setLimit,
+    handlePageClick,
+  } = useFetchResults({ startDate, endDate });
+
+  // setFilteredResults(results);
+  // console.log("filteredResults", filteredResults);
   const displayedWorkouts = () => {
-    return filteredResults.map((result, index) => {
+    return results.map((result, index) => {
       return (
         <ListGroup key={result.id}>
           <Row className="template-row">
@@ -41,10 +56,6 @@ const History = () => {
       );
     });
   };
-
-  const { results, loading } = useFetchResults({ startDate, endDate });
-
-  console.log(results);
 
   if (loading)
     return (
@@ -70,6 +81,47 @@ const History = () => {
 
   return (
     <div>
+      <ul className="ul-exercise mt-3">{displayedWorkouts()}</ul>
+      <Label for="setLimit">SET NUMBER OF RESULTS</Label>
+      <div className="input-limit mb-3">
+        <Input
+          className="input "
+          type="select"
+          name="Set Limit"
+          value={limit}
+          onChange={(event) => {
+            setLimit(event.target.value);
+            setCurrentPage(1);
+          }}>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+          <option>500</option>
+          <option>1000</option>
+        </Input>
+      </div>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        forcePage={currentPage - 2}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        marginPagesDisplayed={2}
+        containerClassName="pagination justify-content-center"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        activeClassName="active"
+      />
+      {/*  // <ul className="ul-exercise">{displayedWorkouts()}</ul>*/}
+      {/* 
       <FormGroup className="py-1">
         <Label for="exampleDate">START DATE</Label>
         <Input
@@ -107,15 +159,15 @@ const History = () => {
           }
         }}>
         SHOW RESULTS
-      </Button>
-      <Button
+      </Button> */}
+      {/* <Button
         color="primary"
         className="add-new-template-cancel-button"
         onClick={() => {
           allResults();
         }}>
         SHOW ALL RESULTS
-      </Button>
+      </Button> */}
       {/* <Button className="add-new-template-cancel-button" onClick={() => {}}>
         NEXT PAGE
       </Button> */}
@@ -127,8 +179,8 @@ const History = () => {
         }}>
         DOWNLOAD JSON
       </Button>
-      <ul className="ul-exercise">{displayedWorkouts()}</ul>
-      <div className="spacer"></div>
+
+      <div className="spacer  mb-3"></div>
     </div>
   );
 };

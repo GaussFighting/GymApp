@@ -19,7 +19,6 @@ const useFetchTemplates = () => {
           `/.netlify/functions/templateRead?page=${currentPage}&limit=${limit}`
         );
         const resData = await res.json();
-
         const loadedTemplates = [];
         setPageCount(resData.data.results.pageCount);
         const templatesArr = resData.data.results.result

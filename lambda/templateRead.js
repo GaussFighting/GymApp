@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
     }
 
     results.result = templates.slice(startIndex, lastIndex);
-
+    console.log("AA", results);
     const response = {
       msg: "Templates successfully found",
       data: {
@@ -42,7 +42,7 @@ exports.handler = async (event, context) => {
         results,
       },
     };
-
+    console.log("response", response.data.templates);
     mongoose.connection.close();
     return {
       statusCode: 200,

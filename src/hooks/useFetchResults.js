@@ -5,11 +5,18 @@ const useFetchResults = (propsObj) => {
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(null);
   const [count, setCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [pageCount, setPageCount] = useState(0);
 
-  let urlChecker = `/.netlify/functions/resultRead`;
+  const handlePageClick = (e) => {
+    setCurrentPage(e.selected + 1);
+  };
+
+  let urlChecker = `/.netlify/functions/resultRead?page=${currentPage}&limit=${limit}`;
+
   if (propsObj.exerciseId)
     urlChecker = `/.netlify/functions/resultRead?exerciseId=${propsObj.exerciseId}`;
-
   if (propsObj.startDate && propsObj.endDate)
     urlChecker = `/.netlify/functions/resultRead?startDate=${propsObj.startDate}&endDate=${propsObj.endDate}`;
 
@@ -21,14 +28,12 @@ const useFetchResults = (propsObj) => {
     urlChecker = `/.netlify/functions/resultRead?countWeights=${propsObj.countWeights}`;
   if (propsObj.countDays)
     urlChecker = `/.netlify/functions/resultRead?countDays=${propsObj.countDays}`;
-
   useEffect(() => {
     const fetchResults = async () => {
       let res = "";
       try {
         setLoading(true);
         res = await fetch(urlChecker);
-
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -42,7 +47,11 @@ const useFetchResults = (propsObj) => {
         const responseData = await res.json();
 
         const loadedResults = [];
-        const resultArr = responseData.data.res.results;
+        setPageCount(responseData.data.resultsOfTrainings.pageCount);
+
+        const resultArr = responseData.data.resultsOfTrainings.result
+          ? responseData.data.resultsOfTrainings.result
+          : responseData.data.res.results;
 
         resultArr.forEach((el) => {
           if (
@@ -95,9 +104,20 @@ const useFetchResults = (propsObj) => {
       }
     };
     fetchResults();
-  }, [urlChecker]);
+  }, [urlChecker, currentPage, limit]);
 
-  return { results, loading, isError, count };
+  return {
+    results,
+    loading,
+    isError,
+    count,
+    pageCount,
+    limit,
+    setLimit,
+    currentPage,
+    setCurrentPage,
+    handlePageClick,
+  };
 };
 
 export default useFetchResults;

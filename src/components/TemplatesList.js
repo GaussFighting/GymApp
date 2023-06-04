@@ -95,7 +95,7 @@ const TemplatesList = (props) => {
 
   return (
     <div>
-      <ul className="ul-exercise">{TemplatesList}</ul>
+      <ul className="ul-exercise mt-3">{TemplatesList}</ul>
       <Label for="setLimit">SET NUMBER OF TEMPLATE</Label>
       <div className="input-limit mb-3">
         <Input
