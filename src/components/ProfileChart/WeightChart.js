@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetchResults from "../../hooks/useFetchResults";
 import moment from "moment";
 import {
@@ -10,11 +10,32 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const WeightChart = () => {
-  const { results } = useFetchResults({
+  const { loading, results } = useFetchResults({
     countWeights: true,
   });
+
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Weight Chart in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
 
   const format = "YYYY-MM-DD";
 
@@ -29,7 +50,7 @@ const WeightChart = () => {
 
   return (
     <div>
-      <h4 className="my-3">WeightChart</h4>
+      <h4 className="my-3">Weight Chart</h4>
       <div>
         <ResponsiveContainer width="100%" height={624}>
           <LineChart width={1500} height={300} data={bodyWeightArr}>

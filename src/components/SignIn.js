@@ -1,11 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
   const [form, setForm] = useState({
     password: "",
     email: "",
   });
+  const [loading, setLoading] = useState(false);
+
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Logging!", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
 
   const isEmpty = Object.values(form).some((el) => {
     return !el;
@@ -14,6 +36,7 @@ const SignIn = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const res = await fetch("/.netlify/functions/login", {
         method: "POST",
         headers: {
@@ -26,14 +49,16 @@ const SignIn = () => {
       if (logRes.msg) {
         alert(`${logRes.msg}`);
         window.location.href = "./";
+        setLoading(false);
       } else {
-        alert("login successful");
         window.localStorage.setItem("token", logRes.token);
         window.localStorage.setItem("loggedIn", true);
         window.localStorage.setItem("role", logRes.role);
         window.location.href = "./";
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -79,6 +104,15 @@ const SignIn = () => {
             Log in!
           </Button>
         </div>
+        <p>Do not have account? </p>
+        <p>
+          {" "}
+          <strong>
+            <a className="sign-in" href="/">
+              Sign up!
+            </a>
+          </strong>
+        </p>
       </form>
     </div>
   );

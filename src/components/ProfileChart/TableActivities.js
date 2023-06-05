@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetchResults from "../../hooks/useFetchResults";
 import { Row, Col } from "reactstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TableActivities = () => {
-  const { count } = useFetchResults({
+  const { loading, count } = useFetchResults({
     countTrainingsPerYears: true,
   });
 
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Table of trainings in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
   let TableYear = () => {
     return (
       <div className="profile-table">

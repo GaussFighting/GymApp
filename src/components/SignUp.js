@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import axios from "axios";
 
 const SignUp = () => {
@@ -12,6 +14,27 @@ const SignUp = () => {
     // ipAdress: "",
   });
   // const [ip, setIp] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Loading!", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
+
   const roleKey = process.env.REACT_APP_API_KEY;
   const [secretKey, setSecretKey] = useState("");
 
@@ -25,7 +48,8 @@ const SignUp = () => {
       alert("Invalid Admin");
     } else {
       try {
-        const res = await fetch("/.netlify/functions/userCreate", {
+        setLoading(true);
+        await fetch("/.netlify/functions/userCreate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -33,7 +57,9 @@ const SignUp = () => {
           body: JSON.stringify(form),
         });
         window.location.href = "./signin";
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     }

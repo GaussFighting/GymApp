@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetchResults from "../../hooks/useFetchResults";
 import moment from "moment";
 import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DayOfTheWeekDiagram = () => {
-  const { results } = useFetchResults({
+  const { loading, results } = useFetchResults({
     countWeights: true,
   });
 
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Weight Chart in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
   const format = "YYYY-MM-DD";
 
   const bodyWeightArr = results.map((el) => {
