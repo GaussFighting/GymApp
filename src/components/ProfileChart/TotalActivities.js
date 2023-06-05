@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetchResults from "../../hooks/useFetchResults";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TotalActivities = () => {
-  const { count } = useFetchResults({
+  const { loading, count } = useFetchResults({
     countTrainings: true,
   });
+
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Number of trainings in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
+
   return (
     <div>
       <h4 className="my-3">

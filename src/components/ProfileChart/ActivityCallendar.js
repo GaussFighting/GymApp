@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ActivityCalendar from "react-activity-calendar";
 import useFetchResults from "../../hooks/useFetchResults";
 import moment from "moment";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ActivityCallendar = () => {
-  const { results } = useFetchResults({
+  const { loading, results } = useFetchResults({
     countDays: true,
   });
+
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Activity Callendar in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
 
   const format = "YYYY-MM-DD";
   let data = () => {
@@ -56,7 +77,7 @@ const ActivityCallendar = () => {
   };
   return (
     <div>
-      <h4 className="my-3"> ActivityCallendar</h4>
+      <h4 className="my-3"> Activity Callendar</h4>
       <div className="d-flex justify-content-center">
         {data().length && (
           <ActivityCalendar
