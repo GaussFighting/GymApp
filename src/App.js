@@ -20,6 +20,7 @@ import SignIn from "./components/SignIn";
 
 const App = () => {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
+
   return (
     <Router>
       <div>

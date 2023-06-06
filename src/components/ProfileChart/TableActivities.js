@@ -27,6 +27,7 @@ const TableActivities = () => {
       toast.dismiss(toastId.current);
     }
   }, [loading]);
+
   let TableYear = () => {
     return (
       <div className="profile-table">
