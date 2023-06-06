@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { FormGroup, Label, Input, Button } from "reactstrap";
 import Spinner from "react-bootstrap/Spinner";
 import useFetchResults from "../hooks/useFetchResults";
 import ReactPaginate from "react-paginate";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const History = () => {
   let [startDate, setStartDate] = useState();
@@ -27,6 +29,7 @@ const History = () => {
   // const allResults = () => {
   //   return setFilteredResults(results);
   // };
+  const toastId = React.useRef(null);
 
   const {
     results,
@@ -39,8 +42,23 @@ const History = () => {
     handlePageClick,
   } = useFetchResults({ startDate, endDate });
 
-  // setFilteredResults(results);
-  // console.log("filteredResults", filteredResults);
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Results in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
+
   const displayedWorkouts = () => {
     return results.map((result, index) => {
       return (
@@ -57,14 +75,14 @@ const History = () => {
     });
   };
 
-  if (loading)
-    return (
-      <div className="d-flex spinner">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+  // if (loading)
+  //   return (
+  //     <div className="d-flex spinner">
+  //       <Spinner animation="border" role="status">
+  //         <span className="visually-hidden">Loading...</span>
+  //       </Spinner>
+  //     </div>
+  //   );
 
   const downloadJson = () => {
     const mainData = results;

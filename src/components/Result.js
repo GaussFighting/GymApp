@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
 import EditResult from "./EditResult";
 import Spinner from "react-bootstrap/Spinner";
 import useFetchResult from "../hooks/useFetchResult";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Result = () => {
   const format = "YYYY-MM-DD dddd";
@@ -65,16 +67,35 @@ const Result = () => {
 
   const { id, loading, results } = useFetchResult({});
 
+  const toastId = React.useRef(null);
+
+  useEffect(() => {
+    if (loading) {
+      toastId.current = toast("Results of training in progress", {
+        position: "top-center",
+        // autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [loading]);
+
   const navigate = useNavigate();
 
-  if (loading)
-    return (
-      <div className="d-flex spinner">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+  // if (loading)
+  //   return (
+  //     <div className="d-flex spinner">
+  //       <Spinner animation="border" role="status">
+  //         <span className="visually-hidden">Loading...</span>
+  //       </Spinner>
+  //     </div>
+  //   );
 
   const deleteRecord = async (id) => {
     try {
