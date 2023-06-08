@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useFetchResults from "../../hooks/useFetchResults";
 import moment from "moment";
 import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
@@ -9,6 +9,11 @@ const DayOfTheWeekDiagram = () => {
   const { loading, results } = useFetchResults({
     countWeights: true,
   });
+
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
 
   const toastId = React.useRef(null);
 
@@ -28,6 +33,19 @@ const DayOfTheWeekDiagram = () => {
       toast.dismiss(toastId.current);
     }
   }, [loading]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   const format = "YYYY-MM-DD";
 
   const bodyWeightArr = results.map((el) => {
@@ -134,7 +152,7 @@ const DayOfTheWeekDiagram = () => {
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
-              outerRadius={250}
+              outerRadius={windowSize[0] > 1300 ? 250 : windowSize[0] / 5}
               fill="#8884d8"
               dataKey="value">
               {data.map((entry, index) => (

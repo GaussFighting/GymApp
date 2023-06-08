@@ -79,13 +79,17 @@ a {
   border: 1px solid black;
   border-radius: 40px;
   width: 50%;
-  height: 65vh;
+  height: 70vh;
+  min-height: 800px;
+  min-width: 300px;
   margin: auto;
   margin-top: 15vh;
   background-color: $muted;
 }
 .signin {
-  height: 40vh;
+  height: 45vh;
+  max-height: 1300px;
+  min-height: 550px;
   margin-top: 20vh;
 }
 .body {
@@ -249,21 +253,19 @@ a {
 .profile-table-item {
   padding-bottom: 10px;
   border-bottom: 1px solid;
+  justify-content: center;
 }
-.profile-table-item:nth-child(n + 1) {
+.profile-table-item:nth-child(n + 1),
+.profile-table-item-result:nth-child(n-1) {
   border-right: 1px solid;
 }
-.profile-table-item:last-child {
-  border-right: none;
+.profile-table-item:nth-child(n + 1),
+.profile-table-item-result:nth-child(n-1) {
+  border-right: 1px solid;
 }
 .profile-table-item-result {
   padding-top: 10px;
-}
-.profile-table-item-result:nth-child(n + 1) {
-  border-right: 1px solid;
-}
-.profile-table-item-result:last-child {
-  border-right: none;
+  justify-content: center;
 }
 
 .col-name {
