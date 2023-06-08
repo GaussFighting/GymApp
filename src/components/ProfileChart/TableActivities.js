@@ -31,24 +31,38 @@ const TableActivities = () => {
   let TableYear = () => {
     return (
       <div className="profile-table">
-        <Row className="pb-0">
-          {count.map((el, idx) => {
-            return (
-              <Col className="profile-table-item" key={el + idx}>
-                {2023 - idx}
-              </Col>
-            );
-          })}
-        </Row>
-        <Row className="pt-0">
-          {count.map((el, idx) => {
-            return (
-              <Col className="profile-table-item-result" key={el + idx}>
-                {el}
-              </Col>
-            );
-          })}
-        </Row>
+        <div className="profile-table">
+          <Row className="pb-0">
+            {count.map((el, idx) => {
+              return (
+                <Col key={el + idx}>
+                  <Row className="profile-table-item"> {2023 - idx}</Row>
+                  <Row className="profile-table-item-result"> {el}</Row>
+                </Col>
+              );
+            })}
+          </Row>
+        </div>
+        {/* <div className="profile-table">
+          <Row className="pb-0 ">
+            {count.map((el, idx) => {
+              return (
+                <Col className="profile-table-item" key={el + idx}>
+                  {2023 - idx}
+                </Col>
+              );
+            })}
+          </Row>
+          <Row className="pt-0">
+            {count.map((el, idx) => {
+              return (
+                <Col className="profile-table-item-result" key={el + idx}>
+                  {el}
+                </Col>
+              );
+            })}
+          </Row>
+        </div> */}
       </div>
     );
   };

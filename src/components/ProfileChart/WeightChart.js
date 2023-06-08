@@ -47,13 +47,15 @@ const WeightChart = () => {
     };
     return dataArr;
   });
-
   return (
     <div>
       <h4 className="my-3">Weight Chart</h4>
       <div>
         <ResponsiveContainer width="100%" height={624}>
-          <LineChart width={1500} height={300} data={bodyWeightArr}>
+          <LineChart
+            width={1500}
+            height={300}
+            data={bodyWeightArr.slice(0, 254)}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="name"
