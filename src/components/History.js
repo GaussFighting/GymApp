@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { Label, Input, Button } from "reactstrap";
@@ -21,7 +21,7 @@ const History = () => {
     limit,
     setLimit,
     handlePageClick,
-  } = useFetchResults({ startDate, endDate });
+  } = useFetchResults();
 
   useEffect(() => {
     if (loading) {
