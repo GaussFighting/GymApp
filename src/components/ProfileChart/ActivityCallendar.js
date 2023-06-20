@@ -16,7 +16,6 @@ const ActivityCallendar = () => {
     if (loading) {
       toastId.current = toast("Activity Callendar in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

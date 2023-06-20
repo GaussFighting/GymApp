@@ -22,7 +22,6 @@ const SignUp = () => {
     if (loading) {
       toastId.current = toast("Loading!", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

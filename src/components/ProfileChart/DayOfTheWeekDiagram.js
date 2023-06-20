@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useFetchResults from "../../hooks/useFetchResults";
 import moment from "moment";
 import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
@@ -21,7 +21,6 @@ const DayOfTheWeekDiagram = () => {
     if (loading) {
       toastId.current = toast("Weight Chart in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

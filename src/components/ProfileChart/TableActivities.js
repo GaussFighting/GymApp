@@ -15,7 +15,6 @@ const TableActivities = () => {
     if (loading) {
       toastId.current = toast("Table of trainings in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

@@ -23,7 +23,6 @@ const Exercises = () => {
     if (loading) {
       toastId.current = toast("Preparing data in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

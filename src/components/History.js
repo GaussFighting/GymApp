@@ -1,34 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
-import { FormGroup, Label, Input, Button } from "reactstrap";
-import Spinner from "react-bootstrap/Spinner";
+import { Label, Input, Button } from "reactstrap";
 import useFetchResults from "../hooks/useFetchResults";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const History = () => {
-  let [startDate, setStartDate] = useState();
-  let [endDate, setEndDate] = useState();
-  // const [filteredResults, setFilteredResults] = useState([]);
   const format = "YYYY-MM-DD";
   const moment = require("moment");
-
-  // const filterResults = () => {
-  //   const resultsList = results.filter((result) => {
-  //     return (
-  //       moment(result.date).isAfter(startDate) &&
-  //       moment(result.date).isBefore(endDate)
-  //     );
-  //   });
-
-  //   return setFilteredResults(resultsList);
-  // };
-
-  // const allResults = () => {
-  //   return setFilteredResults(results);
-  // };
   const toastId = React.useRef(null);
 
   const {
@@ -46,7 +27,6 @@ const History = () => {
     if (loading) {
       toastId.current = toast("Results in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,
@@ -74,15 +54,6 @@ const History = () => {
       );
     });
   };
-
-  // if (loading)
-  //   return (
-  //     <div className="d-flex spinner">
-  //       <Spinner animation="border" role="status">
-  //         <span className="visually-hidden">Loading...</span>
-  //       </Spinner>
-  //     </div>
-  //   );
 
   const downloadJson = () => {
     const mainData = results;
@@ -138,57 +109,7 @@ const History = () => {
         nextLinkClassName="page-link"
         activeClassName="active"
       />
-      {/*  // <ul className="ul-exercise">{displayedWorkouts()}</ul>*/}
-      {/* 
-      <FormGroup className="py-1">
-        <Label for="exampleDate">START DATE</Label>
-        <Input
-          id="exampleDate"
-          name="date"
-          placeholder="date placeholder"
-          type="date"
-          onChange={(date) => {
-            setStartDate(() => {
-              return moment(date.target.value).toDate();
-            });
-          }}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleDate">END DATE</Label>
-        <Input
-          id="exampleDate"
-          name="date"
-          placeholder="date placeholder"
-          type="date"
-          onChange={(date) => {
-            setEndDate(() => {
-              return moment(date.target.value).endOf("day").toDate();
-            });
-          }}
-        />
-      </FormGroup>
-      <Button
-        color="primary"
-        className="add-new-template-cancel-button "
-        onClick={() => {
-          if (startDate && endDate) {
-            filterResults();
-          }
-        }}>
-        SHOW RESULTS
-      </Button> */}
-      {/* <Button
-        color="primary"
-        className="add-new-template-cancel-button"
-        onClick={() => {
-          allResults();
-        }}>
-        SHOW ALL RESULTS
-      </Button> */}
-      {/* <Button className="add-new-template-cancel-button" onClick={() => {}}>
-        NEXT PAGE
-      </Button> */}
+
       <Button
         color="primary"
         className="add-new-template-cancel-button"

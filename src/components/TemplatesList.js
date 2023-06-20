@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input, Label } from "reactstrap";
 import { ListGroup, Row, Col } from "react-bootstrap";
-import Spinner from "react-bootstrap/Spinner";
 import { CSVLink } from "react-csv";
 import useFetchTemplates from "../hooks/useFetchTemplates";
 import ReactPaginate from "react-paginate";
@@ -23,20 +22,10 @@ const TemplatesList = (props) => {
 
   const toastId = React.useRef(null);
 
-  // if (loading)
-  //   return (
-  //     <div className="d-flex spinner">
-  //       <Spinner animation="border" role="status">
-  //         <span className="visually-hidden">Loading...</span>
-  //       </Spinner>
-  //     </div>
-  //   );
-
   useEffect(() => {
     if (loading) {
       toastId.current = toast("Templates in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,
