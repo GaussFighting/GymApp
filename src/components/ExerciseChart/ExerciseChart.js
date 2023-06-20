@@ -1,6 +1,5 @@
 import React, { useMemo, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import Spinner from "react-bootstrap/Spinner";
 import Chart from "../Chart";
 import allTypeResults from "../../utils/allTypeResults";
 import ExerciseChartHeader from "./ExerciseChartHeader";
@@ -10,8 +9,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ExerciseChart = ({ exerciseId }) => {
-  const { results, loading, isError } = useFetchResults({ exerciseId });
-
+  const { results, loading, isError, noDataText } = useFetchResults({
+    exerciseId,
+  });
   const toastId = React.useRef(null);
 
   useEffect(() => {
@@ -42,22 +42,10 @@ const ExerciseChart = ({ exerciseId }) => {
     return <div>{isError}</div>;
   }
 
-  // if (loading)
-  //   return (
-  //     <div className="d-flex spinner">
-  //       <Spinner animation="border" role="status">
-  //         <span className="visually-hidden">Loading...</span>
-  //       </Spinner>
-  //     </div>
-  //   );
-
   if (!results.length) {
-    return (
-      <div>
-        We ARE SORRY THERE IS NO RECORDS IN DATABASE FOR THIS EXERCISE :(
-      </div>
-    );
+    return <div>{noDataText}</div>;
   }
+
   return (
     <div>
       <Chart results={results} exerciseId={exerciseId} />
