@@ -32,7 +32,12 @@ const useFetchExercises = () => {
     };
     fetchExercises();
   }, []);
-  return { loading, exercises, allExercisesForFiltering, setExercises };
+  return {
+    loading,
+    exercises,
+    allExercisesForFiltering,
+    setExercises,
+  };
 };
 
 export default useFetchExercises;

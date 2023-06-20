@@ -16,7 +16,7 @@ const Exercises = () => {
 
   const { loading, exercises, allExercisesForFiltering, setExercises } =
     useFetchExercises();
-
+  const [exercisesFrequency, setExercisesFrequency] = useState([]);
   const toastId = React.useRef(null);
 
   useEffect(() => {
@@ -35,6 +35,36 @@ const Exercises = () => {
       toast.dismiss(toastId.current);
     }
   }, [loading]);
+  const loadedExercises = [];
+
+  useEffect(() => {
+    if (exercisesFrequency.length === 0) {
+      const exercisesIdArr = exercises.map((el) => el.id);
+      const fetchResults = async (el) => {
+        let urlChecker = `/.netlify/functions/resultRead?exerciseId=${el}`;
+        let res = "";
+        try {
+          res = await fetch(urlChecker);
+        } catch (error) {
+          console.log(error);
+        }
+        const responseData = await res.json();
+
+        let numberOfExercises = responseData.data.res.results.length;
+        loadedExercises.push({
+          exerciseId: el,
+          numberOfExercises: numberOfExercises,
+        });
+      };
+      const asyncFetchingLoop = async () => {
+        for (let i = 0; i < exercisesIdArr.length; i++) {
+          await fetchResults(exercisesIdArr[i]);
+        }
+        setExercisesFrequency(loadedExercises);
+      };
+      asyncFetchingLoop();
+    }
+  }, [exercises]);
 
   const downloadCSV = () => {
     const csvString = [
@@ -56,30 +86,46 @@ const Exercises = () => {
     window.open(encodedUri);
     document.body.removeChild(link);
   };
-  const ExercisesList = exercises.map((exercise, idx) => (
-    <ListGroup key={exercise.id + idx}>
-      <Button className="button">
-        <Link to={`/exercise/${exercise.id}`}>
-          <ListGroupItem className="text-uppercase">
-            <Row>
-              <Col sm="2" md="1">
-                {idx + 1}
-              </Col>
-              <Col sm="10" md="5">
-                {exercise.nameEn}
-              </Col>
-              <Col sm="6" md="3">
-                {exercise.bodyPart}
-              </Col>
-              <Col sm="6" md="3">
-                {exercise.equipment}
-              </Col>
-            </Row>
-          </ListGroupItem>
-        </Link>
-      </Button>
-    </ListGroup>
-  ));
+
+  const filteredNumberOfExercises = (a) => {
+    let frequencyOfCurrentExercise = exercisesFrequency.find((el) => {
+      return el.exerciseId === a;
+    });
+
+    return frequencyOfCurrentExercise.numberOfExercises;
+  };
+
+  const ExercisesList = exercises.map((exercise, idx) => {
+    return (
+      <ListGroup key={exercise.id + idx}>
+        <Button className="button">
+          <Link to={`/exercise/${exercise.id}`}>
+            <ListGroupItem className="text-uppercase">
+              <Row>
+                <Col sm="2" md="1">
+                  {idx + 1}
+                </Col>
+                <Col sm="10" md="5">
+                  {exercise.nameEn}{" "}
+                  <strong style={{ color: "red" }}>
+                    {" "}
+                    {exercisesFrequency.length &&
+                      filteredNumberOfExercises(exercise.id)}
+                  </strong>
+                </Col>
+                <Col sm="6" md="3">
+                  {exercise.bodyPart}
+                </Col>
+                <Col sm="6" md="3">
+                  {exercise.equipment}
+                </Col>
+              </Row>
+            </ListGroupItem>
+          </Link>
+        </Button>
+      </ListGroup>
+    );
+  });
 
   const bodyPart = "bodyPart";
   const bodyPartUniqueList = [

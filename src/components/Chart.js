@@ -106,7 +106,6 @@ const Chart = ({ results, exerciseId }) => {
 
     return result;
   };
-  console.log(dataTotalVolume());
   if (!(dataTotalVolume()[0].volume === 0)) {
     return (
       <div className="small-view">

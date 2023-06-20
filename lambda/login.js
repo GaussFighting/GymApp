@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
   });
   const role = user.role;
 
-  const expiresIn = 60000;
+  const expiresIn = 6000;
   const date = new Date();
   const expireTime = new Date(date.getTime() + expiresIn * 1000).toUTCString();
 

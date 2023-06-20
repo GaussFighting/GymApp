@@ -8,6 +8,7 @@ const useFetchResults = (propsObj) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [pageCount, setPageCount] = useState(0);
+  const [noDataText, setNoDataText] = useState();
 
   const handlePageClick = (e) => {
     setCurrentPage(e.selected + 1);
@@ -101,6 +102,11 @@ const useFetchResults = (propsObj) => {
         });
         setResults(loadedResults);
         setCount(responseData.data.res.count);
+        if (loadedResults.length === 0) {
+          setNoDataText(
+            "WE ARE SORRY THERE IS NO RECORDS IN DATABASE FOR THIS EXERCISE :("
+          );
+        }
       }
     };
     fetchResults();
@@ -117,6 +123,7 @@ const useFetchResults = (propsObj) => {
     currentPage,
     setCurrentPage,
     handlePageClick,
+    noDataText,
   };
 };
 
