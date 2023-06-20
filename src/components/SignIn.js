@@ -16,7 +16,6 @@ const SignIn = () => {
     if (loading) {
       toastId.current = toast("Logging!", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

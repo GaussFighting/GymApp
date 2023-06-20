@@ -24,7 +24,6 @@ const WeightChart = () => {
     if (loading) {
       toastId.current = toast("Weight Chart in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

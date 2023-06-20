@@ -3,7 +3,6 @@ import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
 import EditTemplate from "./EditTemplate";
-import Spinner from "react-bootstrap/Spinner";
 import useFetchTempalte from "../hooks/useFetchTemplate";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -57,22 +56,12 @@ const Template = () => {
   const { id, loading, template } = useFetchTempalte();
   const navigate = useNavigate();
 
-  // if (loading)
-  //   return (
-  //     <div className="d-flex spinner">
-  //       <Spinner animation="border" role="status">
-  //         <span className="visually-hidden">Loading...</span>
-  //       </Spinner>
-  //     </div>
-  //   );
-
   const toastId = React.useRef(null);
 
   useEffect(() => {
     if (loading) {
       toastId.current = toast("Template table in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

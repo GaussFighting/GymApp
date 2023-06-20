@@ -18,7 +18,6 @@ const ExerciseChart = ({ exerciseId }) => {
     if (loading) {
       toastId.current = toast("Exercise results and charts in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,

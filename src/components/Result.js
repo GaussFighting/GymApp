@@ -3,7 +3,6 @@ import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Modal } from "react-bootstrap";
 import EditResult from "./EditResult";
-import Spinner from "react-bootstrap/Spinner";
 import useFetchResult from "../hooks/useFetchResult";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -73,7 +72,6 @@ const Result = () => {
     if (loading) {
       toastId.current = toast("Results of training in progress", {
         position: "top-center",
-        // autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,
