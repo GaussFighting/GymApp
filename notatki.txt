@@ -1,3 +1,84 @@
+History z datami
+  let [startDate, setStartDate] = useState();
+  let [endDate, setEndDate] = useState();
+  // const [filteredResults, setFilteredResults] = useState([]);
+  // const filterResults = () => {
+  //   const resultsList = results.filter((result) => {
+  //     return (
+  //       moment(result.date).isAfter(startDate) &&
+  //       moment(result.date).isBefore(endDate)
+  //     );
+  //   });
+
+  //   return setFilteredResults(resultsList);
+  // };
+
+  // const allResults = () => {
+  //   return setFilteredResults(results);
+  // };
+{/*  // <ul className="ul-exercise">{displayedWorkouts()}</ul>*/}
+      {/* 
+      <FormGroup className="py-1">
+        <Label for="exampleDate">START DATE</Label>
+        <Input
+          id="exampleDate"
+          name="date"
+          placeholder="date placeholder"
+          type="date"
+          onChange={(date) => {
+            setStartDate(() => {
+              return moment(date.target.value).toDate();
+            });
+          }}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label for="exampleDate">END DATE</Label>
+        <Input
+          id="exampleDate"
+          name="date"
+          placeholder="date placeholder"
+          type="date"
+          onChange={(date) => {
+            setEndDate(() => {
+              return moment(date.target.value).endOf("day").toDate();
+            });
+          }}
+        />
+      </FormGroup>
+      <Button
+        color="primary"
+        className="add-new-template-cancel-button "
+        onClick={() => {
+          if (startDate && endDate) {
+            filterResults();
+          }
+        }}>
+        SHOW RESULTS
+      </Button> */}
+      {/* <Button
+        color="primary"
+        className="add-new-template-cancel-button"
+        onClick={() => {
+          allResults();
+        }}>
+        SHOW ALL RESULTS
+      </Button> */}
+      {/* <Button className="add-new-template-cancel-button" onClick={() => {}}>
+        NEXT PAGE
+      </Button> */}
+      i w fetchu wysylalem {startDate, endDate}
+Spinner
+import Spinner from "react-bootstrap/Spinner";
+  // if (loading)
+  //   return (
+  //     <div className="d-flex spinner">
+  //       <Spinner animation="border" role="status">
+  //         <span className="visually-hidden">Loading...</span>
+  //       </Spinner>
+  //     </div>
+  //   );
+
 Pagination
 Wysłać przez link z fetcha params do recodrów a tam przez propsy coś z nim porobić.
 Chce mieć n stron z y wynikami i kazda na innym linku 
