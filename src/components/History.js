@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { Label, Input, Button } from "reactstrap";
@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const History = () => {
+  let [startDate, setStartDate] = useState();
+  let [endDate, setEndDate] = useState();
   const format = "YYYY-MM-DD";
   const moment = require("moment");
   const toastId = React.useRef(null);
@@ -21,7 +23,7 @@ const History = () => {
     limit,
     setLimit,
     handlePageClick,
-  } = useFetchResults();
+  } = useFetchResults({ startDate, endDate });
 
   useEffect(() => {
     if (loading) {
