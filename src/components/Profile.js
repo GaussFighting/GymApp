@@ -38,14 +38,14 @@ const Profile = () => {
   return (
     <div className="mt-5">
       <Row>
-        <Col>
+        <Col className="pt-3" sm="6">
           <h1>Profile</h1>{" "}
         </Col>
-        <Col>
+        <Col sm="6">
           {" "}
           <Button
             color="primary"
-            className="add-new-template-cancel-button center-block "
+            className="center-block "
             onClick={(e) => logOut(e)}>
             LOG OUT
           </Button>

@@ -8,17 +8,17 @@ const StartWorkout = () => {
     <div>
       <Row>
         <Button color="primary">
-          <Link to="/choosetemplate">START WORKOUT FROM TEMPLATE</Link>
+          <Link to="/choosetemplate">START WORKOUT</Link>
         </Button>
       </Row>
       <Row>
         <Button color="primary">
-          <Link to="/emptyworkout">START AN EMPTY WORKOUT</Link>
+          <Link to="/emptyworkout">EMPTY WORKOUT</Link>
         </Button>
       </Row>
       <Row>
         <Button color="primary">
-          <Link to="/addnewtemplate">ADD A NEW TEMPLATE</Link>
+          <Link to="/addnewtemplate">NEW TEMPLATE</Link>
         </Button>
       </Row>
       <Row>

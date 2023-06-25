@@ -187,7 +187,7 @@ const Exercises = () => {
       <ul className="ul-exercise">{ExercisesList}</ul>
       <Button
         color="primary"
-        className="add-new-template-cancel-button center-block"
+        className="center-block"
         onClick={() => {
           downloadCSV();
         }}>

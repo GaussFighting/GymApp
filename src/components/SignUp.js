@@ -147,7 +147,7 @@ const SignUp = () => {
           <Button
             color="primary"
             disabled={!!isEmpty}
-            className="add-new-template-cancel-button center-block"
+            className="center-block"
             onClick={(e) => onSubmit(e, form)}>
             Submit
           </Button>

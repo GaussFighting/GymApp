@@ -166,13 +166,15 @@ const Workout = (props) => {
               return (
                 <React.Fragment key={idx + label}>
                   {" "}
-                  <span>{`${(idx === 0 ? i + 1 : " ") + " " + label}`}</span>
+                  <span className="workout-small">{`${
+                    (idx === 0 ? i + 1 : " ") + " " + label
+                  }`}</span>
                   <Input
                     key={`${exercise.id}-${i}`}
                     disabled={disabledCheckboxesArr.includes(
                       `${exercise.id}-${i}`
                     )}
-                    className="input d-inline-block col-sm-12 col-lg-6 edit-input"
+                    className="input d-inline-block col-sm-12 col-lg-6 edit-input workout-input"
                     type={label === "TIME" ? "time" : "number"}
                     step="1"
                     min={0}
@@ -261,7 +263,7 @@ const Workout = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col sm="12" md="6" className="py-3">
+          <Col sm="3" md="5" lg="6" className=" pt-3">
             <DatePicker
               className="date-picker"
               selected={startDate}
@@ -273,7 +275,7 @@ const Workout = (props) => {
               }}
             />
           </Col>
-          <Col sm="12" md="6">
+          <Col sm="9" md="7" lg="6">
             <Form>
               <span>BODY WEIGHT:</span>
               <Input
@@ -317,13 +319,13 @@ const Workout = (props) => {
               <Button
                 color="primary"
                 onClick={() => changeSetNumber(exercise.id, true)}
-                className="add-new-template-cancel-button button-modal">
+                className="button-modal">
                 ADD SET
               </Button>
               <Button
                 color="primary"
                 onClick={() => changeSetNumber(exercise.id, false)}
-                className="add-new-template-cancel-button button-modal">
+                className="button-modal">
                 DELETE SET
               </Button>
             </Row>
@@ -360,7 +362,7 @@ const Workout = (props) => {
             }
             if (bodyWeightConfirmed) onSubmit(e);
           }}
-          className="add-new-template-cancel-button margin-left button-modal">
+          className="margin-left button-modal">
           FINISH
         </Button>
       </FormGroup>

@@ -118,7 +118,7 @@ const AddNewTemplate = () => {
   return (
     <Form>
       <FormGroup>
-        <Label for="exampleEmail">Name</Label>
+        <Label for="exampleEmail">Template name</Label>
         <Input
           className="input"
           type="text"

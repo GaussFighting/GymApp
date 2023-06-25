@@ -194,7 +194,8 @@ a {
   justify-content: space-evenly;
   width: 32vh;
   max-width: 250px;
-  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
 }
 .button-modal {
   max-width: 150px;
@@ -429,13 +430,18 @@ a {
     justify-content: flex-start;
     padding-left: 0px;
   }
+  .signin,
+  .signup {
+    margin-top: 100px;
+  }
   .btn-primary,
   .btn-link {
     width: 22vh;
     padding: 10px;
     max-width: 150px;
     min-width: 175px;
-    max-height: 100px;
+    min-height: 48px;
+    max-height: 48px;
   }
   .button-modal {
     max-width: 150px;
@@ -460,10 +466,42 @@ a {
   .edit-input:focus {
     width: inherit;
   }
+
+  .page-link {
+    margin: 0px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-height: 38px;
+  }
+}
+.edit-input,
+.edit-input:focus {
+  width: 8vh;
+}
+.form-control,
+.form-control:focus {
+  width: 50px;
+}
+.date-picker {
+  width: 120px;
+}
+.workout-input.form-control {
+  width: 50px;
+  max-width: 50px;
 }
 @media only screen and (max-width: rem(480)) {
   .small-view {
     display: none;
+  }
+  .page-link {
+    margin: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 3px;
+    padding-right: 4px;
+    max-height: 38px;
   }
 }
 @media only screen and (max-width: rem(320)) {
@@ -473,5 +511,10 @@ a {
   .form-select:focus,
   .btn-link {
     width: auto;
+  }
+  .page-link {
+    margin: 0px;
+    padding: 1px;
+    max-height: 38px;
   }
 }
