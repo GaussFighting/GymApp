@@ -174,7 +174,7 @@ const Workout = (props) => {
                     disabled={disabledCheckboxesArr.includes(
                       `${exercise.id}-${i}`
                     )}
-                    className="input d-inline-block col-sm-12 col-lg-6 edit-input workout-input"
+                    className="input d-inline-block col-sm-6 col-lg-6 edit-input workout-input"
                     type={label === "TIME" ? "time" : "number"}
                     step="1"
                     min={0}
@@ -263,7 +263,7 @@ const Workout = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col sm="3" md="5" lg="6" className=" pt-3">
+          <Col sm="3" md="5" lg="6" className=" pt-3 date-picker-view">
             <DatePicker
               className="date-picker"
               selected={startDate}
@@ -280,7 +280,7 @@ const Workout = (props) => {
               <span>BODY WEIGHT:</span>
               <Input
                 disabled={bodyWeightConfirmed}
-                className="input d-inline-block"
+                className="input d-inline-block workout-input"
                 type="number"
                 min={0}
                 max={255}

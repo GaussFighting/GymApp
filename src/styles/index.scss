@@ -426,6 +426,10 @@ a {
   .container-fluid {
     margin-bottom: 1rem;
   }
+  .date-picker-view {
+    display: flex;
+    align-items: center;
+  }
   .mobile-row {
     justify-content: flex-start;
     padding-left: 0px;
@@ -452,6 +456,7 @@ a {
     width: 8vh;
   }
 }
+
 @media only screen and (max-width: rem(720)) {
   .a.nav-item {
     display: inline;
@@ -475,25 +480,49 @@ a {
     padding-right: 10px;
     max-height: 38px;
   }
+  .edit-input,
+  .edit-input:focus {
+    width: 8vh;
+  }
+  .form-control,
+  .form-control:focus {
+    width: 50px;
+  }
+  .date-picker {
+    width: 120px;
+  }
+  .workout-input.form-control {
+    width: 40px;
+    max-width: 40px;
+    min-width: 60px;
+  }
+
+  .btn-primary,
+  .btn-link {
+    width: 22vh;
+    padding: 10px;
+    max-width: 150px;
+    min-width: 100px;
+    min-height: 64px;
+    max-height: 64px;
+  }
 }
-.edit-input,
-.edit-input:focus {
-  width: 8vh;
-}
-.form-control,
-.form-control:focus {
-  width: 50px;
-}
-.date-picker {
-  width: 120px;
-}
-.workout-input.form-control {
-  width: 50px;
-  max-width: 50px;
-}
+
 @media only screen and (max-width: rem(480)) {
+  :root {
+    --bs-body-font-size: 9px;
+  }
+  .workout-input.form-control {
+    width: 45px;
+    max-width: 45px;
+    min-width: 45px;
+  }
   .small-view {
     display: none;
+  }
+  .input,
+  .form-control {
+    font-size: 9px;
   }
   .page-link {
     margin: 0px;
