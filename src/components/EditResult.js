@@ -396,7 +396,7 @@ const EditResult = ({
                 <Button
                   color="primary"
                   onClick={() => changeSetNumber(exercise.id, true)}
-                  className="add-new-template-cancel-button button-modal">
+                  className="button-modal">
                   ADD SET
                 </Button>
                 <Button
@@ -414,7 +414,7 @@ const EditResult = ({
                     })
                   }
                   disabled={!(localStorage.getItem("role") === "Admin")}
-                  className="add-new-template-cancel-button button-modal">
+                  className="button-modal">
                   DELETE EXERCISE
                 </Button>
               </Row>
