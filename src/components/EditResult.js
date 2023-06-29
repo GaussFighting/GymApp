@@ -139,9 +139,9 @@ const EditResult = ({
         inputName
       ];
     return (
-      <Col sm="12" md="4">
+      <Col sm="4" md="4">
         <Input
-          className="input edit-input"
+          className="input edit-input workout-input"
           type={inputType}
           step={inputType === "time" ? "1" : "0.1"}
           value={inputType === "number" ? parseFloat(inputValue) : inputValue}
@@ -293,26 +293,26 @@ const EditResult = ({
                       <React.Fragment key={result + index}>
                         {index === 0 && (
                           <Row>
-                            <Col sm="12" className="firstCol" md="4">
+                            <Col sm="4" className="firstCol" md="4">
                               SET
                             </Col>
                             {result.setWeight && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="4" md="4" className="firstCol">
                                 WEIGHT
                               </Col>
                             )}
                             {result.setRepetition && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="4" md="4" className="firstCol">
                                 REPETITION
                               </Col>
                             )}{" "}
                             {result.setDistance && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="4" md="4" className="firstCol">
                                 DISTANCE
                               </Col>
                             )}
                             {result.setTime && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="14" md="4" className="firstCol">
                                 TIME
                               </Col>
                             )}
@@ -324,7 +324,7 @@ const EditResult = ({
                               ? "exercise-row-even"
                               : "exercise-row-odd"
                           }>
-                          <Col sm="12" md="4">
+                          <Col sm="2" md="2">
                             {" "}
                             {index + 1}.{" "}
                           </Col>
@@ -375,7 +375,7 @@ const EditResult = ({
                               callback={resultEdit}
                             />
                           )}
-                          <Col sm="12">
+                          <Col sm="2" xl="2">
                             {" "}
                             <Button
                               color="primary button-hyphen"

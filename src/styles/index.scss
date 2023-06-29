@@ -205,6 +205,10 @@ a {
   max-width: 50px;
   max-height: 50px;
 }
+.button-hyphen.btn-primary {
+  margin-top: 0px;
+  margin-bottom: 32px;
+}
 .btn-link:hover,
 .btn-primary:hover,
 .btn-link:focus {
@@ -438,8 +442,7 @@ a {
   .signup {
     margin-top: 100px;
   }
-  .btn-primary,
-  .btn-link {
+  .btn-primary.btn-link {
     width: 22vh;
     padding: 10px;
     max-width: 150px;
@@ -451,9 +454,20 @@ a {
     max-width: 150px;
     max-height: 50px;
   }
+
   .edit-input,
   .edit-input:focus {
     width: 8vh;
+  }
+
+  .workout-input.form-control {
+    width: 40px;
+    max-width: 40px;
+    min-width: 60px;
+  }
+  .button-hyphen.btn-primary {
+    max-width: 50px;
+    max-height: 50px;
   }
 }
 
@@ -497,8 +511,7 @@ a {
     min-width: 60px;
   }
 
-  .btn-primary,
-  .btn-link {
+  .btn-primary.btn-link {
     width: 22vh;
     padding: 10px;
     max-width: 150px;
@@ -527,10 +540,22 @@ a {
   .page-link {
     margin: 0px;
     padding-top: 5px;
+    .button-modal {
+      max-width: 180px;
+      max-height: 75px;
+    }
     padding-bottom: 5px;
     padding-left: 3px;
     padding-right: 4px;
     max-height: 38px;
+  }
+  .button-hyphen.btn-primary {
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 }
 @media only screen and (max-width: rem(320)) {
