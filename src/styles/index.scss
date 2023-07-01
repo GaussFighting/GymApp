@@ -411,6 +411,15 @@ a {
   width: 50vw;
   height: 50vh;
 }
+.date-picker-view {
+  display: flex;
+  align-items: flex-start;
+}
+.inputUnit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @media only screen and (max-width: rem(2560)) {
   .edit-input,
   .edit-input:focus {
@@ -454,6 +463,24 @@ a {
   .edit-input,
   .edit-input:focus {
     width: 8vh;
+  }
+  .workout-input.form-control,
+  .edit-input,
+  .edit-input:focus {
+    width: 75px;
+    max-width: 75px;
+    min-width: 75px;
+  }
+  .date-picker {
+    width: 120px;
+  }
+  .date-picker-view {
+    display: flex;
+    align-items: flex-start;
+  }
+  .inputUnit {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -506,23 +533,82 @@ a {
     min-height: 64px;
     max-height: 64px;
   }
+  .workout-input.form-control,
+  .edit-input,
+  .edit-input:focus {
+    width: 55px;
+    max-width: 55px;
+    min-width: 55px;
+  }
+  .date-picker {
+    width: 120px;
+  }
+  .date-picker-view {
+    display: flex;
+    align-items: flex-start;
+  }
+  .inputUnit {
+    display: flex;
+    align-items: center;
+  }
+  .sets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media only screen and (max-width: rem(480)) {
-  :root {
-    --bs-body-font-size: 9px;
+  // :root {
+  //   --bs-body-font-size: 10px;
+  // }
+  .profile-table {
+    font-size: 10px;
   }
-  .workout-input.form-control {
+  .template-row.row,
+  .template-row-exercise {
+    padding: 10px;
+  }
+  .template-row-exercise.row {
+    padding-top: 10px;
+  }
+  .row {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .btn-primary,
+  .btn-link {
+    margin-bottom: 10px;
+  }
+  .workout-small {
+    font-size: 10px;
+  }
+  .workout-input.form-control,
+  .edit-input,
+  .edit-input:focus {
     width: 45px;
     max-width: 45px;
     min-width: 45px;
   }
+  .date-picker {
+    font-size: 10px;
+    width: 80px;
+  }
+  .date-picker-view {
+    display: flex;
+    align-items: flex-start;
+  }
+  .inputUnit {
+    display: flex;
+    align-items: center;
+  }
   .small-view {
     display: none;
   }
+
   .input,
   .form-control {
-    font-size: 9px;
+    font-size: 10px;
   }
   .page-link {
     margin: 0px;
