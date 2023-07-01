@@ -293,7 +293,7 @@ const EditResult = ({
                       <React.Fragment key={result + index}>
                         {index === 0 && (
                           <Row>
-                            <Col sm="4" className="firstCol" md="4">
+                            <Col sm="2" className="firstCol">
                               SET
                             </Col>
                             {result.setWeight && (
@@ -324,7 +324,7 @@ const EditResult = ({
                               ? "exercise-row-even"
                               : "exercise-row-odd"
                           }>
-                          <Col sm="4" md="4" className="inputUnit">
+                          <Col sm="2" className="inputUnit">
                             {" "}
                             {index + 1}.{" "}
                           </Col>
@@ -375,7 +375,7 @@ const EditResult = ({
                               callback={resultEdit}
                             />
                           )}
-                          <Col sm="12">
+                          <Col sm="2">
                             {" "}
                             <Button
                               color="primary button-hyphen"
