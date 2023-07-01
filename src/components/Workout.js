@@ -156,7 +156,7 @@ const Workout = (props) => {
 
     let labelsFunction = (labels) => {
       return (
-        <div className="row">
+        <div className="row workout-mobile">
           <Form>
             {labels.map((label, idx) => {
               let labelName =

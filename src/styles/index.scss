@@ -212,6 +212,9 @@ a {
   color: $dark;
   text-decoration: none;
 }
+.button-hyphen.btn-primary {
+  margin-top: 16px;
+}
 .btn-secondary:hover {
   background-color: $primary;
   color: $dark;
@@ -420,6 +423,14 @@ a {
   align-items: center;
   justify-content: center;
 }
+.button-hyphen.btn-primary {
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-height: 30px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 @media only screen and (max-width: rem(2560)) {
   .edit-input,
   .edit-input:focus {
@@ -471,6 +482,7 @@ a {
     max-width: 75px;
     min-width: 75px;
   }
+
   .date-picker {
     width: 120px;
   }
@@ -556,12 +568,23 @@ a {
     justify-content: center;
     align-items: center;
   }
+  .button-hyphen.btn-primary {
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 }
 
 @media only screen and (max-width: rem(480)) {
   // :root {
   //   --bs-body-font-size: 10px;
   // }
+  .row.workout-mobile {
+    padding-right: 0px;
+  }
   .profile-table {
     font-size: 10px;
   }
