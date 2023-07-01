@@ -139,7 +139,7 @@ const EditResult = ({
         inputName
       ];
     return (
-      <Col sm="12" md="4">
+      <Col sm="4" md="4" className="inputUnit">
         <Input
           className="input edit-input"
           type={inputType}
@@ -293,26 +293,26 @@ const EditResult = ({
                       <React.Fragment key={result + index}>
                         {index === 0 && (
                           <Row>
-                            <Col sm="12" className="firstCol" md="4">
+                            <Col sm="4" className="firstCol" md="4">
                               SET
                             </Col>
                             {result.setWeight && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="4" md="4" className="firstCol">
                                 WEIGHT
                               </Col>
                             )}
                             {result.setRepetition && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="4" md="4" className="firstCol">
                                 REPETITION
                               </Col>
                             )}{" "}
                             {result.setDistance && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="4" md="4" className="firstCol">
                                 DISTANCE
                               </Col>
                             )}
                             {result.setTime && (
-                              <Col sm="12" md="4" className="firstCol">
+                              <Col sm="4" md="4" className="firstCol">
                                 TIME
                               </Col>
                             )}
@@ -324,7 +324,7 @@ const EditResult = ({
                               ? "exercise-row-even"
                               : "exercise-row-odd"
                           }>
-                          <Col sm="12" md="4">
+                          <Col sm="4" md="4" className="inputUnit">
                             {" "}
                             {index + 1}.{" "}
                           </Col>
