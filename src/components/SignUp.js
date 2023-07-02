@@ -11,10 +11,12 @@ const SignUp = () => {
     password: "",
     email: "",
     role: "",
+    secretKey: "User",
     // ipAdress: "",
   });
   // const [ip, setIp] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const toastId = React.useRef(null);
 
@@ -34,33 +36,47 @@ const SignUp = () => {
     }
   }, [loading]);
 
-  const roleKey = process.env.REACT_APP_API_KEY;
-  const [secretKey, setSecretKey] = useState("");
+  useEffect(() => {
+    if (errorMsg) {
+      toastId.current = toast(errorMsg, {
+        position: "top-center",
+        autoClose: 100000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    setErrorMsg("");
+  }, [errorMsg]);
 
   const isEmpty = Object.values(form).some((el) => {
     return !el;
   });
-
+  console.log(form);
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (form.role === "Admin" && secretKey !== roleKey) {
-      alert("Invalid Admin");
-    } else {
-      try {
-        setLoading(true);
-        await fetch("/.netlify/functions/userCreate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-        });
-        window.location.href = "./signin";
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
+    try {
+      setLoading(true);
+      const res = await fetch("/.netlify/functions/userCreate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+      const record = await res.json();
+      if (res.status < 200 || res.status > 299) {
+        setErrorMsg(record.msg);
+        return;
       }
+      window.location.href = "./signin";
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
     }
   };
 
@@ -136,10 +152,12 @@ const SignUp = () => {
           <div className="mb-3">
             <label>Secret Key</label>
             <input
-              type="text"
+              type="password"
               placeholder="Secret Key"
               className="form-control"
-              onChange={(event) => setSecretKey(event.target.value)}></input>
+              onChange={(event) =>
+                updateForm({ secretKey: event.target.value })
+              }></input>
           </div>
         )}
 
