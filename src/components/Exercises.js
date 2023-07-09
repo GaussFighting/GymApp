@@ -16,7 +16,7 @@ const Exercises = () => {
 
   const { loading, exercises, allExercisesForFiltering, setExercises } =
     useFetchExercises();
-  const [exercisesFrequency, setExercisesFrequency] = useState([]);
+  const [exercisesCount, setExercisesCount] = useState({});
   const toastId = React.useRef(null);
 
   useEffect(() => {
@@ -34,34 +34,24 @@ const Exercises = () => {
       toast.dismiss(toastId.current);
     }
   }, [loading]);
-  const loadedExercises = [];
+
+  let loadedExercises = {};
 
   useEffect(() => {
-    if (exercisesFrequency.length === 0) {
-      const exercisesIdArr = exercises.map((el) => el.id);
-      const fetchResults = async (el) => {
-        let urlChecker = `/.netlify/functions/resultRead?exerciseId=${el}`;
+    if (Object.keys(exercisesCount).length === 0) {
+      const fetchResults = async () => {
+        let urlChecker = `/.netlify/functions/resultRead?exercisesCount=${true}`;
         let res = "";
         try {
           res = await fetch(urlChecker);
+          const responseData = await res.json();
+          loadedExercises = responseData.data.res;
+          setExercisesCount(loadedExercises);
         } catch (error) {
           console.log(error);
         }
-        const responseData = await res.json();
-
-        let numberOfExercises = responseData.data.res.results.length;
-        loadedExercises.push({
-          exerciseId: el,
-          numberOfExercises: numberOfExercises,
-        });
       };
-      const asyncFetchingLoop = async () => {
-        for (let i = 0; i < exercisesIdArr.length; i++) {
-          await fetchResults(exercisesIdArr[i]);
-        }
-        setExercisesFrequency(loadedExercises);
-      };
-      asyncFetchingLoop();
+      fetchResults();
     }
   }, [exercises]);
 
@@ -86,14 +76,6 @@ const Exercises = () => {
     document.body.removeChild(link);
   };
 
-  const filteredNumberOfExercises = (a) => {
-    let frequencyOfCurrentExercise = exercisesFrequency.find((el) => {
-      return el.exerciseId === a;
-    });
-
-    return frequencyOfCurrentExercise.numberOfExercises;
-  };
-
   const ExercisesList = exercises.map((exercise, idx) => {
     return (
       <ListGroup key={exercise.id + idx}>
@@ -108,8 +90,8 @@ const Exercises = () => {
                   {exercise.nameEn}{" "}
                   <strong style={{ color: "red" }}>
                     {" "}
-                    {exercisesFrequency.length &&
-                      filteredNumberOfExercises(exercise.id)}
+                    {Object.keys(exercisesCount).length &&
+                      exercisesCount[exercise.id]}
                   </strong>
                 </Col>
                 <Col sm="6" md="3">

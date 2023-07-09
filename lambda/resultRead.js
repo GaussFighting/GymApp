@@ -10,6 +10,7 @@ exports.handler = async (event, context) => {
   const page = parseInt(event.queryStringParameters.page);
   const limit = parseInt(event.queryStringParameters.limit);
   const exerciseId = event.queryStringParameters.exerciseId;
+  const exercisesCount = event.queryStringParameters.exercisesCount;
   const startDate =
     event.queryStringParameters.startDate &&
     new Date(event.queryStringParameters.startDate);
@@ -56,6 +57,23 @@ exports.handler = async (event, context) => {
           templateExercises: { $elemMatch: { id: exerciseId } },
         }).sort({ date: -1 }),
       };
+    } else if (exercisesCount) {
+      let arrOfallTrainingResults = {};
+      arrOfallTrainingResults = {
+        results: await Result.find({}, { templateExercises: { id: 1 } }),
+      };
+      let arrOfAllExercises = arrOfallTrainingResults.results.map((el) => {
+        let arrExercieses = el.templateExercises.map((el) => {
+          return el.id;
+        });
+        return arrExercieses;
+      });
+      flatedExercisesId = arrOfAllExercises.flat();
+      let counts = {};
+      for (let i = 0; i < flatedExercisesId.length; i++) {
+        counts[flatedExercisesId[i]] = 1 + (counts[flatedExercisesId[i]] || 0);
+      }
+      res = counts;
     } else if (isoStartDate && isoEndDate) {
       res = {
         results: await Result.find({
