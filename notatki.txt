@@ -1,3 +1,43 @@
+Exercises list z liczbą ćwiczeń, pierwsze podejście na 200 requestów
+  // useEffect(() => {
+  //   if (exercisesFrequency.length === 0) {
+  //     const exercisesIdArr = exercises.map((el) => el.id);
+  //     const fetchResults = async (el) => {
+  //       let urlChecker = `/.netlify/functions/resultRead?exerciseId=${el}`;
+  //       let res = "";
+  //       try {
+  //         res = await fetch(urlChecker);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //       const responseData = await res.json();
+
+  //       let numberOfExercises = responseData.data.res.results.length;
+  //       loadedExercises.push({
+  //         exerciseId: el,
+  //         numberOfExercises: numberOfExercises,
+  //       });
+  //     };
+  //     const asyncFetchingLoop = async () => {
+  //       for (let i = 0; i < exercisesIdArr.length; i++) {
+  //         await fetchResults(exercisesIdArr[i]);
+  //       }
+  //       setExercisesFrequency(loadedExercises);
+  //     };
+  //     asyncFetchingLoop();
+  //   }
+  // }, [exercises]);
+
+  // const filteredNumberOfExercises = (a) => {
+  //   let frequencyOfCurrentExercise = exercisesFrequency.find((el) => {
+  //     return el.exerciseId === a;
+  //   });
+
+  //   return frequencyOfCurrentExercise.numberOfExercises;
+  // };
+   {/* {exercisesFrequency.length &&
+                      filteredNumberOfExercises(exercise.id)} */}
+
 History z datami
   let [startDate, setStartDate] = useState();
   let [endDate, setEndDate] = useState();

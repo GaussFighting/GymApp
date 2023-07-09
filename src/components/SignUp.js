@@ -55,7 +55,6 @@ const SignUp = () => {
   const isEmpty = Object.values(form).some((el) => {
     return !el;
   });
-  console.log(form);
   const onSubmit = async (e) => {
     e.preventDefault();
     try {

@@ -11,8 +11,6 @@ import moment from "moment";
 const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
   const format = "YYYY-MM-DD";
 
-  console.log(results.length);
-
   let renderedResults = results.map((ex, index) => {
     const shortTrainingSummary = twoColResRend(ex, exerciseId);
     const singleTrainRes = singleTrainingResults(ex, exerciseId);
