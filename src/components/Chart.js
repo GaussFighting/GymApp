@@ -262,7 +262,7 @@ const Chart = ({ results, exerciseId }) => {
               height={100}
               interval={"preserveStartEnd"}
             />
-            <YAxis yAxisId="left" domain={[0, "dataMax + 200"]} />
+            <YAxis yAxisId="left" domain={[0, "dataMax + 450"]} />
             <YAxis
               yAxisId="right"
               orientation="right"
