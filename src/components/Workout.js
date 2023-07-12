@@ -355,7 +355,9 @@ const Workout = (props) => {
             }
             let sortedArrayOfSetsIds = arrayOfSetsIds.sort();
             let sortedDisabledCheckboxesArr = disabledCheckboxesArr.sort();
+
             for (let i = 0; i < sortedArrayOfSetsIds.length; i++) {
+              console.log(sortedDisabledCheckboxesArr);
               if (sortedArrayOfSetsIds[i] !== sortedDisabledCheckboxesArr[i]) {
                 return;
               }

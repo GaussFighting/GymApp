@@ -5,7 +5,7 @@ const useFetchTemplates = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
 
   const handlePageClick = (e) => {
     setCurrentPage(e.selected + 1);
