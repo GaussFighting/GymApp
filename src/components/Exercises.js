@@ -89,7 +89,6 @@ const Exercises = () => {
     }
     return 0;
   });
-  console.log("sortedExercises:", sortedExercises);
 
   const ExercisesList = sortedExercises.map((exercise, idx) => {
     return (
