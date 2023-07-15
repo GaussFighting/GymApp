@@ -35,10 +35,9 @@ const Exercises = () => {
     }
   }, [loading]);
 
-  let loadedExercises = {};
-
   useEffect(() => {
     if (Object.keys(exercisesCount).length === 0) {
+      let loadedExercises = {};
       const fetchResults = async () => {
         let urlChecker = `/.netlify/functions/resultRead?exercisesCount=${true}`;
         let res = "";
