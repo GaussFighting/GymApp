@@ -11,8 +11,8 @@ exports.handler = async (event, context) => {
 
   try {
     const templates = id
-      ? await Template.find({ _id: id })
-      : await Template.find({});
+      ? await Template.find({ _id: id }).sort({ date: -1 })
+      : await Template.find({}).sort({ date: -1 });
 
     const startIndex = (page - 1) * limit;
     const lastIndex = page * limit;
@@ -32,6 +32,7 @@ exports.handler = async (event, context) => {
         page: page - 1,
       };
     }
+    templates.reverse();
 
     results.result = templates.slice(startIndex, lastIndex);
     const response = {

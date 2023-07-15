@@ -5,6 +5,8 @@ import { ListGroup, Row, Col } from "react-bootstrap";
 import ChooseExercise from "./ChooseExercise";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Workout = (props) => {
   useEffect(() => {
@@ -15,6 +17,25 @@ const Workout = (props) => {
   }, []);
 
   const location = useLocation();
+
+  const [checked, setChecked] = useState("");
+
+  const toastId = React.useRef(null);
+  useEffect(() => {
+    if (checked) {
+      toastId.current = toast("Check all inputs to submit results!", {
+        position: "top-center",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.dismiss(toastId.current);
+    }
+  }, [checked]);
 
   const [loadedTemplate, setLoadedTemplate] = useState(
     props.template
@@ -144,7 +165,7 @@ const Workout = (props) => {
   };
 
   let valueOfExercises = (exercise, i) => {
-    let exerciseArray = ["barebell", "dumbbell", "other", "machine", "cable"];
+    let exerciseArray = ["barbell", "dumbbell", "other", "machine", "cable"];
     let exerciseArray1 = ["weighted bodyweight", "assisted bodyweight"];
     let exerciseLabels = ["WEIGHT", "REPETITION"];
     let exerciseArray2 = ["cardio"];
@@ -351,10 +372,23 @@ const Workout = (props) => {
           disabled={isWaiting}
           onClick={(e) => {
             if (arrayOfSetsIds.length !== disabledCheckboxesArr.length) {
+              let notCheckedInput =
+                document.getElementsByClassName("form-control");
+              for (let i = 0; i < notCheckedInput.length; i++) {
+                notCheckedInput[i].style.border = "solid  #fa4360";
+                notCheckedInput[i].style.background = "#fae1e5";
+              }
+              let checkedInput = document.querySelectorAll(":disabled");
+              for (let i = 0; i < checkedInput.length; i++) {
+                checkedInput[i].style.border = "";
+                checkedInput[i].style.background = "#e9ecef";
+              }
+              setChecked("true");
               return;
             }
             let sortedArrayOfSetsIds = arrayOfSetsIds.sort();
             let sortedDisabledCheckboxesArr = disabledCheckboxesArr.sort();
+
             for (let i = 0; i < sortedArrayOfSetsIds.length; i++) {
               if (sortedArrayOfSetsIds[i] !== sortedDisabledCheckboxesArr[i]) {
                 return;

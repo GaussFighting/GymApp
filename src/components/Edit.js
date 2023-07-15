@@ -88,7 +88,7 @@ const Edit = ({ exerciseName, bodyPart, equipment }) => {
             id="exampleSelect"
             value={form.equipment}
             onChange={(e) => updateForm({ equipment: e.target.value })}>
-            <option>BAREBELL</option>
+            <option>BARBELL</option>
             <option>DUMBBELL</option>
             <option>REPS ONLY</option>
             <option>DURATION</option>

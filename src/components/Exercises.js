@@ -76,7 +76,23 @@ const Exercises = () => {
     document.body.removeChild(link);
   };
 
-  const ExercisesList = exercises.map((exercise, idx) => {
+  console.log(exercises);
+
+  let sortedExercises = exercises.sort((a, b) => {
+    let fa = a.nameEn.toLowerCase();
+    let fb = b.nameEn.toLowerCase();
+
+    if (fa < fb) {
+      return -1;
+    }
+    if (fa > fb) {
+      return 1;
+    }
+    return 0;
+  });
+  console.log("sortedExercises:", sortedExercises);
+
+  const ExercisesList = sortedExercises.map((exercise, idx) => {
     return (
       <ListGroup key={exercise.id + idx}>
         <Button className="button">

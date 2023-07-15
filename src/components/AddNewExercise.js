@@ -7,7 +7,7 @@ const MyVerticallyCenteredModal = (props) => {
   const [form, setForm] = useState({
     exerciseName: "",
     selectedBodyPart: "CHEST",
-    selectedEquipment: "BAREBELL",
+    selectedEquipment: "BARBELL",
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [isWaiting, setIsWaiting] = useState(false);

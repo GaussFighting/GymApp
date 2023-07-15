@@ -63,45 +63,41 @@ const TemplatesList = (props) => {
   });
 
   const data = dataSketch.flat();
-
+  console.log("pagecount", pageCount);
+  console.log("currentPage", currentPage);
   // without slice, reverse gaves unexpected results and dont reverse array templates!
-  const TemplatesList = templates
-    .slice(0)
-    .reverse()
-    .map((template, index) => (
-      <ListGroup key={template.id}>
-        <Row className="main-row ml-0 pl-0 gx-0">
-          <Link
-            className=" ml-0 pl-0 gx-0"
-            state={props.training ? { templateObj: template } : {}}
-            to={
-              props.training ? `/templateworkout` : `/template/${template.id}`
-            }>
-            <Col sm="12" md="12 " className="col-name">
-              {index + 1} {template.templateName.toUpperCase()}
+  const TemplatesList = templates.map((template, index) => (
+    <ListGroup key={template.id}>
+      <Row className="main-row ml-0 pl-0 gx-0">
+        <Link
+          className=" ml-0 pl-0 gx-0"
+          state={props.training ? { templateObj: template } : {}}
+          to={props.training ? `/templateworkout` : `/template/${template.id}`}>
+          <Col sm="12" md="12 " className="col-name">
+            {index + 1} {template.templateName.toUpperCase()}
+          </Col>
+        </Link>
+      </Row>
+      <Row className="template-row">
+        {template.templateExercises.map((exercise, idx) => (
+          <Row className="template-row-exercise" key={exercise.id}>
+            <Col sm="1" md="1" lg="1">
+              {idx + 1}{" "}
             </Col>
-          </Link>
-        </Row>
-        <Row className="template-row">
-          {template.templateExercises.map((exercise, idx) => (
-            <Row className="template-row-exercise" key={exercise.id}>
-              <Col sm="1" md="1" lg="1">
-                {idx + 1}{" "}
-              </Col>
-              <Col sm="7" md="8" lg="10">
-                {exercise.nameEn.toUpperCase()} {"("}
-                {exercise.equipment.toUpperCase()}
-                {")"}
-              </Col>
-              <Col sm="4" md="2" lg="1">
-                {" "}
-                {exercise.sets} SETS
-              </Col>
-            </Row>
-          ))}
-        </Row>
-      </ListGroup>
-    ));
+            <Col sm="7" md="8" lg="10">
+              {exercise.nameEn.toUpperCase()} {"("}
+              {exercise.equipment.toUpperCase()}
+              {")"}
+            </Col>
+            <Col sm="4" md="2" lg="1">
+              {" "}
+              {exercise.sets} SETS
+            </Col>
+          </Row>
+        ))}
+      </Row>
+    </ListGroup>
+  ));
 
   return (
     <div>
