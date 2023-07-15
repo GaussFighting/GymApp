@@ -165,7 +165,7 @@ const Workout = (props) => {
   };
 
   let valueOfExercises = (exercise, i) => {
-    let exerciseArray = ["barebell", "dumbbell", "other", "machine", "cable"];
+    let exerciseArray = ["barbell", "dumbbell", "other", "machine", "cable"];
     let exerciseArray1 = ["weighted bodyweight", "assisted bodyweight"];
     let exerciseLabels = ["WEIGHT", "REPETITION"];
     let exerciseArray2 = ["cardio"];

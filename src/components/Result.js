@@ -230,7 +230,9 @@ const Result = () => {
                           <Row>
                             {totalVolume > 0 && (
                               <React.Fragment>
-                                <Col>Total Volume: {totalVolume}</Col>
+                                <Col>
+                                  Total Volume: {totalVolume.toFixed(0)}
+                                </Col>
                                 <Col>
                                   {" "}
                                   Volume / mass:{" "}
