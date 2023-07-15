@@ -2,3 +2,4 @@
   Command = "CI= npm run build"
   Functions = "lambda"
   Publish = "build"
+  node_bundler = "esbuild"
