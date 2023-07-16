@@ -86,15 +86,6 @@ const Result = () => {
 
   const navigate = useNavigate();
 
-  // if (loading)
-  //   return (
-  //     <div className="d-flex spinner">
-  //       <Spinner animation="border" role="status">
-  //         <span className="visually-hidden">Loading...</span>
-  //       </Spinner>
-  //     </div>
-  //   );
-
   const deleteRecord = async (id) => {
     try {
       await fetch(`/.netlify/functions/resultDelete?id=${id}`, {

@@ -28,8 +28,6 @@ const Chart = ({ results, exerciseId }) => {
 
   let range = endDate.diff(firstDate, "days");
 
-  // let interval = parseInt((range / 6).toFixed(0)) + 1;
-
   const dataTotalVolume = () => {
     let arrOfDates = [];
     let arrayOfDateAndVolume = results.map((training) => {
