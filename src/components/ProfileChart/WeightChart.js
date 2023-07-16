@@ -67,6 +67,7 @@ const WeightChart = () => {
             />
             <YAxis
               yAxisId="left"
+              unit=" kg "
               tickCount={8}
               interval="preserveStartEnd"
               domain={(element) => {

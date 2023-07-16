@@ -68,8 +68,22 @@ a {
   text-decoration: none;
   color: $light;
 }
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+}
+.logo-size {
+  width: 250px;
+}
 .sign-in {
   color: $dark;
+  animation: sign-in 3s linear infinite;
+}
+@keyframes sign-in {
+  40% {
+    opacity: 0.5;
+  }
 }
 .sign-in:hover {
   color: $secondary;
@@ -83,14 +97,13 @@ a {
   min-height: 800px;
   min-width: 300px;
   margin: auto;
-  margin-top: 15vh;
+  margin-top: vh;
   background-color: $muted;
 }
 .signin {
   height: 45vh;
   max-height: 1300px;
   min-height: 550px;
-  margin-top: 20vh;
 }
 .body {
   font-size: 1rem;
@@ -460,10 +473,10 @@ a {
     justify-content: flex-start;
     padding-left: 0px;
   }
-  .signin,
-  .signup {
-    margin-top: 100px;
+  .logo {
+    margin-top: 80px;
   }
+
   .btn-primary,
   .btn-link {
     width: 22vh;
@@ -503,6 +516,9 @@ a {
 }
 
 @media only screen and (max-width: rem(720)) {
+  .logo-size {
+    width: 200px;
+  }
   .pie-chart {
     font-size: 12px;
   }
@@ -652,6 +668,9 @@ a {
   }
 }
 @media only screen and (max-width: rem(320)) {
+  .logo-size {
+    width: 150px;
+  }
   .form-control,
   .form-select,
   .form-control:focus,
