@@ -63,9 +63,7 @@ const TemplatesList = (props) => {
   });
 
   const data = dataSketch.flat();
-  console.log("pagecount", pageCount);
-  console.log("currentPage", currentPage);
-  // without slice, reverse gaves unexpected results and dont reverse array templates!
+
   const TemplatesList = templates.map((template, index) => (
     <ListGroup key={template.id}>
       <Row className="main-row ml-0 pl-0 gx-0">

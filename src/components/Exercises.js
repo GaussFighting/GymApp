@@ -43,6 +43,7 @@ const Exercises = () => {
         let res = "";
         try {
           res = await fetch(urlChecker);
+          console.log("res:", res);
           const responseData = await res.json();
           loadedExercises = responseData.data.res;
           setExercisesCount(loadedExercises);
@@ -52,7 +53,7 @@ const Exercises = () => {
       };
       fetchResults();
     }
-  }, [exercises]);
+  }, [exercises, exercisesCount]);
 
   const downloadCSV = () => {
     const csvString = [
@@ -74,8 +75,6 @@ const Exercises = () => {
     window.open(encodedUri);
     document.body.removeChild(link);
   };
-
-  console.log(exercises);
 
   let sortedExercises = exercises.sort((a, b) => {
     let fa = a.nameEn.toLowerCase();

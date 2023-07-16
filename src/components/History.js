@@ -8,8 +8,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const History = () => {
-  let [startDate, setStartDate] = useState();
-  let [endDate, setEndDate] = useState();
+  // let [startDate, setStartDate] = useState();
+  // let [endDate, setEndDate] = useState();
+  let startDate = "";
+  let endDate = "";
   const format = "YYYY-MM-DD";
   const moment = require("moment");
   const toastId = React.useRef(null);

@@ -5,7 +5,6 @@ exports.handler = async (event, context) => {
   const mongoose = await connectDb(process.env.REACT_APP_DB);
 
   context.callbackWaitsForEmptyEventLoop = false;
-  console.log(event.queryStringParameters);
   const id = event.queryStringParameters.id;
   const page = parseInt(event.queryStringParameters.page);
   const limit = parseInt(event.queryStringParameters.limit);
