@@ -2,7 +2,6 @@ const connectDb = require("../db/connectDb");
 const Result = require("../models/resultModel");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 exports.handler = async (event, context) => {

@@ -142,7 +142,7 @@ const DayOfTheWeekDiagram = () => {
   return (
     <div>
       <h4 className="my-3">Days of week distribution</h4>
-      <div>
+      <div className="pie-chart">
         <ResponsiveContainer width="100%" height={600}>
           <PieChart width={600} height={600}>
             <Pie

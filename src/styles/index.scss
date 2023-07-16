@@ -445,6 +445,9 @@ a {
   }
 }
 @media only screen and (max-width: rem(1024)) {
+  .pie-chart {
+    font-size: 14px;
+  }
   .nav,
   .container-fluid {
     margin-bottom: 1rem;
@@ -500,6 +503,9 @@ a {
 }
 
 @media only screen and (max-width: rem(720)) {
+  .pie-chart {
+    font-size: 12px;
+  }
   .a.nav-item {
     display: inline;
   }
@@ -582,14 +588,14 @@ a {
 }
 
 @media only screen and (max-width: rem(480)) {
-  // :root {
-  //   --bs-body-font-size: 10px;
-  // }
   .row.workout-mobile {
     padding-right: 0px;
   }
   .profile-table {
-    font-size: 10px;
+    font-size: 9px;
+  }
+  .pie-chart {
+    font-size: 9px;
   }
   .template-row.row,
   .template-row-exercise {
@@ -657,5 +663,8 @@ a {
     margin: 0px;
     padding: 1px;
     max-height: 38px;
+  }
+  .profile-table {
+    font-size: 8px;
   }
 }

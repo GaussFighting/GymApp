@@ -267,7 +267,7 @@ const Workout = (props) => {
     if (exerciseArray4.includes(exercise.equipment.toLowerCase())) {
       return labelsFunction(exerciseLabels4);
     } else {
-      return <div>Dude Wrong Equipment!</div>;
+      return <div>Wrong Equipment!</div>;
     }
   };
   return (

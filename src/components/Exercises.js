@@ -52,7 +52,7 @@ const Exercises = () => {
       };
       fetchResults();
     }
-  }, [exercises]);
+  }, [exercises, exercisesCount]);
 
   const downloadCSV = () => {
     const csvString = [
@@ -74,8 +74,6 @@ const Exercises = () => {
     window.open(encodedUri);
     document.body.removeChild(link);
   };
-
-  console.log(exercises);
 
   let sortedExercises = exercises.sort((a, b) => {
     let fa = a.nameEn.toLowerCase();
