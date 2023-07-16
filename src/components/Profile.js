@@ -22,7 +22,6 @@ const Profile = () => {
       const dataOfUserResponse = await res.json();
       setUserData(dataOfUserResponse);
       if (dataOfUserResponse === "token expired") {
-        // alert("Token expired login again");
         window.localStorage.clear();
         window.location.href = "/";
       }
