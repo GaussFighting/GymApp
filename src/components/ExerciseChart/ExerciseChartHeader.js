@@ -16,27 +16,33 @@ const ExerciseChartHeader = ({ bestResults }) => {
 
   if (repetitionMax) {
     return (
-      <Row>
-        <Col sm="12" md="2">
-          RM: <b>{repetitionMax + "kg"}</b>
-        </Col>
-        <Col sm="12" md="2">
-          RM / mass: <b>{repetitionMaxByWeight}</b>
-        </Col>
-        <Col sm="12" md="2">
-          Best Set Volume: <b>{bestSetVolume + "kg"}</b>
-        </Col>
-        <Col sm="12" md="2">
-          Best Set Volume/mass: <b>{bestTotalVolumeByMass}</b>
-        </Col>
-        <Col sm="12" md="2">
-          {" "}
-          Best Total Volume: <b>{bestTotalVolume + "kg"}</b>
-        </Col>
-        <Col sm="12" md="2">
-          Best Total Volume/mass: <b>{volumeBestTotalByWeight}</b>
-        </Col>
-      </Row>
+      <>
+        <Row>
+          <Col sm="12" md="4">
+            RM: <b className="text-lowercase">{repetitionMax + " kg"}</b>
+          </Col>
+          <Col sm="12" md="4">
+            RM / mass: <b>{repetitionMaxByWeight}</b>
+          </Col>
+          <Col sm="12" md="4">
+            Best Set Volume:{" "}
+            <b className="text-lowercase">{bestSetVolume + " kg"}</b>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm="12" md="4">
+            Best Set Volume/mass: <b>{bestTotalVolumeByMass}</b>
+          </Col>
+          <Col sm="12" md="4">
+            {" "}
+            Best Total Volume:{" "}
+            <b className="text-lowercase">{bestTotalVolume + " kg"}</b>
+          </Col>
+          <Col sm="12" md="4">
+            Best Total Volume/mass: <b>{volumeBestTotalByWeight}</b>
+          </Col>
+        </Row>
+      </>
     );
   }
   if (repetitionBestSet) {

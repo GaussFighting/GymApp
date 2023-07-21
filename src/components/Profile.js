@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
 import TotalActivities from "./ProfileChart/TotalActivities";
 import TableActivities from "./ProfileChart/TableActivities";
@@ -29,33 +28,23 @@ const Profile = () => {
     dataOfUser();
   }, []);
 
-  const logOut = () => {
-    window.localStorage.clear();
-    window.location.href = "./";
-  };
-
   return (
     <div className="mt-5">
       <Row>
-        <Col className="pt-3" sm="6">
-          <h1>Profile</h1>{" "}
-        </Col>
-        <Col sm="6">
-          {" "}
-          <Button
-            color="primary"
-            className="center-block "
-            onClick={(e) => logOut(e)}>
-            LOG OUT
-          </Button>
+        <Col className="pt-3 text-center ">
+          <h1>
+            {" "}
+            <strong>Profile</strong>{" "}
+          </h1>{" "}
         </Col>
       </Row>
-      <h2 className="my-3">
+      <h3 className="my-3 ">
         <strong>
           {userData.firstname} {userData.lastname}
         </strong>
-      </h2>
+      </h3>
       <TotalActivities />
+      <hr className="hr" />
       <TableActivities />
       <ActivityCallendar />
       <WeightChart />

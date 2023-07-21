@@ -7,7 +7,7 @@ const ExerciseChartSinglestsultRender = ({ shortTrainingSummary }) => {
   if (sts.totalVolumeOfTraining && sts.totalVolumeOfTrainingByWeight) {
     return (
       <>
-        <Col sm="12" md="1">
+        <Col sm="12" md="1" className="text-lowercase">
           {sts.totalVolumeOfTraining} {" kg"}
         </Col>
         <Col sm="12" md="1">

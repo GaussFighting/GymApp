@@ -48,8 +48,8 @@ const WeightChart = () => {
   });
   return (
     <div>
-      <h4 className="my-3">Weight Chart</h4>
-      <div>
+      <h4 className="my-4 ">Weight Chart</h4>
+      <div className="pb-4">
         <ResponsiveContainer width="100%" height={624}>
           <LineChart
             width={1500}

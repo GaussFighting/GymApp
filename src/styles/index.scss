@@ -68,6 +68,9 @@ a {
   text-decoration: none;
   color: $light;
 }
+h4 {
+  font-weight: 1000;
+}
 .logo {
   display: flex;
   justify-content: center;
@@ -76,13 +79,14 @@ a {
 .logo-size {
   width: 250px;
 }
+
 .sign-in {
   color: $dark;
   animation: sign-in 3s linear infinite;
 }
 @keyframes sign-in {
-  40% {
-    opacity: 0.5;
+  10% {
+    opacity: 0;
   }
 }
 .sign-in:hover {
@@ -283,11 +287,33 @@ a {
 .profile-table-item-result:nth-child(n-1) {
   border-right: 1px solid;
 }
+
 .profile-table-item-result {
   padding-top: 10px;
   justify-content: center;
 }
 
+.profile-table-item-last,
+.profile-table-item-result-last {
+  border: solid 1px;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  justify-content: center;
+}
+.profile-table-item-result-last {
+  border-bottom: none;
+}
+.hr {
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+
+  height: 3vh;
+  margin: auto;
+  margin-top: 3vh;
+  // border-bottom: 1px solid;
+}
 .col-name {
   font-size: rem(22);
   background-color: $primary;
@@ -519,6 +545,9 @@ a {
   .logo-size {
     width: 200px;
   }
+  .profile-table {
+    font-size: 12px;
+  }
   .pie-chart {
     font-size: 12px;
   }
@@ -608,7 +637,7 @@ a {
     padding-right: 0px;
   }
   .profile-table {
-    font-size: 9px;
+    font-size: 8px;
   }
   .pie-chart {
     font-size: 9px;
