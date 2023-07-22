@@ -73,7 +73,15 @@ const History = () => {
   };
 
   return (
-    <div>
+    <div className="mt-3">
+      <Row>
+        <Col className="pt-3 text-center ">
+          <h1>
+            {" "}
+            <strong>List of all results</strong>{" "}
+          </h1>{" "}
+        </Col>
+      </Row>
       <ul className="ul-exercise mt-3">{displayedWorkouts()}</ul>
       <Label for="setLimit">SET NUMBER OF RESULTS</Label>
       <div className="input-limit mb-3">
@@ -100,7 +108,7 @@ const History = () => {
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        forcePage={currentPage - 2}
+        forcePage={currentPage - 1}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
         marginPagesDisplayed={2}
@@ -113,16 +121,14 @@ const History = () => {
         nextLinkClassName="page-link"
         activeClassName="active"
       />
-
       <Button
         color="primary"
         className="add-new-template-cancel-button"
         onClick={() => {
           downloadJson();
         }}>
-        DOWNLOAD JSON
+        DOWNLOAD {limit} RESULTS
       </Button>
-
       <div className="spacer  mb-3"></div>
     </div>
   );

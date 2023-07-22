@@ -7,24 +7,27 @@ const StartWorkout = () => {
   return (
     <div>
       <Row>
-        <Button color="primary">
-          <Link to="/choosetemplate">START WORKOUT</Link>
-        </Button>
+        <Link to="/choosetemplate">
+          <Button color="primary">START WORKOUT</Button>
+        </Link>
       </Row>
       <Row>
-        <Button color="primary">
-          <Link to="/emptyworkout">EMPTY WORKOUT</Link>
-        </Button>
+        {" "}
+        <Link to="/emptyworkout">
+          <Button color="primary">EMPTY WORKOUT</Button>
+        </Link>
       </Row>
       <Row>
-        <Button color="primary">
-          <Link to="/addnewtemplate">NEW TEMPLATE</Link>
-        </Button>
+        {" "}
+        <Link to="/addnewtemplate">
+          <Button color="primary">NEW TEMPLATE</Button>
+        </Link>
       </Row>
       <Row>
-        <Button color="primary">
-          <Link to="/templatelist">LIST OF TEMPLATES</Link>
-        </Button>
+        {" "}
+        <Link to="/templatelist">
+          <Button color="primary">LIST OF TEMPLATES</Button>
+        </Link>
       </Row>
     </div>
   );

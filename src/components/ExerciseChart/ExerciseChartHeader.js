@@ -19,27 +19,45 @@ const ExerciseChartHeader = ({ bestResults }) => {
       <>
         <Row>
           <Col sm="12" md="4">
-            RM: <b className="text-lowercase">{repetitionMax + " kg"}</b>
+            <strong>
+              {" "}
+              RM: <b className="text-lowercase">{repetitionMax + " kg"}</b>
+            </strong>
           </Col>
           <Col sm="12" md="4">
-            RM / mass: <b>{repetitionMaxByWeight}</b>
+            <strong>
+              {" "}
+              RM / mass: <b>{repetitionMaxByWeight}</b>
+            </strong>
           </Col>
           <Col sm="12" md="4">
-            Best Set Volume:{" "}
-            <b className="text-lowercase">{bestSetVolume + " kg"}</b>
+            <strong>
+              {" "}
+              Best Set Volume:{" "}
+              <b className="text-lowercase">{bestSetVolume + " kg"}</b>
+            </strong>
           </Col>
         </Row>
         <Row>
           <Col sm="12" md="4">
-            Best Set Volume/mass: <b>{bestTotalVolumeByMass}</b>
+            <strong>
+              {" "}
+              Best Set Volume/mass: <b>{bestTotalVolumeByMass}</b>
+            </strong>
           </Col>
           <Col sm="12" md="4">
             {" "}
-            Best Total Volume:{" "}
-            <b className="text-lowercase">{bestTotalVolume + " kg"}</b>
+            <strong>
+              {" "}
+              Best Total Volume:{" "}
+              <b className="text-lowercase">{bestTotalVolume + " kg"}</b>
+            </strong>
           </Col>
           <Col sm="12" md="4">
-            Best Total Volume/mass: <b>{volumeBestTotalByWeight}</b>
+            <strong>
+              {" "}
+              Best Total Volume/mass: <b>{volumeBestTotalByWeight}</b>
+            </strong>
           </Col>
         </Row>
       </>
@@ -50,11 +68,17 @@ const ExerciseChartHeader = ({ bestResults }) => {
       <Row>
         {" "}
         <Col sm="12" md="6">
-          Repetitions Max: <b>{repetitionBestSet}</b>
+          <strong>
+            {" "}
+            Repetitions Max: <b>{repetitionBestSet}</b>
+          </strong>
         </Col>
         <Col sm="12" md="6">
           {" "}
-          Best Total Repetitions <b>{bestTotalRepetitions}</b>
+          <strong>
+            {" "}
+            Best Total Repetitions <b>{bestTotalRepetitions}</b>
+          </strong>
         </Col>
       </Row>
     );
@@ -64,7 +88,10 @@ const ExerciseChartHeader = ({ bestResults }) => {
       <Row>
         {" "}
         <Col sm="12" md="12">
-          Distance Max: <b>{distanceMax} meteres</b>
+          <strong>
+            {" "}
+            Distance Max: <b>{distanceMax} meteres</b>
+          </strong>
         </Col>
       </Row>
     );
@@ -74,7 +101,10 @@ const ExerciseChartHeader = ({ bestResults }) => {
       <Row>
         <Col sm="12" md="12">
           {" "}
-          Duration Max: <b>{durationMax ? durationMax : null}</b>
+          <strong>
+            {" "}
+            Duration Max: <b>{durationMax ? durationMax : null}</b>
+          </strong>
         </Col>
       </Row>
     );

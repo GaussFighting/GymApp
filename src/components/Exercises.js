@@ -90,33 +90,62 @@ const Exercises = () => {
 
   const ExercisesList = sortedExercises.map((exercise, idx) => {
     return (
-      <ListGroup key={exercise.id + idx}>
-        <Button className="button">
-          <Link to={`/exercise/${exercise.id}`}>
-            <ListGroupItem className="text-uppercase">
-              <Row>
-                <Col sm="2" md="1">
-                  {idx + 1}
-                </Col>
-                <Col sm="10" md="5">
-                  {exercise.nameEn}{" "}
-                  <strong style={{ color: "red" }}>
-                    {" "}
-                    {Object.keys(exercisesCount).length &&
-                      exercisesCount[exercise.id]}
-                  </strong>
-                </Col>
-                <Col sm="6" md="3">
-                  {exercise.bodyPart}
-                </Col>
-                <Col sm="6" md="3">
-                  {exercise.equipment}
-                </Col>
-              </Row>
-            </ListGroupItem>
-          </Link>
-        </Button>
-      </ListGroup>
+      <React.Fragment>
+        {idx === 0 && (
+          <ListGroup key={exercise.id + "0"}>
+            <Button className="button-disabled">
+              <ListGroupItem className="text-uppercase ">
+                <Row>
+                  <Col sm="2" md="1">
+                    {"No."}
+                  </Col>
+                  <Col sm="8" md="4">
+                    {"Exercise Name"}
+                  </Col>
+                  <Col sm="2" md="1">
+                    {"Qty"}
+                  </Col>
+                  <Col sm="6" md="3">
+                    {"Body Part"}
+                  </Col>
+                  <Col sm="6" md="3">
+                    {"Equipment"}
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            </Button>
+          </ListGroup>
+        )}
+        <ListGroup key={exercise.id + idx}>
+          <Button className="button">
+            <Link to={`/exercise/${exercise.id}`}>
+              <ListGroupItem className="text-uppercase">
+                <Row>
+                  <Col sm="2" md="1">
+                    {idx + 1}
+                  </Col>
+                  <Col sm="8" md="4">
+                    {exercise.nameEn}{" "}
+                  </Col>
+                  <Col sm="2" md="1">
+                    <strong style={{ color: "red" }}>
+                      {" "}
+                      {Object.keys(exercisesCount).length &&
+                        exercisesCount[exercise.id]}
+                    </strong>
+                  </Col>
+                  <Col sm="6" md="3">
+                    {exercise.bodyPart}
+                  </Col>
+                  <Col sm="6" md="3">
+                    {exercise.equipment}
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            </Link>
+          </Button>
+        </ListGroup>
+      </React.Fragment>
     );
   });
 
@@ -136,6 +165,14 @@ const Exercises = () => {
 
   return (
     <div className="mt-4">
+      <Row>
+        <Col className="pt-3 text-center ">
+          <h1>
+            {" "}
+            <strong>List of all exercises</strong>{" "}
+          </h1>{" "}
+        </Col>
+      </Row>
       <Row>
         <Col sm="12" md="6" className="margin-input input-exercises">
           <FormExercises
@@ -185,9 +222,9 @@ const Exercises = () => {
         onClick={() => {
           downloadCSV();
         }}>
-        DOWNLOAD CSV
+        DOWNLOAD LIST
       </Button>
-      <div className="spacer"></div>
+      <div className="spacer pb-5"></div>
     </div>
   );
 };

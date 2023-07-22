@@ -161,7 +161,12 @@ h4 {
   width: 22vh;
   min-width: 175px;
   margin: 1rem;
+  border: 1px solid black;
 }
+// .form-control:focus-visible,
+// .form-select:focus-visible {
+//   border: 2px solid orange;
+// }
 .edit-input {
   width: inherit;
 }
@@ -244,6 +249,11 @@ h4 {
   border: none;
   background-color: transparent;
   color: $dark;
+}
+.btn.btn-secondary.disabled {
+  pointer-events: none;
+  opacity: 1;
+  background-color: transparent;
 }
 .btn-primary {
   margin-top: 20px;
@@ -388,6 +398,9 @@ h4 {
   text-align: center;
   border-radius: 5px;
 }
+.ext-lowercase {
+  text-transform: lowercase;
+}
 .template-link-chart {
   color: $dark;
 }
@@ -405,6 +418,10 @@ h4 {
   background-color: $warning;
   border-radius: 5px;
   width: inherit;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .exercise-col {
   background-color: $primary;

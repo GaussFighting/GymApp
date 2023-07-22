@@ -20,7 +20,7 @@ const FormExercises = ({
         <Input
           className="input"
           type="text"
-          placeholder="Search..."
+          placeholder="Search exercise"
           value={filterName}
           onChange={(event) => {
             setFilterName(event.target.value);
