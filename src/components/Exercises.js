@@ -90,62 +90,35 @@ const Exercises = () => {
 
   const ExercisesList = sortedExercises.map((exercise, idx) => {
     return (
-      <React.Fragment>
-        {idx === 0 && (
-          <ListGroup key={exercise.id + "0"}>
-            <Button className="button-disabled">
-              <ListGroupItem className="text-uppercase ">
-                <Row>
-                  <Col sm="2" md="1">
-                    {"No."}
-                  </Col>
-                  <Col sm="8" md="4">
-                    {"Exercise Name"}
-                  </Col>
-                  <Col sm="2" md="1">
-                    {"Qty"}
-                  </Col>
-                  <Col sm="6" md="3">
-                    {"Body Part"}
-                  </Col>
-                  <Col sm="6" md="3">
-                    {"Equipment"}
-                  </Col>
-                </Row>
-              </ListGroupItem>
-            </Button>
-          </ListGroup>
-        )}
-        <ListGroup key={exercise.id + idx}>
-          <Button className="button">
-            <Link to={`/exercise/${exercise.id}`}>
-              <ListGroupItem className="text-uppercase">
-                <Row>
-                  <Col sm="2" md="1">
-                    {idx + 1}
-                  </Col>
-                  <Col sm="8" md="4">
-                    {exercise.nameEn}{" "}
-                  </Col>
-                  <Col sm="2" md="1">
-                    <strong style={{ color: "red" }}>
-                      {" "}
-                      {Object.keys(exercisesCount).length &&
-                        exercisesCount[exercise.id]}
-                    </strong>
-                  </Col>
-                  <Col sm="6" md="3">
-                    {exercise.bodyPart}
-                  </Col>
-                  <Col sm="6" md="3">
-                    {exercise.equipment}
-                  </Col>
-                </Row>
-              </ListGroupItem>
-            </Link>
-          </Button>
-        </ListGroup>
-      </React.Fragment>
+      <ListGroup key={exercise.id + idx}>
+        <Button className="button">
+          <Link to={`/exercise/${exercise.id}`}>
+            <ListGroupItem className="text-uppercase">
+              <Row>
+                <Col sm="2" md="1">
+                  {idx + 1}
+                </Col>
+                <Col sm="8" md="4">
+                  {exercise.nameEn}{" "}
+                </Col>
+                <Col sm="2" md="1">
+                  <strong style={{ color: "red" }}>
+                    {" "}
+                    {Object.keys(exercisesCount).length &&
+                      exercisesCount[exercise.id]}
+                  </strong>
+                </Col>
+                <Col sm="6" md="3">
+                  {exercise.bodyPart}
+                </Col>
+                <Col sm="6" md="3">
+                  {exercise.equipment}
+                </Col>
+              </Row>
+            </ListGroupItem>
+          </Link>
+        </Button>
+      </ListGroup>
     );
   });
 
@@ -215,6 +188,31 @@ const Exercises = () => {
           />
         </Col>
       </Row>
+      <React.Fragment>
+        <ListGroup key={"0"}>
+          <Button className="button-disabled">
+            <ListGroupItem className="text-uppercase ">
+              <Row>
+                <Col sm="2" md="1">
+                  {"No."}
+                </Col>
+                <Col sm="8" md="4">
+                  {"Exercise Name"}
+                </Col>
+                <Col sm="2" md="1">
+                  {"Qty"}
+                </Col>
+                <Col sm="6" md="3">
+                  {"Body Part"}
+                </Col>
+                <Col sm="6" md="3">
+                  {"Equipment"}
+                </Col>
+              </Row>
+            </ListGroupItem>
+          </Button>
+        </ListGroup>
+      </React.Fragment>
       <ul className="ul-exercise">{ExercisesList}</ul>
       <Button
         color="primary"

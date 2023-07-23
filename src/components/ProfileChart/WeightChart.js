@@ -54,7 +54,7 @@ const WeightChart = () => {
           <LineChart
             width={1500}
             height={300}
-            data={bodyWeightArr.slice(0, 254)}>
+            data={bodyWeightArr.slice(0, 300)}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="name"

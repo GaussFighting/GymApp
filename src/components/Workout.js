@@ -272,6 +272,16 @@ const Workout = (props) => {
   };
   return (
     <div className="main-template-div">
+      {!props.template && (
+        <Row>
+          <Col className="pt-3 text-center ">
+            <h1>
+              {" "}
+              <strong>Empty workout</strong>{" "}
+            </h1>{" "}
+          </Col>
+        </Row>
+      )}
       <ListGroup key={loadedTemplate.id}>
         <Row className="template-row ">
           <Col sm="12" md="12" className="single-col-name">
@@ -298,7 +308,7 @@ const Workout = (props) => {
           </Col>
           <Col sm="9" md="7" lg="6">
             <Form>
-              <span>BODY WEIGHT:</span>
+              <strong> {"Body Weight: "}</strong>
               <Input
                 disabled={bodyWeightConfirmed}
                 className="input d-inline-block workout-input"

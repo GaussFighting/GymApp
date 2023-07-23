@@ -255,6 +255,11 @@ h4 {
   opacity: 1;
   background-color: transparent;
 }
+.btn.btn-secondary.button-disabled {
+  pointer-events: none;
+  opacity: 1;
+  background-color: transparent;
+}
 .btn-primary {
   margin-top: 20px;
   top: 40px;
@@ -267,10 +272,36 @@ h4 {
   margin-top: 2rem;
   display: block;
 }
-
+.page-item:first-child .page-link {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+}
+.page-item:last-child .page-link {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+.page-item:not(:first-child) .page-link {
+  margin-left: 10px;
+}
+.page-link {
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.break {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .template-row,
 .main-row {
   text-align: center;
+  margin-left: 0px;
 }
 
 .input-exercises {
@@ -352,6 +383,10 @@ h4 {
   color: $light;
   background-color: $primary;
 }
+.single-col-name.space-around {
+  justify-content: space-around;
+  border-radius: 5px 5px 0px 0px;
+}
 .single-col {
   display: flex;
   text-align: center;
@@ -362,7 +397,7 @@ h4 {
   color: $dark;
   display: flex;
   text-align: center;
-  margin-left: 0px;
+  // margin-left: 0px;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -394,9 +429,8 @@ h4 {
   background-color: $muted;
   padding-top: 0px;
   padding-bottom: 0px;
-  border-radius: 10px;
   text-align: center;
-  border-radius: 5px;
+  // border-radius: 10px;
 }
 .ext-lowercase {
   text-transform: lowercase;
@@ -431,6 +465,10 @@ h4 {
   border-top: 1px solid;
   border-color: $muted;
 }
+.exercise-row-odd {
+  border-top: 1px solid;
+  border-color: $light;
+}
 .form-group,
 .row-position,
 .main-template-div {
@@ -453,7 +491,7 @@ h4 {
   white-space: nowrap;
 }
 .firstCol {
-  font-weight: bold;
+  font-weight: 600;
 }
 .text-wraper {
   overflow-wrap: anywhere;
@@ -496,11 +534,30 @@ h4 {
     width: 18vh;
   }
   .button-modal {
-    max-width: 180px;
+    max-width: 250px;
     max-height: 75px;
   }
 }
 @media only screen and (max-width: rem(1024)) {
+  .page-item:not(:first-child) .page-link {
+    margin-left: 5px;
+  }
+  .page-item:first-child .page-link {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    min-width: 80px;
+  }
+  .page-link {
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+  }
+  .break {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
   .pie-chart {
     font-size: 14px;
   }
@@ -526,8 +583,8 @@ h4 {
     padding: 10px;
     max-width: 150px;
     min-width: 175px;
-    min-height: 48px;
-    max-height: 48px;
+    min-height: 64px;
+    max-height: 64px;
   }
   .button-modal {
     max-width: 150px;
@@ -559,6 +616,25 @@ h4 {
 }
 
 @media only screen and (max-width: rem(720)) {
+  .page-item:not(:first-child) .page-link {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  .page-item:last-child .page-link {
+    min-width: 57px;
+  }
+  .page-link {
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 11px;
+  }
+  .break {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
   .logo-size {
     width: 200px;
   }
@@ -650,6 +726,31 @@ h4 {
 }
 
 @media only screen and (max-width: rem(480)) {
+  .page-item:first-child .page-link {
+    border: 0;
+  }
+  .page-item:last-child .page-link {
+    border: 0;
+  }
+  .page-item:not(:first-child) .page-link {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  .page-item:last-child .page-link {
+    min-width: 57px;
+  }
+  .page-link {
+    border: 1px solid black;
+    border-radius: 0;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 11px;
+  }
+  .break {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
   .row.workout-mobile {
     padding-right: 0px;
   }

@@ -116,48 +116,57 @@ const AddNewTemplate = () => {
     </ListGroupItem>
   ));
   return (
-    <Form>
-      <FormGroup>
-        <Label for="exampleEmail">Template name</Label>
-        <Input
-          className="input"
-          type="text"
-          placeholder="Put template name"
-          // value={}
-          onChange={(event) =>
-            updateFormTemplate({ templateName: event.target.value })
-          }></Input>
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleText">Descritpion</Label>
-        <Input
-          type="textarea"
-          name="text"
-          id="exampleText"
-          placeholder="Descritpion"
-          onChange={(event) =>
-            updateFormTemplate({ description: event.target.value })
-          }
-        />
-      </FormGroup>
-      <ListGroup>{exercisesForTemplate}</ListGroup>
+    <React.Fragment>
+      <Col className="pt-3 text-center ">
+        <h1>
+          {" "}
+          <strong>Create new template</strong>{" "}
+        </h1>{" "}
+      </Col>
 
-      <FormGroup>
-        <ChooseExercise
-          setAddedExercises={setAddedExercises}
-          addedExercises={addedExercises}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Button
-          color="primary"
-          onClick={(e) => onSubmit(e, formTemplate)}
-          className="add-new-template-cancel-button">
-          SUBMIT
-        </Button>
-      </FormGroup>
-      <div className="spacer"></div>
-    </Form>
+      <Form>
+        <FormGroup>
+          <Label for="exampleEmail">Template name</Label>
+          <Input
+            className="input"
+            type="text"
+            placeholder="Put template name"
+            // value={}
+            onChange={(event) =>
+              updateFormTemplate({ templateName: event.target.value })
+            }></Input>
+        </FormGroup>
+        <FormGroup>
+          <Label for="exampleText">Descritpion</Label>
+          <Input
+            type="textarea"
+            name="text"
+            id="exampleText"
+            placeholder="Descritpion"
+            onChange={(event) =>
+              updateFormTemplate({ description: event.target.value })
+            }
+          />
+        </FormGroup>
+        <ListGroup>{exercisesForTemplate}</ListGroup>
+
+        <FormGroup>
+          <ChooseExercise
+            setAddedExercises={setAddedExercises}
+            addedExercises={addedExercises}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Button
+            color="primary"
+            onClick={(e) => onSubmit(e, formTemplate)}
+            className="add-new-template-cancel-button">
+            SUBMIT
+          </Button>
+        </FormGroup>
+        <div className="spacer"></div>
+      </Form>
+    </React.Fragment>
   );
 };
 

@@ -66,7 +66,7 @@ const TemplatesList = (props) => {
 
   const TemplatesList = templates.map((template, index) => (
     <ListGroup key={template.id}>
-      <Row className="main-row ml-0 pl-0 gx-0">
+      <Row className="main-row gx-0">
         <Link
           className=" ml-0 pl-0 gx-0"
           state={props.training ? { templateObj: template } : {}}
