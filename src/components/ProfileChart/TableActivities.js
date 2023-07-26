@@ -30,11 +30,11 @@ const TableActivities = () => {
   let TableYear = () => {
     return (
       <div className="profile-table ">
-        <div className="profile-table">
-          <Row className="pb-4 ">
+        <div className="profile-table ">
+          <Row className="profile-table-row">
             {count.map((el, idx) => {
               return (
-                <React.Fragment>
+                <React.Fragment className="profile-table-row">
                   {idx === 0 && (
                     <Col key={el + idx}>
                       <Row className="profile-table-item">Year</Row>
