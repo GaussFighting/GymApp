@@ -137,6 +137,7 @@ const AddNewTemplate = () => {
             }></Input>
         </FormGroup>
         <FormGroup>
+          {" "}
           <Label for="exampleText">Descritpion</Label>
           <Input
             type="textarea"
