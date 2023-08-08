@@ -84,7 +84,7 @@ const TemplatesList = (props) => {
             </Col>
             <Col sm="7" md="8" lg="10">
               {exercise.nameEn.toUpperCase()} {"("}
-              {exercise.equipment.toUpperCase()}
+              <strong>{exercise.equipment.toUpperCase()}</strong>
               {")"}
             </Col>
             <Col sm="4" md="2" lg="1">

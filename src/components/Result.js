@@ -240,7 +240,7 @@ const Result = () => {
                                 <Col>
                                   <strong>
                                     {" "}
-                                    Total Volume: {totalVolume.toFixed(0)}
+                                    Total Volume: {totalVolume.toFixed(0)} kg
                                   </strong>
                                 </Col>
                                 <Col>

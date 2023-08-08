@@ -84,43 +84,47 @@ const History = () => {
       </Row>
       <ul className="ul-exercise mt-3">{displayedWorkouts()}</ul>
       <Label for="setLimit">SET NUMBER OF RESULTS</Label>
-      <div className="input-limit mb-3">
-        <Input
-          className="input "
-          type="select"
-          name="Set Limit"
-          value={limit}
-          onChange={(event) => {
-            setLimit(event.target.value);
-            setCurrentPage(1);
-          }}>
-          <option>10</option>
-          <option>20</option>
-          <option>50</option>
-          <option>100</option>
-          <option>500</option>
-          <option>1000</option>
-        </Input>
-      </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        forcePage={currentPage - 1}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-        marginPagesDisplayed={2}
-        containerClassName="pagination justify-content-center"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        activeClassName="active"
-      />
+      {pageCount != 0 && (
+        <div className="input-limit mb-3">
+          <Input
+            className="input "
+            type="select"
+            name="Set Limit"
+            value={limit}
+            onChange={(event) => {
+              setLimit(event.target.value);
+              setCurrentPage(1);
+            }}>
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+            <option>500</option>
+            <option>1000</option>
+          </Input>
+        </div>
+      )}
+      {pageCount != 0 && (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          forcePage={currentPage - 1}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+          marginPagesDisplayed={2}
+          containerClassName="pagination justify-content-center"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          activeClassName="active"
+        />
+      )}
       <Button
         color="primary"
         className="add-new-template-cancel-button"

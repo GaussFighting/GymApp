@@ -106,12 +106,12 @@ const Chart = ({ results, exerciseId }) => {
   };
   if (!(dataTotalVolume()[0].volume === 0)) {
     return (
-      <div className="small-view text-lowercase">
+      <div className="small-view text-capitalize">
         {" "}
         {!isNaN(dataTotalVolume()[0].volume) && (
           <div>
             <div>
-              <h5>Total Volume Chart</h5>
+              <h5 className="text-capitalize">Total Volume Chart</h5>
               <Label className="VolumeLine">
                 <Input
                   type="checkbox"
@@ -219,7 +219,7 @@ const Chart = ({ results, exerciseId }) => {
               </ResponsiveContainer>
             </div>
             <br />
-            <h5>Set Volume Chart</h5>
+            <h5 className="text-capitalize">Set Volume Chart</h5>
             <Label className="VolumeLine">
               <Input
                 type="checkbox"
