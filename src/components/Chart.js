@@ -106,12 +106,12 @@ const Chart = ({ results, exerciseId }) => {
   };
   if (!(dataTotalVolume()[0].volume === 0)) {
     return (
-      <div className="small-view">
+      <div className="small-view text-capitalize">
         {" "}
         {!isNaN(dataTotalVolume()[0].volume) && (
           <div>
             <div>
-              <h5>Total Volume Chart</h5>
+              <h5 className="text-capitalize">Total Volume Chart</h5>
               <Label className="VolumeLine">
                 <Input
                   type="checkbox"
@@ -156,6 +156,7 @@ const Chart = ({ results, exerciseId }) => {
                   />
                   <YAxis
                     yAxisId="left"
+                    unit=" kg"
                     tickCount={8}
                     interval="preserveStartEnd"
                     domain={(element) => {
@@ -167,6 +168,7 @@ const Chart = ({ results, exerciseId }) => {
                   />
                   <YAxis
                     yAxisId="right"
+                    unit=" kg"
                     orientation="right"
                     domain={(element) => {
                       if (disabledVolumePerWeight) {
@@ -217,7 +219,7 @@ const Chart = ({ results, exerciseId }) => {
               </ResponsiveContainer>
             </div>
             <br />
-            <h5>Set Volume Chart</h5>
+            <h5 className="text-capitalize">Set Volume Chart</h5>
             <Label className="VolumeLine">
               <Input
                 type="checkbox"
@@ -260,9 +262,14 @@ const Chart = ({ results, exerciseId }) => {
                   height={100}
                   interval={"preserveStartEnd"}
                 />
-                <YAxis yAxisId="left" domain={[0, "dataMax + 700"]} />
+                <YAxis
+                  yAxisId="left"
+                  unit=" kg"
+                  domain={[0, "dataMax + 700"]}
+                />
                 <YAxis
                   yAxisId="right"
+                  unit=" kg"
                   orientation="right"
                   domain={(element) => {
                     if (disabledSetVolumePerWeight) {

@@ -102,22 +102,38 @@ const Result = () => {
   };
 
   return (
-    <div className="main-template-div">
-      <Row className="top-row">
-        <Row>
-          <Col md="12" className="single-col-name">
+    <div className="main-template-div mt-4">
+      <Row className="m-0 p-0">
+        <Col className="pt-3 text-center ">
+          <h1>
+            {" "}
+            <strong>Result of current training</strong>{" "}
+          </h1>{" "}
+        </Col>
+      </Row>
+      <Row className="top-row m-0 p-0">
+        <Row className="m-0 p-0">
+          <Col md="12" className="single-col-name space-around m-0 p-0">
+            <strong>{"Template Name: "}</strong>
             {results.templateName}
           </Col>
         </Row>
         <Row>
-          <Col md="12">{results.description}</Col>
-        </Row>
-        <Row>
-          <Col md="12">{moment(results.date).format(format)}</Col>
+          <Col md="12">
+            <strong>{"Template descritpion: "}</strong>
+            {results.description}
+          </Col>
         </Row>
         <Row>
           <Col md="12">
-            {"BODY WEIGHT: "}
+            {" "}
+            <strong>Date: </strong>
+            {moment(results.date).format(format)}
+          </Col>
+        </Row>
+        <Row>
+          <Col md="12">
+            <strong> {"Body Weight: "}</strong>
             {results.bodyWeight}
             {" kg"}
           </Col>
@@ -222,12 +238,18 @@ const Result = () => {
                             {totalVolume > 0 && (
                               <React.Fragment>
                                 <Col>
-                                  Total Volume: {totalVolume.toFixed(0)}
+                                  <strong>
+                                    {" "}
+                                    Total Volume: {totalVolume.toFixed(0)} kg
+                                  </strong>
                                 </Col>
                                 <Col>
                                   {" "}
                                   Volume / mass:{" "}
-                                  {totalVolumeDivideBymass.toFixed(2)}
+                                  <strong>
+                                    {" "}
+                                    {totalVolumeDivideBymass.toFixed(2)}
+                                  </strong>
                                 </Col>
                               </React.Fragment>
                             )}
@@ -240,7 +262,7 @@ const Result = () => {
             </Link>
           ))}
       </Row>
-      <Row className="row">
+      <Row className="row ">
         <Col sm="6" md="6" className="button-new-exercise">
           <Button
             color="primary"

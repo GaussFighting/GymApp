@@ -7,6 +7,7 @@ import {
   faDumbbell,
   faMedal,
   faHeartPulse,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Navigationbar = () => {
@@ -19,6 +20,12 @@ const Navigationbar = () => {
   const navTogglerClose = () => {
     setIsOpen(false);
   };
+
+  const logOut = () => {
+    window.localStorage.clear();
+    window.location.href = "./";
+  };
+
   return (
     <div>
       <Navbar color="primary pt-0 pb-0 " expand="md">
@@ -49,6 +56,15 @@ const Navigationbar = () => {
               <NavLink className="nav-link" to="/startworkout">
                 START WORKOUT <br></br>
                 <FontAwesomeIcon icon={faHeartPulse} size="2x" />
+              </NavLink>
+            </NavItem>
+            <NavItem onClick={navTogglerClose}>
+              <NavLink
+                className="nav-link"
+                to="/signin"
+                onClick={(e) => logOut(e)}>
+                LOG OUT <br></br>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} size="2x" />
               </NavLink>
             </NavItem>
           </Nav>

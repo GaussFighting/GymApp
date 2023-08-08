@@ -26,10 +26,10 @@ const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
                 <Col sm="12" md="1" lg="1">
                   {index + 1}
                 </Col>
-                <Col sm="12" md="1" lg="1">
+                <Col sm="12" md="2" lg="2" className="text-wrap">
                   {moment(ex.date).format(format)}
                 </Col>
-                <Col sm="12" md="1" lg="1">
+                <Col sm="12" md="1" lg="1" className="text-lowercase">
                   {ex.bodyWeight.toFixed(1)}
                   {" kg"}
                 </Col>

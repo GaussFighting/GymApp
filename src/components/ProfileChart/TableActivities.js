@@ -29,48 +29,50 @@ const TableActivities = () => {
 
   let TableYear = () => {
     return (
-      <div className="profile-table">
-        <div className="profile-table">
-          <Row className="pb-0">
+      <div className="profile-table ">
+        <div className="profile-table ">
+          <Row className="profile-table-row">
             {count.map((el, idx) => {
               return (
-                <Col key={el + idx}>
-                  <Row className="profile-table-item"> {2023 - idx}</Row>
-                  <Row className="profile-table-item-result"> {el}</Row>
-                </Col>
+                <React.Fragment key={idx + el}>
+                  {idx === 0 && (
+                    <Col key={el - 1}>
+                      <Row className="profile-table-item">Year</Row>
+                      <Row className="profile-table-item-result">Sessions</Row>
+                    </Col>
+                  )}
+                  {idx <= count.length - 2 && (
+                    <Col key={el + idx}>
+                      <Row className="profile-table-item"> {2023 - idx}</Row>
+                      <Row className="profile-table-item-result"> {el}</Row>
+                    </Col>
+                  )}
+                  {idx === count.length - 1 && (
+                    <Col key={el + idx}>
+                      <Row className="profile-table-item-last">
+                        {" "}
+                        {2023 - idx}
+                      </Row>
+                      <Row className="profile-table-item-result-last">
+                        {" "}
+                        {el}
+                      </Row>
+                    </Col>
+                  )}
+                </React.Fragment>
               );
             })}
           </Row>
         </div>
-        {/* <div className="profile-table">
-          <Row className="pb-0 ">
-            {count.map((el, idx) => {
-              return (
-                <Col className="profile-table-item" key={el + idx}>
-                  {2023 - idx}
-                </Col>
-              );
-            })}
-          </Row>
-          <Row className="pt-0">
-            {count.map((el, idx) => {
-              return (
-                <Col className="profile-table-item-result" key={el + idx}>
-                  {el}
-                </Col>
-              );
-            })}
-          </Row>
-        </div> */}
       </div>
     );
   };
 
   return (
     <div>
-      <h4 className="my-3">Training summary </h4>
+      <h4>Training summary </h4>
       {count && <TableYear />}
-      <div className="spacer"></div>
+      <div className="spacer "></div>
     </div>
   );
 };

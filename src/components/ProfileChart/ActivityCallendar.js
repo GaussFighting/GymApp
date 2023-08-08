@@ -38,7 +38,7 @@ const ActivityCallendar = () => {
           {
             date: moment(results[i].date).format(format),
             count: 1,
-            level: results[i].templateExercises.length - 3,
+            level: Math.ceil(results[i].templateExercises.length / 3),
           },
         ];
       }
@@ -49,8 +49,17 @@ const ActivityCallendar = () => {
   };
 
   const explicitTheme = {
-    light: ["#f0f0f0", "#c4edde", "#7ac7c4", "#f73859", "#384259"],
-    dark: ["hsl(0, 0%, 22%)", "#4D455D", "#7DB9B6", "#F5E9CF", "#E96479"],
+    level0: "#eee",
+    level1: "#fecc79",
+    level2: "#fd9829",
+    level3: "#e97719",
+    level4: "#590900",
+    // level5: "#f0f0f0",
+    // level6: "#f0f0f0",
+    // level7: "#f0f0f0",
+    // level9: "#f0f0f0",
+    // light: ["#f0f0f0", "#c4edde", "#7ac7c4", "#f73859", "#384259"],
+    // dark: ["hsl(0, 0%, 22%)", "#4D455D", "#7DB9B6", "#F5E9CF", "#E96479"],
   };
   const labels = {
     months: [
@@ -76,8 +85,8 @@ const ActivityCallendar = () => {
   };
   return (
     <div>
-      <h4 className="my-3"> Activity Callendar</h4>
-      <div className="d-flex justify-content-center">
+      <h4 className="my-4 "> Activity Callendar</h4>
+      <div className="d-flex pb-4 justify-content-center">
         {data().length && (
           <ActivityCalendar
             data={data()}
@@ -91,7 +100,7 @@ const ActivityCallendar = () => {
             labels={labels}
           />
         )}
-        <div className="spacer"></div>
+        <div className="spacer "></div>
       </div>
     </div>
   );

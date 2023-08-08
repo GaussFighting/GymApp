@@ -28,9 +28,9 @@ const TotalActivities = () => {
 
   return (
     <div>
-      <h4 className="my-3">
+      <h5 className="my-3 ">
         Total number of trainings : <b>{count}</b>
-      </h4>
+      </h5>
       <div className="spacer"></div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Logo from "./Logo";
 // import axios from "axios";
 
 const SignUp = () => {
@@ -86,99 +87,113 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup">
-      <form className="mb-3 py-5">
-        <h3>Sign Up</h3>
-        <div className="mb-3 pt-3">
-          <label>First name</label>
-          <input
-            type="text"
-            placeholder="Enter First Name"
-            className="form-control"
-            onChange={(event) =>
-              updateForm({ firstname: event.target.value })
-            }></input>
-        </div>
-        <div className="mb-3">
-          <label>Last name</label>
-          <input
-            type="text"
-            placeholder="Enter Last Name"
-            className="form-control"
-            onChange={(event) =>
-              updateForm({ lastname: event.target.value })
-            }></input>
-        </div>
-        <div className="mb-3">
-          <label>Email adress</label>
-          <input
-            type="email"
-            placeholder="Enter email"
-            className="form-control"
-            onChange={(event) =>
-              updateForm({ email: event.target.value })
-            }></input>
-        </div>
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter password"
-            className="form-control"
-            onChange={(event) =>
-              updateForm({ password: event.target.value })
-            }></input>
-        </div>
-        <div>
-          {" "}
-          Register As{" "}
-          <input
-            type="radio"
-            name="role"
-            value="User"
-            onChange={(event) => updateForm({ role: event.target.value })}
-          />{" "}
-          User{" "}
-          <input
-            type="radio"
-            name="role"
-            value="Admin"
-            onChange={(event) => updateForm({ role: event.target.value })}
-          />{" "}
-          Admin
-        </div>
-        {form.role === "Admin" && (
-          <div className="mb-3">
-            <label>Secret Key</label>
+    <div>
+      {" "}
+      <Logo />
+      <div className="signup">
+        <form className="mb-3 py-5">
+          <h3>Sign Up</h3>
+          <div className="mb-3 pt-3">
+            <label>First name</label>
             <input
-              type="password"
-              placeholder="Secret Key"
+              type="text"
+              minLength="3"
+              maxLength="200"
+              placeholder="Enter First Name"
               className="form-control"
               onChange={(event) =>
-                updateForm({ secretKey: event.target.value })
+                updateForm({ firstname: event.target.value })
               }></input>
           </div>
-        )}
+          <div className="mb-3">
+            <label>Last name</label>
+            <input
+              type="text"
+              minLength="3"
+              maxLength="200"
+              placeholder="Enter Last Name"
+              className="form-control"
+              onChange={(event) =>
+                updateForm({ lastname: event.target.value })
+              }></input>
+          </div>
+          <div className="mb-3">
+            <label>Email adress</label>
+            <input
+              type="email"
+              minLength="3"
+              maxLength="200"
+              placeholder="Enter email"
+              className="form-control"
+              onChange={(event) =>
+                updateForm({ email: event.target.value })
+              }></input>
+          </div>
+          <div className="mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              minLength="3"
+              maxLength="200"
+              placeholder="Enter password"
+              className="form-control"
+              onChange={(event) =>
+                updateForm({ password: event.target.value })
+              }></input>
+          </div>
+          <div>
+            {" "}
+            Register As{" "}
+            <input
+              type="radio"
+              name="role"
+              value="User"
+              onChange={(event) => updateForm({ role: event.target.value })}
+            />{" "}
+            User{" "}
+            <input
+              type="radio"
+              name="role"
+              value="Admin"
+              onChange={(event) => updateForm({ role: event.target.value })}
+            />{" "}
+            Admin
+          </div>
+          {form.role === "Admin" && (
+            <div className="mb-3">
+              <label>Secret Key</label>
+              <input
+                type="password"
+                minLength="3"
+                maxLength="200"
+                placeholder="Secret Key"
+                className="form-control"
+                onChange={(event) =>
+                  updateForm({ secretKey: event.target.value })
+                }></input>
+            </div>
+          )}
 
-        <div className="mb-3 pb-3">
-          <Button
-            color="primary"
-            disabled={!!isEmpty}
-            className="center-block"
-            onClick={(e) => onSubmit(e, form)}>
-            Submit
-          </Button>
-        </div>
-        <p>Already registered? </p>
-        <p>
-          {" "}
-          <strong>
-            <a className="sign-in" href="/signin">
-              Sign in!
-            </a>
-          </strong>
-        </p>
-      </form>
+          <div className="mb-3 pb-3">
+            <Button
+              color="primary"
+              disabled={!!isEmpty}
+              className="center-block"
+              onClick={(e) => onSubmit(e, form)}>
+              Submit
+            </Button>
+          </div>
+          <p>Already registered? </p>
+          <p>
+            {" "}
+            <strong>
+              <a className="sign-in" href="/signin">
+                Sign in!
+              </a>
+            </strong>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

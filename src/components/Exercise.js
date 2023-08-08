@@ -81,15 +81,24 @@ const Exercise = () => {
     <ListGroupItem className="text-align-single-exercise text-uppercase">
       <Row className="row">
         <Col sm="12" md="12">
-          <h1>{exercise.nameEn}</h1>
+          <h1>
+            {" "}
+            <strong>Statistics of {exercise.nameEn}</strong>{" "}
+          </h1>{" "}
         </Col>
       </Row>
       <Row>
         <Col sm="12" md="6">
-          <h4>Body Part: {exercise.bodyPart}</h4>
+          <strong>
+            {" "}
+            <h4>Body Part: {exercise.bodyPart}</h4>
+          </strong>
         </Col>
         <Col sm="12" md="6">
-          <h4>Equipment: {exercise.equipment}</h4>
+          <strong>
+            {" "}
+            <h4>Equipment: {exercise.equipment}</h4>
+          </strong>
         </Col>
       </Row>
 

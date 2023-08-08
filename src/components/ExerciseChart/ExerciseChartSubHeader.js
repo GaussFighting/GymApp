@@ -40,34 +40,34 @@ const ExerciseChartSubHeader = ({ bestResults }) => {
   return (
     <Row>
       <Col sm="12" md="1">
-        No.
+        <strong>No.</strong>{" "}
+      </Col>
+      <Col sm="12" md="2">
+        <strong>Date</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        Date
+        <strong>BW</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        BW
+        <strong>{thirdCol}</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        {thirdCol}
+        <strong>{fourthCol}</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        {fourthCol}
+        <strong>{fifthCol}</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        {fifthCol}
+        <strong>{sixthCol}</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        {sixthCol}
+        <strong>{seventhCol}</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        {seventhCol}
+        <strong>{eightCol}</strong>{" "}
       </Col>
       <Col sm="12" md="1">
-        {eightCol}
-      </Col>
-      <Col sm="12" md="1">
-        {ninethCol}
+        <strong>{ninethCol}</strong>{" "}
       </Col>
     </Row>
   );

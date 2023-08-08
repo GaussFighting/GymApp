@@ -66,7 +66,7 @@ const TemplatesList = (props) => {
 
   const TemplatesList = templates.map((template, index) => (
     <ListGroup key={template.id}>
-      <Row className="main-row ml-0 pl-0 gx-0">
+      <Row className="main-row gx-0">
         <Link
           className=" ml-0 pl-0 gx-0"
           state={props.training ? { templateObj: template } : {}}
@@ -84,7 +84,7 @@ const TemplatesList = (props) => {
             </Col>
             <Col sm="7" md="8" lg="10">
               {exercise.nameEn.toUpperCase()} {"("}
-              {exercise.equipment.toUpperCase()}
+              <strong>{exercise.equipment.toUpperCase()}</strong>
               {")"}
             </Col>
             <Col sm="4" md="2" lg="1">
@@ -98,7 +98,15 @@ const TemplatesList = (props) => {
   ));
 
   return (
-    <div>
+    <div className="mt-4">
+      <Row>
+        <Col className="pt-3 text-center ">
+          <h1>
+            {" "}
+            <strong>List of all templates</strong>{" "}
+          </h1>{" "}
+        </Col>
+      </Row>
       <ul className="ul-exercise mt-3">{TemplatesList}</ul>
       <Label for="setLimit">SET NUMBER OF TEMPLATE</Label>
       <div className="input-limit mb-3">

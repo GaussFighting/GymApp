@@ -53,7 +53,7 @@ $navbar-light-active-color: $secondary;
 }
 .date-picker {
   justify-content: center;
-  border: 1px solid #ced4da;
+  border: 1px solid black;
   border-radius: 0.375rem;
   padding: 6px 10px;
 }
@@ -68,8 +68,26 @@ a {
   text-decoration: none;
   color: $light;
 }
+h4 {
+  font-weight: 1000;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+}
+.logo-size {
+  width: 250px;
+}
+
 .sign-in {
   color: $dark;
+  animation: sign-in 3s ease-out infinite;
+}
+@keyframes sign-in {
+  10% {
+    opacity: 0;
+  }
 }
 .sign-in:hover {
   color: $secondary;
@@ -83,14 +101,12 @@ a {
   min-height: 800px;
   min-width: 300px;
   margin: auto;
-  margin-top: 15vh;
   background-color: $muted;
 }
 .signin {
   height: 45vh;
   max-height: 1300px;
   min-height: 550px;
-  margin-top: 20vh;
 }
 .body {
   font-size: 1rem;
@@ -144,7 +160,12 @@ a {
   width: 22vh;
   min-width: 175px;
   margin: 1rem;
+  border: 1px solid black;
 }
+// .form-control:focus-visible,
+// .form-select:focus-visible {
+//   border: 2px solid orange;
+// }
 .edit-input {
   width: inherit;
 }
@@ -228,6 +249,16 @@ a {
   background-color: transparent;
   color: $dark;
 }
+.btn.btn-secondary.disabled {
+  pointer-events: none;
+  opacity: 1;
+  background-color: transparent;
+}
+.btn.btn-secondary.button-disabled {
+  pointer-events: none;
+  opacity: 1;
+  background-color: transparent;
+}
 .btn-primary {
   margin-top: 20px;
   top: 40px;
@@ -240,10 +271,36 @@ a {
   margin-top: 2rem;
   display: block;
 }
-
+.page-item:first-child .page-link {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+}
+.page-item:last-child .page-link {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+.page-item:not(:first-child) .page-link {
+  margin-left: 10px;
+}
+.page-link {
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.break {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .template-row,
 .main-row {
   text-align: center;
+  margin-left: 0px;
 }
 
 .input-exercises {
@@ -252,6 +309,10 @@ a {
 .template-row-exercise:nth-child(2n) {
   text-align: center;
   background-color: $muted;
+}
+.profile-table-row.row {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .profile-table {
   text-align: center;
@@ -270,11 +331,33 @@ a {
 .profile-table-item-result:nth-child(n-1) {
   border-right: 1px solid;
 }
+
 .profile-table-item-result {
   padding-top: 10px;
   justify-content: center;
 }
 
+.profile-table-item-last,
+.profile-table-item-result-last {
+  border: solid 1px;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  justify-content: center;
+}
+.profile-table-item-result-last {
+  border-bottom: none;
+}
+.hr {
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+
+  height: 3vh;
+  margin: auto;
+  margin-top: 3vh;
+  // border-bottom: 1px solid;
+}
 .col-name {
   font-size: rem(22);
   background-color: $primary;
@@ -303,6 +386,10 @@ a {
   color: $light;
   background-color: $primary;
 }
+.single-col-name.space-around {
+  justify-content: space-around;
+  border-radius: 5px 5px 0px 0px;
+}
 .single-col {
   display: flex;
   text-align: center;
@@ -313,7 +400,7 @@ a {
   color: $dark;
   display: flex;
   text-align: center;
-  margin-left: 0px;
+  // margin-left: 0px;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -345,9 +432,11 @@ a {
   background-color: $muted;
   padding-top: 0px;
   padding-bottom: 0px;
-  border-radius: 10px;
   text-align: center;
-  border-radius: 5px;
+  // border-radius: 10px;
+}
+.ext-lowercase {
+  text-transform: lowercase;
 }
 .template-link-chart {
   color: $dark;
@@ -366,6 +455,10 @@ a {
   background-color: $warning;
   border-radius: 5px;
   width: inherit;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .exercise-col {
   background-color: $primary;
@@ -374,6 +467,10 @@ a {
 .exercise-row-even {
   border-top: 1px solid;
   border-color: $muted;
+}
+.exercise-row-odd {
+  border-top: 1px solid;
+  border-color: $light;
 }
 .form-group,
 .row-position,
@@ -397,10 +494,13 @@ a {
   white-space: nowrap;
 }
 .firstCol {
-  font-weight: bold;
+  font-weight: 600;
 }
 .text-wraper {
   overflow-wrap: anywhere;
+}
+.spacer {
+  height: 30px;
 }
 .chart-spacer {
   height: 20px;
@@ -440,11 +540,30 @@ a {
     width: 18vh;
   }
   .button-modal {
-    max-width: 180px;
+    max-width: 250px;
     max-height: 75px;
   }
 }
 @media only screen and (max-width: rem(1024)) {
+  .page-item:not(:first-child) .page-link {
+    margin-left: 5px;
+  }
+  .page-item:first-child .page-link {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    min-width: 80px;
+  }
+  .page-link {
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+  }
+  .break {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
   .pie-chart {
     font-size: 14px;
   }
@@ -460,18 +579,18 @@ a {
     justify-content: flex-start;
     padding-left: 0px;
   }
-  .signin,
-  .signup {
-    margin-top: 100px;
+  .logo {
+    margin-top: 80px;
   }
+
   .btn-primary,
   .btn-link {
     width: 22vh;
     padding: 10px;
     max-width: 150px;
     min-width: 175px;
-    min-height: 48px;
-    max-height: 48px;
+    min-height: 64px;
+    max-height: 64px;
   }
   .button-modal {
     max-width: 150px;
@@ -503,6 +622,34 @@ a {
 }
 
 @media only screen and (max-width: rem(720)) {
+  .logo {
+    margin-top: 0px;
+  }
+  .page-item:not(:first-child) .page-link {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  .page-item:last-child .page-link {
+    min-width: 57px;
+  }
+  .page-link {
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 11px;
+  }
+  .break {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  .logo-size {
+    width: 200px;
+  }
+  .profile-table {
+    font-size: 12px;
+  }
   .pie-chart {
     font-size: 12px;
   }
@@ -588,11 +735,36 @@ a {
 }
 
 @media only screen and (max-width: rem(480)) {
+  .page-item:first-child .page-link {
+    border: 0;
+  }
+  .page-item:last-child .page-link {
+    border: 0;
+  }
+  .page-item:not(:first-child) .page-link {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  .page-item:last-child .page-link {
+    min-width: 57px;
+  }
+  .page-link {
+    border: 1px solid black;
+    border-radius: 0;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 11px;
+  }
+  .break {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
   .row.workout-mobile {
     padding-right: 0px;
   }
   .profile-table {
-    font-size: 9px;
+    font-size: 8px;
   }
   .pie-chart {
     font-size: 9px;
@@ -652,6 +824,9 @@ a {
   }
 }
 @media only screen and (max-width: rem(320)) {
+  .logo-size {
+    width: 150px;
+  }
   .form-control,
   .form-select,
   .form-control:focus,

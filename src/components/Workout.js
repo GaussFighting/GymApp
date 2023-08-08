@@ -272,7 +272,25 @@ const Workout = (props) => {
   };
   return (
     <div className="main-template-div">
+      {!props.template && (
+        <Row>
+          <Col className="pt-3 text-center ">
+            <h1>
+              {" "}
+              <strong>Empty Workout</strong>{" "}
+            </h1>{" "}
+          </Col>
+        </Row>
+      )}
       <ListGroup key={loadedTemplate.id}>
+        <Row>
+          <Col className="pt-3 text-center ">
+            <h1>
+              {" "}
+              <strong>Current Workout</strong>{" "}
+            </h1>{" "}
+          </Col>
+        </Row>
         <Row className="template-row ">
           <Col sm="12" md="12" className="single-col-name">
             {loadedTemplate.templateName.toUpperCase()}
@@ -280,11 +298,12 @@ const Workout = (props) => {
         </Row>
         <Row>
           <Col sm="12" md="12">
-            {loadedTemplate.descritpion}
+            {"Template Description: " + loadedTemplate.descritpion}
           </Col>
         </Row>
         <Row>
           <Col sm="3" md="5" lg="6" className=" pt-3 date-picker-view">
+            <strong> {"Date: "}</strong>
             <DatePicker
               className="date-picker"
               selected={startDate}
@@ -298,7 +317,7 @@ const Workout = (props) => {
           </Col>
           <Col sm="9" md="7" lg="6">
             <Form>
-              <span>BODY WEIGHT:</span>
+              <strong> {"Body Weight: "}</strong>
               <Input
                 disabled={bodyWeightConfirmed}
                 className="input d-inline-block workout-input"
@@ -321,15 +340,16 @@ const Workout = (props) => {
               </Label>
             </Form>
           </Col>
+          <hr className="hr" />
         </Row>
+
         <Row className="template-row">
           {loadedTemplate.templateExercises.map((exercise, idx) => (
             <Row className="template-row-exercise" key={exercise.id}>
-              <Col sm="1" md="2">
-                {idx + 1}{" "}
-              </Col>
-              <Col sm="11" md="8">
+              <Col>
                 <h5>
+                  {idx + 1}
+                  {". "}
                   {exercise.nameEn.toUpperCase()}
                   {" ("}
                   {exercise.equipment.toUpperCase()}
