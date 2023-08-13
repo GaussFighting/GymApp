@@ -102,7 +102,7 @@ const Exercises = () => {
                   {exercise.nameEn}{" "}
                 </Col>
                 <Col sm="2" md="1">
-                  <strong style={{ color: "red" }}>
+                  <strong style={{ color: "#232f34" }}>
                     {" "}
                     {Object.keys(exercisesCount).length &&
                       exercisesCount[exercise.id]}
@@ -121,7 +121,6 @@ const Exercises = () => {
       </ListGroup>
     );
   });
-
   const bodyPart = "bodyPart";
   const bodyPartUniqueList = [
     ...new Set(
@@ -137,9 +136,9 @@ const Exercises = () => {
   ];
 
   return (
-    <div className="mt-4">
+    <div className="mt-3">
       <Row>
-        <Col className="pt-3 text-center ">
+        <Col className="pt-3 text-center text-capitalize">
           <h1>
             {" "}
             <strong>List of all exercises</strong>{" "}
@@ -154,15 +153,17 @@ const Exercises = () => {
             setFilterName={setFilterName}
             setExercises={setExercises}
             allExercisesForFiltering={allExercisesForFiltering}
+            loading={loading}
           />
         </Col>
-        <Col sm="12" md="6" className="button-new-exercise ">
+        <Col sm="12" md="6" className="button-new-exercise mt-4">
           <AddNewExercise
             nameBodyPart={bodyPart}
             nameEquipment={equipment}
             uniqueListBodyPart={bodyPartUniqueList}
             uniqueListEquipment={equipmentUniqueList}
             setExercises={setExercises}
+            loading={loading}
           />
         </Col>
       </Row>
@@ -175,6 +176,7 @@ const Exercises = () => {
             setFilterByOption={setFilterByBodyPart}
             filterOption={filterByBodyPart}
             allExercisesForFiltering={allExercisesForFiltering}
+            loading={loading}
           />
         </Col>
         <Col sm="12" md="6">
@@ -185,43 +187,49 @@ const Exercises = () => {
             setFilterByOption={setFilterByEquipment}
             filterOption={filterByEquipment}
             allExercisesForFiltering={allExercisesForFiltering}
+            loading={loading}
           />
         </Col>
       </Row>
-      <React.Fragment>
-        <ListGroup key={"0"}>
-          <Button className="button-disabled">
-            <ListGroupItem className="text-uppercase ">
-              <Row>
-                <Col sm="2" md="1">
-                  {"No."}
-                </Col>
-                <Col sm="8" md="4">
-                  {"Exercise Name"}
-                </Col>
-                <Col sm="2" md="1">
-                  {"Qty"}
-                </Col>
-                <Col sm="6" md="3">
-                  {"Body Part"}
-                </Col>
-                <Col sm="6" md="3">
-                  {"Equipment"}
-                </Col>
-              </Row>
-            </ListGroupItem>
+
+      {!loading && (
+        <React.Fragment>
+          <React.Fragment>
+            <ListGroup key={"0"}>
+              <Button className="button-disabled">
+                <ListGroupItem className="text-uppercase ">
+                  <Row>
+                    <Col sm="2" md="1">
+                      <strong>{"No."}</strong>
+                    </Col>
+                    <Col sm="8" md="4">
+                      <strong>{"Exercise Name"}</strong>
+                    </Col>
+                    <Col sm="2" md="1">
+                      <strong> {"Qty"}</strong>
+                    </Col>
+                    <Col sm="6" md="3">
+                      <strong> {"Body Part"}</strong>
+                    </Col>
+                    <Col sm="6" md="3">
+                      <strong> {"Equipment"}</strong>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              </Button>
+            </ListGroup>
+          </React.Fragment>
+          <ul className="ul-exercise">{ExercisesList}</ul>
+          <Button
+            color="primary"
+            className="center-block"
+            onClick={() => {
+              downloadCSV();
+            }}>
+            DOWNLOAD LIST
           </Button>
-        </ListGroup>
-      </React.Fragment>
-      <ul className="ul-exercise">{ExercisesList}</ul>
-      <Button
-        color="primary"
-        className="center-block"
-        onClick={() => {
-          downloadCSV();
-        }}>
-        DOWNLOAD LIST
-      </Button>
+        </React.Fragment>
+      )}
       <div className="spacer pb-5"></div>
     </div>
   );

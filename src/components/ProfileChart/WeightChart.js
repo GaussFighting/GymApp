@@ -47,50 +47,52 @@ const WeightChart = () => {
     return dataArr;
   });
   return (
-    <div>
-      <h4 className="my-4 ">Weight Chart</h4>
-      <div className="pb-4">
-        <ResponsiveContainer width="100%" height={624}>
-          <LineChart
-            width={1500}
-            height={300}
-            data={bodyWeightArr.slice(0, 300)}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="name"
-              padding={{ left: 30, right: 30 }}
-              reversed={true}
-              angle={90}
-              tickMargin={50}
-              height={100}
-              interval={"preserveStartEnd"}
-            />
-            <YAxis
-              yAxisId="left"
-              unit=" kg "
-              tickCount={8}
-              interval="preserveStartEnd"
-              domain={(element) => {
-                return [
-                  75,
-                  Math.round((element[1] * 1.1).toFixed(0) / 100) * 100,
-                ];
-              }}
-            />
-            <Tooltip />
-            <Line
-              index="1"
-              yAxisId="left"
-              dataKey="bodyWeight"
-              stroke="#232f34"
-              activeDot={{ r: 8 }}
-              connectNulls={true}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+    results !== 0 && (
+      <div>
+        <h4 className="my-4 ">Weight Chart</h4>
+        <div className="pb-4">
+          <ResponsiveContainer width="100%" height={624}>
+            <LineChart
+              width={1500}
+              height={300}
+              data={bodyWeightArr.slice(0, 300)}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="name"
+                padding={{ left: 30, right: 30 }}
+                reversed={true}
+                angle={295}
+                tickMargin={40}
+                height={100}
+                interval={"preserveStartEnd"}
+              />
+              <YAxis
+                yAxisId="left"
+                unit=" kg "
+                tickCount={8}
+                interval="preserveStartEnd"
+                domain={(element) => {
+                  return [
+                    75,
+                    Math.round((element[1] * 1.1).toFixed(0) / 100) * 100,
+                  ];
+                }}
+              />
+              <Tooltip border="red" />
+              <Line
+                index="1"
+                yAxisId="left"
+                dataKey="bodyWeight"
+                stroke="#232f34"
+                activeDot={{ r: 8 }}
+                connectNulls={true}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="spacer"></div>
       </div>
-      <div className="spacer"></div>
-    </div>
+    )
   );
 };
 

@@ -270,6 +270,7 @@ const Workout = (props) => {
       return <div>Wrong Equipment!</div>;
     }
   };
+  console.log(loadedTemplate.description);
   return (
     <div className="main-template-div">
       {!props.template && (
@@ -296,11 +297,20 @@ const Workout = (props) => {
             {loadedTemplate.templateName.toUpperCase()}
           </Col>
         </Row>
-        <Row>
-          <Col sm="12" md="12">
-            {"Template Description: " + loadedTemplate.descritpion}
-          </Col>
-        </Row>
+
+        {loadedTemplate === "Workout without description" ? (
+          <Row>
+            <Col sm="12" md="12">
+              {"Template Description: " + loadedTemplate.description}
+            </Col>
+          </Row>
+        ) : (
+          <Row>
+            <Col sm="12" md="12">
+              {"Workout without description"}
+            </Col>
+          </Row>
+        )}
         <Row>
           <Col sm="3" md="5" lg="6" className=" pt-3 date-picker-view">
             <strong> {"Date: "}</strong>
@@ -345,7 +355,7 @@ const Workout = (props) => {
 
         <Row className="template-row">
           {loadedTemplate.templateExercises.map((exercise, idx) => (
-            <Row className="template-row-exercise" key={exercise.id}>
+            <Row className="template-row-exercise  pb-4" key={exercise.id}>
               <Col>
                 <h5>
                   {idx + 1}

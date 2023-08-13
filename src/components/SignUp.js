@@ -23,7 +23,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (loading) {
-      toastId.current = toast("Loading!", {
+      toastId.current = toast("Creating new User!", {
         position: "top-center",
         hideProgressBar: false,
         closeOnClick: true,

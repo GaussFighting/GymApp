@@ -8,6 +8,7 @@ const FormSelector = ({
   setFilterByOption,
   filterOption,
   allExercisesForFiltering,
+  loading,
 }) => {
   const humanName = name.replace(/([A-Z])/g, " $1").toUpperCase();
   const options = uniqueList.map((item, idx) => (
@@ -31,6 +32,7 @@ const FormSelector = ({
           type="select"
           name="select"
           id="exampleSelect"
+          disabled={loading}
           value={filterOption}
           onChange={(event) => {
             setFilterByOption(event.target.value);

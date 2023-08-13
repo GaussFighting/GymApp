@@ -102,7 +102,7 @@ const Result = () => {
   };
 
   return (
-    <div className="main-template-div mt-4">
+    <div className="main-template-div mt-3">
       <Row className="m-0 p-0">
         <Col className="pt-3 text-center ">
           <h1>
@@ -111,9 +111,9 @@ const Result = () => {
           </h1>{" "}
         </Col>
       </Row>
-      <Row className="top-row m-0 p-0">
+      <Row className="top-row m-0 p-0 mt-3">
         <Row className="m-0 p-0">
-          <Col md="12" className="single-col-name space-around m-0 p-0">
+          <Col md="12" className="single-col-name space-around m-0 p-0 ">
             <strong>{"Template Name: "}</strong>
             {results.templateName}
           </Col>

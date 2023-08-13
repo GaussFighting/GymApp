@@ -123,19 +123,21 @@ const DayOfTheWeekDiagram = () => {
     const x1 = cx + radius1 * Math.cos(-midAngle * RADIAN);
     const y1 = cy + radius1 * Math.sin(-midAngle * RADIAN);
     return (
-      <>
-        <text
-          x={x}
-          y={y}
-          fill="white"
-          textAnchor={x > cx ? "start" : "end"}
-          dominantBaseline="central">
-          {`${(percent * 100).toFixed(0)}%`}
-        </text>
-        <text x={x1} y={y1} fill={fill} textAnchor={x > cx ? "start" : "end"}>
-          {name} {`\n`} {`(${payload.value})`}
-        </text>
-      </>
+      results !== 0 && (
+        <>
+          <text
+            x={x}
+            y={y}
+            fill="white"
+            textAnchor={x > cx ? "start" : "end"}
+            dominantBaseline="central">
+            {`${(percent * 100).toFixed(0)}%`}
+          </text>
+          <text x={x1} y={y1} fill={fill} textAnchor={x > cx ? "start" : "end"}>
+            {name} {`\n`} {`(${payload.value})`}
+          </text>
+        </>
+      )
     );
   };
 

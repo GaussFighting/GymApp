@@ -23,7 +23,7 @@ const Navigationbar = () => {
 
   const logOut = () => {
     window.localStorage.clear();
-    window.location.href = "./";
+    window.location.href = "/";
   };
 
   return (
@@ -59,10 +59,7 @@ const Navigationbar = () => {
               </NavLink>
             </NavItem>
             <NavItem onClick={navTogglerClose}>
-              <NavLink
-                className="nav-link"
-                to="/signin"
-                onClick={(e) => logOut(e)}>
+              <NavLink className="nav-link" to="/" onClick={(e) => logOut(e)}>
                 LOG OUT <br></br>
                 <FontAwesomeIcon icon={faArrowRightFromBracket} size="2x" />
               </NavLink>

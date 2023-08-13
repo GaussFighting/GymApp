@@ -77,7 +77,7 @@ const ExerciseChartHeader = ({ bestResults }) => {
           {" "}
           <strong>
             {" "}
-            Best Total Repetitions <b>{bestTotalRepetitions}</b>
+            Best Total Repetitions: <b>{bestTotalRepetitions}</b>
           </strong>
         </Col>
       </Row>

@@ -27,12 +27,14 @@ const TotalActivities = () => {
   }, [loading]);
 
   return (
-    <div>
-      <h5 className="my-3 ">
-        Total number of trainings : <b>{count}</b>
-      </h5>
-      <div className="spacer"></div>
-    </div>
+    count !== 0 && (
+      <div>
+        <h5 className="my-3 ">
+          Total number of trainings : <b>{count}</b>
+        </h5>
+        <div className="spacer"></div>
+      </div>
+    )
   );
 };
 

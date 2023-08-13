@@ -77,63 +77,74 @@ const Exercise = () => {
     }
     navigate("/exercises");
   };
+  console.log(exercise);
   return (
-    <ListGroupItem className="text-align-single-exercise text-uppercase">
-      <Row className="row">
-        <Col sm="12" md="12">
-          <h1>
-            {" "}
-            <strong>Statistics of {exercise.nameEn}</strong>{" "}
-          </h1>{" "}
-        </Col>
-      </Row>
-      <Row>
-        <Col sm="12" md="6">
-          <strong>
-            {" "}
-            <h4>Body Part: {exercise.bodyPart}</h4>
-          </strong>
-        </Col>
-        <Col sm="12" md="6">
-          <strong>
-            {" "}
-            <h4>Equipment: {exercise.equipment}</h4>
-          </strong>
-        </Col>
-      </Row>
+    <React.Fragment>
+      <ListGroupItem className="text-align-single-exercise  mt-4">
+        {exercise !== {} && (
+          <React.Fragment>
+            <Row className="row">
+              <Col sm="12" md="12" className="text-capitalize">
+                <h1>
+                  {" "}
+                  <strong>Statistics of {exercise.nameEn}</strong>{" "}
+                </h1>{" "}
+              </Col>
+            </Row>
+            <Row>
+              <Col sm="12" md="6">
+                <strong>
+                  {" "}
+                  <h4 className="text-lowercase">
+                    Body Part: {exercise.bodyPart}
+                  </h4>
+                </strong>
+              </Col>
+              <Col sm="12" md="6">
+                <strong>
+                  {" "}
+                  <h4 className="text-lowercase">
+                    Equipment: {exercise.equipment}
+                  </h4>
+                </strong>
+              </Col>
+            </Row>
+          </React.Fragment>
+        )}
 
-      {exercise.id && <ExerciseChart exerciseId={id} />}
+        {exercise.id && <ExerciseChart exerciseId={id} />}
 
-      <Row className="row">
-        <Col sm="12" md="6" className="button-new-exercise">
-          <Button
-            color="primary"
-            disabled={!(localStorage.getItem("role") === "Admin")}
-            onClick={() => setModalShowEdit(true)}>
-            EDIT
-          </Button>
-          <OpenModalEdit
-            show={modalShowEdit}
-            id={id}
-            onHide={() => setModalShowEdit(false)}
-          />
-        </Col>
-        <Col sm="12" md="6" className="button-new-exercise">
-          <Button
-            color="primary"
-            disabled={!(localStorage.getItem("role") === "Admin")}
-            onClick={() => setModalShow(true)}>
-            DELETE
-          </Button>
-          <OpenModal
-            show={modalShow}
-            deleteRecord={deleteRecord}
-            id={id}
-            onHide={() => setModalShow(false)}
-          />
-        </Col>
-      </Row>
-    </ListGroupItem>
+        <Row className="row">
+          <Col sm="12" md="6" className="button-new-exercise">
+            <Button
+              color="primary"
+              disabled={!(localStorage.getItem("role") === "Admin")}
+              onClick={() => setModalShowEdit(true)}>
+              EDIT
+            </Button>
+            <OpenModalEdit
+              show={modalShowEdit}
+              id={id}
+              onHide={() => setModalShowEdit(false)}
+            />
+          </Col>
+          <Col sm="12" md="6" className="button-new-exercise">
+            <Button
+              color="primary"
+              disabled={!(localStorage.getItem("role") === "Admin")}
+              onClick={() => setModalShow(true)}>
+              DELETE
+            </Button>
+            <OpenModal
+              show={modalShow}
+              deleteRecord={deleteRecord}
+              id={id}
+              onHide={() => setModalShow(false)}
+            />
+          </Col>
+        </Row>
+      </ListGroupItem>
+    </React.Fragment>
   );
 };
 

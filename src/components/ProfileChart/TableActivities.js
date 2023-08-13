@@ -69,11 +69,13 @@ const TableActivities = () => {
   };
 
   return (
-    <div>
-      <h4>Training summary </h4>
-      {count && <TableYear />}
-      <div className="spacer "></div>
-    </div>
+    count !== 0 && (
+      <div>
+        <h4>Training summary </h4>
+        <TableYear />
+        <div className="spacer "></div>
+      </div>
+    )
   );
 };
 

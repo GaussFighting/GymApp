@@ -74,15 +74,27 @@ h4 {
 .logo {
   display: flex;
   justify-content: center;
-  margin-top: 10vh;
+  margin-top: 2vh;
 }
 .logo-size {
   width: 250px;
 }
-
+.recharts-tooltip-wrapper.recharts-tooltip-wrapper-left.recharts-tooltip-wrapper-bottom {
+  border: 2px solid $primary;
+}
+.recharts-tooltip-wrapper.recharts-tooltip-wrapper-right.recharts-tooltip-wrapper-bottom {
+  border: 2px solid $primary;
+}
 .sign-in {
   color: $dark;
   animation: sign-in 3s ease-out infinite;
+}
+.text-transform {
+  text-transform: capitalize;
+}
+.chart-input {
+  display: flex;
+  justify-content: flex-start;
 }
 @keyframes sign-in {
   10% {
@@ -105,7 +117,7 @@ h4 {
 }
 .signin {
   height: 45vh;
-  max-height: 1300px;
+  max-height: 600px;
   min-height: 550px;
 }
 .body {
@@ -157,10 +169,13 @@ h4 {
   @extend .input;
   background-color: $light;
   text-align: center;
-  width: 22vh;
+  width: 18vw;
   min-width: 175px;
   margin: 1rem;
   border: 1px solid black;
+}
+.addNewExercise {
+  width: 22vh;
 }
 // .form-control:focus-visible,
 // .form-select:focus-visible {
@@ -421,12 +436,18 @@ h4 {
 }
 .VolumeLine {
   color: #8884d8;
+  display: flex;
+  justify-content: flex-start;
 }
 .BodyWeightLine {
   color: #ca8284;
+  display: flex;
+  justify-content: flex-start;
 }
 .VolumePerBodyWeightLine {
   color: #82ca9d;
+  display: flex;
+  justify-content: flex-start;
 }
 .top-row {
   background-color: $muted;
@@ -435,6 +456,16 @@ h4 {
   text-align: center;
   // border-radius: 10px;
 }
+.results-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+}
+.word-spacing {
+  word-spacing: 20px;
+}
+
 .ext-lowercase {
   text-transform: lowercase;
 }
@@ -467,10 +498,14 @@ h4 {
 .exercise-row-even {
   border-top: 1px solid;
   border-color: $muted;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .exercise-row-odd {
   border-top: 1px solid;
   border-color: $light;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .form-group,
 .row-position,
@@ -534,6 +569,9 @@ h4 {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+.input-max {
+  max-width: 200px;
+}
 @media only screen and (max-width: rem(2560)) {
   .edit-input,
   .edit-input:focus {
@@ -545,6 +583,9 @@ h4 {
   }
 }
 @media only screen and (max-width: rem(1024)) {
+  .small-button {
+    font-size: 12px;
+  }
   .page-item:not(:first-child) .page-link {
     margin-left: 5px;
   }
@@ -580,7 +621,7 @@ h4 {
     padding-left: 0px;
   }
   .logo {
-    margin-top: 80px;
+    margin-top: 40px;
   }
 
   .btn-primary,

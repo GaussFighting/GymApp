@@ -106,13 +106,15 @@ const Chart = ({ results, exerciseId }) => {
   };
   if (!(dataTotalVolume()[0].volume === 0)) {
     return (
-      <div className="small-view text-capitalize">
+      <div className="small-view ">
         {" "}
         {!isNaN(dataTotalVolume()[0].volume) && (
           <div>
-            <div>
-              <h5 className="text-capitalize">Total Volume Chart</h5>
-              <Label className="VolumeLine">
+            <div className="mt-3">
+              <h5 className="text-capitalize chart-input">
+                Total Volume Chart
+              </h5>
+              <Label className="VolumeLine ">
                 <Input
                   type="checkbox"
                   onChange={() => {
@@ -122,7 +124,7 @@ const Chart = ({ results, exerciseId }) => {
                 <div>&nbsp;</div>
                 Hide Volume line
               </Label>{" "}
-              <Label className="BodyWeightLine">
+              <Label className="BodyWeightLine ">
                 <Input
                   type="checkbox"
                   onChange={() => {
@@ -132,14 +134,14 @@ const Chart = ({ results, exerciseId }) => {
                 <div>&nbsp;</div>
                 Hide Body Weight line
               </Label>{" "}
-              <Label className="VolumePerBodyWeightLine">
+              <Label className="VolumePerBodyWeightLine ">
                 <Input
                   type="checkbox"
                   onChange={() => {
                     setDisabledVolumePerWeight(!disabledVolumePerWeight);
                   }}
                 />{" "}
-                <div>&nbsp;</div>
+                <div className="mt-3">&nbsp;</div>
                 Hide Volume per body weight line{" "}
               </Label>
               <ResponsiveContainer width="100%" height={624}>
@@ -149,7 +151,7 @@ const Chart = ({ results, exerciseId }) => {
                     dataKey="name"
                     padding={{ left: 30, right: 30 }}
                     reverse={true}
-                    angle={0}
+                    angle={295}
                     tickMargin={40}
                     height={100}
                     interval={"preserveStartEnd"}
@@ -219,7 +221,8 @@ const Chart = ({ results, exerciseId }) => {
               </ResponsiveContainer>
             </div>
             <br />
-            <h5 className="text-capitalize">Set Volume Chart</h5>
+            <hr className="hr" />
+            <h5 className="text-capitalize chart-input">Set Volume Chart</h5>
             <Label className="VolumeLine">
               <Input
                 type="checkbox"
@@ -247,7 +250,7 @@ const Chart = ({ results, exerciseId }) => {
                   setDisabledSetVolumePerWeight(!disabledSetVolumePerWeight);
                 }}
               />{" "}
-              <div>&nbsp;</div>
+              <div className="mt-3">&nbsp;</div>
               Hide Volume per body weight line
             </Label>
             <ResponsiveContainer width="100%" height={624}>
@@ -257,7 +260,7 @@ const Chart = ({ results, exerciseId }) => {
                   dataKey="name"
                   padding={{ left: 30, right: 30 }}
                   reverse={true}
-                  angle={0}
+                  angle={295}
                   tickMargin={40}
                   height={100}
                   interval={"preserveStartEnd"}
