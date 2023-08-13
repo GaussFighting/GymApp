@@ -84,25 +84,27 @@ const ActivityCallendar = () => {
     },
   };
   return (
-    <div>
-      <h4 className="my-4 "> Activity Callendar</h4>
-      <div className="d-flex pb-4 justify-content-center">
-        {data().length && (
-          <ActivityCalendar
-            data={data()}
-            blockMargin={10}
-            blockSize={14}
-            showWeekdayLabels={true}
-            weekStart={1}
-            fontSize={18}
-            colorScheme={true}
-            theme={explicitTheme}
-            labels={labels}
-          />
-        )}
-        <div className="spacer "></div>
+    data().length !== 0 && (
+      <div>
+        <h4 className="my-4 "> Activity Callendar</h4>
+        <div className="d-flex pb-4 justify-content-center">
+          {data().length !== 0 && (
+            <ActivityCalendar
+              data={data()}
+              blockMargin={10}
+              blockSize={14}
+              showWeekdayLabels={true}
+              weekStart={1}
+              fontSize={18}
+              colorScheme={true}
+              theme={explicitTheme}
+              labels={labels}
+            />
+          )}
+          <div className="spacer "></div>
+        </div>
       </div>
-    </div>
+    )
   );
 };
 

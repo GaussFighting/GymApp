@@ -49,7 +49,7 @@ const History = () => {
         <ListGroup key={result.id}>
           <Row className="template-row">
             <Link to={`/results/${result.id}`}>
-              <Col sm="12" md="12" className="col-name">
+              <Col sm="12" md="12" className="col-name ml-5 word-spacing">
                 {index + 1} {moment(result.date).format(format)}
               </Col>
             </Link>
@@ -75,7 +75,7 @@ const History = () => {
   return (
     <div className="mt-3">
       <Row>
-        <Col className="pt-3 text-center ">
+        <Col className="pt-3 text-center text-capitalize">
           <h1>
             {" "}
             <strong>List of all results</strong>{" "}
@@ -83,8 +83,8 @@ const History = () => {
         </Col>
       </Row>
       <ul className="ul-exercise mt-3">{displayedWorkouts()}</ul>
-      <Label for="setLimit">SET NUMBER OF RESULTS</Label>
-      {pageCount != 0 && (
+      {pageCount !== 0 && <Label for="setLimit">SET NUMBER OF RESULTS</Label>}
+      {pageCount !== 0 && (
         <div className="input-limit mb-3">
           <Input
             className="input "
@@ -104,7 +104,7 @@ const History = () => {
           </Input>
         </div>
       )}
-      {pageCount != 0 && (
+      {pageCount !== 0 && (
         <ReactPaginate
           breakLabel="..."
           nextLabel="next >"
@@ -125,14 +125,16 @@ const History = () => {
           activeClassName="active"
         />
       )}
-      <Button
-        color="primary"
-        className="add-new-template-cancel-button"
-        onClick={() => {
-          downloadJson();
-        }}>
-        DOWNLOAD {limit} RESULTS
-      </Button>
+      {pageCount !== 0 && (
+        <Button
+          color="primary"
+          className="small-button"
+          onClick={() => {
+            downloadJson();
+          }}>
+          DOWNLOAD {limit} RESULTS
+        </Button>
+      )}
       <div className="spacer  mb-3"></div>
     </div>
   );

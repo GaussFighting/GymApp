@@ -1,11 +1,12 @@
 import React from "react";
-import { Form, FormGroup, Input } from "reactstrap";
+import { Form, FormGroup, Input, Label } from "reactstrap";
 
 const FormExercises = ({
   setExercises,
   filterName,
   setFilterName,
   allExercisesForFiltering,
+  loading,
 }) => {
   const getByName = (value) => {
     const filteredExercises = allExercisesForFiltering.filter((exercise) => {
@@ -17,10 +18,14 @@ const FormExercises = ({
   return (
     <Form>
       <FormGroup>
+        <Label for="exampleSelect" className="text-uppercase">
+          Exercise Name
+        </Label>
         <Input
           className="input"
           type="text"
           placeholder="Search exercise"
+          disabled={loading}
           value={filterName}
           onChange={(event) => {
             setFilterName(event.target.value);

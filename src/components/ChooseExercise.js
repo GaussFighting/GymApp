@@ -11,10 +11,7 @@ const ChooseExercise = (props) => {
 
   return (
     <div className="addButtonWidth">
-      <Button
-        color="primary"
-        className="add-new-template-cancel-button"
-        onClick={handleShow}>
+      <Button color="primary" onClick={handleShow} className="button-modal">
         ADD NEW EXERCISE
       </Button>
       <Modal show={show} onHide={handleClose}>

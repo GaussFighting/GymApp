@@ -79,7 +79,9 @@ const MyVerticallyCenteredModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered>
       <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter ">
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="text-capitalize">
           Please add new exercise
         </Modal.Title>
       </Modal.Header>
@@ -87,6 +89,9 @@ const MyVerticallyCenteredModal = (props) => {
         <Form>
           <Row>
             <FormGroup>
+              <Label for="exampleSelect" className="text-uppercase">
+                Exercise Name
+              </Label>
               <Input
                 className="input"
                 type="text"
@@ -159,6 +164,7 @@ const AddNewExercise = ({
   nameEquipment,
   uniqueListEquipment,
   setExercises,
+  loading,
 }) => {
   const [modalShow, setModalShow] = useState(false);
 
@@ -171,8 +177,12 @@ const AddNewExercise = ({
   ));
 
   return (
-    <div className="center-block">
-      <Button color="link" onClick={() => setModalShow(true)}>
+    <div className="center-block ">
+      <Button
+        color="link"
+        className="addNewExercise"
+        disabled={loading}
+        onClick={() => setModalShow(true)}>
         ADD NEW EXERCISE
       </Button>
 

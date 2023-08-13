@@ -22,14 +22,18 @@ const ExerciseChartResultRender = ({ results, bestResults, exerciseId }) => {
             <Link
               className="template-link-chart"
               to={`/results/${results[index].id}`}>
-              <Row className="template-link-chart">
-                <Col sm="12" md="1" lg="1">
+              <Row className="template-link-chart ">
+                <Col sm="12" md="1" lg="1" className="results-table">
                   {index + 1}
                 </Col>
-                <Col sm="12" md="2" lg="2" className="text-wrap">
+                <Col sm="12" md="2" lg="2" className="text-wrap results-table">
                   {moment(ex.date).format(format)}
                 </Col>
-                <Col sm="12" md="1" lg="1" className="text-lowercase">
+                <Col
+                  sm="12"
+                  md="1"
+                  lg="1"
+                  className="text-lowercase results-table">
                   {ex.bodyWeight.toFixed(1)}
                   {" kg"}
                 </Col>

@@ -69,7 +69,7 @@ const AddNewTemplate = () => {
         </Col>
       </Row>
       <Row>
-        <Col sm="12" md="6" xl="3">
+        <Col sm="12" md="6" xl="3" className="chart-input">
           <FormGroup>
             <Label for="exampleEmail">Enter number of sets</Label>
           </FormGroup>
@@ -79,7 +79,7 @@ const AddNewTemplate = () => {
             {" "}
             <FormGroup>
               <Input
-                className="input"
+                className="input input-max"
                 type="number"
                 value={exercise.sets}
                 onChange={(event) => {
@@ -101,6 +101,7 @@ const AddNewTemplate = () => {
         <Col sm="12" md="12" xl="6">
           <Button
             color="primary"
+            className="mt-1"
             disabled={!(localStorage.getItem("role") === "Admin")}
             onClick={() => {
               setAddedExercises((exercises) => {
@@ -117,7 +118,7 @@ const AddNewTemplate = () => {
   ));
   return (
     <React.Fragment>
-      <Col className="pt-3 text-center ">
+      <Col className="pt-3 text-center text-capitalize">
         <h1>
           {" "}
           <strong>Create new template</strong>{" "}
@@ -126,7 +127,9 @@ const AddNewTemplate = () => {
 
       <Form>
         <FormGroup>
-          <Label for="exampleEmail">Template name</Label>
+          <Label for="exampleEmail" className="text-uppercase">
+            Template name
+          </Label>
           <Input
             className="input"
             type="text"
@@ -138,7 +141,9 @@ const AddNewTemplate = () => {
         </FormGroup>
         <FormGroup>
           {" "}
-          <Label for="exampleText">Descritpion</Label>
+          <Label for="exampleText" className="text-uppercase">
+            Descritpion
+          </Label>
           <Input
             type="textarea"
             name="text"
@@ -160,8 +165,14 @@ const AddNewTemplate = () => {
         <FormGroup>
           <Button
             color="primary"
-            onClick={(e) => onSubmit(e, formTemplate)}
-            className="add-new-template-cancel-button">
+            className="button-modal"
+            disabled={
+              (formTemplate.templateExercises &&
+                formTemplate.templateExercises.length === 0) ||
+              formTemplate.templateName === undefined ||
+              formTemplate.description === undefined
+            }
+            onClick={(e) => onSubmit(e, formTemplate)}>
             SUBMIT
           </Button>
         </FormGroup>
