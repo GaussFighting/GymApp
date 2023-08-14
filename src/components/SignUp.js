@@ -72,7 +72,7 @@ const SignUp = () => {
         setErrorMsg(record.msg);
         return;
       }
-      window.location.href = "./signin";
+      window.location.href = "./";
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -187,7 +187,7 @@ const SignUp = () => {
           <p>
             {" "}
             <strong>
-              <a className="sign-in" href="/signin">
+              <a className="sign-in" href="/">
                 Sign in!
               </a>
             </strong>

@@ -115,7 +115,7 @@ const SignIn = () => {
           <p>
             {" "}
             <strong>
-              <a className="sign-in" href="/">
+              <a className="sign-in" href="/signup">
                 Sign up!
               </a>
             </strong>
