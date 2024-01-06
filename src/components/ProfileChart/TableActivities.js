@@ -28,6 +28,8 @@ const TableActivities = () => {
   }, [loading]);
 
   let TableYear = () => {
+    console.log(count.slice(0, 4));
+
     return (
       <div className="profile-table ">
         <div className="profile-table ">
@@ -51,7 +53,7 @@ const TableActivities = () => {
                     <Col key={el + idx}>
                       <Row className="profile-table-item-last">
                         {" "}
-                        {2023 - idx}
+                        {2024 - idx}
                       </Row>
                       <Row className="profile-table-item-result-last">
                         {" "}
@@ -70,7 +72,7 @@ const TableActivities = () => {
 
   return (
     count !== 0 && (
-      <div>
+      <div className="mobile-header">
         <h4>Training summary </h4>
         <TableYear />
         <div className="spacer "></div>
