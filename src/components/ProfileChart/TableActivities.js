@@ -43,7 +43,7 @@ const TableActivities = () => {
                   )}
                   {idx <= count.length - 2 && (
                     <Col key={el + idx}>
-                      <Row className="profile-table-item"> {2023 - idx}</Row>
+                      <Row className="profile-table-item"> {2024 - idx}</Row>
                       <Row className="profile-table-item-result"> {el}</Row>
                     </Col>
                   )}
