@@ -688,8 +688,12 @@ h4 {
   .logo-size {
     width: 200px;
   }
-  .profile-table {
-    font-size: 12px;
+  .profile-table  {
+    display: none;
+    font-size: 10px;
+  }
+  .mobile-header {
+    display: none;
   }
   .pie-chart {
     font-size: 12px;
