@@ -1,70 +1,304 @@
-# Getting Started with Create React App
+# GymApp (GymGenius)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A workout-logging web app: plan training templates, log sets and body weight, and track progress per exercise with charts and statistics.
 
-## Available Scripts
+**Live demo:** https://gymgenius.netlify.app
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+- Authentication (users with roles)
+- Exercise catalogue (body part, equipment) with full CRUD
+- Training templates (reusable plans, e.g. "HT BT A 2023-03") with full CRUD
+- Workout results: sets, weight, repetitions, body weight, date, with full CRUD
+- Body weight chart over time
+- Weekday distribution diagram and activity calendar
+- Per-exercise statistics, charts and history table:
+  - RM, RM / body mass
+  - Best set volume, best set volume / body mass
+  - Best total volume, best total volume / body mass
+- CSV export (`react-csv`)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Layer | Technology |
+|-------|------------|
+| Frontend | React 17 (Create React App), React Router 6, Bootstrap / React-Bootstrap / Reactstrap, Sass |
+| Charts | Recharts, react-activity-calendar |
+| API | Netlify Functions (`lambda/`) — Node.js, one function per operation |
+| Database | MongoDB + Mongoose (`models/`) |
+| Auth | bcryptjs (password hashing), jsonwebtoken, cookie-parser (TODO: verify flow) |
+| Hosting / CI | Netlify (`netlify.toml`) |
 
-### `yarn test`
+## Architecture
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```mermaid
+flowchart LR
+    User([User's browser])
 
-### `yarn build`
+    subgraph Netlify
+        SPA["React SPA<br/>src/ → build/"]
+        subgraph FN["Serverless functions — lambda/"]
+            AUTH["login<br/>userCreate · userDataCreate"]
+            EX["exerciseCreate / Read /<br/>Update / Delete"]
+            TPL["templateCreate / Read /<br/>Update / Delete"]
+            RES["resultCreate / Read /<br/>Update / Delete"]
+        end
+    end
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    MODELS["Mongoose models<br/>models/"]
+    DB[("MongoDB<br/>users · exercises · templates · results")]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    User -->|HTTPS| SPA
+    SPA -->|"axios → /.netlify/functions/*"| AUTH
+    SPA --> EX
+    SPA --> TPL
+    SPA --> RES
+    AUTH --> MODELS
+    EX --> MODELS
+    TPL --> MODELS
+    RES --> MODELS
+    MODELS -->|Mongoose| DB
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Components
 
-### `yarn eject`
+| Path | Responsibility |
+|------|----------------|
+| `src/` | React application: pages, components, charts, statistics logic |
+| `lambda/` | Netlify Functions — the production API (see table below) |
+| `models/` | Mongoose schemas: `userModel`, `exerciseModel`, `templateModel`, `resultModel` |
+| `server/` | Standalone Express server (`server.js`, `db/conn.js`, `routes/record.js`) with its own `package.json`, plus `insert-data.js` for loading initial data. TODO: verify whether it is a local/legacy backend |
+| `db/` | TODO: verify (connection helper / data?) |
+| `public/` | Static assets |
+| `netlify.toml` | Build command, publish dir (`build`), functions dir (`lambda`) |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### API (Netlify Functions)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Every file in `lambda/` is exposed as `/.netlify/functions/<file-name>`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Resource | Functions |
+|----------|-----------|
+| Auth / users | `login`, `userCreate`, `userDataCreate` (TODO: describe) |
+| Exercises | `exerciseCreate`, `exerciseRead`, `exerciseUpdate`, `exerciseDelete` |
+| Templates | `templateCreate`, `templateRead`, `templateUpdate`, `templateDelete` |
+| Results | `resultCreate`, `resultRead`, `resultUpdate`, `resultDelete` |
+| Other | `server` (TODO: describe) |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+> TODO: add HTTP method, request body and response for each function.
 
-## Learn More
+### Request flow
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```mermaid
+sequenceDiagram
+    participant B as Browser (React)
+    participant F as Netlify Function
+    participant M as MongoDB
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    B->>F: login (email, password)
+    F->>M: find user
+    M-->>F: user document
+    F-->>B: token / cookie (TODO: verify)
+    B->>F: resultRead / templateRead / exerciseRead
+    F->>M: query via Mongoose model
+    M-->>F: documents
+    F-->>B: JSON
+    B->>B: compute statistics, render charts
+    B->>F: resultCreate (after a workout)
+    F->>M: insert result
+```
 
-### Code Splitting
+## Data model
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+MongoDB collections: `users`, `exercises`, `templates`, `results`.
+Templates and results embed a copy of the exercise data (denormalised), so a result keeps its history even if the exercise changes later.
 
-### Analyzing the Bundle Size
+```mermaid
+erDiagram
+    USERS {
+        ObjectId _id
+        string firstName
+        string lastName
+        string email
+        string password "hashed"
+        string role
+    }
+    EXERCISES {
+        ObjectId _id
+        string nameEn
+        string bodyPart
+        string equipment
+    }
+    TEMPLATES {
+        ObjectId _id
+        string templateName
+        string description
+        array templateExercises "id, nameEn, bodyPart, equipment, sets"
+    }
+    RESULTS {
+        ObjectId _id
+        string templateName
+        string description
+        int bodyWeight
+        string date "ISO 8601"
+        array templateExercises "exercise + sets + addedResults"
+    }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    EXERCISES ||--o{ TEMPLATES : "embedded in templateExercises"
+    TEMPLATES ||--o{ RESULTS : "used as base for"
+    EXERCISES ||--o{ RESULTS : "embedded in templateExercises"
+```
 
-### Making a Progressive Web App
+> TODO: verify how `results` / `templates` are linked to `users` (e.g. a user id field) and the exact field names in `userModel`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Example documents
 
-### Advanced Configuration
+**exercises**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```json
+{
+  "_id": "624992452b437add5cb04f07",
+  "nameEn": "front raise",
+  "bodyPart": "shoulders",
+  "equipment": "BARBELL"
+}
+```
 
-### Deployment
+**templates**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```json
+{
+  "_id": "63fe0cf021cd2dda4e84ff63",
+  "templateName": "HT BT A 2023-03",
+  "description": "Hypertrophy bottom A, weeks 1-4",
+  "templateExercises": [
+    {
+      "id": "63c6d6cf636f4623dd38512b",
+      "nameEn": "HAMSTRING CURLS",
+      "bodyPart": "LEGS",
+      "equipment": "MACHINE",
+      "sets": 3
+    }
+  ]
+}
+```
 
-### `yarn build` fails to minify
+**results**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```json
+{
+  "_id": "62e6428505a6b63ba89c2e3c",
+  "templateName": "FBW B",
+  "description": "Pull 2022",
+  "bodyWeight": 89,
+  "date": "2022-01-26T09:48:42.000Z",
+  "templateExercises": [
+    {
+      "id": "624992452b437add5cb04f5a",
+      "nameEn": "pull up",
+      "bodyPart": "back",
+      "equipment": "assisted bodyweight",
+      "sets": 5,
+      "addedResults": [
+        { "id": "624992452b437add5cb04f5a-0", "setWeight": 89, "setRepetition": 8 },
+        { "id": "624992452b437add5cb04f5a-1", "setWeight": 89, "setRepetition": 7 }
+      ]
+    }
+  ]
+}
+```
+
+## Statistics
+
+Computed on the client from `results.templateExercises[].addedResults[]`:
+
+| Metric | Description |
+|--------|-------------|
+| RM | Best one-rep max for the exercise (TODO: state formula, e.g. Epley/Brzycki or best recorded) |
+| RM / mass | RM divided by body weight at that session |
+| Set volume | `setWeight × setRepetition` — the best single set is reported |
+| Total volume (V) | Sum of set volumes in one session |
+| V / m | Total volume divided by body weight |
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 16+ (TODO: verify)
+- A MongoDB instance (e.g. MongoDB Atlas)
+- Netlify CLI (included in dependencies)
+
+### Environment variables
+
+Create a `.env` file (never commit it):
+
+```
+MONGODB_URI=...      # TODO: verify variable names
+JWT_SECRET=...
+```
+
+### Run locally
+
+```bash
+npm install
+npx netlify dev      # React app + Netlify Functions
+# or only the frontend:
+npm start
+```
+
+### Seed the database
+
+```bash
+cd server
+npm install
+node insert-data.js  # TODO: verify
+```
+
+### Build
+
+```bash
+npm run build        # output: build/
+```
+
+### Deploy
+
+Netlify builds from `netlify.toml`:
+
+```toml
+[build]
+command = "npm run build"
+functions = "lambda"
+publish = "build"
+```
+
+## Project structure
+
+```
+GymApp/
+├── db/                  # TODO
+├── lambda/              # Netlify Functions (API)
+│   ├── exercise{Create,Read,Update,Delete}.js
+│   ├── result{Create,Read,Update,Delete}.js
+│   ├── template{Create,Read,Update,Delete}.js
+│   ├── login.js
+│   ├── userCreate.js
+│   ├── userDataCreate.js
+│   └── server.js
+├── models/              # Mongoose schemas
+│   ├── exerciseModel.js
+│   ├── resultModel.js
+│   ├── templateModel.js
+│   └── userModel.js
+├── public/              # static assets
+├── server/              # standalone Express server + data seeding
+│   ├── db/conn.js
+│   ├── routes/record.js
+│   ├── insert-data.js
+│   └── server.js
+├── src/                 # React app
+├── netlify.toml
+└── package.json
+```
+
+## License
+
+TODO
