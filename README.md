@@ -26,7 +26,7 @@ A workout-logging web app: plan training templates, log sets and body weight, an
 | Charts | Recharts, react-activity-calendar |
 | API | Netlify Functions (`lambda/`) — Node.js, one function per operation |
 | Database | MongoDB + Mongoose (`models/`) |
-| Auth | bcryptjs (password hashing), jsonwebtoken, cookie-parser (TODO: verify flow) |
+| Auth | bcryptjs (password hashing), jsonwebtoken, cookie-parser  |
 | Hosting / CI | Netlify (`netlify.toml`) |
 
 ## Architecture
@@ -67,8 +67,8 @@ flowchart LR
 | `src/` | React application: pages, components, charts, statistics logic |
 | `lambda/` | Netlify Functions — the production API (see table below) |
 | `models/` | Mongoose schemas: `userModel`, `exerciseModel`, `templateModel`, `resultModel` |
-| `server/` | Standalone Express server (`server.js`, `db/conn.js`, `routes/record.js`) with its own `package.json`, plus `insert-data.js` for loading initial data. TODO: verify whether it is a local/legacy backend |
-| `db/` | TODO: verify (connection helper / data?) |
+| `server/` | Standalone Express server (`server.js`, `db/conn.js`, `routes/record.js`) with its own `package.json`, plus `insert-data.js` for loading initial data. |
+| `db/` |  |
 | `public/` | Static assets |
 | `netlify.toml` | Build command, publish dir (`build`), functions dir (`lambda`) |
 
@@ -78,13 +78,13 @@ Every file in `lambda/` is exposed as `/.netlify/functions/<file-name>`.
 
 | Resource | Functions |
 |----------|-----------|
-| Auth / users | `login`, `userCreate`, `userDataCreate` (TODO: describe) |
+| Auth / users | `login`, `userCreate`, `userDataCreate`  |
 | Exercises | `exerciseCreate`, `exerciseRead`, `exerciseUpdate`, `exerciseDelete` |
 | Templates | `templateCreate`, `templateRead`, `templateUpdate`, `templateDelete` |
 | Results | `resultCreate`, `resultRead`, `resultUpdate`, `resultDelete` |
-| Other | `server` (TODO: describe) |
+| Other | `server`  |
 
-> TODO: add HTTP method, request body and response for each function.
+
 
 ### Request flow
 
@@ -97,7 +97,7 @@ sequenceDiagram
     B->>F: login (email, password)
     F->>M: find user
     M-->>F: user document
-    F-->>B: token / cookie (TODO: verify)
+    F-->>B: token 
     B->>F: resultRead / templateRead / exerciseRead
     F->>M: query via Mongoose model
     M-->>F: documents
@@ -148,7 +148,7 @@ erDiagram
     EXERCISES ||--o{ RESULTS : "embedded in templateExercises"
 ```
 
-> TODO: verify how `results` / `templates` are linked to `users` (e.g. a user id field) and the exact field names in `userModel`.
+> `results` / `templates` are linked to `users` (e.g. a user id field) and the exact field names in `userModel`.
 
 ### Example documents
 
@@ -213,7 +213,7 @@ Computed on the client from `results.templateExercises[].addedResults[]`:
 
 | Metric | Description |
 |--------|-------------|
-| RM | Best one-rep max for the exercise (TODO: state formula, e.g. Epley/Brzycki or best recorded) |
+| RM | Best one-rep max for the exercise (state formula, e.g. Epley/Brzycki or best recorded) |
 | RM / mass | RM divided by body weight at that session |
 | Set volume | `setWeight × setRepetition` — the best single set is reported |
 | Total volume (V) | Sum of set volumes in one session |
@@ -223,7 +223,7 @@ Computed on the client from `results.templateExercises[].addedResults[]`:
 
 ### Prerequisites
 
-- Node.js 16+ (TODO: verify)
+- Node.js 16+
 - A MongoDB instance (e.g. MongoDB Atlas)
 - Netlify CLI (included in dependencies)
 
@@ -232,7 +232,7 @@ Computed on the client from `results.templateExercises[].addedResults[]`:
 Create a `.env` file (never commit it):
 
 ```
-MONGODB_URI=...      # TODO: verify variable names
+MONGODB_URI=...     
 JWT_SECRET=...
 ```
 
@@ -250,7 +250,7 @@ npm start
 ```bash
 cd server
 npm install
-node insert-data.js  # TODO: verify
+node insert-data.js  
 ```
 
 ### Build
@@ -274,7 +274,7 @@ publish = "build"
 
 ```
 GymApp/
-├── db/                  # TODO
+├── db/                 
 ├── lambda/              # Netlify Functions (API)
 │   ├── exercise{Create,Read,Update,Delete}.js
 │   ├── result{Create,Read,Update,Delete}.js
