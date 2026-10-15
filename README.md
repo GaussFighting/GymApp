@@ -299,6 +299,4 @@ GymApp/
 └── package.json
 ```
 
-## License
 
-TODO
